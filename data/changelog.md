@@ -6,3 +6,7 @@ Każda zmiana wprowadzona przez cotygodniowy przegląd (albo ręcznie) z uzasadn
 Sample: 0 rozliczonych (4 typy, 10 na papierze otwartych).
 Changes: zakresy kursów 1.10–1.19 / 1.20–1.29 / 1.30–1.44 / 1.45–1.60 z progiem p_est ≥ implikowane + 0.03; raport HTML; dziennik typów z rozliczaniem (ESPN, The Odds API, betexplorer) i CLV z ostatniej ceny przed startem; tryb automatyczny w GitHub Actions (3 raporty dziennie, Sonnet 5; przegląd tygodniowy, Opus).
 Next review: czy rozliczenia działają bez ręcznych poprawek; ile kredytów The Odds API schodzi na raport.
+
+## 2026-09-24 — poprawki po pierwszym raporcie z chmury (z „Wniosków” raportu 20:31)
+Findings: (1) `fixtures.py` pytał ESPN o zakres dat, ESPN odpowiadał 400 dla okien przez północ UTC, a błąd był cicho połykany — wieczorny raport (okno 8 h) tracił WNBA; (2) The Odds API zwraca giełdy (Betfair Exchange, Matchbook…) i rynki `h2h_lay` — ceny przed prowizją / zakłady „przeciw”, które wypływały jako „najlepszy kurs” (Mystics 1.15 na Betfair przy medianie 1.12).
+Changes: `fixtures.py` — ESPN odpytywany dzień po dniu, deduplikacja po id; `odds.py` — pomijane giełdy i rynki `*_lay`; testy na oba przypadki. Jak poznamy, że działa: wieczorne raporty widzą mecze po północy UTC; `best_odds` pochodzi od bukmacherów, nie z giełd.

@@ -132,20 +132,27 @@ def fetch_espn(sport: str, t0, hours: float, leagues: Optional[list[str]] = None
     espn_sport = SPORT_MAP[sport]["espn"]
     if not espn_sport:
         return [], []
-    days = date_span(t0, hours)
-    dates = f"{days[0].replace('-', '')}-{days[-1].replace('-', '')}" if len(days) > 1 else days[0].replace("-", "")
-    rows, errors = [], []
+    # One request per day: ESPN answers a "YYYYMMDD-YYYYMMDD" range with 400 on some leagues
+    # (WNBA, Nations League), which used to drop every match of a window crossing midnight UTC.
+    days = [d.replace("-", "") for d in date_span(t0, hours)]
+    rows, errors, seen = [], [], set()
     for lg in leagues or ESPN_LEAGUES.get(sport, []):
         url = f"https://site.api.espn.com/apis/site/v2/sports/{espn_sport}/{lg}/scoreboard"
-        try:
-            data = http_get_json(url, params={"dates": dates, "limit": 500})
-        except HttpError as e:
-            if e.status not in (400, 404):
-                errors.append(f"espn {lg}: {e}")
-            continue
-        league_name = ((data.get("leagues") or [{}])[0]).get("name") or lg
-        for ev in data.get("events") or []:
+        events, league_name = [], lg
+        for day in days:
+            try:
+                data = http_get_json(url, params={"dates": day, "limit": 500})
+            except HttpError as e:
+                if e.status not in (400, 404):  # 400/404: league not covered — expected for many slugs
+                    errors.append(f"espn {lg} {day}: {e}")
+                continue
+            league_name = ((data.get("leagues") or [{}])[0]).get("name") or lg
+            events += data.get("events") or []
+        for ev in events:
             for comp in _espn_competitions(ev):
+                if (ev.get("id"), comp.get("id")) in seen:  # the same event listed under two dates
+                    continue
+                seen.add((ev.get("id"), comp.get("id")))
                 start = parse_time(comp.get("date") or ev.get("date"))
                 state = (((comp.get("status") or ev.get("status") or {}).get("type") or {}).get("state")) or ""
                 if state in ("post",) or not in_window(start, t0, hours):

@@ -318,6 +318,44 @@ def test_ledger_roundtrip(tmp_path=None):
     assert "Skuteczność" in ledger_mod.html_fragment(st)
 
 
+def test_espn_window_across_midnight():
+    """ESPN rejects a date range with 400; each day must be asked separately and merged."""
+    calls = []
+
+    def espn_by_day(url, params=None, headers=None, **kw):
+        calls.append(params["dates"])
+        if "-" in params["dates"]:
+            raise bk_lib.HttpError(url, 400, "range not supported")
+        ev = {"20260924": ("w1", ts(7)), "20260925": ("w2", ts(9))}.get(params["dates"])
+        if not ev:
+            return {"events": []}
+        comp = {"id": ev[0], "date": ev[1].strftime("%Y-%m-%dT%H:%MZ"), "status": {"type": {"state": "pre"}},
+                "competitors": [{"homeAway": "home", "team": {"displayName": f"H{ev[0]}"}},
+                                {"homeAway": "away", "team": {"displayName": f"A{ev[0]}"}}]}
+        # the late game is listed under both dates (US vs UTC day) — must not be duplicated
+        events = [{"id": ev[0], "competitions": [comp]}]
+        if params["dates"] == "20260924":
+            events.append({"id": "w2", "competitions": [{**comp, "id": "w2", "date": ts(9).strftime("%Y-%m-%dT%H:%MZ"),
+                                                         "competitors": [{"homeAway": "home", "team": {"displayName": "Hw2"}},
+                                                                         {"homeAway": "away", "team": {"displayName": "Aw2"}}]}]})
+        return {"leagues": [{"name": "WNBA"}], "events": events}
+
+    fx_mod.http_get_json = espn_by_day
+    rows, errs = fx_mod.fetch_espn("basketball", T0, 10, ["wnba"])
+    assert not errs and all("-" not in d for d in calls)
+    assert sorted(r["home"] for r in rows) == ["Hw1", "Hw2"]
+
+
+def test_exchanges_and_lay_markets_dropped():
+    fx = {"key": "k", "sport": "basketball", "home": "A", "away": "B", "start_utc": "2026-09-24T23:00:00Z", "sources": {}}
+    ev = {"bookmakers": [{"key": "betfair_ex_eu", "markets": [{"key": "h2h", "outcomes": [{"name": "A", "price": 1.15}]}]},
+                         {"key": "pinnacle", "markets": [
+                             {"key": "h2h", "outcomes": [{"name": "A", "price": 1.11}, {"name": "B", "price": 7.5}]},
+                             {"key": "h2h_lay", "outcomes": [{"name": "A", "price": 1.16}]}]}]}
+    rows = odds_mod._oddsapi_rows(fx, ev)
+    assert {(r["bookmaker"], r["market"]) for r in rows} == {("pinnacle", "h2h")}
+
+
 def test_cli_help():
     for s in ("clock.py", "fixtures.py", "odds.py", "shortlist.py", "context.py", "ledger.py", "betexplorer.py"):
         res = subprocess.run([sys.executable, str(SCRIPTS / s), "--help"], capture_output=True, text=True)

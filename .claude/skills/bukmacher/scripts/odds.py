@@ -298,11 +298,20 @@ def _fuzzy(by_key: dict, sport: str, home: str, away: str, start) -> Optional[di
     return None
 
 
+# Betting exchanges quote prices before commission, and lay markets are bets *against* an
+# outcome — neither is a price a bookmaker customer can take, so they must not become "best odds".
+EXCHANGES = {"betfair_ex_eu", "betfair_ex_uk", "betfair_ex_au", "matchbook", "smarkets", "betdaq"}
+
+
 def _oddsapi_rows(fx: dict, ev: dict) -> list[dict]:
     out = []
     for bk in ev.get("bookmakers") or []:
+        if bk.get("key") in EXCHANGES:
+            continue
         for m in bk.get("markets") or []:
             mk = m.get("key", "?")
+            if mk.endswith("_lay"):
+                continue
             for o in m.get("outcomes") or []:
                 sel = o.get("name")
                 line = o.get("point")

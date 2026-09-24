@@ -50,6 +50,14 @@ jobs:
           print("Odds API OK:", len(json.loads(body)), "sports; credits remaining", hdr.get("x-requests-remaining"))
           EOF
 
+      - name: geo and Polish bookmakers
+        run: |
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
+          echo "betexplorer sees country: $(curl -s -D - -o /dev/null -A "$UA" https://www.betexplorer.com/ | grep -i x-country-code)"
+          for u in https://www.sts.pl/ https://superbet.pl/ https://www.efortuna.pl/ https://www.betclic.pl/ https://lvbet.pl/; do
+            echo "$u -> $(curl -s -o /dev/null -L --max-time 20 -A "$UA" -w '%{http_code} %{url_effective}' "$u")"
+          done
+
       - name: Sofascore
         run: |
           python3 - <<'EOF'

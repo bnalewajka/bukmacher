@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-24 20:31</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-24 18:31 UTC / 20:31 CEST. Zegar zweryfikowany: tak (api.github.com, cloudflare, google, sofascore, espn — zgodne co do sekundy). Okno: 20:20–04:20 CEST (18:20–02:20 UTC), 2026-09-24/25.</p>
+    <p class="meta">Przeanalizowano 19 realnych spotkań startujących w oknie: piłka nożna 9 (8× UEFA Liga Narodów, 1× Concacaf Liga Narodów), koszykówka 4 (WNBA, ostatni dzień sezonu zasadniczego + gra o miejsca w drabince), hokej 6 (NHL — sparingi przedsezonowe, wykluczone z analizy jako event o niskiej wartości danych). Źródła kursów: ESPN BET (wbudowane w listę meczów) i The Odds API (Pinnacle + kilkanaście europejskich bukmacherów, w tym Betfair Exchange, Marathonbet, Betsson, Unibet). Kursy pobrane 18:24–18:31 UTC. Tryb automatyczny (GitHub Actions) — bez Sofascore i bez betexplorer.pl (blokowane z serwerów USA); ceny są europejskie, u polskiego bukmachera mogą się nieco różnić — sprawdź przed obstawieniem.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Żadna selekcja w żadnym z czterech zakresów nie przekroczyła w tym uruchomieniu wymaganego progu (p_est wyraźnie powyżej implikowanego, patrz metodologia). To spokojny wieczór dla rynku: mecze Ligi Narodów UEFA są dobrze wycenione (nowi trenerzy w Holandii i Niemczech, poważne absencje po obu stronach kilku spotkań psują pewność), a WNBA ma tylko jednego bukmachera z realną głębią (ESPN BET/DraftKings) dla części meczów. Poniżej — w każdym zakresie — najbliższe progu kandydatury z pełnym uzasadnieniem, zapisane w rejestrze jako „papier" do rozliczenia i nauki, oraz odrzuceni z podaniem powodu. Nie stawiaj niczego z tego raportu jako pewniaka — to lista „blisko, ale nie dość blisko", nie ranking typów.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 0 typów</a>
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: 2 selekcje, obie poniżej progu.</p>
+    <p class="empty">Brak propozycji w tym zakresie — żadna selekcja nie osiąga wymaganego marginesu.</p>
+
+    <h3 class="sub">Najbliżej progu (zapisane jako „papier")</h3>
+    <ul>
+      <li><strong>Portugalia – Walia (Liga Narodów UEFA), zwycięstwo Portugalii @ 1.19 (Betfair Exchange; mediana 1.15 na 12 bukmacherach)</strong> — implikowane 0.840 (po najlepszej cenie), wymagane ≥0.870, p_est 0.86 (2 pkt poniżej progu). Portugalia niemal w pełnym składzie z Ronaldo, Leão, Félixem, Neto i Ramosem w ataku, Walia bez czterech zawodników z powodu kontuzji, Portugalia wygrała wszystkie 3 poprzednie mecze i nie przegrała na Estádio José Alvalade od 2015. Przeciw: nowy selekcjoner Jorge Jesus (dopiero drugi mecz, nieznana jeszcze taktyka) i sam fakt, że rynek (13 bukmacherów) już wycenia to bardzo nisko — trudno o duży błąd wyceny przy tak płynnym rynku. Jak przegrywa: gol kontaktowy Walii z rzutu rożnego/stałego fragmentu i Portugalia gra ostrożnie resztę meczu bez doszukiwania trzeciego gola (remis lub 1:1).</li>
+      <li><strong>Washington Mystics – Chicago Sky (WNBA), zwycięstwo Mystics @ 1.15 (Betfair Exchange; mediana ok. 1.12 na 17 książkach, w tym Pinnacle 1.11)</strong> — implikowane 0.870, wymagane ≥0.900 (dla ceny 1.15), p_est 0.885. To ostatni dzień sezonu zasadniczego: Mystics potrzebują zwycięstwa (i porażki Fever), by zapewnić sobie 5. miejsce w playoff, Chicago Sky zostało matematycznie wyeliminowane z gry o playoff już 23 sierpnia — mecz bez stawki dla gościa. Mimo to loteria draftowa WNBA liczy się z lat 2024–2025, więc Sky nie ma żadnego powodu, by celowo przegrywać — gra się głównie o dumę i minuty dla rezerwowych. Rynek jest głęboki (17 bukmacherów, w tym Pinnacle) i już uwzględnia różnicę klas; brak w pełni potwierdzonych składów przed startem (23:30 UTC), więc trudno wycisnąć więcej niż rynek. Jak przegrywa: gorący wieczór rzutowy Sky i słabszy dzień liderek Mystics — w WNBA (małe rotacje, wysoka wariancja trójek) to się zdarza częściej niż w piłce.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: 3 selekcje, wszystkie poniżej progu.</p>
+    <p class="empty">Brak propozycji w tym zakresie — żadna selekcja nie osiąga wymaganego marginesu.</p>
+
+    <h3 class="sub">Najbliżej progu (zapisane jako „papier")</h3>
+    <ul>
+      <li><strong>Los Angeles Sparks – Golden State Valkyries (WNBA), zwycięstwo Valkyries @ 1.20 (Pinnacle/Betfair Exchange/Matchbook, 16 książek)</strong> — implikowane 0.833, wymagane ≥0.863, p_est ok. 0.82. Sparks są matematycznie wyeliminowane z playoff (grają o pozycję w loterii draftowej), Valkyries wciąż walczą o 2./3. miejsce w drabince i mają w tym meczu pełną motywację. Rynek (16 bukmacherów łącznie z Pinnacle) jest bardzo płynny i już to wycenia — trudno znaleźć dodatkową przewagę bez potwierdzonych składów (obie drużyny ogłaszają je bliżej startu, mecz o 04:00 CEST). Jak przegrywa: Sparks, grając bez presji, trafiają dobry wieczór z dystansu, a Valkyries rotują z myślą o rozpoczynającym się w niedzielę playoff.</li>
+      <li><strong>Phoenix Mercury – Las Vegas Aces (WNBA), zwycięstwo Aces @ 1.23 (Betfair Exchange/Matchbook)</strong> — implikowane 0.813, wymagane ≥0.843, p_est ok. 0.82. Ten sam schemat: Mercury wyeliminowane, Aces walczą o miejsce w top-3 drabinki. Rynek już to odzwierciedla (16 książek, spread cen wąski). Jak przegrywa: Aces oszczędzają gwiazdy przed playoff mając już zapewnione miejsce wyżej niż Mercury i tak, a Mercury grają luźno i trafiają z dystansu.</li>
+    </ul>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Liechtenstein – Litwa (Liga Narodów UEFA), zwycięstwo Litwy @ 1.28–1.33</strong> — implikowane 0.781–0.752, wymagane ≥0.81. Litwa jest zdecydowanym faworytem (m.in. Gvidas Gineitis, 63 występy w Serie A dla Torino) przeciw jednemu z najsłabszych zespołów Europy, ale obie drużyny grają w najniższej dywizji D Ligi Narodów, co ogranicza przepaść klasową bardziej, niż mogłoby się wydawać. Niezależny model bukmacherski (Sports Mole) daje Litwie tylko 67,4% — wyraźnie poniżej zdewigowanej ceny rynkowej (75%), co sugeruje, że rynek jest już hojny dla faworyta, a nie odwrotnie. Luka do progu (ok. 8 pkt proc.) zbyt duża, by traktować to jako „blisko".</li>
+      <li><strong>Portugalia – Walia, powyżej 2.5 gola @ 1.31</strong> — implikowane 0.763, wymagane ≥0.793, szacowane p_est ok. 0.73. Rynek totalu ma tylko 3 bukmacherów (cienki, mało zbieżny), a mimo mocnego ataku Portugalii ich trzy poprzednie mecze z Walią nie były masakrą bramkową — bez danych o dokładnych wynikach z przeszłości trudno podnieść estymację ponad ostrożny poziom.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: 2 selekcje, obie poniżej progu.</p>
+    <p class="empty">Brak propozycji w tym zakresie — żadna selekcja nie osiąga wymaganego marginesu.</p>
+
+    <h3 class="sub">Najbliżej progu (zapisane jako „papier")</h3>
+    <ul>
+      <li><strong>Austria – Izrael (Liga Narodów UEFA), zwycięstwo Austrii @ 1.445–1.50 (12 bukmacherów, mediana 1.445)</strong> — implikowane 0.692, wymagane ≥0.722, p_est 0.70. Austria Rangnicka jest w świetnej formie (awans na MŚ 2026, rozpoznawalny styl wysokiego pressingu), Izrael nie zakwalifikował się na mundial i ma osłabienie w ataku (Sagiv Jehezkel, choć ostatnio i tak rzadko grał z powodu kontuzji) — reszta kadry gościa niemal kompletna. Bilans h2h umiarkowanie na korzyść Austrii (6 z ostatnich 15 spotkań), ostatni mecz (2021) wygrany 4:2. Realna, ale niewielka przewaga — nie na tyle duża, by przekroczyć margines 3 punktów.</li>
+    </ul>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><em>(patrz „Portugalia – Walia, powyżej 2.5 gola" w sekcji 1.20–1.29 — ta sama selekcja, mediana ceny akurat wypada w niższym zakresie, ale najlepsza dostępna cena 1.31 kwalifikuje ją tam)</em></li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: 11 selekcji, przeanalizowano 4 (pozostałe odrzucone bez dalszej analizy z braku czasu przed startem — patrz Uwagi).</p>
+    <p class="empty">Brak propozycji w tym zakresie — żadna selekcja nie osiąga wymaganego marginesu.</p>
+
+    <h3 class="sub">Najbliżej progu (zapisane jako „papier")</h3>
+    <ul>
+      <li><strong>Holandia – Niemcy (Liga Narodów UEFA), powyżej 2.5 gola @ 1.46 (Betsson/Nordicbet, 3 bukmacherów)</strong> — implikowane 0.685, wymagane ≥0.715, p_est 0.68. Obaj trenerzy debiutują w tym meczu (Xavi Hernández w Holandii, Jürgen Klopp w Niemczech) i obie kadry mają poważne dziury pomocy: Holandia bez de Jonga, Wieffera, Schoutena i Simonsa (cała podstawowa czwórka środka pola) oraz bez Malena, Niemcy bez Goretzki i Undava, a Stiller gra obciążony urazem. Prowizoryczne linie obronno-pomocnicze po obu stronach + duży potencjał ataku (Gakpo, Brobbey, Frimpong; Musiala, Havertz, Gnabry) sprzyjają bramkom, ale to spekulacja bez potwierdzonych składów. Jak przegrywa: nowi trenerzy grają na czas, ostrożnie, w hermetycznym 1:1 albo 1:0.</li>
+      <li><strong>Minnesota Lynx – Indiana Fever (WNBA), zwycięstwo Fever (na wyjeździe) @ 1.56–1.61 (Pinnacle 1.56, do 1.61 u części książek)</strong> — implikowane 0.641, wymagane ≥0.671, p_est 0.64. Lynx zapewniły sobie już 1. miejsce w drabince (22 września) i nie mają żadnej sportowej korzyści z ryzykowania gwiazd w meczu bez stawki, podczas gdy Fever wciąż walczy o wyższe miejsce w playoff i ma motywację do gry w pełnym składzie. Nie ma jednak potwierdzenia, że Lynx faktycznie odpoczną kluczowe zawodniczki — to nadal domysł, nie fakt, stąd ostrożna estymacja tuż poniżej progu.</li>
+    </ul>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Holandia +0.5 (bez porażki) @ 1.513, jeden bukmacher</strong> — rynek zbyt płytki (1 książka, brak zbieżności), a osłabienie środka pola Holandii (4 kluczowych zawodników) każe ostrożnie podchodzić nawet do zakładu „bez porażki".</li>
+      <li><strong>Liechtenstein – Litwa: powyżej 1.5 gola @ 1.5 i poniżej 2.5 gola @ 1.49–1.5</strong> — brak wystarczających danych o typowych wynikach Liechtensteinu (rzadkie, nisko golowe mecze vs okazjonalne rozgromienia) do precyzyjnego oszacowania rozkładu bramek w dostępnym czasie.</li>
+      <li><strong>Norwegia – Dania (zwycięstwo Norwegii, hendykepy, totale) i Kosowo – Irlandia (hendykep, totale)</strong> — nie zdążono ich rzetelnie przeanalizować przed startem (18:45 UTC, ten sam moment co pięć innych meczów) — pomijane zamiast zgadywane.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+    <h2>Skuteczność</h2>
+    <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+    <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">0 (+4 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">0 (+2 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">0 (+10 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">0 (+2 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">0 (+5 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">0 (+2 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr></tbody></table></div>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Nic jeszcze nie zostało rozliczone — wszystkie 14 wcześniejszych wpisów w rejestrze (4 typy, 10 papierowych) dotyczą meczów z dzisiejszego wieczoru (start 18:15–18:45 UTC) i rozliczą się dopiero po ich zakończeniu, czyli po tym raporcie. Pierwsze realne wnioski o skuteczności i CLV pojawią się w kolejnym uruchomieniu.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87% implikowanego prawdopodobieństwa, 1.50 — ok. 67%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Osiem meczów Ligi Narodów UEFA i pięć innych startowało jednocześnie o 18:45 UTC; przy ograniczonym czasie przed startem rzetelnie przeanalizowano cztery najbardziej płynne/newsowe z nich (Portugalia–Walia, Austria–Izrael, Holandia–Niemcy, Liechtenstein–Litwa) — Norwegia–Dania i Kosowo–Irlandia pominięto zamiast zgadywać.</li>
+      <li>Sześć meczów NHL (18:45–19:40 CEST) to sparingi przedsezonowe (sezon zasadniczy zaczyna się w październiku) — wykluczone z analizy jako event niskiej wartości informacyjnej i integralności zgodnie z zasadami skilla.</li>
+      <li>Źródła w tym uruchomieniu: Sofascore i betexplorer.pl pominięte celowo (blokada z adresów IP GitHub Actions, zgodnie z instrukcją trybu automatycznego) — zastąpione przez ESPN + The Odds API i wyszukiwarkę web. Żadne inne źródło nie zawiodło.</li>
+      <li>The Odds API: pozostało ok. 483 kredytów z miesięcznego limitu 500 (wykorzystano ligę UEFA Nations League, NHL — 0 zdarzeń w oknie — i WNBA; bez trybu --extra-markets).</li>
+      <li>Ten raport nie zawiera żadnej propozycji do postawienia — wszystkie kandydatury są poniżej progu pewności. To normalny, uczciwy wynik dla spokojnego wieczoru rynkowego, nie błąd.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

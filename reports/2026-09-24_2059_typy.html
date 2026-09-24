@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-24 20:59</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-24 18:59 UTC / 20:59 CEST. Zegar zweryfikowany (mediana nagłówków <code>Date</code> z api.github.com, Cloudflare, Google, api.sofascore.com, ESPN — zgodność co do ok. 1 sekundy). Okno: 20:59–04:59 (25.09) czasu PL, tj. 18:59–02:59 UTC.</p>
+    <p class="meta">Tryb automatyczny (GitHub Actions): brak pytań, wszystkie 4 zakresy, horyzont 8 h. Serwer działa z amerykańskiego IP — Sofascore i Betexplorer odmówiły dostępu (403/429), więc źródłem meczów i kursów są ESPN oraz The Odds API.</p>
+    <p class="meta">Przeanalizowano: 22 spotkania (piłka nożna 6, koszykówka 5, hokej 11, siatkówka 0, tenis 0), 10 selekcji w wybranych zakresach kursów z ESPN BET i The Odds API (Pinnacle, DraftKings, BetOnline.ag, Betsson, Unibet, Coolbet, Sport888, NordicBet, LeoVegas, PMU, GTbets, MyBookie, BetAnySports). Kursy pobrane o 21:00 CEST (19:00:47 UTC).</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Podane ceny to bukmacherzy zagraniczni (regiony UE/US The Odds API); polskie kursy (STS, Fortuna, Superbet, Betclic) bywają zbliżone, ale nie identyczne.</p>
+    <p class="summary">Realna przewaga jest dziś tylko jedna, za to wyraźna: Indiana Fever @ Minnesota Lynx w przedziale 1.45–1.60 — Lynx mają już zapewnione 1. miejsce w playoff i zapowiedziany odpoczynek gwiazd, Fever grają o być albo nie być w kwestii siewu. W 1.10–1.19 dwa uczciwie wycenione typy WNBA (finał sezonu zasadniczego, wyraźna asymetria stawki). Zakresy 1.20–1.29 i 1.30–1.44 są dziś puste — jedyne kandydatury w tych cenach to sparingi przedsezonowe NHL, z zasady wykluczone jako dane niskiej jakości. Poza WNBA i NHL okno wypełniają głównie mecze CONCACAF Nations League i kolumbijskiej Primera A bez pokrycia kursowego w wybranych przedziałach.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 2 typy</a>
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności ok. 91–84 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: 3 selekcje, przeanalizowano 3 (wszystkie WNBA, finał sezonu zasadniczego).</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">01:30</td>
+            <td>Washington Mystics – Chicago Sky</td>
+            <td>WNBA</td>
+            <td>Zwycięstwo gospodarzy</td>
+            <td class="num">1.12<span class="note">BetOnline.ag, The Odds API, 21:00 CEST</span></td>
+            <td class="num pos">0.90</td>
+            <td class="num">0.89</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="num">04:00</td>
+            <td>Phoenix Mercury – Las Vegas Aces</td>
+            <td>WNBA</td>
+            <td>Zwycięstwo gości (Aces)</td>
+            <td class="num">1.22<span class="note">BetOnline.ag, The Odds API, 21:00 CEST</span></td>
+            <td class="num pos">0.84</td>
+            <td class="num">0.82</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-110-1">
+      <h3>1. Washington Mystics – Chicago Sky — zwycięstwo gospodarzy @ 1.12 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.10–1.19 · WNBA, finał sezonu zasadniczego · 01:30 PL / 23:30 UTC (24/25.09) · 1.12 BetOnline.ag (The Odds API; DraftKings 1.118, Pinnacle 1.11, mediana 14 bukmacherów 1.114), pobrano 21:00 CEST (19:00:47 UTC) · p_est 0.90 vs implikowane 0.89</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Mystics potrzebują zwycięstwa (i porażki Fever), by zapewnić sobie 5. miejsce w playoff, a Chicago Sky odpadli z gry o playoff tygodnie temu i wystawiają skład przetrzebiony przez kontuzje. To największa asymetria stawki spośród kandydatów w tym przedziale — większa niż w meczu Sparks–Valkyries (odrzucony niżej), gdzie obie strony mają dodatkowe, mniej jednoznaczne motywacje.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Mystics: zwycięstwo + porażka Fever = 5. miejsce, uniknięcie trudniejszego rywala z 6. miejsca. Sky: mecz bez żadnej stawki sportowej, od dawna poza wyścigiem o playoff.</dd>
+        <dt>Forma</dt><dd>Mystics pokonali Sky 110:80 w ostatnim bezpośrednim starciu; Sky w rozsypce kadrowej od kilku tygodni.</dd>
+        <dt>Absencje</dt><dd>Sky bez DiJonai Carrington (stopa), Skylar Diggins (kolano), Rickei Jackson (kolano) i Azury Stevens (kolano) — cztery rotacyjne zawodniczki poza składem; trener daje minuty rozwojowe młodym (Kate Martin, Morgan Maly z DNP-decyzją trenera). U Mystics Sonia Citron nieobecna (powody osobiste), Georgia Amoore wątpliwa (kolano) — role uzupełniające, nie podważają przewagi jakościowej.</dd>
+        <dt>Składy</dt><dd>Oficjalne raporty kontuzji z dnia meczu (Athlon Sports, ESPN); ostateczne składy ok. godziny przed startem.</dd>
+        <dt>Terminarz</dt><dd>Ostatni mecz sezonu zasadniczego dla obu drużyn, bez czynnika podróży/zmęczenia.</dd>
+        <dt>Miejsce i warunki</dt><dd>Hala Mystics, bez czynnika pogodowego.</dd>
+        <dt>Styl gry</dt><dd>Przewaga głębi rotacji i jakości składu Mystics nad przetrzebionym Chicago.</dd>
+        <dt>Sygnały rynkowe</dt><dd>14 bukmacherów notuje selekcję w tym przedziale, kurs stabilny (drift ok. 0), Pinnacle 1.11 blisko mediany — rynek nie sygnalizuje niespodzianki.</dd>
+        <dt>Inne</dt><dd>Mecz bez stawki dla Sky zwiększa ryzyko "garbage time", ale to raczej sprzyja faworytowi niż mu szkodzi.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Silna asymetria motywacji (mus zwycięstwa vs zero stawki).</li><li>Sky bez czterech rotacyjnych zawodniczek, w trybie oceny młodych graczy.</li><li>Bezpośredni mecz w tym sezonie na korzyść Mystics.</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Mecz kończący sezon bywa nieprzewidywalny — młodzi zawodnicy grający bez presji potrafią trafiać z dystansu.</li><li>Jeśli wynik Fever–Lynx będzie już znany przed startem (Fever grają wcześniej), a Mystics stracą szansę na 5. miejsce, mogą zdjąć nogę z gazu.</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Sky trafiają nietypowo skuteczny mecz z głębi ławki grając bez presji, albo Mystics — znając już wcześniejszy wynik Fever–Lynx i wiedząc, że 5. miejsce jest nieosiągalne — rotują minuty gwiazd.</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="https://athlonsports.com/wnba/washington-mystics/final-injury-report-for-mystics-sky-will-sonia-citron-dijonai-carrington-play">Athlon Sports — raport kontuzji Mystics–Sky</a>, <a href="https://www.espn.com/wnba/team/injuries/_/name/chi/chicago-sky">ESPN — Chicago Sky Injury Status</a>, <a href="https://www.bleachernation.com/bulls/2026/08/24/caitlin-clark-mitchell-sky/">Bleacher Nation — Sky eliminated</a>, <a href="https://www.nbcsports.com/wnba/news/2026-wnba-playoffs-scenarios-seeding-tiebreakers-updated-bracket-and-standings">NBC Sports — scenariusze seedingu</a> (wszystkie odczytane 24.09.2026 wieczorem UTC).</p>
+    </article>
+
+    <article class="pick" id="z-110-2">
+      <h3>2. Phoenix Mercury – Las Vegas Aces — zwycięstwo gości (Aces) @ 1.22 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.10–1.19 wg mediany (1.195) · WNBA, finał sezonu zasadniczego · 04:00 PL / 02:00 UTC (25.09) · 1.22 BetOnline.ag / BetAnySports (The Odds API; Pinnacle 1.20, mediana 1.195), pobrano 21:00 CEST (19:00:47 UTC) · p_est 0.84 vs implikowane 0.82</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Aces wciąż grają o 2. miejsce w playoff (zwycięstwo + porażka Valkyries = 2. miejsce, a nawet przy porażce mają zapewnione 3. miejsce dzięki bilansowi 3:0 z Valkyries w sezonie), podczas gdy Mercury oficjalnie odpadli z gry o playoff i kończą sezon bez żadnej stawki. Rynek wycenia to niżej niż Mystics–Sky, dając odrobinę więcej miejsca na przewagę.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Aces: szansa na grę u siebie w 1. rundzie (2. vs 3. miejsce). Mercury: sezon bez dalszych konsekwencji, 17-27, poza playoff.</dd>
+        <dt>Forma</dt><dd>Aces (30-13) w czołówce ligi; Mercury poniżej .500, od tygodni bez presji wyniku.</dd>
+        <dt>Absencje</dt><dd>Brak potwierdzonych istotnych absencji po stronie Aces; Mercury typowo dla drużyny poza playoff mogą dać minuty głębszej ławce.</dd>
+        <dt>Składy</dt><dd>Oficjalne składy zwykle publikowane ok. 30 min przed startem — do potwierdzenia na miejscu.</dd>
+        <dt>Terminarz</dt><dd>Ostatni mecz sezonu dla obu drużyn, bez czynnika zmęczenia podróżą.</dd>
+        <dt>Miejsce i warunki</dt><dd>Hala Mercury (Phoenix), bez czynnika pogodowego.</dd>
+        <dt>Styl gry</dt><dd>Wyraźna przewaga jakościowa Aces (m.in. A'ja Wilson) nad rozwojowym składem Mercury.</dd>
+        <dt>Sygnały rynkowe</dt><dd>Kurs stabilny u wszystkich bukmacherów, Pinnacle 1.20 blisko mediany, brak wyraźnego driftu — rynek zgodny z analizą, bez sygnału niespodzianki.</dd>
+        <dt>Inne</dt><dd>Zagwarantowane minimum (3. miejsce) obniża "koszt" ewentualnej porażki dla Aces — realne ryzyko rotacji.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Wyraźna asymetria stawki (gra o lepszy seeding vs mecz bez znaczenia).</li><li>Mercury oficjalnie odpadli z playoff.</li><li>Aces mają w kieszeni head-to-head tiebreaker nad Valkyries, więc grają swobodnie o więcej.</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Skoro Aces mają zagwarantowane minimum 3. miejsce nawet przy porażce, trenerka może dać dodatkowy odpoczynek części gwiazd przed playoff.</li><li>Młody skład Mercury może zagrać swobodnie u siebie, bez presji wyniku.</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> trenerka Aces daje dodatkowy odpoczynek A'ja Wilson / Jackie Young (3. miejsce i tak pewne), a Mercury wygrywają u siebie dzięki świeżym nogom młodego składu.</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="https://www.espn.com/wnba/story/_/id/50017792/wnba-playoffs-2026-picture-postseason-race-berth-seeds-regular-season-finale-thursday">ESPN — WNBA playoff picture 2026</a>, <a href="https://sports.yahoo.com/articles/diana-taurasi-positive-outlook-phoenix-084807188.html">Yahoo Sports — Mercury poza playoff</a>, <a href="https://www.nbcsports.com/wnba/news/2026-wnba-playoffs-scenarios-seeding-tiebreakers-updated-bracket-and-standings">NBC Sports — scenariusze seedingu</a> (odczytane 24.09.2026 wieczorem UTC).</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Los Angeles Sparks – Golden State Valkyries, zwycięstwo gości (Valkyries) @ 1.19 (Pinnacle)</strong> — Valkyries potrzebują zwycięstwa dla 2. miejsca, a Sparks są przetrzebieni (Aaliyah Nye, Dearica Hamby, Cameron Brink poza składem), ale to jednocześnie ostatni mecz kariery Nnki Ogwumike — podwyższona nieprzewidywalność (efekt pożegnalnego meczu). p_est 0.82 nie przebija progu uczciwej ceny (implikowane 0.84); zapisany jako "papier" do weryfikacji.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności ok. 83–78 %. W zakresie: 1 selekcja znaleziona, 0 dopuszczona do typów.</p>
+    <p class="empty">Brak typów. Jedyna selekcja notowana w tym przedziale to sparing przedsezonowy NHL (Tampa Bay Lightning – Florida Panthers, zwycięstwo gospodarzy @ 1.25, 2 bukmacherów). Oficjalne komunikaty klubów NHL potwierdzają, że to mecz przygotowawczy przed sezonem 2026/27 — składy mieszają gwiazdy z kandydatami z lig farmerskich (AHL), bramkarze rotują praktycznie co mecz, a rynek jest bardzo płytki. Zgodnie z zasadą wykluczania danych niskiej jakości (mecze towarzyskie/testowe = brak zakładu) ta selekcja nie trafia do typów niezależnie od ceny.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Tampa Bay Lightning – Florida Panthers, zwycięstwo gospodarzy @ 1.25 (Pinnacle/BetOnline.ag)</strong> — sparing przedsezonowy NHL, wykluczony z zasady (dane niskiej jakości).</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności ok. 77–69 %. W zakresie: 5 selekcji znalezionych, 0 dopuszczonych do typów.</p>
+    <p class="empty">Brak typów. Wszystkie pięć selekcji w tym przedziale to sparingi przedsezonowe NHL — z tego samego powodu co w zakresie 1.20–1.29 (mieszane składy NHL/AHL, rotujący bramkarze, rynek na 2 bukmacherów) żadna nie trafia do typów.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Seattle Kraken – Calgary Flames, zwycięstwo gospodarzy @ 1.33</strong> — sparing przedsezonowy NHL.</li>
+      <li><strong>Philadelphia Flyers – Boston Bruins, zwycięstwo gospodarzy @ 1.34</strong> — sparing przedsezonowy NHL.</li>
+      <li><strong>Detroit Red Wings – Buffalo Sabres, zwycięstwo gospodarzy @ 1.38</strong> — sparing przedsezonowy NHL.</li>
+      <li><strong>Columbus Blue Jackets – Pittsburgh Penguins, zwycięstwo gospodarzy @ 1.37</strong> — sparing przedsezonowy NHL.</li>
+      <li><strong>Vancouver Canucks – Edmonton Oilers, zwycięstwo gospodarzy @ 1.42</strong> — sparing przedsezonowy NHL.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności ok. 69–62,5 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: 1 selekcja, przeanalizowana 1.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">02:00</td>
+            <td>Minnesota Lynx – Indiana Fever</td>
+            <td>WNBA</td>
+            <td>Zwycięstwo gości (Fever)</td>
+            <td class="num">1.59<span class="note">BetOnline.ag / GTbets / BetAnySports, 21:00 CEST</span></td>
+            <td class="num pos">0.70</td>
+            <td class="num">0.63</td>
+            <td><span class="tier value">z przewagą</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-145-1">
+      <h3>1. Minnesota Lynx – Indiana Fever — zwycięstwo gości (Fever) @ 1.59 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.45–1.60 · WNBA, finał sezonu zasadniczego · 02:00 PL / 00:00 UTC (25.09) · 1.59 BetOnline.ag / GTbets / BetAnySports (The Odds API; Pinnacle 1.56; otwarcie DraftKings 1.80 → obecnie 1.571, wyraźny drift w stronę Fever), pobrano 21:00 CEST (19:00:47 UTC) · p_est 0.70 vs implikowane 0.63</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to jedyny kandydat w tym przedziale, ale też najmocniejszy sygnał całej analizy — jawna, potwierdzona z kilku źródeł asymetria motywacji: Lynx (1. miejsce zapewnione od kilku dni) odpoczywają przed playoff, Fever grają o 5. miejsce. Rynek już to częściowo wycenił (silny drift), ale de-vigowane prawdopodobieństwo rynkowe (63 %) wciąż wydaje się zbyt niskie wobec skali zapowiedzianej rotacji Lynx.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Fever: zwycięstwo gwarantuje 5. miejsce (łatwiejszy rywal w 1. rundzie), porażka grozi spadkiem na 6. miejsce i mecz z Aces/Valkyries. Lynx: nic do zdobycia — 1. miejsce i rywal (New York) już zapewnieni.</dd>
+        <dt>Forma</dt><dd>Fever pokonali Lynx dwa dni wcześniej 96:77 — druga wygrana z rzędu nad Minnesotą w tym tygodniu.</dd>
+        <dt>Absencje</dt><dd>Fever: tylko Damiris Dantas (sezon zakończony, rola marginalna), Caitlin Clark (plecy) ma status "prawdopodobna" i grała w obu ostatnich meczach. Lynx: Olivia Miles (łydka, drugi mecz z rzędu poza składem) i Anastasiia Kosu (stopa) na "out" — do tego trenerka zapowiedziała odpoczynek dla pozostałych regularnych zawodniczek przed startem playoff w niedzielę.</dd>
+        <dt>Składy</dt><dd>Oficjalne raporty kontuzji z dnia meczu (ESPN, Yahoo Sports); trenerka Lynx Cheryl Reeve publicznie potwierdziła plan zarządzania minutami.</dd>
+        <dt>Terminarz</dt><dd>Dla Lynx to mecz "bez znaczenia" dwa dni przed 1. rundą playoff — typowy powód do ochrony zdrowia gwiazd; dla Fever to zwykły wyjazdowy finał sezonu z pełną stawką.</dd>
+        <dt>Miejsce i warunki</dt><dd>Target Center, Minneapolis, hala.</dd>
+        <dt>Styl gry</dt><dd>Bez większego znaczenia przy spodziewanym rotacyjnym składzie Lynx tego wieczoru.</dd>
+        <dt>Sygnały rynkowe</dt><dd>Silny drift na korzyść Fever (DraftKings z 1.80 do 1.571) potwierdza, że rynek zareagował na wieści o odpoczynku Lynx — ale mediana wciąż daje Lynx status lekkiego faworyta (63:37), co wobec niemal pewnej rotacji wygląda na zbyt ostrożne.</dd>
+        <dt>Inne</dt><dd>Pojedynczy mecz WNBA to zawsze podwyższona wariancja — nawet trafna analiza może przegrać.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Udokumentowana, publiczna zapowiedź trenerki Lynx o rotacji/odpoczynku przed playoff.</li><li>Fever w pełni zmotywowani i praktycznie zdrowi (Clark prawdopodobna).</li><li>Wyraźny, potwierdzony drift ceny w tym samym kierunku co analiza.</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Napheesa Collier publicznie okazywała frustrację z powodu ograniczania jej minut — nie można wykluczyć, że zagra więcej niż zapowiadano, chcąc utrzymać rytm przed playoff.</li><li>Ławka Lynx (Kayla McBride, Courtney Williams, Natasha Howard) jest głęboka nawet bez pierwszego składu.</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Lynx, chcąc utrzymać rytm przed niedzielnym playoff, jednak wystawiają większość regularnego składu (Collier gra swoje typowe minuty), a głęboka ławka Minnesoty przeważa nad Fever mimo ich pełnej motywacji.</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="https://www.startribune.com/minnesota-lynx-new-york-liberty-wnba-playoff-matchup-standings-schedule-olivia-miles-injury-update/601892064">Star Tribune — Lynx zapewnili 1. miejsce, plany odpoczynku</a>, <a href="https://www.yardbarker.com/wnba/articles/its_embarrassing_napheesa_collier_furious_as_cheryl_reeve_rests_lynx_stars_vs_fever/s1_17664_44338530">Yardbarker — reakcja Napheesy Collier na rotację</a>, <a href="https://sports.yahoo.com/articles/fever-announce-caitlin-clark-injury-002046865.html">Yahoo Sports — status Caitlin Clark</a>, <a href="https://sports.yahoo.com/articles/indiana-fevers-playoff-seeding-possibilities-130732964.html">Yahoo Sports — scenariusze seedingu Fever</a> (odczytane 24.09.2026 wieczorem UTC).</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li>Brak innych kandydatów w tym przedziale po stronie WNBA; sparingi NHL wykluczone z zasady (patrz zakresy 1.20–1.29 i 1.30–1.44); mecze CONCACAF Nations League i kolumbijskiej Primera A bez pokrycia kursowego w tym przedziale.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">0 (+4 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy — z przewagą</td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">0 (+3 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">0 (+2 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">0 (+17 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">0 (+4 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">0 (+7 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">0 (+3 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">0 (+3 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num">—</td></tr></tbody></table></div>
+  <p class="meta">Stan przed dopisaniem typów z tego raportu (4 nowe typy + 1 nowy "papier" zostaną dodane do rejestru po publikacji). Nic jeszcze nie zostało rozliczone — mecze z poprzednich uruchomień albo trwają, albo jeszcze się nie zaczęły.</p>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak rozliczonych typów do tej pory — rejestr (<code>data/ledger.jsonl</code>) ma 21 otwartych pozycji z poprzednich uruchomień, wszystkie z meczów, które dopiero się rozpoczęły lub trwają. Pierwsze wnioski będą możliwe po osadzeniu <code>ledger.py settle</code> w kolejnym uruchomieniu.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.15 oznacza ok. 87 % implikowanego prawdopodobieństwa, 1.50 — ok. 67 %: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore (403 z amerykańskiego IP serwera), Betexplorer (429 / blokada spoza Polski) — zastąpione przez ESPN i The Odds API zgodnie z trybem automatycznym; <code>context.py</code> (oparty o Sofascore) pominięty, research oparto o WebSearch.</li>
+      <li>The Odds API: wykorzystano 2 klucze sportowe (icehockey_nhl_preseason, basketball_wnba) w ramach budżetu 4 kredytów, rynki h2h i totals, region eu; po zapytaniach pozostało 479 z miesięcznego limitu 500 kredytów.</li>
+      <li>Tenis i siatkówka: 0 spotkań w oknie (ESPN nie pokrywa siatkówki, a europejskie ligi tenisowe/ATP-WTA nie grały w tych godzinach — typowe dla nocnego okna czasowego z amerykańskiego serwera).</li>
+      <li>Piłka nożna: CONCACAF Nations League (małe reprezentacje karaibskie/środkowoamerykańskie) i kolumbijska Primera A miały w oknie tylko pojedyncze kursy ESPN BET (jeden mecz, jeden bukmacher), żaden nie trafił w wybrane przedziały kursowe.</li>
+      <li>Wszystkie mecze NHL w oknie to potwierdzone sparingi przedsezonowe (komunikaty klubowe NHL.com) — z zasady wykluczone z typów niezależnie od kursu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

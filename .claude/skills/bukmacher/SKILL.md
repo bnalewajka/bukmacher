@@ -203,6 +203,34 @@ python3 scripts/ledger.py add work/picks.json
 A proposal without a betexplorer reference cannot be settled — find the match there before
 publishing it, or leave it out.
 
+## Automated run (GitHub Actions)
+
+The same skill runs three times a day from `.github/workflows/report.yml` (prompt starts with
+"Tryb automatyczny"; `BUKMACHER_CLOUD=1` is set). Differences from an interactive run:
+
+- **No questions.** Horizon and ranges come from the prompt; never call `AskUserQuestion`.
+- **Sources.** Runners sit on US datacentre IPs: Sofascore answers 403 and betexplorer 429 /
+  US-only books — don't call either (no `context.py`, no `betexplorer.py`). Fixtures and odds
+  come from ESPN and The Odds API, context from WebSearch/WebFetch. Quote the European books
+  The Odds API returns (Pinnacle, Unibet, Betsson, bet365, Marathon…) as the price; Polish
+  bookmakers' prices are close to them — say once in the report that the price should be
+  checked at the reader's own bookmaker.
+- **Credits.** Free plan, 500 a month for ~90 runs:
+  `odds.py --sources espn,oddsapi --oddsapi-markets h2h,totals --credit-budget 4`, never
+  `--extra-markets`. Print the remaining credits in the report's "Uwagi". Below 60 credits
+  left, use `--credit-budget 0` (ESPN only) and say so.
+- **Every run, in this order:** `ledger.py settle` → `ledger.py stats --html work/stats.html`
+  → fixtures/odds → `ledger.py snapshot work/odds.json` (closing-price proxy for open bets) →
+  shortlist → analysis → report → `ledger.py add work/picks.json`. Picks need a `ref` copied
+  from the chosen odds row's `refs` (espn or oddsapi) — a pick without one is not published.
+- **Files.** Name the report in Polish local time (`TZ=Europe/Warsaw date +%Y-%m-%d_%H%M`),
+  save it under `<project>/reports/`, and append the report's "Wnioski" lines to
+  `<project>/data/lessons.md` under a `## <report file>` heading. Don't commit — the
+  workflow commits `reports/` and `data/` and republishes the site. Don't edit the skill
+  itself in a report run; that is the weekly review's job (`references/self-review.md`).
+- **Finish with** a short plain-text summary (ranges, picks, credits left); the `file://` link
+  is meaningless on a runner — give the report's path instead.
+
 ## Hard rules
 
 - Confirmed facts only: a fixture without a source id and a price without a source line do not

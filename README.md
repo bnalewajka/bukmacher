@@ -18,7 +18,7 @@ claude
 ```
 
 Claude zapyta o okno czasowe (4/8/12/24 h) i kurs, potem wykona kroki z `SKILL.md`.
-Raport trafia do `reports/<data>_typy.md` i do odpowiedzi.
+Raport (HTML) trafia do `reports/<data>_<godzina>_typy.html`, a w odpowiedzi jest link do niego.
 
 ## Źródła danych (co działa bez kluczy, co wymaga klucza)
 
@@ -76,3 +76,23 @@ de-vig, wyprowadzanie podwójnej szansy z 1X2 i ranking shortlisty.
 Kurs 1.20 to ~83 % implikowanego prawdopodobieństwa — nawet najlepiej wybrany typ przegrywa
 średnio raz na 6–7 razy. To narzędzie analityczne, nie gwarancja. Obstawiaj wyłącznie środki,
 których utratę akceptujesz.
+
+## Automatyczne raporty i skuteczność
+
+Strona: **https://bnalewajka.github.io/bukmacher/** — najnowszy raport, statystyki skuteczności,
+typy czekające na rozliczenie, archiwum.
+
+| Workflow | Kiedy (czas PL, lato) | Co robi |
+|---|---|---|
+| `report.yml` | 10:00, 16:00, 20:00 | Claude (Sonnet 5, subskrypcja) uruchamia skill bez pytań: rozlicza poprzednie typy, analizuje okno 6/4/8 h, zapisuje raport i typy do dziennika, publikuje stronę |
+| `settle.yml` | 04:30 | rozliczenie bez Claude (ESPN, The Odds API) i odświeżenie strony |
+| `review.yml` | niedziela 08:00 | przegląd tygodniowy (Opus): kalibracja, CLV, błędy → poprawki skilla, wpis w `data/changelog.md` |
+| `publish.yml` | po każdym z powyższych | buduje stronę (`scripts/build_site.py`) i wdraża na GitHub Pages |
+
+Dane: `data/ledger.jsonl` (każdy typ i kandydat „na papierze”, wynik, CLV), `data/lessons.md`
+(wnioski z raportów), `data/changelog.md` (zmiany skilla z uzasadnieniem).
+
+Sekrety repo: `CLAUDE_CODE_OAUTH_TOKEN` (`claude setup-token`), `ODDS_API_KEY`.
+Ręczne uruchomienie: `gh workflow run report.yml -f hours=4`.
+W chmurze nie działają Sofascore (403) ani betexplorer (429, tylko bukmacherzy z USA) — raporty
+podają kursy europejskich bukmacherów z The Odds API i ESPN.

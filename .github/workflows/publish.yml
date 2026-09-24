@@ -1,0 +1,39 @@
+# Builds the site from reports/ + data/ledger.jsonl and deploys it to GitHub Pages.
+# Called by the report / settle / review workflows after they push (a push made with
+# GITHUB_TOKEN does not trigger other workflows), or run by hand.
+name: publish
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main   # the commit the calling workflow just pushed, not the one it started from
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 .claude/skills/bukmacher/scripts/build_site.py --out site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,92 @@
+# The scheduled betting report: Claude Code runs the bukmacher skill headless on the user's
+# subscription (CLAUDE_CODE_OAUTH_TOKEN), commits the report and the ledger, then the site is
+# republished. Windows do not overlap: 08 UTC -> 6 h, 14 UTC -> 4 h, 18 UTC -> 8 h
+# (10:00 / 16:00 / 20:00 Polish summer time; an hour earlier in winter — cron runs in UTC).
+name: report
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+    - cron: "0 14 * * *"
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: "Window in hours (empty = by time of day)"
+        required: false
+      model:
+        description: "Claude model"
+        required: false
+        default: "claude-sonnet-5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bukmacher-main
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      BUKMACHER_CLOUD: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install -g @anthropic-ai/claude-code
+
+      - name: window
+        id: window
+        run: |
+          H="${{ inputs.hours }}"
+          if [ -z "$H" ]; then
+            case "$(date -u +%H)" in 07|08|09|10) H=6 ;; 13|14|15|16) H=4 ;; *) H=8 ;; esac
+          fi
+          echo "hours=$H" >> "$GITHUB_OUTPUT"
+
+      - name: run the skill
+        shell: bash   # -o pipefail: a failing claude must not hide behind tee
+        run: |
+          claude -p "/bukmacher Tryb automatyczny (GitHub Actions, bez pytań): horyzont ${{ steps.window.outputs.hours }} h, wszystkie 4 zakresy kursów. Postępuj według sekcji 'Automated run (GitHub Actions)' w SKILL.md." \
+            --model "${{ inputs.model || 'claude-sonnet-5' }}" \
+            --dangerously-skip-permissions \
+            --max-turns 200 | tee claude-report.log
+
+      - name: check that a report was written
+        run: |
+          git status --porcelain reports | grep -q . || { echo "::error::no new report in reports/"; exit 1; }
+
+      - name: tests
+        run: pip install --quiet pytest && python3 -m pytest -q tests
+
+      - name: commit
+        run: |
+          git config user.name "bukmacher-bot"
+          git config user.email "bukmacher-bot@users.noreply.github.com"
+          git add reports data
+          git commit -m "report: $(ls -t reports | head -1)"
+          git pull --rebase --quiet && git push
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: claude-log
+          path: claude-report.log
+          retention-days: 14
+
+  publish:
+    needs: report
+    uses: ./.github/workflows/publish.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

@@ -438,7 +438,7 @@ def html_fragment(st: dict) -> str:
     recent = "".join(item(e) for e in st["recent"])
     return ("<section id=\"skutecznosc\">\n  <h2>Skuteczność</h2>\n"
             "  <p class=\"meta\">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty "
-            "względem mediany kursu zamknięcia (betexplorer); dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza "
+            "względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza "
             "rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>\n"
             f"  <div class=\"table-wrap\"><table>{head}<tbody>{''.join(rows)}</tbody></table></div>\n"
             + (f"  <h3 class=\"sub\">Ostatnio rozliczone</h3>\n  <ul>{recent}</ul>\n" if recent else "")

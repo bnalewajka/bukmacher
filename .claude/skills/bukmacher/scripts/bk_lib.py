@@ -24,6 +24,9 @@ from typing import Any, Iterable, Optional
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36")
+# Akamai-fronted hosts (ESPN) reject a browser UA sent with a non-browser TLS fingerprint
+# but accept a plain client UA; http_get falls back to it once on 403.
+PLAIN_UA = "curl/8.7.1"
 
 CACHE_DIR = Path(os.environ.get("BUKMACHER_CACHE", Path.home() / ".cache" / "bukmacher"))
 DEFAULT_TTL = int(os.environ.get("BUKMACHER_CACHE_TTL", "600"))
@@ -135,6 +138,9 @@ def http_get(url: str, params: Optional[dict] = None, headers: Optional[dict] = 
         except urllib.error.HTTPError as e:
             detail = e.read()[:300].decode("utf-8", "replace")
             last_err = HttpError(url, e.code, detail)
+            if e.code == 403 and hdrs.get("User-Agent") == UA:
+                hdrs["User-Agent"] = PLAIN_UA
+                continue
             if e.code in (400, 401, 403, 404, 422, 429):
                 break  # not transient (429: do not hammer a rate-limited API)
         except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as e:
@@ -243,9 +249,34 @@ def table(rows: list[dict], cols: list[str], max_width: int = 34) -> str:
     return "\n".join([head, "-" * len(head)] + [fmt(r) for r in rows])
 
 
+# Gitignored KEY=value files checked after the real environment: the skill's own .env, then the cwd's.
+DOTENV_PATHS = (Path(__file__).resolve().parent.parent / ".env", Path.cwd() / ".env")
+
+
+def _dotenv() -> dict[str, str]:
+    out: dict[str, str] = {}
+    for path in DOTENV_PATHS:
+        try:
+            lines = path.read_text().splitlines()
+        except OSError:
+            continue
+        for line in lines:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            out.setdefault(k.strip().removeprefix("export ").strip(), v.strip().strip("'\""))
+    return out
+
+
 def env_key(*names: str) -> Optional[str]:
+    """First non-empty value among `names`, from the environment, else from a .env file."""
     for n in names:
         v = os.environ.get(n)
         if v:
             return v.strip()
+    dotenv = _dotenv()
+    for n in names:
+        if dotenv.get(n):
+            return dotenv[n]
     return None

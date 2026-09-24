@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 24.09 18:51</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 4 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-24 16:51 UTC / 18:51 czasu polskiego (CEST). Zegar zweryfikowany: tak (<code>clock.py</code>, mediana nagłówków Date: Cloudflare, Google, GitHub, ESPN; dryf &lt; 1 s). Okno: 18:47–22:47 (PL).</p>
+    <p class="meta">Przeanalizowano: ok. 90 spotkań (piłka nożna 19, hokej 14, koszykówka 10, tenis ok. 47, siatkówka 0 — betexplorer nie pokazał w oknie żadnego meczu). ok. 80 selekcji w wybranych zakresach kursów z: The Odds API (Pinnacle + ok. 20 bukmacherów EU), ESPN/DraftKings, betexplorer.com (STS, eFortuna, Betclic.pl, Superbet.pl, LV BET, Fuksiarz, BETFAN). Kursy pobrane o 16:48–16:50 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Rynek na dzisiejszy wieczór jest wyceniony ciasno: Pinnacle i polscy bukmacherzy zgadzają się co do faworytów, a newsy o absencjach są już w kursach. Tylko jeden zakład przechodzi mój próg (szansa z kursu + 3 pkt) — <strong>Serbia – Grecja, under 3 (azjatycki) @ 1.30</strong>. W pozostałych zakresach podaję kurs, od którego zagrałbym najbliższych kandydatów.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 0 typów</a>
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 1 typ</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: ok. 15 selekcji, przeanalizowano 5.</p>
+    <p class="empty">Brak typu spełniającego próg. Przy tak niskich kursach marża bukmachera zjada całą przewagę, a żaden kandydat nie ma twardego, niewycenionego argumentu.</p>
+    <h3 class="sub">Odrzuceni kandydaci (najbliżej progu)</h3>
+    <ul>
+      <li><strong>Liechtenstein – Litwa, under 3.5 @ 1.19 (Betclic.pl, STS; mediana 1.18 z 7 bukm.)</strong> — p_est 0.85 vs wymagane 0.87. Rynek już gra pod mało bramek (under 2.5 skrócił się 1.77 → 1.56 u DraftKings). Zagrałbym od <strong>1.22</strong>.</li>
+      <li><strong>Portugalia – Walia, wygrana Portugalii @ 1.16 (Pinnacle 1.16, max 1.18; LV BET 1.22)</strong> — p_est 0.84 (Pinnacle de-vig 0.83); Walia bez Wilsona, Rodona, Broadheada, Darlowa, ale to już jest w kursie (1.22 → 1.14). Zagrałbym od <strong>1.24</strong>.</li>
+      <li><strong>Holandia – Niemcy, over 1.5 @ 1.12–1.13</strong> — p_est 0.87 vs wymagane 0.915. Zagrałbym od 1.19.</li>
+      <li><strong>Austria – Izrael, over 1.5 @ 1.17–1.18 / 1X @ 1.12–1.14</strong> — Austria bez Laimera, Baumgartnera, Grillitscha, Ljubičicia, Svobody i Alaby; p_est ≈ szansa z kursu. Brak przewagi.</li>
+      <li><strong>Tenis ITF (Brengle 1.18, K. Day 1.12, Garcia Vidal 1.19, Sanchez 1.13)</strong> — turnieje W15–W50/M15: mało danych, ryzyko kreczu, słaby rynek.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: ok. 20 selekcji, przeanalizowano 6.</p>
+    <p class="empty">Brak typu spełniającego próg. Dwa kandydaci są o 1–2 pkt od progu — przy lepszym kursie stają się grywalni.</p>
+    <h3 class="sub">Odrzuceni kandydaci (najbliżej progu)</h3>
+    <ul>
+      <li><strong>Serbia – Grecja, under 3.5 @ 1.22 (STS, eFortuna; mediana 1.21 z 7 bukm.)</strong> — p_est 0.84 vs wymagane 0.85. Ten sam argument co typ z zakresu 1.30–1.44, ale azjatycki under 3 daje lepszy stosunek ceny do ryzyka. Zagrałbym od <strong>1.24</strong>.</li>
+      <li><strong>Austria – Izrael, under 4.5 @ 1.23–1.24</strong> — p_est 0.83 vs wymagane 0.84; Austria bez dwóch kreatywnych pomocników. Zagrałbym od 1.25.</li>
+      <li><strong>Baskonia – Olympiacos, Olympiacos (z dogrywką) @ 1.21 mediana, Pinnacle 1.24, Betclic.pl 1.25</strong> — pełny skład Olympiacosu, ale Pinnacle de-vig tylko 0.775; otwarcie sezonu. p_est 0.79. Zagrałbym od <strong>1.32</strong>. (W pierwszym raporcie dziś był to typ nr 3 — przy progu +3 pkt wypada.)</li>
+      <li><strong>Panathinaikos – Paris, PAO @ 1.22 (Pinnacle 1.25)</strong> — PAO bez Nunna, Sloukasa, Hayesa-Davisa i Falla (klub potwierdził); p_est 0.74. Odrzucony.</li>
+      <li><strong>Liechtenstein – Litwa, Litwa wygra @ 1.23 (max 1.28)</strong> — remis zbyt realny w meczu, w którym rynek spodziewa się mało bramek; p_est 0.74.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: ok. 20 selekcji, przeanalizowano 5.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">20:45</td>
+            <td>Serbia – Grecja</td>
+            <td>Liga Narodów A, gr. 2</td>
+            <td>Poniżej 3 gola (azjatycki; przy 3 golach zwrot)</td>
+            <td class="num">1.30<span class="note">STS.pl / eFortuna.pl via betexplorer, 16:49 UTC</span></td>
+            <td class="num pos">0.815*</td>
+            <td class="num">0.769</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="meta">* dla linii azjatyckiej: szansa wygranej wśród rozstrzygnięć bez zwrotu (P(≤2 gole) = 0.66, P(3) = 0.19 → 0.66 / 0.81).</p>
+
+    <h3 class="sub">Analiza propozycji</h3>
+    <article class="pick" id="z-130-1">
+      <h3>1. Serbia – Grecja — poniżej 3 goli (azjatycki) @ 1.30</h3>
+      <p class="line">Zakres 1.30–1.44 · Liga Narodów A, gr. 2 · 20:45 PL (18:45 UTC) · 1.30 STS.pl i eFortuna.pl (betexplorer, 16:49 UTC); under 3.5 1.22, under 2.5 1.62 · p_est 0.815 vs implikowane 0.769</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to jedyny mecz dnia, w którym ważny news — Serbia bez <em>obu</em> środkowych napastników (Vlahović i Mitrović) — nie wygląda na w pełni wyceniony: linia goli stoi na 2.5 z under 1.62, jak przy normalnym składzie. Linia azjatycka 3.0 daje zwrot przy dokładnie 3 golach, więc zakład przegrywa dopiero przy 4+ golach, a kosztuje wyraźnie więcej niż under 3.5 (1.22).</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>1. kolejka Ligi Narodów A (grupa z Niemcami i Holandią) — oba zespoły nie chcą przegrać u progu grupy; pierwszy mecz o stawkę między nimi.</dd>
+        <dt>Forma</dt><dd>Grecja: W-D-L-D-D-L, w tym 0:1 z Paragwajem i Włochami, 0:0 z Węgrami, 2:2 ze Szwecją — mecze niskobramkowe. Serbia: L-W-L-W-L-L, m.in. 0:3 z Republiką Zielonego Przylądka (maj 2026) — słaby atak, gra bez pewności.</dd>
+        <dt>Absencje</dt><dd>Serbia: Vlahović, Mitrović (napastnicy), Milenković, Rajković. W ataku Jović lub Joveljić, wraca Tadić. Grecja: bez Roty, Giannoulisa, Konstantelisa; Bakasetas poza kadrą.</dd>
+        <dt>Składy</dt><dd>Przewidywane (Sports Mole); oficjalne ok. 19:45 PL. Serbia: Jović jako „9”. Grecja: trójka obrońców (Mavropanos, Koulierakis, Restos) + dwóch defensywnych pomocników.</dd>
+        <dt>Terminarz</dt><dd>Pierwszy mecz okna reprezentacyjnego; brak zmęczenia.</dd>
+        <dt>Miejsce i warunki</dt><dd>Stadion Rajko Mitić, Belgrad; wieczór, bez przeszkód pogodowych w zapowiedziach.</dd>
+        <dt>Styl gry</dt><dd>Grecja Jovanovicia gra zwartym blokiem 3-4-3/5-4-1 i czeka na kontry Tzolisa; Serbia bez napastnika w polu karnym ma kłopot z kreowaniem sytuacji.</dd>
+        <dt>Sygnały rynkowe</dt><dd>Under 2.5 u DraftKings 1.69 → 1.61, over 2.05 → 2.30 (rynek lekko po stronie undera); 7 polskich bukmacherów zgodnych (under 3.5 1.21–1.22).</dd>
+        <dt>Inne</dt><dd>Linia azjatycka 3.0: przy 3 golach zwrot stawki — sprawdź, czy Twój bukmacher ma ten rynek („Poniżej 3” / „Under 3.0”).</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Serbia bez obu klasycznych napastników.</li><li>Grecja ma najniższą liczbę goli w meczach w ostatnich miesiącach.</li><li>Zwrot przy 3 golach — przegrana wymaga 4+ goli.</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Otwarty mecz po wczesnym golu, dwie słabe defensywy w formie meczowej Serbii (0:3 z RZP).</li><li>Rzut karny / czerwona kartka zmienia tempo.</li><li>Rozliczenie: 90 min + doliczony czas; linia 3.0 = zwrot przy 3 golach, nie „połowa”.</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> wczesny gol Grecji zmusza Serbię do ataku, mecz się otwiera i kończy 2:2 lub 3:1.</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="https://www.betexplorer.com/football/europe/uefa-nations-league/serbia-greece/2BWSzjVN/">betexplorer — Serbia – Grecja</a> (16:49 UTC), ESPN scoreboard <code>uefa.nations</code> (DraftKings, 16:47 UTC), <a href="https://www.sportsmole.co.uk/football/serbia/uefa-nations-league/preview/serbia-vs-greece-prediction-team-news-lineups_605618.html">Sports Mole — zapowiedź</a>, <a href="https://sports.yahoo.com/articles/team-news-predicted-line-ups-141229868.html">Yahoo Sports — team news</a> (16:50 UTC).</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Portugalia – Walia, over 2.5 @ 1.33–1.35</strong> — rynek zakłada ok. 3.5 gola (linia 3.5 u DraftKings); p_est 0.72 &lt; 0.75. Zagrałbym od 1.45.</li>
+      <li><strong>Holandia – Niemcy, over 2.5 @ 1.42–1.44</strong> — Holandia bez de Jonga, Simonsa, Wieffera, Schoutena; p_est 0.68 &lt; 0.70.</li>
+      <li><strong>Djurgården +1.5 (SHL) @ 1.36, Frölunda +1.5 @ 1.36</strong> — mecze SHL zaczynają się o 19:00 PL, zanim zdążyłbym je przeanalizować; pominięte zgodnie z zasadą „nie analizuję meczów tuż przed startem”.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63 %; wymagane p_est ≈ implikowane + 0.03. W zakresie: ok. 25 selekcji, przeanalizowano 5.</p>
+    <p class="empty">Brak typu spełniającego próg.</p>
+    <h3 class="sub">Odrzuceni kandydaci (najbliżej progu)</h3>
+    <ul>
+      <li><strong>ASVEL – Maccabi Tel Aviv, Maccabi @ 1.52 mediana (Pinnacle 1.54, Betclic.pl 1.67)</strong> — p_est 0.63 (ASVEL bez rezerwowego centra Dossou-Yovo, Clark w Maccabi niepewny). Przechodzi próg tylko przy 1.67 w Betclic.pl, a Betclic w tym samym zestawieniu pokazywał nierealne 1.07 na Panathinaikos — ta cena wygląda na błąd danych, nie na okazję. Odrzucony.</li>
+      <li><strong>Norwegia – Dania, Norwegia @ 1.58 (Pinnacle 1.60, max 1.62)</strong> — Dania bez Christensena, Dolberga, M. Jensena, Stage'a, Osuli; Norwegia bez Sørlotha. Kurs spadł 1.87 → 1.58, więc absencje są już w cenie. p_est 0.62 &lt; 0.65. Zagrałbym od 1.69.</li>
+      <li><strong>Austria – Izrael, Austria @ 1.45 (max 1.51)</strong> — 3 mecze bez wygranej, 6 absencji; p_est 0.66 &lt; 0.69.</li>
+      <li><strong>Kosowo – Irlandia, under 2.5 @ 1.57 (max 1.61)</strong> — Irlandia bez Collinsa, Colemana, Cullena, McGratha, Vale'a; p_est 0.61 &lt; 0.65.</li>
+      <li><strong>Serbia – Grecja, under 2.5 @ 1.62</strong> — powyżej zakresu (1.60); lepsza relacja ryzyka w azjatyckim under 3 (typ z zakresu 1.30–1.44).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87 % implikowanego prawdopodobieństwa, 1.50 — ok. 67 %: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Poprawka do raportu z 18:35 (.md): w meczu Liechtenstein – Litwa under 2.5 <em>skrócił się</em> (1.77 → 1.56), więc rynek gra pod mniej bramek, nie więcej, jak błędnie napisałem wcześniej. Próg „+3 pkt” jest też ostrzejszy niż w tamtym raporcie, dlatego Olympiacos i Portugalia wypadły z propozycji.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore (403 na wszystkich endpointach — brak kursów bet365, składów i <code>context.py</code>); api-sports (brak klucza); euroleaguebasketball.net (403 — raport kontuzji wzięty z Eurohoops/RotoWire przez wyszukiwarkę). Zastępczo: betexplorer.com (listy meczów, kursy PL) i The Odds API (Pinnacle; zużyto 9 kredytów, zostało 491).</li>
+      <li>Hokej: mecze SHL, DEL, Alps HL zaczynają się 19:00–19:30 PL — za blisko startu na rzetelną analizę; w szwajcarskiej NL i Alps HL brak faworytów w zakresach.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

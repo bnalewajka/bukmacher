@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+Report template (Polish by default). Copy this file, keep the structure and the CSS, fill every
+{placeholder} and delete this comment. Repeat the <section class="range"> block once per odds
+range the user chose (default all four: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60, in that
+order), with a matching link in <nav class="ranges">; inside it repeat <article class="pick">
+per proposal (max 3) and <li> per rejected candidate. Anchors: id="z-110", "z-120", "z-130",
+"z-145"; pick ids "z-120-1", "z-120-2", …
+
+Rules for filling it:
+- One self-contained file: inline CSS only, no external scripts, fonts or images, so it opens
+  offline and can be mailed as-is.
+- Escape &, < and > in any text you paste (team names, quotes from sources).
+- Times in Polish local time (CET/CEST), with UTC in brackets where it avoids ambiguity.
+- `p_est` is your estimate after analysis; "implikowane" = 1/kurs, both as 0.00. If `p_est` is
+  below implied, the selection does not belong in the ranking — move it to "Odrzuceni".
+- Mark the edge cell with class "pos" when p_est > implied, "neg" otherwise; put a price that is
+  only good at one bookmaker in the note (e.g. "tylko LV BET; STS 1.16").
+- Sources are real links (<a href>) with the fetch time; a failed source goes into "Uwagi".
+- Do not pad: one strong proposal beats three weak ones. If nothing in a range qualifies,
+  replace its table and picks with <p class="empty"> saying so, and still list the best
+  rejected candidates with what would change your mind.
+- Each nav chip shows the range and its number of proposals ("1.20–1.29 · 2 typy").
+- English-language user → same structure in English (lang="en").
+-->
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy {YYYY-MM-DD HH:MM}</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno {okno} h, zakresy kursów: {lista zakresów}</h1>
+    <p class="meta">Wygenerowano: {data i godzina UTC} / {czas lokalny PL}. Zegar zweryfikowany: {tak/nie + źródło}. Okno: {od–do, czas PL}.</p>
+    <p class="meta">Przeanalizowano: {N} spotkań ({piłka nożna X, siatkówka Y, koszykówka Z, hokej W, tenis V}), {M} selekcji w wybranych zakresach kursów z {lista źródeł kursów}. Kursy pobrane o {godzina}.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">{1–2 zdania: w których zakresach jest realna przewaga, gdzie nic nie warto grać, przy jakich kursach nie grać}</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · {n} typy</a>
+      <a href="#z-120">1.20–1.29 · {n} typy</a>
+      <a href="#z-130">1.30–1.44 · {n} typy</a>
+      <a href="#z-145">1.45–1.60 · {n} typy</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <!-- powtórz tę sekcję dla każdego wybranego zakresu -->
+    <h2>Kursy {1.20–1.29}</h2>
+    <p class="meta">Próg opłacalności {83–78} %; wymagane p_est ≈ implikowane + 0.03. W zakresie: {M} selekcji, przeanalizowano {K}.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">{20:45}</td>
+            <td>{Gospodarz – Gość}</td>
+            <td>{Liga}</td>
+            <td>{np. Podwójna szansa X2}</td>
+            <td class="num">{1.20}<span class="note">{bukmacher, źródło, 17:32 UTC}</span></td>
+            <td class="num pos">{0.88}</td>
+            <td class="num">{0.83}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. {Wydarzenie} — {Zakład} @ {kurs}</h3>
+      <p class="line">Zakres {1.20–1.29} · {Rozgrywki} · {godz. PL} ({godz. UTC}) · {kurs, bukmacher, źródło, godzina pobrania} · p_est {0.00} vs implikowane {0.00}</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> {2–4 zdania: co przesądza; co odróżnia od innych kandydatów w tym zakresie; dlaczego ten rynek, a nie zwykła wygrana}</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>{…}</dd>
+        <dt>Forma</dt><dd>{z uwzględnieniem siły rywali}</dd>
+        <dt>Absencje</dt><dd>{kto wypada, kto go zastępuje}</dd>
+        <dt>Składy</dt><dd>{potwierdzone / przewidywane, godzina publikacji}</dd>
+        <dt>Terminarz</dt><dd>{podróż, zmęczenie, rotacja}</dd>
+        <dt>Miejsce i warunki</dt><dd>{stadion/hala, pogoda, sędzia}</dd>
+        <dt>Styl gry</dt><dd>{dopasowanie stylów}</dd>
+        <dt>Sygnały rynkowe</dt><dd>{drift, Pinnacle vs soft, liczba bukmacherów}</dd>
+        <dt>Inne</dt><dd>{…}</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>{…}</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>{… w tym reguły rozliczenia u bukmachera}</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> {jedno zdanie, realistyczny scenariusz}</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="{url}">{nazwa}</a> ({godzina pobrania}), …</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>{Wydarzenie, rynek, kurs}</strong> — {powód: rotacja, kontuzja, brak potwierdzonego bramkarza, drift w górę, cienki rynek…}</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87 % implikowanego prawdopodobieństwa, 1.50 — ok. 67 %: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: {lista i czym je zastąpiono, lub „brak”}.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

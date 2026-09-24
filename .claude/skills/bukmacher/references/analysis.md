@@ -97,5 +97,14 @@ independently from the price and to name the failure mode of the bet.
   priced; the point is to find the *few* where the evidence stacks up on the same side.
 - Write the "how this loses" line. If you cannot describe a realistic losing scenario, you
   have not analysed it enough; if the losing scenario is easy to imagine and likely, drop it.
-- Calibration anchors: 1.20 → break-even 83 %. A proposal needs `p_est ≥ 0.86` to be worth
-  listing at 1.20; at 1.30, ≥ 0.80; at 1.15, ≥ 0.89.
+- Calibration anchors — a proposal needs `p_est` about 3 points above break-even (1/kurs):
+
+  | Range | Break-even | Minimum `p_est` |
+  |---|---|---|
+  | 1.10–1.19 | 91–84 % | 1/kurs + 0.03 (e.g. 1.15 → 0.90) |
+  | 1.20–1.29 | 83–78 % | e.g. 1.20 → 0.86, 1.25 → 0.83 |
+  | 1.30–1.44 | 77–69 % | e.g. 1.35 → 0.77, 1.40 → 0.74 |
+  | 1.45–1.60 | 69–63 % | e.g. 1.50 → 0.70, 1.60 → 0.66 |
+
+  The lower the price, the less the margin forgives: at 1.10–1.19 the book's de-vigged number
+  is usually already above the truth, so a proposal there needs a concrete, verified reason.

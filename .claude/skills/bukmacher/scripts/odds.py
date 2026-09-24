@@ -133,17 +133,25 @@ def from_espn(fx: dict) -> list[dict]:
     out = []
     for o in fx.get("espn_odds") or []:
         bk = o.get("bookmaker") or "ESPN BET"
-        trio = [(fx["home"], o.get("home_win")), ("Draw", o.get("draw_win")), (fx["away"], o.get("away_win"))]
-        trio = [(s, v) for s, v in trio if v]
-        for s, v in trio:
-            out.append(row(fx, "Match winner (ESPN)", s, v, bk, "espn"))
+        trio = [(fx["home"], "home"), ("Draw", "draw"), (fx["away"], "away")]
+        for s, side in trio:
+            if o.get(f"{side}_win"):
+                out.append(row(fx, "Match winner (ESPN)", s, o[f"{side}_win"], bk, "espn",
+                               initial=o.get(f"{side}_win_open")))
         if o.get("total_over") and o.get("total_under"):
             line = o.get("total_over_line") or o.get("over_under")
-            out.append(row(fx, "Total", "Over", o["total_over"], bk, "espn", line=line))
-            out.append(row(fx, "Total", "Under", o["total_under"], bk, "espn", line=line))
+            # the opening price only counts as drift when it was quoted on the same line
+            for side, label in (("over", "Over"), ("under", "Under")):
+                init = o.get(f"total_{side}_open") if o.get(f"total_{side}_open_line") == line else None
+                out.append(row(fx, "Total", label, o[f"total_{side}"], bk, "espn", line=line, initial=init))
         if o.get("pointSpread_home") and o.get("pointSpread_away"):
-            out.append(row(fx, "Spread", fx["home"], o["pointSpread_home"], bk, "espn", line=o.get("pointSpread_home_line") or o.get("spread")))
-            out.append(row(fx, "Spread", fx["away"], o["pointSpread_away"], bk, "espn", line=o.get("pointSpread_away_line")))
+            for side, name in (("home", fx["home"]), ("away", fx["away"])):
+                line = o.get(f"pointSpread_{side}_line")
+                if line is None and side == "home":
+                    line = o.get("spread")
+                init = (o.get(f"pointSpread_{side}_open")
+                        if o.get(f"pointSpread_{side}_open_line") == line else None)
+                out.append(row(fx, "Spread", name, o[f"pointSpread_{side}"], bk, "espn", line=line, initial=init))
     return [r for r in out if r]
 
 
@@ -184,15 +192,31 @@ EXTRA_MARKETS = {
 }
 
 
+def _sport_key_rank(sport: dict, competitions: set[str]) -> int:
+    """0 = the key's title names a competition in fixtures.json, 1 = otherwise (credits go first
+    to leagues we know are playing in the window)."""
+    title = norm_name(sport.get("title") or "")
+    return 0 if title and any(title in c or c in title for c in competitions) else 1
+
+
 def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float, max_keys: int,
-                 extra: bool, only_keys: Optional[set[str]]) -> tuple[list[dict], list[str]]:
+                 extra: bool, only_keys: Optional[set[str]],
+                 sport_keys: Optional[list[str]] = None) -> tuple[list[dict], list[str]]:
     errors: list[str] = []
     try:
         sports = http_get_json(f"{ODDS_API}/sports", params={"apiKey": key}, ttl=3600)
     except HttpError as e:
         return [], [f"oddsapi sports: {e}"]
-    wanted_groups = {GROUPS[s] for s in {f["sport"] for f in fixtures} if s in GROUPS}
-    keys = [s["key"] for s in sports if s.get("active") and s.get("group") in wanted_groups and not s.get("has_outrights")]
+    if sport_keys:
+        active = {s["key"] for s in sports if s.get("active")}
+        errors += [f"oddsapi: sport key {k} not active" for k in sport_keys if k not in active]
+        keys = [k for k in sport_keys if k in active]
+    else:
+        wanted_groups = {GROUPS[s] for s in {f["sport"] for f in fixtures} if s in GROUPS}
+        competitions = {norm_name(f.get("competition") or "") for f in fixtures} - {""}
+        cands = [s for s in sports if s.get("active") and s.get("group") in wanted_groups and not s.get("has_outrights")]
+        cands.sort(key=lambda s: _sport_key_rank(s, competitions))  # stable: API order within each rank
+        keys = [s["key"] for s in cands]
     if len(keys) > max_keys:
         eprint(f"[oddsapi] {len(keys)} active sport keys, limiting to first {max_keys} (use --max-keys / --oddsapi-keys)")
         keys = keys[:max_keys]
@@ -307,6 +331,8 @@ def main() -> int:
     ap.add_argument("--regions", default="eu", help="The Odds API regions: eu,uk,us,us2,au")
     ap.add_argument("--max-events", type=int, default=80, help="cap per-event calls (sofascore/apisports)")
     ap.add_argument("--max-keys", type=int, default=12, help="cap The Odds API sport keys per run (credits!)")
+    ap.add_argument("--oddsapi-keys", help="comma separated The Odds API sport keys to query instead of "
+                                           "auto-picking (e.g. soccer_uefa_nations_league,basketball_euroleague)")
     ap.add_argument("--extra-markets", action="store_true", help="The Odds API additional markets per event (costly)")
     ap.add_argument("--only-keys", help="comma separated fixture keys to restrict per-event calls to")
     ap.add_argument("--sport", help="restrict to one sport")
@@ -349,7 +375,9 @@ def main() -> int:
         eprint(f"[apisports] odds for {n}/{len(per_event)} events")
     ok = env_key("ODDS_API_KEY", "THE_ODDS_API_KEY")
     if "oddsapi" in sources and ok:
-        r, e = from_oddsapi(fixtures, ok, args.regions, t0, hours, args.max_keys, args.extra_markets, only)
+        sport_keys = [k.strip() for k in args.oddsapi_keys.split(",") if k.strip()] if args.oddsapi_keys else None
+        r, e = from_oddsapi(fixtures, ok, args.regions, t0, hours, args.max_keys, args.extra_markets, only,
+                            sport_keys)
         rows += r; errors += e
         eprint(f"[oddsapi] {len(r)} selections")
     elif "oddsapi" in sources:

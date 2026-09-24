@@ -67,14 +67,27 @@ def _espn_competitor_name(c: dict) -> str:
     return c.get("displayName") or c.get("name") or "?"
 
 
+def _espn_line(val: Any) -> Optional[float]:
+    """'o3.5' / 'u3.5' / '-2.5' / 3.5 -> float; None when absent or unparsable."""
+    if val is None:
+        return None
+    try:
+        return float(str(val).lstrip("ouOU"))
+    except ValueError:
+        return None
+
+
 def _espn_odds(comp: dict) -> list[dict]:
     out = []
     for o in comp.get("odds") or []:
+        if not isinstance(o, dict):
+            continue
         prov = (o.get("provider") or {}).get("name") or "ESPN"
         rec: dict[str, Any] = {"bookmaker": prov, "details": o.get("details"), "over_under": o.get("overUnder"),
                                "spread": o.get("spread")}
         for side in ("homeTeamOdds", "awayTeamOdds", "drawOdds"):
-            s = o.get(side) or {}
+            s = o.get(side)
+            s = s if isinstance(s, dict) else {}
             dec = None
             cur = s.get("current") or {}
             ml = cur.get("moneyLine") if isinstance(cur, dict) else None
@@ -85,17 +98,32 @@ def _espn_odds(comp: dict) -> list[dict]:
             if dec is None and o.get("moneyline") and side != "drawOdds":
                 pass
             rec[side.replace("TeamOdds", "").replace("Odds", "") + "_win"] = dec
-        # ESPN also exposes "moneyline"/"pointSpread"/"total" objects in newer payloads
+        # ESPN also exposes "moneyline"/"pointSpread"/"total" objects in newer payloads, priced as
+        # American strings ("-700", "+100") with lines like "o3.5" / "-2.5", plus the opening price.
         for grp in ("moneyline", "pointSpread", "total"):
             g = o.get(grp)
-            if isinstance(g, dict):
-                for side in ("home", "away", "draw", "over", "under"):
-                    v = g.get(side) or {}
-                    close = (v.get("close") or v.get("current") or {}) if isinstance(v, dict) else {}
-                    if isinstance(close, dict) and close.get("decimal"):
-                        rec[f"{grp}_{side}"] = close.get("decimal")
-                        if close.get("line"):
-                            rec[f"{grp}_{side}_line"] = close.get("line")
+            if not isinstance(g, dict):
+                continue
+            for side in ("home", "away", "draw", "over", "under"):
+                v = g.get(side)
+                if not isinstance(v, dict):
+                    continue
+                for stage, suffix in (("close", ""), ("current", ""), ("open", "_open")):
+                    px = v.get(stage)
+                    if not isinstance(px, dict) or f"{grp}_{side}{suffix}" in rec:
+                        continue
+                    dec = px.get("decimal") or american_to_decimal(px.get("odds"))
+                    if not dec:
+                        continue
+                    rec[f"{grp}_{side}{suffix}"] = dec
+                    line = _espn_line(px.get("line"))
+                    if line is not None:
+                        rec[f"{grp}_{side}{suffix}_line"] = line
+        for side in ("home", "away", "draw"):
+            if rec.get(f"{side}_win") is None and rec.get(f"moneyline_{side}"):
+                rec[f"{side}_win"] = rec[f"moneyline_{side}"]
+            if rec.get(f"moneyline_{side}_open"):
+                rec[f"{side}_win_open"] = rec[f"moneyline_{side}_open"]
         out.append(rec)
     return out
 

@@ -60,7 +60,10 @@ jobs:
           claude -p "/bukmacher Tryb automatyczny (GitHub Actions, bez pytań): horyzont ${{ steps.window.outputs.hours }} h, wszystkie 4 zakresy kursów. Postępuj według sekcji 'Automated run (GitHub Actions)' w SKILL.md." \
             --model "${{ inputs.model || 'claude-sonnet-5' }}" \
             --dangerously-skip-permissions \
-            --max-turns 200 | tee claude-report.log
+            --max-turns 200 \
+            --output-format stream-json --verbose \
+            | tee claude-report.jsonl \
+            | jq -r --unbuffered -f .github/claude-log.jq
 
       - name: check that a report was written
         run: |
@@ -81,7 +84,7 @@ jobs:
         if: always()
         with:
           name: claude-log
-          path: claude-report.log
+          path: claude-report.jsonl
           retention-days: 14
 
   publish:

@@ -44,7 +44,10 @@ jobs:
           claude -p "Przeprowadź cotygodniowy przegląd skilla bukmacher dokładnie według .claude/skills/bukmacher/references/self-review.md. Nie commituj — zrobi to workflow." \
             --model "${{ inputs.model || 'claude-opus-5-5' }}" \
             --dangerously-skip-permissions \
-            --max-turns 200 | tee claude-review.log
+            --max-turns 200 \
+            --output-format stream-json --verbose \
+            | tee claude-review.jsonl \
+            | jq -r --unbuffered -f .github/claude-log.jq
 
       - name: tests
         run: python3 -m pytest -q tests
@@ -62,7 +65,7 @@ jobs:
         if: always()
         with:
           name: claude-review-log
-          path: claude-review.log
+          path: claude-review.jsonl
           retention-days: 30
 
   publish:

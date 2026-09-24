@@ -23,6 +23,7 @@ import bk_lib  # noqa: E402
 import fixtures as fx_mod  # noqa: E402
 import odds as odds_mod  # noqa: E402
 import context as ctx_mod  # noqa: E402
+import ledger as ledger_mod  # noqa: E402
 
 T0 = datetime(2026, 9, 24, 16, 0, tzinfo=timezone.utc)
 
@@ -149,6 +150,8 @@ def oddsapi_get(url, params=None, headers=None, **kw):
     if url.endswith("/v4/sports"):
         return json.dumps([{"key": "soccer_epl", "group": "Soccer", "active": True, "has_outrights": False},
                            {"key": "soccer_epl_winner", "group": "Soccer", "active": True, "has_outrights": True}]).encode(), {}
+    if "/sports/soccer_epl/events" in url:  # free discovery endpoint
+        return json.dumps([{"id": "abc", "commence_time": ts(2).strftime("%Y-%m-%dT%H:%M:%SZ")}]).encode(), {}
     if "/sports/soccer_epl/odds" in url:
         assert params["commenceTimeFrom"] and params["commenceTimeTo"]
         return json.dumps([{"id": "abc", "sport_key": "soccer_epl", "sport_title": "EPL", "commence_time": ts(2).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -228,16 +231,21 @@ def test_odds_and_shortlist(tmp_path=None):
     assert over["odds"] == 1.2 and over["fair_prob"]
     pin = [r for r in rows if r["source"] == "oddsapi"]
     assert pin and che["sources"]["oddsapi"]["event_id"] == "abc"   # matched to the same fixture
+    assert pin[0]["refs"]["oddsapi"]["event_id"] == "abc"          # rows carry settlement refs
     aps = next(r for r in rows if r["source"] == "apisports" and r["selection"] == "Over 1.5")
     assert aps["line"] == "1.5" and aps["odds"] == 1.22
     for r in rows:
         r["fetched_at"] = "x"
     out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_test_odds.json"
     out.write_text(json.dumps({"rows": rows}))
-    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--target", "1.20", "--per-event", "4", "--out", str(out.with_name("bk_sl.json"))],
+    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--per-event", "4", "--out", str(out.with_name("bk_sl.json"))],
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
-    sl = json.loads(out.with_name("bk_sl.json").read_text())["candidates"]
+    ranges = {r["label"]: r["candidates"] for r in json.loads(out.with_name("bk_sl.json").read_text())["ranges"]}
+    assert set(ranges) == {"1.10-1.19", "1.20-1.29", "1.30-1.44", "1.45-1.60"}
+    in_two = [(r, c["key"], c["market_norm"], c["selection"], str(c["line"])) for r, cs in ranges.items() for c in cs]
+    assert len(in_two) == len({x[1:] for x in in_two})  # contiguous ranges: nothing listed twice
+    sl = ranges["1.20-1.29"]
     assert sl, "no candidates"
     # Over 1.5 (sofascore 1.20 + apisports 1.22) and X2 both in band; correct score excluded; volleyball home win 1.20 in band
     sels = {(c["home"], c["selection"], str(c["line"])) for c in sl}
@@ -259,8 +267,59 @@ def test_context():
     ctx_mod.print_summary(ctx)
 
 
+def test_settlement_math():
+    def pay(m, s, line, h, a, odds=2.0):
+        return ledger_mod.payout({"market": m, "selection": s, "line": line, "odds": odds}, h, a)
+    assert pay("totals", "under", 3, 1, 2) == 1.0                   # Asian whole line: push
+    assert pay("totals", "over", 2.25, 1, 1) == 0.5                 # quarter line: half lost
+    assert pay("totals", "over", 2.75, 2, 1) == 1.5                 # quarter line: half won
+    assert pay("spread", "home", -0.75, 1, 0) == 1.5
+    assert pay("spread", "away", 0.5, 1, 1) == 2.0
+    assert pay("dnb", "home", None, 1, 1) == 1.0 and pay("dc", "X2", None, 0, 0) == 2.0
+    assert pay("btts", "yes", None, 1, 0) == 0.0 and pay("h2h", "draw", None, 2, 2) == 2.0
+    assert [ledger_mod.status_of(p, 2.0) for p in (2.0, 1.5, 1.0, 0.5, 0.0)] == \
+        ["won", "half_won", "push", "half_lost", "lost"]
+    hockey = {"sport": "hockey", "period": "reg"}
+    ot = {"score": (3, 2), "partials": [(1, 1), (0, 1), (1, 0), (1, 0)], "stage": "STATUS FINAL Final/OT"}
+    assert ledger_mod.settle_score(hockey, ot) == (2, 2)
+    assert ledger_mod.settle_score({**hockey, "period": "ot"}, ot) == (3, 2)
+    pens = {"score": (2, 2), "partials": [], "stage": "STATUS FINAL PEN"}
+    assert ledger_mod.settle_score({"sport": "football", "period": "ft"}, pens) is None  # 90' unknown -> manual
+
+
+def test_ledger_roundtrip(tmp_path=None):
+    tmp = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_test_ledger.jsonl"
+    tmp.unlink(missing_ok=True)
+    ledger_mod.LEDGER = tmp
+    base = {"report": "r.html", "kind": "pick", "range": "1.20-1.29", "sport": "hockey", "competition": "NHL",
+            "home": "Boston", "away": "Philadelphia", "start_utc": "2026-09-23T00:00:00Z", "market": "h2h",
+            "selection": "home", "line": None, "period": "reg", "odds": 1.25, "bookmaker": "pinnacle",
+            "source": "oddsapi", "p_est": 0.82,
+            "ref": {"source": "espn", "sport": "hockey", "league": "nhl", "event_id": "9"}}
+    picks = [base, {**base, "kind": "paper", "market": "totals", "selection": "under", "line": 5.5, "odds": 1.5},
+             {**base, "ref": {"source": "espn"}}]                       # incomplete ref -> rejected
+    src = tmp.with_name("bk_picks.json"); src.write_text(json.dumps(picks))
+    assert ledger_mod.cmd_add(str(src)) == 1                              # one rejected
+    entries = ledger_mod.load(tmp); assert len(entries) == 2
+    rows = [{"refs": {"espn": {"event_id": "9"}}, "market_norm": "h2h", "selection_norm": "home", "line": None, "odds": o}
+            for o in (1.20, 1.22, 1.30)]
+    odds_file = tmp.with_name("bk_snap.json")
+    odds_file.write_text(json.dumps({"generated_at": "2026-09-22T23:00:00Z", "rows": rows}))
+    ledger_mod.cmd_snapshot(str(odds_file), None)
+    assert ledger_mod.load(tmp)[0]["last_seen"]["median"] == 1.22
+    ledger_mod.result_espn = lambda ref: {"finished": True, "score": (5, 1), "stage": "STATUS FINAL Final",
+                                          "partials": [(1, 1), (0, 0), (4, 0)]}
+    ledger_mod.cmd_settle("2026-09-24T00:00:00Z")
+    pick, paper = ledger_mod.load(tmp)
+    assert pick["status"] == "won" and pick["profit"] == 0.25 and pick["clv"] == round(1.25 / 1.22 - 1, 4)
+    assert paper["status"] == "lost" and paper["score"] == [5, 1]
+    st = ledger_mod.build_stats(ledger_mod.load(tmp))
+    assert st["by_kind"]["pick"]["settled"] == 1 and st["by_kind"]["paper"]["roi"] == -1.0
+    assert "Skuteczność" in ledger_mod.html_fragment(st)
+
+
 def test_cli_help():
-    for s in ("clock.py", "fixtures.py", "odds.py", "shortlist.py", "context.py"):
+    for s in ("clock.py", "fixtures.py", "odds.py", "shortlist.py", "context.py", "ledger.py", "betexplorer.py"):
         res = subprocess.run([sys.executable, str(SCRIPTS / s), "--help"], capture_output=True, text=True)
         assert res.returncode == 0, s
 

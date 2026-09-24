@@ -75,7 +75,8 @@ STATUS_PL = {"won": "wygrana", "lost": "przegrana", "push": "zwrot", "half_won":
 
 
 # ------------------------------------------------------------------------------- storage
-def load(path: Path = LEDGER) -> list[dict]:
+def load(path: Optional[Path] = None) -> list[dict]:
+    path = path or LEDGER  # resolved per call, so tests and BUKMACHER_LEDGER can redirect it
     if not path.exists():
         return []
     entries = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
@@ -85,7 +86,8 @@ def load(path: Path = LEDGER) -> list[dict]:
     return entries
 
 
-def save(entries: list[dict], path: Path = LEDGER) -> None:
+def save(entries: list[dict], path: Optional[Path] = None) -> None:
+    path = path or LEDGER
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
     tmp.write_text("".join(json.dumps(e, ensure_ascii=False, sort_keys=True) + "\n" for e in entries))

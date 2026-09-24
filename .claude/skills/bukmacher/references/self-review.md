@@ -25,8 +25,9 @@ reports of the last 7 days in `reports/`.
   bar is too strict.
 - **CLV.** Average and share of positive CLV for picks. Negative average CLV over 20+ picks is
   the clearest sign the analysis does not beat the market (whatever the win rate says).
-- **Paper vs picks.** Are near-miss paper bets doing as well as picks? Then the +0.03 bar is
-  too strict (or p_est too noisy to separate them).
+- **Tiers.** Do "value" picks (p_est ≥ implied + 0.03) beat "fair" picks on hit rate vs p_est
+  and on CLV? If not, p_est does not separate them and the tier label is noise. Do "paper"
+  bets (dropped just below implied) win as often as fair picks? Then p_est is too pessimistic.
 - **Ranges, sports, markets.** Where do losses and negative CLV concentrate? (e.g. basketball
   moneylines at 1.20–1.29, football unders, Euroleague openers.)
 - **Process.** From `lessons.md`: recurring causes — a missed absence, stale price, wrong

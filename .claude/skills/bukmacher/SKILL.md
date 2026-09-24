@@ -158,16 +158,24 @@ Use WebSearch/WebFetch for news, injury reports, press conferences and official 
 (club sites, NBA injury report, DailyFaceoff, ATP/WTA, PlusLiga, FIVB). Ignore prediction
 sites and tipster "pewniaki": they are not evidence. Form your own probability estimate
 (`p_est`) for each finalist and write one line on *what has to happen for this bet to lose*.
-Drop any finalist whose `p_est` is not clearly above the implied probability of the price
-(per-range bars in `references/analysis.md` §12).
+Then sort each finalist into a tier (bars in `references/analysis.md` §12):
+
+- **value** — `p_est` ≥ implied + 0.03: the analysis found something the price misses;
+- **fair** — implied ≤ `p_est` < implied + 0.03: among the most likely outcomes at this price,
+  priced about right — a legitimate pick, labelled as such;
+- **drop** — `p_est` < implied: overpriced by your own estimate; never published as a pick.
 
 Never analyse a game that has already started (T0 vs start time) or a price you did not fetch.
 
 ## Step 5 — Rank and report
 
 Within each range rank by `p_est`, tie-break by edge (`p_est × odds − 1`) and by liquidity
-(number of books agreeing). Present up to 3 proposals per range plus the notable rejected
-candidates and why; a range with nothing worth betting says so instead of padding. The report
+(number of books agreeing). **Every range gets up to 3 picks** — the owner wants the most
+likely bets at each price level on every run, not only the rare ones with an edge. Take them
+from the value and fair tiers, value first; mark each pick's tier in the report ("z przewagą" /
+"uczciwa cena"). A range stays empty only when no candidate reaches even the fair tier (then
+say so and show the closest ones with the price that would make them fair), or when the window
+has no usable fixtures at that price. The report
 is **one HTML file with a section per range**: copy `references/report-template.html`
 (self-contained, inline CSS, light/dark, phone-friendly), fill it in the user's language
 (Polish by default) and save it to `reports/<YYYY-MM-DD_HHMM>_typy.html` in the project. In
@@ -190,11 +198,11 @@ The report also carries the scoreboard: paste `work/stats.html` (from Step 1b) i
 template's "Skuteczność" section, and fill "Wnioski" with the lessons from the settled bets —
 or say that nothing settled yet.
 
-**Record the run in the ledger** — every proposal as `kind: "pick"` and every rejected
-candidate within ~0.03 of the bar as `kind: "paper"` (the paper bets are how we learn whether
-the bar is too strict). Write them as a JSON list (schema in `scripts/ledger.py`'s docstring;
-`be` must point at the betexplorer match and the exact bet type / line / column so the closing
-price can be read later) and add them:
+**Record the run in the ledger** — every pick as `kind: "pick"` with `"tier": "value"` or
+`"fair"`, and the closest dropped candidates (p_est within ~0.03 below implied) as
+`kind: "paper"` (they show whether the estimates are too pessimistic). Write them as a JSON
+list (schema in `scripts/ledger.py`'s docstring; `ref` copied from the odds row's `refs` so
+the result and the pre-start price can be found later) and add them:
 
 ```bash
 python3 scripts/ledger.py add work/picks.json

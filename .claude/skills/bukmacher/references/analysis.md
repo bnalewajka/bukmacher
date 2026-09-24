@@ -97,9 +97,10 @@ independently from the price and to name the failure mode of the bet.
   priced; the point is to find the *few* where the evidence stacks up on the same side.
 - Write the "how this loses" line. If you cannot describe a realistic losing scenario, you
   have not analysed it enough; if the losing scenario is easy to imagine and likely, drop it.
-- Calibration anchors — a proposal needs `p_est` about 3 points above break-even (1/kurs):
+- Calibration anchors — break-even is 1/kurs. A pick needs `p_est` ≥ break-even ("fair"
+  tier); ≥ break-even + 0.03 makes it a "value" pick:
 
-  | Range | Break-even | Minimum `p_est` |
+  | Range | Break-even | `p_est` for "value" |
   |---|---|---|
   | 1.10–1.19 | 91–84 % | 1/kurs + 0.03 (e.g. 1.15 → 0.90) |
   | 1.20–1.29 | 83–78 % | e.g. 1.20 → 0.86, 1.25 → 0.83 |

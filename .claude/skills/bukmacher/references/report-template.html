@@ -17,9 +17,10 @@ Rules for filling it:
 - Mark the edge cell with class "pos" when p_est > implied, "neg" otherwise; put a price that is
   only good at one bookmaker in the note (e.g. "tylko LV BET; STS 1.16").
 - Sources are real links (<a href>) with the fetch time; a failed source goes into "Uwagi".
-- Do not pad: one strong proposal beats three weak ones. If nothing in a range qualifies,
-  replace its table and picks with <p class="empty"> saying so, and still list the best
-  rejected candidates with what would change your mind.
+- Up to 3 picks per range from the "value" and "fair" tiers (SKILL.md Step 4), each with its
+  tier badge: <span class="tier value">z przewagą</span> or <span class="tier fair">uczciwa cena</span>.
+  Only when no candidate reaches even the fair tier, replace the table and picks with
+  <p class="empty"> saying so, and list the closest candidates with the price that would make them fair.
 - Each nav chip shows the range and its number of proposals ("1.20–1.29 · 2 typy").
 - "Skuteczność": replace the placeholder section with the fragment `ledger.py stats --html`
   wrote (it is a complete <section id="skutecznosc">). "Wnioski": one line per settled loss
@@ -86,6 +87,10 @@ Rules for filling it:
   .range > h2 { font-size: 1.35rem; margin-top: 20px; }
   .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
   .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
   @media (max-width: 640px) {
     .pick dl, .cols { grid-template-columns: 1fr; }
     .pick dt { margin-top: 6px; }
@@ -117,7 +122,7 @@ Rules for filling it:
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th></tr>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -129,6 +134,7 @@ Rules for filling it:
             <td class="num">{1.20}<span class="note">{bukmacher, źródło, 17:32 UTC}</span></td>
             <td class="num pos">{0.88}</td>
             <td class="num">{0.83}</td>
+            <td><span class="tier {value|fair}">{z przewagą|uczciwa cena}</span></td>
           </tr>
         </tbody>
       </table>
@@ -137,7 +143,7 @@ Rules for filling it:
     <h3 class="sub">Analiza propozycji</h3>
 
     <article class="pick" id="z-120-1">
-      <h3>1. {Wydarzenie} — {Zakład} @ {kurs}</h3>
+      <h3>1. {Wydarzenie} — {Zakład} @ {kurs} <span class="tier {value|fair}">{z przewagą|uczciwa cena}</span></h3>
       <p class="line">Zakres {1.20–1.29} · {Rozgrywki} · {godz. PL} ({godz. UTC}) · {kurs, bukmacher, źródło, godzina pobrania} · p_est {0.00} vs implikowane {0.00}</p>
       <p><strong>Dlaczego ten typ, a nie inne:</strong> {2–4 zdania: co przesądza; co odróżnia od innych kandydatów w tym zakresie; dlaczego ten rynek, a nie zwykła wygrana}</p>
       <dl>

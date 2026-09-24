@@ -2,8 +2,9 @@
 """The bet ledger: record every proposal, settle it from real results, and measure the skill.
 
 One JSON object per line in <project>/data/ledger.jsonl. Two kinds of entries:
-  pick   — a proposal published in a report (counts for the headline stats),
-  paper  — a candidate rejected close to the bar (tracked to learn whether the bar is right).
+  pick   — a proposal published in a report (counts for the headline stats), with a tier:
+           "value" (p_est ≥ implied + 0.03) or "fair" (implied ≤ p_est < implied + 0.03),
+  paper  — a candidate dropped just below implied (tracked to learn whether p_est is too low).
 
 Commands:
   add PICKS.json           append entries (a JSON list; schema below), validated
@@ -15,6 +16,7 @@ Commands:
 Entry schema (fields the run must fill; the rest is added here):
   report       report file name, e.g. "2026-09-24_1851_typy.html"
   kind         "pick" | "paper"
+  tier         picks only: "value" | "fair"
   range        "1.10-1.19" | "1.20-1.29" | "1.30-1.44" | "1.45-1.60" | "custom"
   sport, competition, home, away, start_utc
   market       "h2h" | "dc" | "dnb" | "totals" | "spread" | "btts"
@@ -70,6 +72,7 @@ MARKETS = {"h2h": {"home", "away", "draw"}, "dnb": {"home", "away"}, "spread": {
 # a match is assumed over this long after the start; earlier it is not even looked up
 DURATION = {"football": 2.25, "hockey": 3.0, "basketball": 2.75, "tennis": 4.0, "volleyball": 2.75}
 RANGES = ("1.10-1.19", "1.20-1.29", "1.30-1.44", "1.45-1.60")
+TIERS = {"value": "z przewagą", "fair": "uczciwa cena"}
 STATUS_PL = {"won": "wygrana", "lost": "przegrana", "push": "zwrot", "half_won": "pół wygranej",
              "half_lost": "pół przegranej", "manual": "do ręcznego rozliczenia"}
 
@@ -98,6 +101,8 @@ def validate(e: dict) -> list[str]:
     errs = [f"missing {k}" for k in REQUIRED if e.get(k) in (None, "")]
     if e.get("kind") not in ("pick", "paper"):
         errs.append("kind must be pick|paper")
+    if e.get("kind") == "pick" and e.get("tier") not in TIERS:
+        errs.append(f"a pick needs tier {'|'.join(TIERS)}")
     if e.get("market") not in MARKETS:
         errs.append(f"market must be one of {sorted(MARKETS)}")
     elif e.get("selection") not in MARKETS[e["market"]]:
@@ -390,7 +395,9 @@ def calibration(rows: list[dict]) -> list[dict]:
 
 
 def build_stats(entries: list[dict]) -> dict:
-    out: dict[str, Any] = {"generated_utc": iso(now_utc()), "by_kind": {}, "by_range": {}, "calibration": {}}
+    out: dict[str, Any] = {"generated_utc": iso(now_utc()), "by_kind": {}, "by_range": {}, "calibration": {},
+                           "by_tier": {t: summarize([e for e in entries if e["kind"] == "pick" and e.get("tier") == t])
+                                       for t in TIERS}}
     for kind in ("pick", "paper"):
         rows = [e for e in entries if e["kind"] == kind]
         out["by_kind"][kind] = summarize(rows)
@@ -426,6 +433,7 @@ def html_fragment(st: dict) -> str:
     head = ("<thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th>"
             "<th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead>")
     rows = [row("<strong>Typy — razem</strong>", st["by_kind"]["pick"])]
+    rows += [row(f"Typy — {label}", st["by_tier"][t]) for t, label in TIERS.items() if st["by_tier"][t]["n"]]
     rows += [row(f"Typy {r}", s) for r, s in st["by_range"]["pick"].items() if s["n"]]
     rows += [row("<em>Na papierze (odrzuceni)</em>", st["by_kind"]["paper"])]
     rows += [row(f"<em>Papier {r}</em>", s) for r, s in st["by_range"]["paper"].items() if s["n"]]

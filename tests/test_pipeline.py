@@ -294,12 +294,13 @@ def test_ledger_roundtrip(tmp_path=None):
     base = {"report": "r.html", "kind": "pick", "range": "1.20-1.29", "sport": "hockey", "competition": "NHL",
             "home": "Boston", "away": "Philadelphia", "start_utc": "2026-09-23T00:00:00Z", "market": "h2h",
             "selection": "home", "line": None, "period": "reg", "odds": 1.25, "bookmaker": "pinnacle",
-            "source": "oddsapi", "p_est": 0.82,
+            "source": "oddsapi", "p_est": 0.82, "tier": "fair",
             "ref": {"source": "espn", "sport": "hockey", "league": "nhl", "event_id": "9"}}
     picks = [base, {**base, "kind": "paper", "market": "totals", "selection": "under", "line": 5.5, "odds": 1.5},
-             {**base, "ref": {"source": "espn"}}]                       # incomplete ref -> rejected
+             {**base, "ref": {"source": "espn"}},                        # incomplete ref -> rejected
+             {k: v for k, v in base.items() if k != "tier"}]             # pick without tier -> rejected
     src = tmp.with_name("bk_picks.json"); src.write_text(json.dumps(picks))
-    assert ledger_mod.cmd_add(str(src)) == 1                              # one rejected
+    assert ledger_mod.cmd_add(str(src)) == 1                              # two rejected
     entries = ledger_mod.load(tmp); assert len(entries) == 2
     rows = [{"refs": {"espn": {"event_id": "9"}}, "market_norm": "h2h", "selection_norm": "home", "line": None, "odds": o}
             for o in (1.20, 1.22, 1.30)]
@@ -315,6 +316,7 @@ def test_ledger_roundtrip(tmp_path=None):
     assert paper["status"] == "lost" and paper["score"] == [5, 1]
     st = ledger_mod.build_stats(ledger_mod.load(tmp))
     assert st["by_kind"]["pick"]["settled"] == 1 and st["by_kind"]["paper"]["roi"] == -1.0
+    assert st["by_tier"]["fair"]["won"] == 1 and st["by_tier"]["value"]["n"] == 0
     assert "Skuteczność" in ledger_mod.html_fragment(st)
 
 

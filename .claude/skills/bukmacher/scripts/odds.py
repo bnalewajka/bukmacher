@@ -89,6 +89,8 @@ def row(fx: dict, market: str, selection: str, odds: Optional[float], bookmaker:
         "initial_odds": round(float(initial), 3) if initial else None,
         "implied_prob": round(implied(float(odds)), 4), "bookmaker": bookmaker, "source": source,
         "group": group or f"{source}|{bookmaker}|{fx['key']}|{market}|{line}",
+        # event ids the ledger settles from (copy into a pick's `ref`)
+        "refs": {k: v for k, v in (fx.get("sources") or {}).items() if k in ("espn", "oddsapi")},
     }
 
 
@@ -199,35 +201,58 @@ def _sport_key_rank(sport: dict, competitions: set[str]) -> int:
     return 0 if title and any(title in c or c in title for c in competitions) else 1
 
 
+def _events_in_window(key: str, sport_key: str, span_from: str, span_to: str) -> int:
+    """Number of events of a sport key starting in the window — /events costs no credits."""
+    try:
+        return len(http_get_json(f"{ODDS_API}/sports/{sport_key}/events", params={
+            "apiKey": key, "dateFormat": "iso", "commenceTimeFrom": span_from, "commenceTimeTo": span_to}))
+    except HttpError:
+        return 0
+
+
 def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float, max_keys: int,
                  extra: bool, only_keys: Optional[set[str]],
-                 sport_keys: Optional[list[str]] = None) -> tuple[list[dict], list[str]]:
+                 sport_keys: Optional[list[str]] = None, markets: str = "h2h,spreads,totals",
+                 credit_budget: Optional[int] = None) -> tuple[list[dict], list[str]]:
+    """Featured odds for the sport keys that actually have events in the window.
+
+    Key discovery is free (/sports, /events); each /odds call costs len(markets) x len(regions)
+    credits, so keys are ranked (competitions already in fixtures.json first, then by number of
+    events in the window) and cut to --max-keys and --credit-budget."""
     errors: list[str] = []
     try:
         sports = http_get_json(f"{ODDS_API}/sports", params={"apiKey": key}, ttl=3600)
     except HttpError as e:
         return [], [f"oddsapi sports: {e}"]
+    span_from, span_to = iso(t0 - timedelta(minutes=5)), iso(t0 + timedelta(hours=hours))
     if sport_keys:
         active = {s["key"] for s in sports if s.get("active")}
         errors += [f"oddsapi: sport key {k} not active" for k in sport_keys if k not in active]
         keys = [k for k in sport_keys if k in active]
     else:
-        wanted_groups = {GROUPS[s] for s in {f["sport"] for f in fixtures} if s in GROUPS}
+        # all covered sports, not only those in fixtures.json: ESPN misses Euroleague, SHL, Liiga…
+        wanted_groups = set(GROUPS.values())
         competitions = {norm_name(f.get("competition") or "") for f in fixtures} - {""}
         cands = [s for s in sports if s.get("active") and s.get("group") in wanted_groups and not s.get("has_outrights")]
-        cands.sort(key=lambda s: _sport_key_rank(s, competitions))  # stable: API order within each rank
-        keys = [s["key"] for s in cands]
+        counted = [(s, _events_in_window(key, s["key"], span_from, span_to)) for s in cands]
+        counted = [(s, n) for s, n in counted if n]
+        counted.sort(key=lambda sn: (_sport_key_rank(sn[0], competitions), -sn[1]))
+        keys = [s["key"] for s, _ in counted]
+        eprint(f"[oddsapi] {len(keys)} sport keys with events in the window: "
+               + ", ".join(f"{s['key']}({n})" for s, n in counted))
+    cost = len(markets.split(",")) * len(regions.split(","))
+    if credit_budget is not None:
+        max_keys = min(max_keys, max(0, credit_budget // cost))
     if len(keys) > max_keys:
-        eprint(f"[oddsapi] {len(keys)} active sport keys, limiting to first {max_keys} (use --max-keys / --oddsapi-keys)")
+        eprint(f"[oddsapi] limiting to {max_keys} of {len(keys)} keys ({cost} credits each; --max-keys / --credit-budget)")
         keys = keys[:max_keys]
     by_key = {f["key"]: f for f in fixtures}
     out: list[dict] = []
-    span_from, span_to = iso(t0 - timedelta(minutes=5)), iso(t0 + timedelta(hours=hours))
     for sk in keys:
         sport = next((s for s, g in GROUPS.items() if g == next((x.get("group") for x in sports if x["key"] == sk), "")), "football")
         try:
             body, hdr = http_get(f"{ODDS_API}/sports/{sk}/odds", params={
-                "apiKey": key, "regions": regions, "markets": "h2h,spreads,totals", "oddsFormat": "decimal",
+                "apiKey": key, "regions": regions, "markets": markets, "oddsFormat": "decimal",
                 "dateFormat": "iso", "commenceTimeFrom": span_from, "commenceTimeTo": span_to})
             import json as _j
             events = _j.loads(body)
@@ -333,6 +358,8 @@ def main() -> int:
     ap.add_argument("--max-keys", type=int, default=12, help="cap The Odds API sport keys per run (credits!)")
     ap.add_argument("--oddsapi-keys", help="comma separated The Odds API sport keys to query instead of "
                                            "auto-picking (e.g. soccer_uefa_nations_league,basketball_euroleague)")
+    ap.add_argument("--oddsapi-markets", default="h2h,spreads,totals", help="featured markets (1 credit each per key)")
+    ap.add_argument("--credit-budget", type=int, help="max The Odds API credits this run may spend on /odds")
     ap.add_argument("--extra-markets", action="store_true", help="The Odds API additional markets per event (costly)")
     ap.add_argument("--only-keys", help="comma separated fixture keys to restrict per-event calls to")
     ap.add_argument("--sport", help="restrict to one sport")
@@ -377,7 +404,7 @@ def main() -> int:
     if "oddsapi" in sources and ok:
         sport_keys = [k.strip() for k in args.oddsapi_keys.split(",") if k.strip()] if args.oddsapi_keys else None
         r, e = from_oddsapi(fixtures, ok, args.regions, t0, hours, args.max_keys, args.extra_markets, only,
-                            sport_keys)
+                            sport_keys, args.oddsapi_markets, args.credit_budget)
         rows += r; errors += e
         eprint(f"[oddsapi] {len(r)} selections")
     elif "oddsapi" in sources:

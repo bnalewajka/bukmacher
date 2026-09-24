@@ -7,7 +7,8 @@ One JSON object per line in <project>/data/ledger.jsonl. Two kinds of entries:
 
 Commands:
   add PICKS.json           append entries (a JSON list; schema below), validated
-  settle [--now ISO]       settle open entries whose match should be over; fetch closing odds
+  snapshot ODDS.json       store the latest pre-start price of open entries (closing-price proxy)
+  settle [--now ISO]       settle open entries whose match should be over
   stats [--json F] [--html F]   print the scoreboard; optionally write JSON and an HTML fragment
   list [--open]            show entries
 
@@ -25,8 +26,15 @@ Entry schema (fields the run must fill; the rest is added here):
                match) | "reg" (hockey 60 minutes) | "ot" (hockey incl. OT and shoot-out)
   odds, bookmaker, source           the price taken, where, from which feed
   p_est                              your probability (for Asian lines: of winning among non-push outcomes)
-  be           {"url": match url, "match_id", "bettype", "line": as shown on the site, "col"}
-               — betexplorer reference used for the result and the closing price. Required.
+  ref          where the result comes from — copy it from the odds row's `refs`:
+               {"source": "espn", "sport": "soccer", "league": "uefa.nations", "event_id": "401861044"}
+               {"source": "oddsapi", "sport_key": "basketball_euroleague", "event_id": "…"}
+               {"source": "betexplorer", "url": match url, "match_id", "bettype", "line", "col"}
+               ESPN and The Odds API work from anywhere; betexplorer only from a Polish IP.
+
+Closing price: every run calls `snapshot` with its fresh odds.json, so the last price seen
+before the start (median across bookmakers, same event/market/line) is kept as `last_seen`;
+CLV = price taken / that median − 1. Betexplorer refs read the real closing table instead.
 """
 from __future__ import annotations
 
@@ -34,6 +42,7 @@ import argparse
 import json
 import math
 import os
+import re
 import sys
 from collections import defaultdict
 from datetime import timedelta
@@ -41,13 +50,21 @@ from html import escape as esc
 from pathlib import Path
 from typing import Any, Optional
 
+import statistics
+
 import betexplorer
-from bk_lib import HttpError, eprint, iso, now_utc, parse_time, table
+from bk_lib import HttpError, env_key, eprint, http_get_json, iso, now_utc, parse_time, table
 
 PROJECT = Path(__file__).resolve().parents[4]
 LEDGER = Path(os.environ.get("BUKMACHER_LEDGER", PROJECT / "data" / "ledger.jsonl"))
 REQUIRED = ("report", "kind", "range", "sport", "home", "away", "start_utc", "market", "selection",
-            "period", "odds", "bookmaker", "source", "p_est", "be")
+            "period", "odds", "bookmaker", "source", "p_est", "ref")
+REF_FIELDS = {"espn": ("sport", "league", "event_id"), "oddsapi": ("sport_key", "event_id"),
+              "betexplorer": ("url",)}
+ODDS_API = "https://api.the-odds-api.com/v4"
+# ledger market -> odds.py market_norm, to match snapshot rows
+ROW_MARKET = {"h2h": "h2h", "dc": "double_chance", "dnb": "dnb", "totals": "totals", "spread": "handicap",
+              "btts": "btts"}
 MARKETS = {"h2h": {"home", "away", "draw"}, "dnb": {"home", "away"}, "spread": {"home", "away"},
            "dc": {"1X", "12", "X2"}, "totals": {"over", "under"}, "btts": {"yes", "no"}}
 # a match is assumed over this long after the start; earlier it is not even looked up
@@ -61,7 +78,11 @@ STATUS_PL = {"won": "wygrana", "lost": "przegrana", "push": "zwrot", "half_won":
 def load(path: Path = LEDGER) -> list[dict]:
     if not path.exists():
         return []
-    return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+    entries = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+    for e in entries:  # entries written before `ref` existed carried a betexplorer `be`
+        if "ref" not in e and "be" in e:
+            e["ref"] = {"source": "betexplorer", **e.pop("be")}
+    return entries
 
 
 def save(entries: list[dict], path: Path = LEDGER) -> None:
@@ -83,8 +104,11 @@ def validate(e: dict) -> list[str]:
         errs.append("totals/spread need a line")
     if e.get("period") not in ("ft", "reg", "ot"):
         errs.append("period must be ft|reg|ot")
-    if not isinstance(e.get("be"), dict) or not e["be"].get("url"):
-        errs.append("be.url (betexplorer match url) is required for settlement")
+    ref = e.get("ref")
+    if not isinstance(ref, dict) or ref.get("source") not in REF_FIELDS:
+        errs.append(f"ref.source must be one of {sorted(REF_FIELDS)}")
+    else:
+        errs += [f"ref.{k} missing" for k in REF_FIELDS[ref["source"]] if not ref.get(k)]
     try:
         if not (1.0 < float(e.get("odds")) < 50 and 0 < float(e.get("p_est")) < 1):
             errs.append("odds must be >1, p_est in (0,1)")
@@ -126,7 +150,8 @@ def settle_score(e: dict, res: dict) -> Optional[tuple[int, int]]:
     score, parts, stage = res.get("score"), res.get("partials") or [], (res.get("stage") or "").lower()
     if not score:
         return None
-    extra = any(w in stage for w in ("extra", "penalt", "overtime", "aet", "ot"))
+    # whole words, from betexplorer ("After Extra Time", "After Penalties") and ESPN ("Final/OT", "FINAL PEN")
+    extra = bool(set(re.split(r"[^a-z]+", stage)) & {"extra", "penalties", "overtime", "aet", "pen", "ot", "so"})
     if e["sport"] == "football" and extra:  # books settle football on 90 minutes
         return (parts[0][0] + parts[1][0], parts[0][1] + parts[1][1]) if len(parts) >= 2 else None
     if e["sport"] == "hockey" and e["period"] == "reg":
@@ -182,44 +207,139 @@ def status_of(pay: float, odds: float) -> str:
     return "half_won" if pay > 1 else "half_lost"
 
 
-def closing(e: dict) -> Optional[dict]:
-    be = e["be"]
-    if not be.get("match_id") or not be.get("bettype"):
+# ----------------------------------------------------------------------------- results
+def result_espn(ref: dict) -> dict:
+    d = http_get_json(f"https://site.api.espn.com/apis/site/v2/sports/{ref['sport']}/{ref['league']}/summary",
+                      params={"event": ref["event_id"]}, ttl=0)
+    comp = d["header"]["competitions"][0]
+    st = comp["status"]["type"]
+    side = {c["homeAway"]: c for c in comp["competitors"]}
+    score = (int(side["home"]["score"]), int(side["away"]["score"])) if st.get("completed") else None
+    # summary gives {"displayValue": "4"}, scoreboard {"value": 4.0}
+    lines = [[float(x.get("value", x.get("displayValue")) or 0) for x in side[k].get("linescores") or []]
+             for k in ("home", "away")]
+    partials = [(int(h), int(a)) for h, a in zip(*lines)]
+    # "Final/OT", "Final/SO", "STATUS_FINAL_AET", "STATUS_FINAL_PEN" — settle_score looks for these words
+    stage = f"{st.get('name', '')} {st.get('detail', '')}".replace("_", " ")
+    return {"finished": bool(st.get("completed")), "score": score, "partials": partials, "stage": stage,
+            "cancelled": any(w in st.get("name", "") for w in ("POSTPONED", "CANCELED", "ABANDONED"))}
+
+
+def results_oddsapi(sport_key: str, event_ids: list[str]) -> dict[str, dict]:
+    """Final scores for several events of one sport key in one call (2 credits with daysFrom)."""
+    data = http_get_json(f"{ODDS_API}/sports/{sport_key}/scores", params={
+        "apiKey": env_key("ODDS_API_KEY", "THE_ODDS_API_KEY"), "daysFrom": 3, "eventIds": ",".join(event_ids)}, ttl=0)
+    out = {}
+    for ev in data:
+        sc = {x["name"]: int(x["score"]) for x in ev.get("scores") or [] if x.get("score") not in (None, "")}
+        home, away = ev.get("home_team"), ev.get("away_team")
+        out[ev["id"]] = {"finished": bool(ev.get("completed")), "partials": [], "stage": "",
+                         "score": (sc[home], sc[away]) if ev.get("completed") and home in sc and away in sc else None}
+    return out
+
+
+def fetch_results(due: list[dict]) -> dict[str, dict]:
+    """entry id -> result dict ({finished, score, partials, stage}); failures are skipped."""
+    out: dict[str, dict] = {}
+    by_key: dict[str, list[dict]] = defaultdict(list)
+    for e in due:
+        ref = e["ref"]
+        try:
+            if ref["source"] == "espn":
+                out[e["id"]] = result_espn(ref)
+            elif ref["source"] == "betexplorer":
+                out[e["id"]] = betexplorer.result(ref["url"], ttl=0)
+            else:
+                by_key[ref["sport_key"]].append(e)
+        except (HttpError, KeyError, ValueError) as err:
+            eprint(f"[ledger] result {e['id']}: {err}")
+    for sport_key, group in by_key.items():
+        try:
+            res = results_oddsapi(sport_key, sorted({e["ref"]["event_id"] for e in group}))
+        except HttpError as err:
+            eprint(f"[ledger] results {sport_key}: {err}")
+            continue
+        for e in group:
+            if e["ref"]["event_id"] in res:
+                out[e["id"]] = res[e["ref"]["event_id"]]
+    return out
+
+
+def closing_betexplorer(e: dict) -> Optional[dict]:
+    ref = e["ref"]
+    if ref.get("source") != "betexplorer" or not ref.get("match_id") or not ref.get("bettype"):
         return None
     try:
-        return betexplorer.price_summary(be["match_id"], be["bettype"], str(be.get("line") or ""), int(be.get("col", 0)))
+        return betexplorer.price_summary(ref["match_id"], ref["bettype"], str(ref.get("line") or ""),
+                                         int(ref.get("col", 0)))
     except HttpError as err:
         eprint(f"[ledger] closing odds {e['id']}: {err}")
         return None
 
 
+# ---------------------------------------------------------------------------- snapshot
+def _row_matches(e: dict, r: dict) -> bool:
+    ref, refs = e["ref"], r.get("refs") or {}
+    same_event = any((refs.get(src) or {}).get("event_id") == ref.get("event_id")
+                     for src in ("espn", "oddsapi") if ref.get("source") == src)
+    if not same_event or r.get("market_norm") != ROW_MARKET[e["market"]]:
+        return False
+    sel = {"1X": "1x", "12": "12", "X2": "x2"}.get(e["selection"], e["selection"])
+    if (r.get("selection_norm") or "") != sel:
+        return False
+    if e.get("line") is None:
+        return True
+    try:
+        return r.get("line") is not None and math.isclose(float(r["line"]), float(e["line"]))
+    except (TypeError, ValueError):
+        return False
+
+
+def cmd_snapshot(odds_path: str, now_arg: Optional[str]) -> int:
+    now = parse_time(now_arg) if now_arg else now_utc()
+    data = json.loads(Path(odds_path).read_text())
+    rows = data["rows"] if isinstance(data, dict) else data
+    fetched = parse_time(data.get("generated_at")) if isinstance(data, dict) else now
+    entries = load()
+    n = 0
+    for e in entries:
+        if e["status"] != "open" or parse_time(e["start_utc"]) <= (fetched or now):
+            continue
+        prices = [r["odds"] for r in rows if _row_matches(e, r)]
+        if prices:
+            e["last_seen"] = {"median": round(statistics.median(prices), 3), "max": max(prices),
+                              "n_books": len(prices), "at": iso(fetched or now)}
+            n += 1
+    save(entries)
+    print(f"[ledger] snapshot: pre-start prices updated for {n} open entries")
+    return 0
+
+
+# ---------------------------------------------------------------------------- settlement
 def cmd_settle(now_arg: Optional[str]) -> int:
     now = parse_time(now_arg) if now_arg else now_utc()
     entries = load()
+    due = [e for e in entries if e["status"] == "open"
+           and now >= parse_time(e["start_utc"]) + timedelta(hours=DURATION.get(e["sport"], 3.0))]
+    results = fetch_results(due)
     done = 0
-    for e in entries:
-        if e["status"] != "open":
+    for e in due:
+        res = results.get(e["id"])
+        if res is None:
             continue
         start = parse_time(e["start_utc"])
-        if now < start + timedelta(hours=DURATION.get(e["sport"], 3.0)):
-            continue
-        try:
-            res = betexplorer.result(e["be"]["url"], ttl=0)
-        except HttpError as err:
-            eprint(f"[ledger] result {e['id']}: {err}")
-            continue
         if not res["finished"]:
-            if now > start + timedelta(hours=48):  # postponed/abandoned: needs a human look
-                e.update({"status": "manual", "note": f"not finished 48h after start ({res.get('stage')})"})
+            if res.get("cancelled") or now > start + timedelta(hours=48):  # postponed/abandoned: a human decides
+                e.update({"status": "manual", "note": f"not finished ({res.get('stage') or 'no result 48h after start'})"})
             continue
         sc = settle_score(e, res)
         if sc is None:
-            e.update({"status": "manual", "note": f"cannot derive settlement score from {res}"})
+            e.update({"status": "manual", "note": f"cannot derive the settlement score from {res}"})
             continue
         pay = payout(e, *sc)
         e.update({"status": status_of(pay, e["odds"]), "payout": round(pay, 4), "profit": round(pay - 1, 4),
                   "score": list(sc), "stage": res.get("stage"), "settled_utc": iso(now)})
-        cl = closing(e)
+        cl = closing_betexplorer(e) or e.get("last_seen")
         if cl:
             e["closing"] = cl
             e["clv"] = round(e["odds"] / cl["median"] - 1, 4)
@@ -352,6 +472,7 @@ def main() -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     a = sub.add_parser("add"); a.add_argument("picks_json")
     s = sub.add_parser("settle"); s.add_argument("--now")
+    n = sub.add_parser("snapshot"); n.add_argument("odds_json"); n.add_argument("--now")
     t = sub.add_parser("stats"); t.add_argument("--json"); t.add_argument("--html")
     l = sub.add_parser("list"); l.add_argument("--open", action="store_true")
     args = ap.parse_args()
@@ -359,6 +480,8 @@ def main() -> int:
         return cmd_add(args.picks_json)
     if args.cmd == "settle":
         return cmd_settle(args.now)
+    if args.cmd == "snapshot":
+        return cmd_snapshot(args.odds_json, args.now)
     if args.cmd == "stats":
         return cmd_stats(args.json, args.html)
     return cmd_list(args.open)

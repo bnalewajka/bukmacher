@@ -1,0 +1,23 @@
+{
+  "skill_name": "bukmacher",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Znajdź mi najpewniejszy typ na dziś wieczór, kurs około 1.20, interesuje mnie piłka i siatkówka. Sprawdź prawdziwe kursy i napisz raport.",
+      "expected_output": "Asks (or confirms) the horizon and odds band, verifies the clock, lists real fixtures in the window from Sofascore/ESPN, fetches real odds, analyses finalists with lineups/absences/motivation, returns a Polish report with 3-5 proposals incl. bookmaker, source, fetch time, p_est, pluses, risks, how-it-loses line, rejected candidates.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "what can I bet on in the next 8 hours at ~1.30? hockey, basketball, tennis. don't give me tipster garbage, do your own analysis",
+      "expected_output": "Uses 8h / 1.30 without re-asking, includes non-win markets (puck line, set handicap, spreads), flags hockey OT rules and tennis retirement rules, cites odds sources, English report following the template.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Zrób analizę bukmacherską na najbliższe 24h, wszystkie sporty, kurs 1.15",
+      "expected_output": "24h window with correct day boundaries in UTC vs local time, higher probability bar (>=0.89) applied, candidates across all five sports, report saved to reports/ and printed.",
+      "files": []
+    }
+  ]
+}

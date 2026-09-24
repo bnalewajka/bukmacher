@@ -1,0 +1,63 @@
+# Checks, from a GitHub-hosted runner, which data sources answer (datacentre IPs get blocked by
+# some sites). Run by hand: Actions -> probe-sources -> Run workflow.
+name: probe-sources
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: .claude/skills/bukmacher
+    env:
+      ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: clock
+        run: python3 scripts/clock.py || true
+
+      - name: ESPN scoreboard
+        run: |
+          python3 - <<'EOF'
+          import sys; sys.path.insert(0, "scripts")
+          from bk_lib import http_get_json
+          d = http_get_json("https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard", ttl=0)
+          print("ESPN OK:", len(d.get("events", [])), "events")
+          EOF
+
+      - name: betexplorer list, odds, result
+        run: |
+          python3 scripts/betexplorer.py next --sport basketball --hours 24 | head -5
+          python3 scripts/betexplorer.py odds 2BWSzjVN ou | head -4
+          python3 scripts/betexplorer.py result https://www.betexplorer.com/hockey/usa/nhl/carolina-hurricanes-florida-panthers/dA1qxSG6/
+
+      - name: The Odds API (free /sports endpoint, no credits)
+        run: |
+          python3 - <<'EOF'
+          import json, sys; sys.path.insert(0, "scripts")
+          from bk_lib import env_key, http_get
+          body, hdr = http_get("https://api.the-odds-api.com/v4/sports/", params={"apiKey": env_key("ODDS_API_KEY")}, ttl=0)
+          print("Odds API OK:", len(json.loads(body)), "sports; credits remaining", hdr.get("x-requests-remaining"))
+          EOF
+
+      - name: Sofascore
+        run: |
+          python3 - <<'EOF'
+          import sys; sys.path.insert(0, "scripts")
+          from bk_lib import HttpError, http_get_json
+          try:
+              d = http_get_json("https://api.sofascore.com/api/v1/sport/football/scheduled-events/2026-09-24", ttl=0)
+              print("Sofascore OK:", len(d.get("events", [])), "events")
+          except HttpError as e:
+              print("Sofascore FAILED:", e.status)
+          EOF

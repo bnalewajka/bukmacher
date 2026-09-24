@@ -24,9 +24,11 @@ jobs:
           python-version: "3.12"
 
       - name: clock
+        continue-on-error: true
         run: python3 scripts/clock.py || true
 
       - name: ESPN scoreboard
+        continue-on-error: true
         run: |
           python3 - <<'EOF'
           import sys; sys.path.insert(0, "scripts")
@@ -36,12 +38,14 @@ jobs:
           EOF
 
       - name: betexplorer list, odds, result
+        continue-on-error: true
         run: |
           python3 scripts/betexplorer.py next --sport basketball --hours 24 | head -5
           python3 scripts/betexplorer.py odds 2BWSzjVN ou | head -4
           python3 scripts/betexplorer.py result https://www.betexplorer.com/hockey/usa/nhl/carolina-hurricanes-florida-panthers/dA1qxSG6/
 
       - name: The Odds API (free /sports endpoint, no credits)
+        continue-on-error: true
         run: |
           python3 - <<'EOF'
           import json, sys; sys.path.insert(0, "scripts")
@@ -51,6 +55,7 @@ jobs:
           EOF
 
       - name: geo and Polish bookmakers
+        continue-on-error: true
         run: |
           UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36"
           echo "betexplorer sees country: $(curl -s -D - -o /dev/null -A "$UA" https://www.betexplorer.com/ | grep -i x-country-code)"
@@ -59,6 +64,7 @@ jobs:
           done
 
       - name: Sofascore
+        continue-on-error: true
         run: |
           python3 - <<'EOF'
           import sys; sys.path.insert(0, "scripts")

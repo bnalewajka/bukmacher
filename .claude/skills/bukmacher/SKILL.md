@@ -222,7 +222,9 @@ The same skill runs three times a day from `.github/workflows/report.yml` (promp
   come from ESPN and The Odds API, context from WebSearch/WebFetch. Quote the European books
   The Odds API returns (Pinnacle, Unibet, Betsson, bet365, Marathon…) as the price; Polish
   bookmakers' prices are close to them — say once in the report that the price should be
-  checked at the reader's own bookmaker.
+  checked at the reader's own bookmaker. Take the price from `best_book` in the shortlist —
+  never from exchanges or US-only books (BetOnline, GTbets, DraftKings…), which a Polish bettor
+  cannot use; they only count towards the median.
 - **Credits.** Free plan, 500 a month for ~90 runs:
   `odds.py --sources espn,oddsapi --oddsapi-markets h2h,totals --credit-budget 4`, never
   `--extra-markets`. Print the remaining credits in the report's "Uwagi". Below 60 credits

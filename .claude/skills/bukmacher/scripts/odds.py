@@ -88,6 +88,7 @@ def row(fx: dict, market: str, selection: str, odds: Optional[float], bookmaker:
         "odds": round(float(odds), 3),
         "initial_odds": round(float(initial), 3) if initial else None,
         "implied_prob": round(implied(float(odds)), 4), "bookmaker": bookmaker, "source": source,
+        "us_only": bookmaker.lower() in US_ONLY,
         "group": group or f"{source}|{bookmaker}|{fx['key']}|{market}|{line}",
         # event ids the ledger settles from (copy into a pick's `ref`)
         "refs": {k: v for k, v in (fx.get("sources") or {}).items() if k in ("espn", "oddsapi")},
@@ -301,6 +302,12 @@ def _fuzzy(by_key: dict, sport: str, home: str, away: str, start) -> Optional[di
 # Betting exchanges quote prices before commission, and lay markets are bets *against* an
 # outcome — neither is a price a bookmaker customer can take, so they must not become "best odds".
 EXCHANGES = {"betfair_ex_eu", "betfair_ex_uk", "betfair_ex_au", "matchbook", "smarkets", "betdaq"}
+# Books that only take US (or offshore-to-US) customers: fine for the median, but a Polish bettor
+# cannot take their price, so shortlist.py never picks them as the best price when a European
+# book quotes the same bet. Keys as The Odds API / ESPN name them, lower-cased.
+US_ONLY = {"betonlineag", "betonline.ag", "betus", "bovada", "mybookieag", "lowvig", "gtbets", "betanysports",
+           "draftkings", "fanduel", "betmgm", "betrivers", "espnbet", "espn bet", "fliff", "hardrockbet",
+           "ballybet", "betparx", "williamhill_us", "fanatics", "caesars"}
 
 
 def _oddsapi_rows(fx: dict, ev: dict) -> list[dict]:

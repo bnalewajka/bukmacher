@@ -78,8 +78,11 @@ def main() -> int:
                                "start_utc": r["start_utc"], "home": r["home"], "away": r["away"],
                                "market": r["market"], "market_norm": r["market_norm"], "selection": r["selection"],
                                "line": r.get("line"), "prices": [], "fair": [], "books": [], "drift": [],
+                               "takeable": [],
                                "selection_norm": r.get("selection_norm")})
         a["prices"].append(r["odds"]); a["books"].append(f"{r['bookmaker']}@{r['odds']}")
+        if not r.get("us_only"):
+            a["takeable"].append((r["odds"], r["bookmaker"]))
         if r.get("fair_prob"):
             a["fair"].append(r["fair_prob"])
         if r.get("initial_odds"):
@@ -87,12 +90,14 @@ def main() -> int:
 
     cands = []
     for a in agg.values():
-        best, med = max(a["prices"]), statistics.median(a["prices"])
+        # best price a Polish bettor can take: US-only books count for the median, not for "best"
+        best, best_book = max(a["takeable"]) if a["takeable"] else (max(a["prices"]), "US-only")
+        med = statistics.median(a["prices"])
         fair = max(a["fair"]) if a["fair"] else None
         cands.append({
             **{k: a[k] for k in ("key", "sport", "competition", "start_utc", "home", "away", "market", "market_norm",
                                  "selection", "line")},
-            "best_odds": best, "median_odds": round(med, 3), "n_books": len(a["prices"]),
+            "best_odds": best, "best_book": best_book, "median_odds": round(med, 3), "n_books": len(a["prices"]),
             "implied_best": round(1 / best, 4), "fair_prob": round(fair, 4) if fair else None,
             "drift": round(statistics.mean(a["drift"]), 3) if a["drift"] else None,
             "books": a["books"][:8],
@@ -114,7 +119,7 @@ def main() -> int:
                 break
         print(f"\n# range {label}: {len(in_range)} matching selections, showing {len(kept)}")
         print(table(kept, ["start_utc", "sport", "home", "away", "market", "selection", "line", "median_odds",
-                           "best_odds", "n_books", "fair_prob", "drift"], max_width=28))
+                           "best_odds", "best_book", "n_books", "fair_prob", "drift"], max_width=28))
         out.append({"label": label, "band": [lo, round(hi - 0.005, 2)], "candidates": kept})
     if args.out:
         dump_json({"ranges": out}, args.out)

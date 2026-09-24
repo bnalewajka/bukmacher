@@ -358,6 +358,19 @@ def test_exchanges_and_lay_markets_dropped():
     assert {(r["bookmaker"], r["market"]) for r in rows} == {("pinnacle", "h2h")}
 
 
+def test_best_price_ignores_us_only_books():
+    fx = {"key": "k", "sport": "basketball", "home": "A", "away": "B", "start_utc": "2026-09-24T23:00:00Z", "sources": {}}
+    rows = [odds_mod.row(fx, "h2h", "A", o, bk, "oddsapi") for o, bk in
+            (("1.59", "betonlineag"), ("1.52", "pinnacle"), ("1.55", "unibet_eu"), ("1.50", "betsson"))]
+    out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_us_odds.json"
+    out.write_text(json.dumps({"rows": rows}))
+    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--out", str(out.with_name("bk_us_sl.json"))],
+                         capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    c = next(c for r in json.loads(out.with_name("bk_us_sl.json").read_text())["ranges"] for c in r["candidates"])
+    assert c["best_odds"] == 1.55 and c["best_book"] == "unibet_eu" and c["n_books"] == 4
+
+
 def test_cli_help():
     for s in ("clock.py", "fixtures.py", "odds.py", "shortlist.py", "context.py", "ledger.py", "betexplorer.py"):
         res = subprocess.run([sys.executable, str(SCRIPTS / s), "--help"], capture_output=True, text=True)

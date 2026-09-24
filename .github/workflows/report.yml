@@ -1,14 +1,15 @@
 # The scheduled betting report: Claude Code runs the bukmacher skill headless on the user's
 # subscription (CLAUDE_CODE_OAUTH_TOKEN), commits the report and the ledger, then the site is
 # republished. Windows do not overlap: 08 UTC -> 6 h, 14 UTC -> 4 h, 18 UTC -> 8 h
-# (10:00 / 16:00 / 20:00 Polish summer time; an hour earlier in winter — cron runs in UTC).
+# (10:17 / 16:17 / 20:17 Polish summer time; an hour earlier in winter — cron runs in UTC).
+# Minute 17, not :00: GitHub delays or drops scheduled runs at the top of the hour under load.
 name: report
 
 on:
   schedule:
-    - cron: "0 8 * * *"
-    - cron: "0 14 * * *"
-    - cron: "0 18 * * *"
+    - cron: "17 8 * * *"
+    - cron: "17 14 * * *"
+    - cron: "17 18 * * *"
   workflow_dispatch:
     inputs:
       hours:

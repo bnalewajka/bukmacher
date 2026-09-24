@@ -5,7 +5,7 @@ name: settle
 
 on:
   schedule:
-    - cron: "30 2 * * *"   # 04:30 CEST / 03:30 CET
+    - cron: "43 2 * * *"   # 04:43 CEST / 03:43 CET
   workflow_dispatch:
 
 permissions:

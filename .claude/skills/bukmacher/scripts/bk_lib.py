@@ -13,6 +13,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -94,8 +95,18 @@ def date_span(t0: datetime, hours: float) -> list[str]:
 
 
 # --------------------------------------------------------------------------- http
+SECRET_PARAMS = re.compile(r"((?:api_?key|apikey|token|key)=)[^&]+", re.I)
+
+
+def redact(url: str) -> str:
+    """Hide credentials passed as query parameters (The Odds API's apiKey) before a URL is
+    printed, logged or written to the cache — CI logs of a public repo are public."""
+    return SECRET_PARAMS.sub(r"\1***", url)
+
+
 class HttpError(Exception):
     def __init__(self, url: str, status: Optional[int], detail: str):
+        url = redact(url)
         super().__init__(f"{status} {url}: {detail}")
         self.url, self.status, self.detail = url, status, detail
 
@@ -130,7 +141,7 @@ def http_get(url: str, params: Optional[dict] = None, headers: Optional[dict] = 
                 if ttl > 0:
                     try:
                         CACHE_DIR.mkdir(parents=True, exist_ok=True)
-                        cpath.write_text(json.dumps({"url": url, "headers": resp_headers,
+                        cpath.write_text(json.dumps({"url": redact(url), "headers": resp_headers,
                                                      "body": body.decode("utf-8", "replace")}))
                     except OSError:
                         pass

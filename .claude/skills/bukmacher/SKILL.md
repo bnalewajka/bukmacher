@@ -58,6 +58,25 @@ was reachable, `date -u` is only a hypothesis: confirm the date from a fetched l
 (the fixtures list itself shows "today's" dates) before trusting the window, and say in the
 report which clock you trusted. Convert to the user's local time (Poland: CET/CEST) in the report.
 
+## Step 1b — Settle the ledger (before looking at tonight)
+
+Every proposal and every near-miss is recorded in `<project>/data/ledger.jsonl`. Before the
+new analysis, settle what has finished and look at the scoreboard:
+
+```bash
+python3 scripts/ledger.py settle            # final scores + closing odds from betexplorer
+python3 scripts/ledger.py stats --html work/stats.html --json work/stats.json
+python3 scripts/ledger.py list --open       # anything stuck as "manual" needs a look
+```
+
+Read the result before choosing anything: for every settled *pick* that lost, and every
+"paper" candidate that won, ask whether it was foreseeable (a missed absence, a wrong market,
+a bar set too high) and write one line on it into the report's "Wnioski" (lessons). Watch
+**CLV** (price taken vs the closing median) more than the win rate: over a few dozen bets a
+positive average CLV is the best evidence the analysis beats the market; the win rate needs
+hundreds. Entries marked `manual` (postponed, abandoned, unparsable) are settled by hand in the
+ledger file.
+
 ## Step 2 — Collect every fixture in the window
 
 ```bash
@@ -69,6 +88,14 @@ qualifiers, ATP/WTA/Challenger, volleyball leagues and FIVB; ESPN adds its own l
 ESPN BET odds; api-sports joins if `APISPORTS_KEY` is set. Events already in progress,
 postponed or cancelled are dropped. Read `references/sources.md` when a source fails (403 from
 Sofascore on datacentre IPs is common) — it lists the WebFetch/WebSearch fallbacks per sport.
+
+`scripts/betexplorer.py` is the keyless fallback that has worked when Sofascore did not: fixture
+lists with average odds for hockey, basketball, tennis, volleyball and football, times already
+converted to UTC:
+
+```bash
+python3 scripts/betexplorer.py next --sport hockey --hours 4 --out work/be_hockey.json
+```
 
 Sanity-check the list: does it contain the big games you would expect tonight? An empty
 sport with no error usually means the source has no coverage (ESPN has no volleyball), not that
@@ -88,8 +115,16 @@ bookmaker's own de-vigged probability, valid only inside mutually exclusive mark
 (double chance is derived from 1X2). `shortlist.py` merges the same bet across bookmakers,
 puts it in the range of its median price and ranks each range by fair probability. With `ODDS_API_KEY`
 (The Odds API, in `.env`) it adds Pinnacle and a dozen EU books; the free plan has 500
-credits a month, so run `--extra-markets --only-keys …` on the finalists only and report the
-remaining credits the script prints.
+credits a month: name the leagues actually playing with `--oddsapi-keys` (e.g.
+`soccer_uefa_nations_league,basketball_euroleague`), run `--extra-markets --only-keys …` on
+the finalists only, and report the remaining credits the script prints.
+
+Polish bookmakers' prices (and every market line, Asian totals and handicaps included) come
+from betexplorer for any match id from its lists or match URLs:
+
+```bash
+python3 scripts/betexplorer.py odds <match_id> 1x2 dc ou ah bts   # ha instead of 1x2 for no-draw sports
+```
 
 Treat the shortlist as candidates, not answers: bookmaker margin is loaded onto favourites,
 so the de-vigged number is an upper bound on the truth. Read `references/markets.md` for the
@@ -150,6 +185,23 @@ must carry: event, competition, start time (UTC and local), market and selection
 with bookmaker + source + fetch time, `p_est` vs implied, the reasoning, pluses, risks, and
 the "how it loses" line. State plainly that odds move and must be re-checked at the bookmaker
 before placing anything; single bets, not accumulators, unless asked.
+
+The report also carries the scoreboard: paste `work/stats.html` (from Step 1b) into the
+template's "Skuteczność" section, and fill "Wnioski" with the lessons from the settled bets —
+or say that nothing settled yet.
+
+**Record the run in the ledger** — every proposal as `kind: "pick"` and every rejected
+candidate within ~0.03 of the bar as `kind: "paper"` (the paper bets are how we learn whether
+the bar is too strict). Write them as a JSON list (schema in `scripts/ledger.py`'s docstring;
+`be` must point at the betexplorer match and the exact bet type / line / column so the closing
+price can be read later) and add them:
+
+```bash
+python3 scripts/ledger.py add work/picks.json
+```
+
+A proposal without a betexplorer reference cannot be settled — find the match there before
+publishing it, or leave it out.
 
 ## Hard rules
 

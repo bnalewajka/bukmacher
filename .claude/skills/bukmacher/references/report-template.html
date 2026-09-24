@@ -21,6 +21,9 @@ Rules for filling it:
   replace its table and picks with <p class="empty"> saying so, and still list the best
   rejected candidates with what would change your mind.
 - Each nav chip shows the range and its number of proposals ("1.20–1.29 · 2 typy").
+- "Skuteczność": replace the placeholder section with the fragment `ledger.py stats --html`
+  wrote (it is a complete <section id="skutecznosc">). "Wnioski": one line per settled loss
+  (and per paper bet that won) — was it foreseeable, and what changes because of it.
 - English-language user → same structure in English (lang="en").
 -->
 <html lang="pl">
@@ -102,6 +105,7 @@ Rules for filling it:
       <a href="#z-120">1.20–1.29 · {n} typy</a>
       <a href="#z-130">1.30–1.44 · {n} typy</a>
       <a href="#z-145">1.45–1.60 · {n} typy</a>
+      <a href="#skutecznosc">Skuteczność</a>
     </nav>
   </header>
 
@@ -158,6 +162,18 @@ Rules for filling it:
     <h3 class="sub">Odrzuceni kandydaci</h3>
     <ul>
       <li><strong>{Wydarzenie, rynek, kurs}</strong> — {powód: rotacja, kontuzja, brak potwierdzonego bramkarza, drift w górę, cienki rynek…}</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+    <h2>Skuteczność</h2>
+    <p class="meta">{fragment z `ledger.py stats --html` — podmień całą tę sekcję}</p>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>{Wydarzenie, zakład, wynik}</strong> — {czy było do przewidzenia; co przeoczyłem; co zmieniam (w analizie, progach, rynkach, źródłach)}</li>
     </ul>
   </section>
 

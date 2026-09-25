@@ -62,8 +62,50 @@ def _page_offset(page: str) -> timedelta:
 
 
 # ----------------------------------------------------------------------------- fixtures
+def _football_day(day: datetime) -> str:
+    """Every football match of one (site-time) day. The /football/ page shows only a slice;
+    the site lazy-loads the rest from homepage-data.php, and end=all returns all of it at once."""
+    body, _ = http_get(f"{BASE}/gres/ajax/homepage-data.php", headers=XHR, params={
+        "tab": "all", "year": day.year, "month": day.month, "day": day.day, "betType": "1x2",
+        "start": 0, "end": "all"})
+    return body.decode("utf-8", "replace")
+
+
+def football_matches(now: datetime, hours: float) -> list[dict]:
+    """All football fixtures in the window (≈100+ leagues a day instead of the ~10 on /football/)."""
+    out, seen = [], set()
+    end = now + timedelta(hours=hours)
+    day = (now + timedelta(hours=1)).date()          # site days run on UTC+1; +1 h covers late-night UTC
+    while datetime(day.year, day.month, day.day, tzinfo=timezone.utc) <= end + timedelta(hours=1):
+        page = _football_day(datetime(day.year, day.month, day.day))
+        offset = _page_offset(page)
+        for block in page.split('<ul class="leagues-list')[1:]:
+            name = re.search(r'data-league-name="([^"]*)"', block)
+            country = re.search(r'data-country-name="([^"]*)"', block)
+            league = ": ".join(html.unescape(x.group(1)) for x in (country, name) if x) or None
+            for m in re.finditer(r'data-dt="([^"]+)"[^>]*?data-dt-now="[^"]+"(.*?)(?=data-dt="|\Z)', block, re.S):
+                body = m.group(2)
+                link = re.search(r'href="(/football/[^"]+/([A-Za-z0-9]{8})/)"', body)
+                home = re.search(r'table-main__participantHome[^>]*>\s*<p[^>]*>([^<]*)</p>', body)
+                away = re.search(r'table-main__participantAway[^>]*>.*?<p[^>]*>([^<]*)</p>', body, re.S)
+                if not (link and home and away) or link.group(2) in seen:
+                    continue
+                start = (_page_dt(m.group(1)) - offset).replace(tzinfo=timezone.utc)
+                if not (now <= start <= end):
+                    continue
+                seen.add(link.group(2))
+                out.append({"sport": "football", "competition": league, "home": _text(home.group(1)),
+                            "away": _text(away.group(1)), "start_utc": iso(start),
+                            "odds": [float(x) for x in re.findall(r'data-odd="([\d.]+)"', body)[:3]],
+                            "match_id": link.group(2), "url": BASE + link.group(1)})
+        day += timedelta(days=1)
+    return sorted(out, key=lambda r: r["start_utc"])
+
+
 def next_matches(sport: str, now: Optional[datetime] = None, hours: float = 24) -> list[dict]:
     now = now or now_utc()
+    if sport == "football":
+        return football_matches(now, hours)
     page = _page(LIST_PATH[sport])
     offset = _page_offset(page)
     out, league = [], None

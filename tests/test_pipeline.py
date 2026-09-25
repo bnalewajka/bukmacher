@@ -24,6 +24,7 @@ import fixtures as fx_mod  # noqa: E402
 import odds as odds_mod  # noqa: E402
 import context as ctx_mod  # noqa: E402
 import ledger as ledger_mod  # noqa: E402
+import betexplorer as be_mod  # noqa: E402
 
 T0 = datetime(2026, 9, 24, 16, 0, tzinfo=timezone.utc)
 
@@ -373,6 +374,28 @@ def test_best_price_ignores_us_only_books():
     assert res.returncode == 0, res.stderr
     c = next(c for r in json.loads(out.with_name("bk_us_sl.json").read_text())["ranges"] for c in r["candidates"])
     assert c["best_odds"] == 1.55 and c["best_book"] == "unibet_eu" and c["n_books"] == 4
+
+
+def test_betexplorer_full_football_list():
+    """The lazy-loaded homepage-data.php list: league blocks, site-time -> UTC, window filter."""
+    now = bk_lib.now_utc().replace(second=0, microsecond=0)
+    site = lambda dt: f"{dt.day},{dt.month},{dt.year},{dt.hour},{dt.minute:02d}"   # the site runs on UTC+1
+    def row(start, mid, home, away, odds):
+        return (f'<li data-dt="{site(start + timedelta(hours=1))}" data-def="1" data-dt-now="{site(now + timedelta(hours=1))}">'
+                f'<a href="/football/europe/uefa-nations-league/x-y/{mid}/"><div class="table-main__participantHome participantHomeOrder">'
+                f'<p class="t">{home}</p></div><div class="table-main__participantAway"><img alt="{away}"/><p class="t">{away}</p></div></a>'
+                + "".join(f'<button data-odd="{o}"></button>' for o in odds) + "</li>")
+    page = ('<ul class="leagues-list" data-key="1"><a data-league-name="UEFA Nations League" data-country-name="Europe"></a>'
+            + row(now + timedelta(hours=2), "tIqochT1", "Armenia", "Latvia", (1.85, 3.45, 4.28))
+            + row(now + timedelta(hours=9), "zzzzzzz1", "Late", "Game", (2.0, 3.0, 4.0)) + "</ul>"
+            + '<ul class="leagues-list" data-key="2"><a data-league-name="Liga" data-country-name="Poland"></a>'
+            + row(now - timedelta(hours=1), "started1", "Legia", "Lech", (2.1, 3.3, 3.4)) + "</ul>")
+    calls = []
+    be_mod.http_get = lambda url, params=None, headers=None, **kw: (calls.append(params) or page.encode(), {})
+    rows = be_mod.football_matches(now, 4)
+    assert [(r["home"], r["away"], r["competition"]) for r in rows] == [("Armenia", "Latvia", "Europe: UEFA Nations League")]
+    assert rows[0]["start_utc"] == bk_lib.iso(now + timedelta(hours=2)) and rows[0]["odds"] == [1.85, 3.45, 4.28]
+    assert calls and calls[0]["end"] == "all"
 
 
 def test_cli_help():

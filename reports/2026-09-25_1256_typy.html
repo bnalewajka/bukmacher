@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 25.09 12:56</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 4 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-25 10:56 UTC / 12:56 CEST (uruchomienie lokalne, polskie IP). Zegar zweryfikowany: tak (clock.py). Okno: 13:16–16:56 PL.</p>
+    <p class="meta">Przeanalizowano: ok. 110 spotkań z betexplorer (tenis ~85, piłka 10, koszykówka, hokej, siatkówka); po odrzuceniu ITF, debli, sparingów i niższych lig w zakresach zostało ok. 16 kandydatów. Ceny polskich bukmacherów z betexplorer, pobrane 12:55–12:58.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Wczesne popołudnie jest cienkie: jedna wyraźna przewaga — <strong>under 3.5 w meczu Mozambik – Senegal @ 1.40</strong> (obie drużyny strzelają mało, debiut trenera Senegalu, brak Mané). Do tego dwie uczciwie wycenione pozycje w tenisie (Nosková 1.15, Sakkari 1.43). Zakresy 1.20–1.29 i 1.45–1.60 puste — nic nie osiągnęło nawet uczciwej ceny.</p>
+    <nav class="ranges"><a href="#z-110">1.10–1.19 · 1 typ</a><a href="#z-120">1.20–1.29 · 0 typów</a><a href="#z-130">1.30–1.44 · 2 typy</a><a href="#z-145">1.45–1.60 · 0 typów</a><a href="#skutecznosc">Skuteczność</a></nav>
+  </header>
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84 %.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">13:20</td><td>Bucșa – Nosková</td><td>BJK Cup, półfinał</td><td>Wygrana Noskovej</td><td class="num">1.15<span class="note">BETFAN, betexplorer 12:55</span></td><td class="num pos">0.88</td><td class="num">0.870</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div>
+    <h3 class="sub">Analiza propozycji</h3>
+    <article class="pick" id="z-110-1">
+      <h3>1. Bucșa – <strong>Nosková</strong> (BJK Cup) — wygrana Noskovej @ 1.15 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.10–1.19 · BJK Cup Finals, półfinał Hiszpania – Czechy, singiel nr 2 · 13:20 PL (11:20 UTC) · 1.15 BETFAN (mediana 1.14, 7 bukm.; betexplorer 12:55) · p_est 0.88 vs implikowane 0.870</p>
+      <p><strong>Dlaczego ten typ:</strong> Nosková (nr 6 WTA) przeciw Bucși (nr 35) na hali, kort twardy. Różnica ok. 30 miejsc w rankingu i klasy na szybkiej nawierzchni; Bucșa przegrała w ćwierćfinale singla z Putincewą.</p>
+      <dl><dt>Stawka</dt><dd>półfinał BJK Cup — singiel liderek obu drużyn</dd><dt>Forma</dt><dd>Nosková wygrała swój singiel w ćwierćfinale z Boulter 6:2, 7:6; Bucșa przegrała singla z Putincewą 2:6, 6:3, 1:6</dd><dt>Warunki</dt><dd>hala Shenzhen Bay, kort twardy — sprzyja mocniej serwującej i grającej płasko Noskovej</dd><dt>Rynek</dt><dd>7 polskich bukmacherów zgodnych 1.13–1.15</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>różnica rankingu ~30 miejsc</li><li>hala sprzyja stylowi Noskovej</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>mocno skorelowane z wcześniejszym typem na wygraną Czech w całym meczu (dziennik 09:50) — to nie są dwa niezależne zakłady</li><li>Bucșa gra ambitnie w drużynówkach (wygrała debla w ćwierćfinale)</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Nosková psuje serwis pod presją, a Bucșa przeciąga wymiany i wygrywa w trzech setach.</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="https://www.betexplorer.com/tennis/wta-singles/billie-jean-king-cup-world-group/bucsa-cristina-noskova-linda/nuplmFEc/">betexplorer</a>, <a href="https://www.nbcsports.com/tennis/news/spain-advances-to-billie-jean-king-cup-semifinals-against-czechia-by-beating-kazakhstan-2-1">NBC Sports</a>, <a href="https://en.wikipedia.org/wiki/2026_Billie_Jean_King_Cup_finals">Wikipedia</a></p>
+    </article>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Indonezja – Singapur (FIFA ASEAN Cup), Indonezja @ 1.16 (STS)</strong> — p_est 0.84 &lt; 0.862; brak twardych informacji o składach, rynek uczciwy.</li>
+      <li><strong>Prizmic – Glinka (Challenger St. Tropez) @ 1.20 (STS)</strong> — p_est 0.80 &lt; 0.833.</li>
+      <li><strong>Challengery kobiet (Ristic 1.16, Gasanova 1.14, Kraus 1.23)</strong> — brak danych o formie, nie analizowane.</li>
+    </ul>
+  </section>
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="empty">Brak typu — nic nie osiąga uczciwej ceny.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul><li><strong>Mozambik – Senegal, Senegal @ 1.23 (mediana; Betclic 1.31 odstaje — możliwy błąd danych)</strong> — p_est 0.77 &lt; 0.81: nowy trener, 1 wygrana w 6 meczach, bez Mané; zagrałbym od 1.35.</li></ul>
+  </section>
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">15:00</td><td>Mozambik – Senegal</td><td>Kwal. PNA 2027</td><td>Poniżej 3.5 gola</td><td class="num">1.40<span class="note">BETFAN, betexplorer 12:56</span></td><td class="num pos">0.78</td><td class="num">0.714</td><td><span class="tier value">z przewagą</span></td></tr><tr><td>2</td><td class="num">14:15</td><td>Sakkari – Gibson</td><td>WTA Singapur</td><td>Wygrana Sakkari</td><td class="num">1.43<span class="note">Superbet.pl, betexplorer 12:56</span></td><td class="num pos">0.71</td><td class="num">0.699</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div>
+    <h3 class="sub">Analiza propozycji</h3>
+    <article class="pick" id="z-130-1">
+      <h3>1. Mozambik – Senegal — poniżej 3.5 gola @ 1.40 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.30–1.44 · kwalifikacje Pucharu Narodów Afryki 2027 · 15:00 PL (13:00 UTC), Maputo · 1.40 BETFAN (mediana 1.39, 7 bukm.) · p_est 0.78 vs implikowane 0.714</p>
+      <p><strong>Dlaczego ten typ:</strong> Obie drużyny mają słabą ofensywę w tej chwili: Mozambik przegrał 4 mecze z rzędu, strzelając w nich łącznie 2 gole; Senegal wygrał 1 z 6 ostatnich meczów, debiutuje nowy trener (Patrick Vieira) i brakuje Sadio Mané. Rynek zakłada ok. 2.6 gola — to więcej, niż pokazuje forma obu stron.</p>
+      <dl><dt>Absencje</dt><dd>Senegal bez Mané, Antoine’a Mendy’ego i Habiba Diarry</dd><dt>Forma</dt><dd>Mozambik: 4 porażki z rzędu, 2 gole w 4 meczach (m.in. 0:1 z Indonezją w czerwcu); Senegal: 1 wygrana w 6 meczach</dd><dt>Miejsce</dt><dd>mecz przeniesiony do Maputo (problemy ze stadionem w Senegalu) — de facto u Mozambiku</dd><dt>Rynek</dt><dd>under 3.5 1.38–1.40 u 7 bukmacherów; linia 2.5 wyceniona na over</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>dwie drużyny w słabej formie ofensywnej</li><li>debiut trenera zwykle oznacza ostrożną grę</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Senegal ma dużą przewagę jakości — może wygrać wysoko, jeśli Mozambik się otworzy</li><li>wiadomości o formie pochodzą z zapowiedzi, nie z pełnych statystyk</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Senegal strzela szybko, Mozambik musi atakować, mecz się otwiera i kończy 1:3 albo 0:4.</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="https://www.betexplorer.com">betexplorer (OKqq6xU0)</a>, <a href="https://www.sportsmole.co.uk/football/afcon-qualifying/mozambique-vs-senegal_game_258888.html">Sports Mole</a>, <a href="https://africasoccer.com/senegal-and-mozambique-name-probable-line-ups-for-2027-africa-cup-of-nations-qualifier/">AfricaSoccer</a></p>
+    </article>
+    <article class="pick" id="z-130-2">
+      <h3>2. <strong>Sakkari</strong> – Gibson (WTA Singapur) — wygrana Sakkari @ 1.43 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.30–1.44 · WTA Singapur, ćwierćfinał · 14:15 PL (12:15 UTC) · 1.43 Superbet.pl (mediana 1.42, 7 bukm.) · p_est 0.71 vs implikowane 0.699</p>
+      <p><strong>Dlaczego ten typ:</strong> Sakkari (nr 33) przeciw Gibson (nr 63), kort twardy. Rynek wycenia to blisko — cena jest uczciwa, bez wyraźnej przewagi.</p>
+      <dl><dt>Ranking</dt><dd>Sakkari 33 vs Gibson 63</dd><dt>Rynek</dt><dd>7 bukmacherów 1.40–1.43</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>większe doświadczenie Sakkari w późnych rundach</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Gibson gra agresywnie i potrafi wygrywać z wyżej notowanymi; szczegóły formy tylko z zapowiedzi</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Gibson trafia serwisem i forhendem, a Sakkari psuje w końcówkach setów.</p>
+      <p class="sources"><strong>Źródła:</strong> <a href="https://www.bets.com.au/tennis/wta-tour/maria-sakkari-vs-talia-gibson-wta-singapore-tips-prediction-live-stream-20260925-0003/">zapowiedź (ranking)</a>, betexplorer (Ic9rpKal)</p>
+    </article>
+  </section>
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="empty">Brak typu — kandydaci (Faria 1.50, Algieria w siatkówce 1.50, Gill 1.55) bez twardych informacji, nie analizowani.</p>
+  </section>
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">7 (+4 otw.)</td><td class="num">5–1–1</td><td class="num">83%</td><td class="num">82%</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy — z przewagą</td><td class="num">2 (+1 otw.)</td><td class="num">0–1–1</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-50.0%</td><td class="num">—</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">5 (+3 otw.)</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+1.00 u</td><td class="num pos">+20.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">4 (+2 otw.)</td><td class="num">4–0–0</td><td class="num">100%</td><td class="num">86%</td><td class="num pos">+0.75 u</td><td class="num pos">+18.8%</td><td class="num">+6.1%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">81%</td><td class="num pos">+0.25 u</td><td class="num pos">+25.0%</td><td class="num">+2.5%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">1 (+2 otw.)</td><td class="num">0–0–1</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">—</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">1</td><td class="num">0–1–0</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-100.0%</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">18 (+7 otw.)</td><td class="num">13–5–0</td><td class="num">72%</td><td class="num">77%</td><td class="num neg">-2.08 u</td><td class="num neg">-11.5%</td><td class="num">+1.3%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">5 (+3 otw.)</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+0.88 u</td><td class="num pos">+17.6%</td><td class="num">+2.1%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">7 (+3 otw.)</td><td class="num">7–0–0</td><td class="num">100%</td><td class="num">80%</td><td class="num pos">+1.60 u</td><td class="num pos">+22.9%</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">3 (+1 otw.)</td><td class="num">1–2–0</td><td class="num">33%</td><td class="num">70%</td><td class="num neg">-1.55 u</td><td class="num neg">-51.8%</td><td class="num">+0.8%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">3</td><td class="num">0–3–0</td><td class="num">0%</td><td class="num">65%</td><td class="num neg">-3.00 u</td><td class="num neg">-100.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.2 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.23 → <strong>wygrana</strong> (82:100) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.22 → <strong>wygrana</strong> (82:100)</li><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.19 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.56 → <strong>przegrana</strong> (86:66) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.59 → <strong>przegrana</strong> (86:66)</li><li>Washington Mystics – Chicago Sky: h2h home @ 1.15 → <strong>wygrana</strong> (101:93) <em>(papier)</em></li><li>Washington Mystics – Chicago Sky: h2h home @ 1.12 → <strong>wygrana</strong> (101:93)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2)</li><li>Portugal – Wales: h2h home @ 1.22 → <strong>wygrana</strong> (1:0)</li><li>Serbia – Greece: totals under 3 @ 1.3 → <strong>zwrot</strong> (1:2)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2) <em>(papier)</em></li><li>Portugal – Wales: h2h home @ 1.16 → <strong>wygrana</strong> (1:0) <em>(papier)</em></li><li>Serbia – Greece: totals under 3.5 @ 1.22 → <strong>wygrana</strong> (1:2) <em>(papier)</em></li><li>Austria – Israel: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li></ul>
+</section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul><li>Od ostatniego raportu nic nowego się nie rozliczyło (5 otwartych wpisów z porannego uruchomienia czeka na wyniki).</li></ul>
+  </section>
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO. Typ na Noskovą jest skorelowany z porannym typem na wygraną Czech w meczu.</li>
+      <li>Kurs 1.15 oznacza ok. 87 % implikowanego prawdopodobieństwa, 1.40 — ok. 71 %. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła: betexplorer.com (polskie IP), WebSearch. Sofascore niedostępny (403).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

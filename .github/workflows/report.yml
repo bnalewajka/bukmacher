@@ -1,16 +1,17 @@
 # The scheduled betting report: Claude Code runs the bukmacher skill headless on the user's
 # subscription (CLAUDE_CODE_OAUTH_TOKEN), commits the report and the ledger, then the site is
-# republished. Windows do not overlap: 08 UTC -> 6 h, 14 UTC -> 4 h, 18 UTC -> 8 h
-# (10:13 / 16:13 / 20:13 Polish summer time; an hour earlier in winter — cron runs in UTC).
-# Scheduled runs are attributed to the author of the last commit that changed the cron; that
-# author must be a GitHub-linked email (see README), or GitHub never starts them.
+# republished. Windows do not overlap: ~08 UTC -> 6 h, ~14 UTC -> 4 h, ~18 UTC -> 8 h.
+#
+# Primary trigger: cron-job.org calls the workflow_dispatch API at 10:13 / 16:13 / 20:13
+# Europe/Warsaw (GitHub's own `schedule` never fired in this repo — see README). The cron below
+# is a fallback 30 min later; it skips itself when a report was made in the last 90 minutes.
 name: report
 
 on:
   schedule:
-    - cron: "13 8 * * *"
-    - cron: "13 14 * * *"
-    - cron: "13 18 * * *"
+    - cron: "43 8 * * *"
+    - cron: "43 14 * * *"
+    - cron: "43 18 * * *"
   workflow_dispatch:
     inputs:
       hours:
@@ -46,6 +47,23 @@ jobs:
           node-version: "22"
       - run: npm install -g @anthropic-ai/claude-code
 
+      - name: skip if a report was just made
+        id: fresh
+        if: github.event_name == 'schedule'
+        # GitHub's own cron (unreliable here) and the external trigger may both fire: run once
+        run: |
+          python3 - <<'EOF'
+          import os, re, pathlib, datetime as dt
+          from zoneinfo import ZoneInfo
+          now = dt.datetime.now(ZoneInfo("Europe/Warsaw"))
+          times = [dt.datetime.strptime(m.group(1), "%Y-%m-%d_%H%M").replace(tzinfo=ZoneInfo("Europe/Warsaw"))
+                   for p in pathlib.Path("reports").glob("*_typy.html")
+                   if (m := re.match(r"(\d{4}-\d{2}-\d{2}_\d{4})_typy", p.name))]
+          fresh = any(now - t < dt.timedelta(minutes=90) for t in times)
+          print("latest report is recent — skipping" if fresh else "no recent report")
+          open(os.environ["GITHUB_OUTPUT"], "a").write(f"skip={'true' if fresh else 'false'}\n")
+          EOF
+
       - name: window
         id: window
         run: |
@@ -56,6 +74,7 @@ jobs:
           echo "hours=$H" >> "$GITHUB_OUTPUT"
 
       - name: run the skill
+        if: steps.fresh.outputs.skip != 'true'
         shell: bash   # -o pipefail: a failing claude must not hide behind tee
         run: |
           claude -p "/bukmacher Tryb automatyczny (GitHub Actions, bez pytań): horyzont ${{ steps.window.outputs.hours }} h, wszystkie 4 zakresy kursów. Postępuj według sekcji 'Automated run (GitHub Actions)' w SKILL.md." \
@@ -67,13 +86,16 @@ jobs:
             | jq -r --unbuffered -f .github/claude-log.jq
 
       - name: check that a report was written
+        if: steps.fresh.outputs.skip != 'true'
         run: |
           git status --porcelain reports | grep -q . || { echo "::error::no new report in reports/"; exit 1; }
 
       - name: tests
+        if: steps.fresh.outputs.skip != 'true'
         run: pip install --quiet pytest && python3 -m pytest -q tests
 
       - name: commit
+        if: steps.fresh.outputs.skip != 'true'
         run: |
           git config user.name "bukmacher-bot"
           git config user.email "bukmacher-bot@users.noreply.github.com"

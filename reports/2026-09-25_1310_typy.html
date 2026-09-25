@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 25.09 13:10</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — 13:50–19:05, zakresy kursów 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-25 11:10 UTC / 13:10 CEST (lokalnie, polskie IP). Zegar zweryfikowany: tak (clock.py, 11:06:07 UTC). Okno: mecze od 13:51 do 19:06 CEST — wcześniejsze pominięte, bo zaczęłyby się przed końcem analizy.</p>
+    <p class="meta">Przeanalizowano: ok. 150 meczów z list betexplorer (piłka 9, tenis 21, koszykówka 18, hokej 80+, siatkówka 10) + ESPN; ceny polskich bukmacherów (STS, eFortuna, Betclic, Superbet, LV BET, Fuksiarz, BETFAN) dla 17 meczów; 10 finalistów zbadanych: 8 wyszukiwań, 11 stron przeczytanych w całości.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Dwa typy <strong>z przewagą</strong>: <strong>Słowenia – Polska poniżej 4.5 seta @ 1.35</strong> (Słowenia bez kapitana Urnauta i z kontuzjowanym Šternem) oraz <strong>Armenia – Łotwa poniżej 3.5 gola @ 1.28</strong> (dwie drużyny strzelające ok. 0,6 gola na mecz). Do tego cztery typy po uczciwej cenie. Dwa typy dotyczą tego samego meczu Polski — to nie są niezależne zakłady.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 0 typów</a>
+      <a href="#z-120">1.20–1.29 · 3 typy</a>
+      <a href="#z-130">1.30–1.44 · 3 typy</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84 %; „uczciwa cena” ≥ implikowane, „z przewagą” ≥ implikowane + 0.03.</p>
+    <p class="empty">Brak typu, który przeszedłby research i próg — zobacz kandydatów niżej.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3><ul><li><strong>Indonezja – Singapur, Indonezja @ 1.17 (BETFAN)</strong> — p_est 0.86 ≈ implikowane 0.855, ale kluczowe fakty o kadrach tylko z fragmentu strony FIFA (strona nieczytelna) — za słaby research na typ; zapisane na papierze.</li><li><strong>Třinec 1X @ 1.19–1.20</strong> — ta sama analiza co typ na Třinca w 1.30–1.44; w tym zakresie mniej korzystna cena.</li><li><strong>Tenis: Ristic 1.13, Gasanova 1.13 (WTA 125)</strong> — nie sprawdzone ponad listę meczów; bez researchu brak typu.</li></ul>
+  </section>
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78 %; „uczciwa cena” ≥ implikowane, „z przewagą” ≥ implikowane + 0.03.</p>
+    <h3 class="sub">Ranking</h3><div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">18:00</td><td>Armenia – Łotwa</td><td>Liga Narodów C</td><td>Poniżej 3.5 gola</td><td class="num">1.28<span class="note">1.28 LV BET (mediana 1.27, 7 bukm.)</span></td><td class="num pos">0.82</td><td class="num">0.781</td><td><span class="tier value">z przewagą</span></td></tr><tr><td>2</td><td class="num">17:00</td><td>Słowenia – Polska</td><td>ME siatkarzy, półfinał</td><td>Wygrana Polski</td><td class="num">1.25<span class="note">1.25 BETFAN (mediana 1.22, 7 bukm.)</span></td><td class="num ">0.82</td><td class="num">0.800</td><td><span class="tier fair">uczciwa cena</span></td></tr><tr><td>3</td><td class="num">18:00</td><td>Gruzja – Irlandia Płn.</td><td>Liga Narodów B</td><td>Podwójna szansa 1X (Gruzja nie przegra)</td><td class="num">1.22<span class="note">1.22 BETFAN (mediana 1.20, 6 bukm.)</span></td><td class="num ">0.83</td><td class="num">0.820</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div><h3 class="sub">Analiza propozycji</h3>    <article class="pick" id="z-120-1">
+      <h3>Armenia – Łotwa — Poniżej 3.5 gola @ 1.28 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Liga Narodów C · 18:00 (16:00 UTC) · 1.28 LV BET (mediana 1.27, 7 bukm.) · p_est 0.82 vs implikowane 0.781</p>
+      <p><strong>Dlaczego ten typ:</strong> Dwie z najsłabiej strzelających drużyn Europy: w ostatnich 10 meczach o stawkę Armenia 0,6, Łotwa 0,7 gola na mecz. Ostatnie wyniki to 1:1, 1:1, 1:2, 1:0, 1:0, 0:1 — poza klęską Armenii 1:9 z Portugalią. Rynek zakłada ok. 2,5 gola (under 2.5 po 1.72), a przeciw sobie te drużyny strzelają zwykle 2–3. Linia 3.5 przegrywa dopiero przy 4 golach.</p>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>obie drużyny mają problem ze strzelaniem</li><li>H2H: 2:1, 4:1, 2:0, 2:1 — jeden z czterech meczów powyżej 3.5</li><li>nowy sezon Ligi Narodów, oba zespoły zaczynają ostrożnie</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Armenia traci 3 gole na mecz w meczach o stawkę — przy wczesnym golu mecz może się otworzyć</li><li>4:1 z 2024 pokazuje, że Armenia potrafi rozbić Łotwę</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Armenia szybko prowadzi, Łotwa się otwiera i kończy się 3:1 albo 4:1.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.sportsgambler.com/betting-tips/football/armenia-vs-latvia-prediction-lineups-odds-2026-09-25/">sportsgambler.com</a> — ostatnie wyniki, H2H, średnio 0.6 / 0.7 gola strzelonego, <a href="https://dailysports.net/predictions/armenia-have-gone-winless-for-over-a-year-can-the-run-end-in-yerevan-armenia-vs-latvia-prediction/">dailysports.net</a> — Armenia bez wygranej od ponad roku (tylko fragment w wyszukiwarce). Kursy: betexplorer.com, 13:06–13:15 CEST.</p>
+    </article>
+    <article class="pick" id="z-120-2">
+      <h3>Słowenia – Polska — Wygrana Polski @ 1.25 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">ME siatkarzy, półfinał · 17:00 (15:00 UTC) · 1.25 BETFAN (mediana 1.22, 7 bukm.) · p_est 0.82 vs implikowane 0.800</p>
+      <p><strong>Dlaczego ten typ:</strong> Polska przeszła Niemcy 3:0 i Łotwę 3:0, a Słowenia gra bez kapitana Tine Urnauta (uraz stopy, koniec turnieju), atakujący Tonček Štern też ma uraz; Klemen Cebulj dołączył w trakcie turnieju z transferu medycznego. Rynek (78% po odjęciu marży) nie uwzględnia w pełni braku dwóch liderów.</p>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Słowenia bez kapitana i z kontuzjowanym atakującym</li><li>Polska w formie: 3:0, 3:0 w fazie pucharowej</li><li>Polska wygrała 3 z 4 ostatnich meczów ze Słowenią</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Słowenia wygrała półfinały ME 2019 i 2021</li><li>2 z 4 ostatnich meczów kończyły się 3:2</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Słowenia wygrywa dwa wyrównane sety na przewagi, a Polska przegrywa tie-breaka.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 3):</strong> <a href="https://en.volleyballworld.com/news/finland-stun-italy-and-join-france-and-slovenia-as-world-cup-qualifiers">en.volleyballworld.com</a> — ćwierćfinały: Polska 3:0 Niemcy, Słowenia 3:1 Belgia; droga do półfinału, <a href="https://sport.rp.pl/siatkowka/art45189461-w-piatek-polska-slowenia-o-final-mistrzostw-europy-potrafimy-juz-z-nimi-wygrywac">sport.rp.pl</a> — Urnaut poza turniejem, Cebulj z transferu medycznego; H2H półfinałów i 2024, <a href="https://www.polsatsport.pl/wiadomosc/2026-09-24/trener-slowenii-ocenil-polskich-siatkarzy-takie-slowa-przed-polfinalem-me-2026/">polsatsport.pl</a> — Urnaut i Stern kontuzjowani; 2 z 4 ostatnich meczów 3:2. Kursy: betexplorer.com, 13:06–13:15 CEST.</p>
+    </article>
+    <article class="pick" id="z-120-3">
+      <h3>Gruzja – Irlandia Płn. — Podwójna szansa 1X (Gruzja nie przegra) @ 1.22 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Liga Narodów B · 18:00 (16:00 UTC) · 1.22 BETFAN (mediana 1.20, 6 bukm.) · p_est 0.83 vs implikowane 0.820</p>
+      <p><strong>Dlaczego ten typ:</strong> Gruzja u siebie w pełnym składzie z Kwaracchelią i Mikautadze, niepokonana w 4 meczach 2026. Irlandia Płn. bez kapitana Conora Bradleya, McCanna, Lyonsa i McDonnella — kryzys kadrowy przy średniej wieku 24. Zakład przegrywa tylko przy wygranej gości.</p>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>gospodarze w pełnym składzie, goście bez 4 zawodników</li><li>Tbilisi to trudny teren</li><li>remis też wygrywa</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Irlandia Płn. pod O'Neillem: 13 wygranych i 5 remisów, blisko awansu na MŚ</li><li>Gruzja: 5 porażek w 10 meczach od września 2025</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Irlandia strzela ze stałego fragmentu i broni wyniku 0:1 do końca.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://www.sportsmole.co.uk/football/northern-ireland/uefa-nations-league/preview/georgia-vs-northern-ireland-prediction-team-news-lineups_605651.html">sportsmole.co.uk</a> — forma, Gruzja niepokonana w 4 meczach 2026, <a href="https://sports.yahoo.com/articles/georgia-vs-northern-ireland-match-053000960.html">sports.yahoo.com</a> — NI bez Bradleya, McCanna, Lyonsa, McDonnella; Gruzja z Kwaracchelią i Mikautadze. Kursy: betexplorer.com, 13:06–13:15 CEST.</p>
+    </article>
+    <h3 class="sub">Odrzuceni kandydaci</h3><ul><li><strong>Gruzja – Irlandia Płn., poniżej 3.5 gola @ 1.24</strong> — p_est 0.80 &lt; 0.806 (papier).</li><li><strong>Tofas – Bandırma, Tofas @ 1.28</strong> i <strong>Zenit – Uralmasz @ 1.28</strong> — nie zbadane w wystarczającym stopniu (Zenit tylko 1 bukmacher).</li><li><strong>Tunezja – Kamerun (siatkówka, MA) @ 1.23</strong> — brak przeczytanego źródła o składach.</li></ul>
+  </section>
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %; „uczciwa cena” ≥ implikowane, „z przewagą” ≥ implikowane + 0.03.</p>
+    <h3 class="sub">Ranking</h3><div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">17:00</td><td>Słowenia – Polska</td><td>ME siatkarzy, półfinał</td><td>Poniżej 4.5 seta (bez tie-breaka)</td><td class="num">1.35<span class="note">1.35 STS (mediana 1.33, 5 bukm.)</span></td><td class="num pos">0.80</td><td class="num">0.741</td><td><span class="tier value">z przewagą</span></td></tr><tr><td>2</td><td class="num">17:00</td><td>Třinec – Vítkovice</td><td>Extraliga (CZ)</td><td>Wygrana Třinca (z dogrywką i karnymi)</td><td class="num">1.35<span class="note">1.35 eFortuna (mediana 1.33, 6 bukm.)</span></td><td class="num ">0.76</td><td class="num">0.741</td><td><span class="tier fair">uczciwa cena</span></td></tr><tr><td>3</td><td class="num">17:30</td><td>Ilves – KooKoo</td><td>Liiga (FI)</td><td>Wygrana Ilves (z dogrywką i karnymi)</td><td class="num">1.37<span class="note">1.37 eFortuna (mediana 1.34, 6 bukm.)</span></td><td class="num ">0.75</td><td class="num">0.730</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div><h3 class="sub">Analiza propozycji</h3>    <article class="pick" id="z-130-1">
+      <h3>Słowenia – Polska — Poniżej 4.5 seta (bez tie-breaka) @ 1.35 <span class="tier value">z przewagą</span></h3>
+      <p class="line">ME siatkarzy, półfinał · 17:00 (15:00 UTC) · 1.35 STS (mediana 1.33, 5 bukm.) · p_est 0.80 vs implikowane 0.741</p>
+      <p><strong>Dlaczego ten typ:</strong> Zakład wygrywa przy każdym wyniku poza 3:2 — więc przegrywa tylko, gdy osłabiona Słowenia dotrwa do tie-breaka. Bez Urnauta i z kontuzjowanym Šternem szansa na wyrównany mecz na 5 setów jest mniejsza niż zakłada kurs (ok. 26% na tie-break).</p>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>przegrywa tylko jeden scenariusz: 3:2</li><li>Polska wygrywała w tym turnieju gładko (3:0, 3:0)</li><li>osłabiona Słowenia</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>2 z 4 ostatnich meczów tych drużyn skończyły się 3:2</li><li>półfinał — obie strony walczą o każdy set</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Mecz idzie set za set, 2:2, i o finale decyduje tie-break.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 3):</strong> <a href="https://en.volleyballworld.com/news/finland-stun-italy-and-join-france-and-slovenia-as-world-cup-qualifiers">en.volleyballworld.com</a> — ćwierćfinały: Polska 3:0 Niemcy, Słowenia 3:1 Belgia; droga do półfinału, <a href="https://sport.rp.pl/siatkowka/art45189461-w-piatek-polska-slowenia-o-final-mistrzostw-europy-potrafimy-juz-z-nimi-wygrywac">sport.rp.pl</a> — Urnaut poza turniejem, Cebulj z transferu medycznego; H2H półfinałów i 2024, <a href="https://www.polsatsport.pl/wiadomosc/2026-09-24/trener-slowenii-ocenil-polskich-siatkarzy-takie-slowa-przed-polfinalem-me-2026/">polsatsport.pl</a> — Urnaut i Stern kontuzjowani; 2 z 4 ostatnich meczów 3:2. Kursy: betexplorer.com, 13:06–13:15 CEST.</p>
+    </article>
+    <article class="pick" id="z-130-2">
+      <h3>Třinec – Vítkovice — Wygrana Třinca (z dogrywką i karnymi) @ 1.35 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Extraliga (CZ) · 17:00 (15:00 UTC) · 1.35 eFortuna (mediana 1.33, 6 bukm.) · p_est 0.76 vs implikowane 0.741</p>
+      <p><strong>Dlaczego ten typ:</strong> Třinec wygrał wszystkie 3 mecze ligowe (m.in. 6:5 z Kometą, 3:2 z Pilznem) i 6:3 z Vítkovicami w sparingu 9 września. Vítkovice: 1 zwycięstwo w 6 sparingach, porażka 3:4 z Kladnem na otwarcie, a przed sezonem wymieniły 8 zawodników.</p>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Třinec 3-0, u siebie</li><li>Vítkovice w słabej formie i po dużych zmianach w składzie</li><li>sparing 6:3 dla Třinca 2 tygodnie temu</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>derby — Vítkovice zawsze grają ambitnie</li><li>hokej: bramkarz może ukraść mecz</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Bramkarz Vítkovic ma wieczór życia i goście wygrywają 2:1 po karnych.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://www.hcocelari.cz/matches/MUZ">hcocelari.cz</a> — Třinec 3-0 w lidze, sparing 6:3 z Vítkovicami, <a href="https://moravskoslezsky.denik.cz/hokej/vitkovice-v-extralize-kadr-vstupenky-ambice-a-klicova-data/">moravskoslezsky.denik.cz</a> — Vítkovice 1-5 w sparingach, 3:4 z Kladnem, 8 odejść / 8 przyjść. Kursy: betexplorer.com, 13:06–13:15 CEST.</p>
+    </article>
+    <article class="pick" id="z-130-3">
+      <h3>Ilves – KooKoo — Wygrana Ilves (z dogrywką i karnymi) @ 1.37 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Liiga (FI) · 17:30 (15:30 UTC) · 1.37 eFortuna (mediana 1.34, 6 bukm.) · p_est 0.75 vs implikowane 0.730</p>
+      <p><strong>Dlaczego ten typ:</strong> Ilves wygrał 4 z 5 meczów — wszystkie na wyjeździe — i teraz otwiera sezon u siebie w Nokia Arenie. KooKoo po 6 meczach nie ma wygranej (1 punkt).</p>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Ilves 4-1 na wyjazdach</li><li>KooKoo bez wygranej</li><li>pierwszy mecz u siebie przy pełnej hali</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>tabela KooKoo tylko z fragmentu strony ligi (strona niedostępna do czytania)</li><li>hokej: wysoka losowość</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> KooKoo broni się nisko, wygrywa w kontrach i utrzymuje 2:1.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.ilves.com/ottelut-2026-27/">ilves.com</a> — Ilves 4-1 (wszystkie na wyjeździe), otwarcie hali, <a href="https://www.liiga.fi/en/stats/teamstats/gameday?sarja=runkosarja&amp;tilasto=sarjataulukko&amp;paivasta=2026-09-01&amp;paivaan=2026-09-23">liiga.fi</a> — KooKoo 6 meczów, 0 wygranych, 1 pkt (tylko fragment w wyszukiwarce). Kursy: betexplorer.com, 13:06–13:15 CEST.</p>
+    </article>
+    <h3 class="sub">Odrzuceni kandydaci</h3><ul><li><strong>Armenia – Łotwa, Łotwa +1.5 @ 1.32 (STS)</strong> — wartościowy, ale ten sam mecz co under 3.5; zostawiony na papierze, żeby nie dublować ryzyka.</li><li><strong>Brantmeier 1.37, Timofeeva 1.35 (WTA 125 Porto)</strong> — bez przeczytanych źródeł o formie i zdrowiu.</li></ul>
+  </section>
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63 %; „uczciwa cena” ≥ implikowane, „z przewagą” ≥ implikowane + 0.03.</p>
+    <p class="empty">Brak zbadanych kandydatów w tym zakresie.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3><ul><li><strong>Ulm @ 1.475 (u Phoenix Hagen), Faria @ 1.47, Gill @ 1.55</strong> — bez researchu na nowym poziomie w tym przebiegu.</li></ul>
+  </section>
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">7 (+10 otw.)</td><td class="num">5–1–1</td><td class="num">83%</td><td class="num">82%</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy — z przewagą</td><td class="num">2 (+3 otw.)</td><td class="num">0–1–1</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-50.0%</td><td class="num">—</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">5 (+7 otw.)</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+1.00 u</td><td class="num pos">+20.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">4 (+2 otw.)</td><td class="num">4–0–0</td><td class="num">100%</td><td class="num">86%</td><td class="num pos">+0.75 u</td><td class="num pos">+18.8%</td><td class="num">+6.1%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">1 (+3 otw.)</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">81%</td><td class="num pos">+0.25 u</td><td class="num pos">+25.0%</td><td class="num">+2.5%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">1 (+5 otw.)</td><td class="num">0–0–1</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">—</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">1</td><td class="num">0–1–0</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-100.0%</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">18 (+10 otw.)</td><td class="num">13–5–0</td><td class="num">72%</td><td class="num">77%</td><td class="num neg">-2.08 u</td><td class="num neg">-11.5%</td><td class="num">+1.3%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">5 (+4 otw.)</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+0.88 u</td><td class="num pos">+17.6%</td><td class="num">+2.1%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">7 (+4 otw.)</td><td class="num">7–0–0</td><td class="num">100%</td><td class="num">80%</td><td class="num pos">+1.60 u</td><td class="num pos">+22.9%</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">3 (+2 otw.)</td><td class="num">1–2–0</td><td class="num">33%</td><td class="num">70%</td><td class="num neg">-1.55 u</td><td class="num neg">-51.8%</td><td class="num">+0.8%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">3</td><td class="num">0–3–0</td><td class="num">0%</td><td class="num">65%</td><td class="num neg">-3.00 u</td><td class="num neg">-100.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.2 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.23 → <strong>wygrana</strong> (82:100) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.22 → <strong>wygrana</strong> (82:100)</li><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.19 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.56 → <strong>przegrana</strong> (86:66) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.59 → <strong>przegrana</strong> (86:66)</li><li>Washington Mystics – Chicago Sky: h2h home @ 1.15 → <strong>wygrana</strong> (101:93) <em>(papier)</em></li><li>Washington Mystics – Chicago Sky: h2h home @ 1.12 → <strong>wygrana</strong> (101:93)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2)</li><li>Portugal – Wales: h2h home @ 1.22 → <strong>wygrana</strong> (1:0)</li><li>Serbia – Greece: totals under 3 @ 1.3 → <strong>zwrot</strong> (1:2)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2) <em>(papier)</em></li><li>Portugal – Wales: h2h home @ 1.16 → <strong>wygrana</strong> (1:0) <em>(papier)</em></li><li>Serbia – Greece: totals under 3.5 @ 1.22 → <strong>wygrana</strong> (1:2) <em>(papier)</em></li><li>Austria – Israel: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li></ul>
+</section>
+
+  <section id="wnioski">
+    <h2>Wnioski</h2>
+    <ul><li>Poranny typ na wygraną Czech w BJK Cup i Nosková zostaną rozliczone lokalnie (odwołania do betexploratora).</li><li>Nowy standard: każdy typ ma ≥ 2 źródła z różnych stron i ≥ 1 przeczytane w całości; tam, gdzie strona była nieczytelna (FIFA, liiga.fi), zaznaczono to przy źródle.</li></ul>
+  </section>
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO. Słowenia – Polska występuje dwa razy (wygrana Polski i poniżej 4.5 seta) — to jeden mecz, jedno ryzyko.</li>
+      <li>Kurs 1.25 oznacza ok. 80 % implikowanego prawdopodobieństwa, 1.35 — ok. 74 %: nawet dobrze wybrany typ przegrywa mniej więcej raz na 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły: fifa.com i liiga.fi (strony renderowane skryptem — nieczytelne), en.wikipedia EuroVolley (brak tabel w treści). Sofascore niedostępny (403).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-25 09:44</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 4 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-25 07:40 UTC / 09:44 CEST (tryb automatyczny, GitHub Actions, bez pytań). Zegar zweryfikowany: tak — system + api.github.com + cloudflare.com + sofascore.com + espn.com, rozbieżność &lt;1 s (verdict OK); przyjęte T0 = 2026-09-25T07:39:59Z.</p>
+    <p class="meta">Okno: 2026-09-25 09:40–13:40 CEST (07:40–11:40 UTC).</p>
+    <p class="meta">Przeanalizowano: 24 potwierdzone spotkania w oknie (piłka nożna 1, tenis 23 — głównie debel ATP/WTA niższych turniejów) + 1 dodatkowy mecz koszykówki (NBL, Australia) znaleziony wyłącznie przez The Odds API. Źródła: ESPN (mecze + ESPN BET), The Odds API (Pinnacle, Winamax, Unibet, Betsson, Marathon, 1xBet, William Hill, 888sport i in.). Sofascore i betexplorer pominięte celowo — ten runner siedzi na amerykańskim IP, oba źródła tam nie odpowiadają. Kursy pobrane o 07:40:37 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Ceny podane niżej pochodzą z księgowań The Odds API (europejskie book’y); polski bukmacher może różnić się o ułamek kursu.</p>
+    <p class="summary">Noc wyjątkowo płytka: z 24 potwierdzonych meczów tylko 2 miały w ogóle cenę z bukmachera dostępnego dla polskiego gracza w wybranych zakresach kursów (oba w 1.20–1.29), a jedyny z nich, który przeszedł pełną analizę (Andreeva – Fernandez), nie osiągnął nawet progu „uczciwej ceny” — head-to-head na twardej nawierzchni jest przeciwny faworytowi. Wszystkie cztery zakresy zostają dziś puste; żaden zakład nie trafia do rekomendacji.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 0 typów</a>
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84 %. W zakresie: 0 selekcji.</p>
+    <p class="empty">Brak jakichkolwiek selekcji w tym przedziale kursowym. W oknie nie było żadnego meczu z ceną w tym paśmie u dostępnego dla polskiego gracza bukmachera — ani wśród 23 meczów tenisowych (prawie wyłącznie debel bez żadnego pokrycia kursowego u naszych źródeł), ani w jedynym meczu piłkarskim (Australia – Brazylia, wyceniony tylko przez bukmachera US-only, więc pominięty), ani w meczu NBL dodanym przez The Odds API (kursy 1X2 tam mieściły się w przedziale 1.70–2.13, poza wybranymi zakresami).</p>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78 %; wymagane p_est ≥ implikowane + 0.03. W zakresie: 2 surowe selekcje, przeanalizowano 1 (druga bez użytecznej ceny).</p>
+    <p class="empty">Żaden kandydat nie osiągnął nawet progu „uczciwej ceny”. Najbliższy kandydat i powód odrzucenia poniżej.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Mirra Andreeva – Leylah Fernandez (WTA Singapore, ćwierćfinał), zwycięzca meczu: Andreeva @ 1.29 (Winamax DE, The Odds API, 19 bukmacherów notujących, mediana 1.26)</strong> — implikowane 0.775 (przy najlepszej cenie), p_est własne 0.74. Andreeva jest zdecydowanym faworytem rankingowo i formowo (WTA #5, mistrzyni Roland Garros 2026, bilans sezonu 45–14, ćwierćfinał US Open), ale bilans bezpośrednich spotkań na twardej nawierzchni jest 0–2 dla Fernandez, w tym pewna wygrana Fernandez 6:1 6:4 w Toronto zaledwie ok. 7 tygodni temu — zbyt świeże i zbyt jednoznaczne, by zignorować mimo przepaści rankingowej. Cena, która zrobiłaby z tego „uczciwy” typ: ok. 1.35 (czyli już poza tym zakresem) — obecna cena 1.20–1.29 jest za niska na to ryzyko. Zapisane w rejestrze jako pozycja papierowa do sprawdzenia kalibracji.</li>
+      <li><strong>Australia – Brazylia (sparing reprezentacji), zwycięzca meczu: Brazylia @ 1.25</strong> — jedyna cena pochodzi z DraftKings (ESPN BET), bukmachera dostępnego wyłącznie w USA; żaden europejski bukmacher (The Odds API nie ma klucza dla sparingów reprezentacji) nie wycenił tego meczu, więc kurs jest niedostępny dla polskiego gracza i nie może trafić do rankingu.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %. W zakresie: 0 selekcji.</p>
+    <p class="empty">Brak selekcji w tym przedziale — żaden z trzech meczów z jakąkolwiek ceną (Andreeva–Fernandez, Australia–Brazylia, Brisbane Bullets–Illawarra Hawks) nie miał rynku wycenionego w tym paśmie. Gdyby Andreeva–Fernandez zwycięzca meczu podrożała do ok. 1.35, kwalifikowałaby się tu jako „uczciwa cena” przy obecnym p_est 0.74 — warto sprawdzić w kolejnym uruchomieniu, czy kurs w tę stronę dryfuje.</p>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63 %. W zakresie: 0 selekcji.</p>
+    <p class="empty">Brak jakichkolwiek selekcji w tym przedziale — żaden z trzech wycenionych meczów nie miał rynku w tym paśmie (najbliżej, ale wciąż poza zakresem, był zwycięzca Illawarra Hawks w meczu NBL — mediana ok. 2.05, czyli znacznie drożej).</p>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">7</td><td class="num">5–1–1</td><td class="num">83%</td><td class="num">82%</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy — z przewagą</td><td class="num">2</td><td class="num">0–1–1</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-50.0%</td><td class="num">—</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">5</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+1.00 u</td><td class="num pos">+20.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">4</td><td class="num">4–0–0</td><td class="num">100%</td><td class="num">86%</td><td class="num pos">+0.75 u</td><td class="num pos">+18.8%</td><td class="num">+6.1%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">81%</td><td class="num pos">+0.25 u</td><td class="num pos">+25.0%</td><td class="num">+2.5%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">1</td><td class="num">0–0–1</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">—</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">1</td><td class="num">0–1–0</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-100.0%</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">18</td><td class="num">13–5–0</td><td class="num">72%</td><td class="num">77%</td><td class="num neg">-2.08 u</td><td class="num neg">-11.5%</td><td class="num">+1.3%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">5</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+0.88 u</td><td class="num pos">+17.6%</td><td class="num">+2.1%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">7</td><td class="num">7–0–0</td><td class="num">100%</td><td class="num">80%</td><td class="num pos">+1.60 u</td><td class="num pos">+22.9%</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">3</td><td class="num">1–2–0</td><td class="num">33%</td><td class="num">70%</td><td class="num neg">-1.55 u</td><td class="num neg">-51.8%</td><td class="num">+0.8%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">3</td><td class="num">0–3–0</td><td class="num">0%</td><td class="num">65%</td><td class="num neg">-3.00 u</td><td class="num neg">-100.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.2 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.23 → <strong>wygrana</strong> (82:100) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.22 → <strong>wygrana</strong> (82:100)</li><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.19 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.56 → <strong>przegrana</strong> (86:66) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.59 → <strong>przegrana</strong> (86:66)</li><li>Washington Mystics – Chicago Sky: h2h home @ 1.15 → <strong>wygrana</strong> (101:93) <em>(papier)</em></li><li>Washington Mystics – Chicago Sky: h2h home @ 1.12 → <strong>wygrana</strong> (101:93)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2)</li><li>Portugal – Wales: h2h home @ 1.22 → <strong>wygrana</strong> (1:0)</li><li>Serbia – Greece: totals under 3 @ 1.3 → <strong>zwrot</strong> (1:2)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2) <em>(papier)</em></li><li>Portugal – Wales: h2h home @ 1.16 → <strong>wygrana</strong> (1:0) <em>(papier)</em></li><li>Serbia – Greece: totals under 3.5 @ 1.22 → <strong>wygrana</strong> (1:2) <em>(papier)</em></li><li>Austria – Israel: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Indiana Fever @ Minnesota Lynx, h2h away @ 1.59 (klasa „z przewagą”, p_est 0.70) — przegrana 66:86.</strong> Lynx, mimo wcześniej zapewnionego 1. miejsca w tabeli, zagrały pełnym składem i wygrały różnicą 20 punktów — narracja „nic już nie grają” nie przełożyła się na realny spadek zaangażowania, choć poparta była konkretnymi źródłami (Star Tribune, zapowiedzi trenerki). Na małej próbie (2 rozliczone typy „z przewagą”, 0 wygranych) klasa ta wypada wyraźnie gorzej niż „uczciwa cena” (5/5) — kolejne typy oparte na miękkiej narracji motywacyjnej powinny mieć wyższą poprzeczkę niż typy oparte na twardych danych (kontuzje, potwierdzone składy).</li>
+      <li><strong>Serbia – Grecja, totals under 3 @ 1.30 — zwrot</strong> (wynik 1:2, suma dokładnie na linii). Nie błąd analizy, tylko wpisana w całkowite linie cecha rynku — przypomnienie, by przy kursach blisko równej linii świadomie liczyć się z możliwością zwrotu, a nie tylko z wygraną.</li>
+      <li><strong>To uruchomienie (okno 4h, 25.09 rano UTC): brak typów we wszystkich czterech zakresach.</strong> Z 24 potwierdzonych meczów tylko 3 miały w ogóle jakąkolwiek cenę bukmacherską (i tylko 2 z nich w wybranych zakresach), a jedyny przeanalizowany kandydat (Andreeva – Fernandez) nie przeszedł progu „uczciwej ceny” z powodu niekorzystnego dla faworytki bilansu h2h na twardej nawierzchni. Uczciwe puste zakresy są lepsze niż naciąganie progu — do potwierdzenia w kolejnych porannych oknach, czy to typowy wzorzec (mało meczów singlowych, dużo debla) dla tej pory dnia.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.20 oznacza ok. 83% implikowanego prawdopodobieństwa, 1.60 — ok. 63%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 6 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: brak (Sofascore i betexplorer celowo pominięte na tym runnerze — patrz notatka w nagłówku; api-sports pominięty, bo APISPORTS_KEY nie jest ustawiony w tym środowisku).</li>
+      <li>Budżet The Odds API: wykorzystano 4 kredyty (2 klucze sportowe × 2 rynki: h2h, totals), pozostało ok. 471 kredytów na wrzesień.</li>
+      <li>Dane kursowe dla sparingu Australia – Brazylia i meczu NBL (Brisbane Bullets – Illawarra Hawks) są potwierdzone (identyfikatory zdarzeń ESPN/The Odds API), ale poza wybranymi zakresami kursowymi lub bez ceny u bukmachera dostępnego dla polskiego gracza — nie trafiły do rankingu, ale zostały uwzględnione w analizie jako kontekst.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

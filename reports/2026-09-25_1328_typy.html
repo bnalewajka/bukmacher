@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 25.09 13:28</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 14:10–19:25, zakresy 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 25.09.2026 11:28 UTC / 13:28 PL. Zegar zweryfikowany (clock.py: Cloudflare, Google, GitHub, ESPN). Uruchomienie lokalne (polskie IP — betexplorer z cenami polskich bukmacherów).</p>
+    <p class="meta">Przeskanowano 280 meczów z betexplorera: piłka 104 (pełna lista dnia, 62 rozgrywki — nowość), hokej 86, tenis 49, koszykówka 22, siatkówka 19. Po odrzuceniu niższych lig, rezerw, młodzieżówek (w tym el. ME U21), kobiecych niższych lig i sparingów — ceny STS/eFortuna/Betclic/Superbet/LV BET/Fuksiarz/BETFAN pobrane dla 17 meczów (1X2, podwójna szansa, remis bez zakładu, sumy z liniami azjatyckimi, handicap, BTTS); 9 finalistów zbadanych (11 wyszukiwań, 10 stron przeczytanych). Kursy pobrane 11:30–11:40 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Trzy typy z przewagą: Toruń u lidera-bez-straty-punktu z zerującą Cracovią, <strong>poniżej 3.5 gola</strong> w Nigeria–Madagaskar (bez Osimhena, Madagaskar w obronie piątką) i w Gambia–Somalia (Somalia 180 minut bez straconego gola w el. wstępnych). Plus dwa typy po uczciwej cenie. Typy z raportu 13:10 (Armenia–Łotwa, Słowenia–Polska, Gruzja, Třinec, Ilves) są nadal aktualne i tu się nie powtarzają.</p>
+    <nav class="ranges"><a href="#z-110">1.10–1.19 · 0</a><a href="#z-120">1.20–1.29 · 1 typ</a><a href="#z-130">1.30–1.44 · 3 typy</a><a href="#z-145">1.45–1.60 · 1 typ</a><a href="#skutecznosc">Skuteczność</a></nav>
+  </header>
+
+  <section class="range" id="z-110"><h2>Kursy 1.10–1.19</h2><p class="meta">Próg opłacalności 91–84 %.</p>
+    <p class="empty">Brak typu — faworyci w tym przedziale są według mnie przepłaceni.</p>
+    <h3 class="sub">Odrzuceni (zapisani jako papier)</h3><ul>
+    <li><strong>Nigeria wygra @ 1.20</strong> — p_est 0.80 vs 0.833: bez Osimhena i przeciw pięcioosobowej obronie remis jest realny; zamiast tego under 3.5 (zakres 1.30–1.44).</li>
+    <li><strong>Gambia wygra @ 1.15</strong> — p_est 0.85 vs 0.870: Somalia nie straciła gola w dwóch meczach el. wstępnych.</li>
+    <li><strong>Togo 1X @ 1.13, KTP 1X @ 1.13</strong> — bez dostatecznego researchu; pierwsze w historii starcie Togo–Burundi.</li></ul></section>
+
+  <section class="range" id="z-120"><h2>Kursy 1.20–1.29</h2><p class="meta">Próg opłacalności 83–78 %.</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">18:00*</td><td>Tunezja – Kamerun</td><td>MA siatkarzy, finał</td><td>wygrana Tunezji</td><td class="num">1.25<span class="note">LV BET; mediana 1.225, STS 1.22</span></td><td class="num pos">0.82</td><td class="num">0.800</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div>    <article class="pick" id="z-120-1">
+      <h3>1. Tunezja – Kamerun — wygrana Tunezji @ 1.25 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.29 · Mistrzostwa Afryki siatkarzy, finał (Tunis) · 18:00 PL wg betexplorer (volleyballworld podaje 17:00 UTC = 19:00 PL) · 1.25 LV BET (betexplorer, 11:35 UTC) · p_est 0.82 vs 0.800</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Finał u siebie, w Tunisie, drużyny wyraźnie wyżej notowanej. Kurs uczciwy — przewaga jest, ale mała; zakład do rozważenia jako najbardziej prawdopodobny w tym przedziale.</p>
+      <dl><dt>Stawka</dt><dd>finał — zwycięzca bierze kwalifikację olimpijską LA 2028; obie drużyny mają już awans na PŚ 2027</dd><dt>Forma w turnieju</dt><dd>Tunezja: 3×3:0 w grupie (Ghana, Kenia, Rwanda), półfinał 3:1 z Marokiem (25-17, 20-25, 25-16, 25-12). Kamerun: ćwierćfinał 3:2 z Ghaną (16-14 w tie-breaku), półfinał 3:1 z Algierią</dd><dt>Ranking</dt><dd>Tunezja 31. na świecie, Kamerun 45.</dd><dt>Miejsce</dt><dd>hala w Tunisie — publiczność gospodarzy</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>gospodarz finału</li><li>pewniejsza droga przez turniej (Kamerun męczył się z Ghaną)</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>finał = presja; Kamerun gra fizyczną siatkówkę i potrafi zabrać sety</li><li>rozbieżna godzina startu w źródłach</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Kamerun wygrywa zagrywką dwa sety, a w tie-breaku presja własnej hali paraliżuje Tunezję.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://en.volleyballworld.com/news/tunisia-and-cameroon-book-world-cup-2027-berths-will-clash-for-la-2028-spot">volleyballworld.com</a> (przeczytane), <a href="https://volleyballmag.com/tunisia-downs-morocco-in-four-sets-to-reach-african-championship-final/">volleyballmag.com</a></p>
+    </article>
+
+    <h3 class="sub">Odrzuceni</h3><ul><li><strong>Tofaş @ 1.30, Zenit @ 1.28, Uppsala @ 1.32</strong> — otwarcia sezonów, brak twardych danych o składach.</li>
+    <li><strong>Armenia–Łotwa U3.5, Słowenia–Polska, Gruzja 1X</strong> — już w raporcie 13:10.</li></ul></section>
+
+  <section class="range" id="z-130"><h2>Kursy 1.30–1.44</h2><p class="meta">Próg opłacalności 77–69 %.</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">18:00</td><td>Comarch Cracovia – KH Energa Toruń</td><td>Polska Hokej Liga</td><td>wygrana Torunia (z dogrywką i karnymi)</td><td class="num">1.38<span class="note">LV BET; mediana 1.32, STS 1.33</span></td><td class="num pos">0.77</td><td class="num">0.725</td><td><span class="tier value">z przewagą</span></td></tr><tr><td>2</td><td class="num">18:00</td><td>Nigeria – Madagaskar</td><td>el. Pucharu Narodów Afryki</td><td>poniżej 3.5 gola</td><td class="num">1.40<span class="note">BETFAN; mediana 1.38, STS 1.40</span></td><td class="num pos">0.76</td><td class="num">0.714</td><td><span class="tier value">z przewagą</span></td></tr><tr><td>3</td><td class="num">19:15</td><td>Red Bull Salzburg – VSV Villach</td><td>ICE Hockey League</td><td>wygrana Salzburga (z dogrywką i karnymi)</td><td class="num">1.36<span class="note">eFortuna; mediana 1.33, STS 1.35</span></td><td class="num pos">0.75</td><td class="num">0.735</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div>    <article class="pick" id="z-130-1">
+      <h3>1. Comarch Cracovia – KH Energa Toruń — wygrana Torunia @ 1.38 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.30–1.44 · Polska Hokej Liga · 18:00 PL (16:00 UTC) · 1.38 LV BET (tylko jeden bukmacher; STS 1.33 — przy 1.33 to „uczciwa cena”) · p_est 0.77 vs 0.725</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Lider bez straty punktu przeciw drużynie z zerem punktów i najgorszą różnicą bramek poza Podhalem. Zakład na zwycięzcę z dogrywką — przegrywa tylko porażka Torunia, remis po 60 minutach nie szkodzi.</p>
+      <dl><dt>Tabela 2026/27</dt><dd>Toruń: 3 mecze, 3 wygrane, bramki 19:3, 9 pkt (1. miejsce). Cracovia: 3 mecze, 0 wygranych, 3:13, 0 pkt (9. miejsce)</dd><dt>Kontekst</dt><dd>Cracovia to 12-krotny mistrz Polski, ale w tym sezonie zaczęła najgorzej w lidze</dd><dt>Rynek</dt><dd>STS 1.33, mediana 1.32 — tylko LV BET płaci 1.38</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>dysproporcja formy i bramek w tym sezonie</li><li>zakład obejmuje dogrywkę i karne</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>próbka 3 meczów — początek sezonu</li><li>Cracovia u siebie, z historią i ambicją odbicia</li><li>cena 1.38 tylko w jednym miejscu</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Cracovia zaczyna agresywnie, bramkarz ma mecz życia i wygrywa 3:2 po dogrywce.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://hokej.gkskatowice.eu/tabela/i-zespol">tabela ligi (gkskatowice.eu)</a> (przeczytane), <a href="https://www.flashscore.pl/hokej/polska/tauron-hokej-liga/">flashscore.pl</a></p>
+    </article>
+    <article class="pick" id="z-130-2">
+      <h3>2. Nigeria – Madagaskar — poniżej 3.5 gola @ 1.40 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.30–1.44 · el. PNA 2027, Uyo · 18:00 PL (16:00 UTC) · 1.40 BETFAN / STS · p_est 0.76 vs 0.714</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Zamiast wygranej Nigerii (1.20, uważam ją za przepłaconą — 0.80 vs 0.83) gram na to, co z niej wynika najbezpieczniej: faworyt bez Osimhena przeciw drużynie grającej trzema środkowymi obrońcami i wahadłowymi.</p>
+      <dl><dt>Absencje</dt><dd>Nigeria bez Victora Osimhena (uraz mięśnia; powołany Awoniyi) i Zaidu Sanusiego; w ataku Lookman + Akor Adams</dd><dt>Madagaskar</dt><dd>bez urazów; przewidywany skład z trójką stoperów (Kari, Fontaine, Tremoulet) i wahadłowymi — nastawienie na obronę</dd><dt>H2H</dt><dd>5 meczów: Nigeria 3 wygrane, 1 remis (0:0 w 2000), Madagaskar 1 (2:0 na PNA 2019)</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>brak najlepszego napastnika faworyta</li><li>defensywne ustawienie gości</li><li>linia 3.5 — do przegranej potrzeba 4 goli</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Nigeria u siebie potrafi się rozpędzić (Lookman)</li><li>po wczesnym golu Madagaskar musi się otworzyć</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Nigeria strzela szybko, Madagaskar odkrywa się i mecz kończy się 3:1 albo 4:0.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.aljazeera.com/sports/2026/9/24/nigeria-vs-madagascar-afcon-2027-qualifier-preview-teams">Al Jazeera</a> (przeczytane), <a href="https://www.sportsmole.co.uk/football/nigeria/preview/nigeria-vs-madagascar-prediction-team-news-lineups_605642.html">Sports Mole</a></p>
+    </article>
+    <article class="pick" id="z-130-3">
+      <h3>3. Red Bull Salzburg – VSV Villach — wygrana Salzburga @ 1.36 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.30–1.44 · ICE Hockey League, Salzburg · 19:15 PL (17:15 UTC) · 1.36 eFortuna · p_est 0.75 vs 0.735</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Salzburg zaczął sezon bez wygranej, ale według relacji dominuje i nie wykańcza sytuacji — to zwykle wraca do średniej. Villach dopiero 15.09 uratował sezon po kryzysie finansowym.</p>
+      <dl><dt>Salzburg</dt><dd>bez zwycięstwa w nowym sezonie; ostatnio porażka u siebie z Innsbruckiem po karnych mimo przewagi; podobny start w 2018/19 zakończył się 9:0 w piątym meczu</dd><dt>Villach</dt><dd>kryzys finansowy po odejściu dyrektora generalnego, sezon zabezpieczony dopiero po posiedzeniu kryzysowym 15.09</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>jakość składu Salzburga</li><li>niestabilna sytuacja Villach</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Salzburg ewidentnie bez pewności siebie</li><li>brak danych o wynikach Villach w tym sezonie</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Kolejny mecz z przewagą bez goli — Villach wygrywa 2:1 z dwóch kontr.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://www.hockey-news.info/red-bull-salzburg-noch-ohne-sieg-es-ist-jetzt-nicht-angebracht-in-panik-zu-verfallen/">hockey-news.info</a> (przeczytane), <a href="https://www.ecvsv.at/nach-krisensitzung-saison-gesichert-meisterschaftsstart-am-freitag-fix/">ecvsv.at</a> (przeczytane)</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni</h3><ul><li><strong>Graz99ers @ 1.35</strong> — brak danych o formie. <strong>Timofeeva @ 1.37</strong> — start przed końcem analizy. <strong>Třinec, Ilves, Słowenia–Polska U4.5</strong> — już w raporcie 13:10.</li></ul></section>
+
+  <section class="range" id="z-145"><h2>Kursy 1.45–1.60</h2><p class="meta">Próg opłacalności 69–63 %.</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">18:00</td><td>Gambia – Somalia</td><td>el. Pucharu Narodów Afryki</td><td>poniżej 3.5 gola</td><td class="num">1.48<span class="note">eFortuna; mediana 1.47, STS 1.47</span></td><td class="num pos">0.72</td><td class="num">0.676</td><td><span class="tier value">z przewagą</span></td></tr></tbody></table></div>    <article class="pick" id="z-145-1">
+      <h3>1. Gambia – Somalia — poniżej 3.5 gola @ 1.48 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.45–1.60 · el. PNA 2027, Banjul · 18:00 PL (16:00 UTC) · 1.48 eFortuna · p_est 0.72 vs 0.676</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Rynek zakłada ok. 3 gole (over 2.5 @ 1.60), bo Somalia to najsłabsza drużyna w grupie. Ale Somalia awansowała do fazy grupowej, nie tracąc gola w 180 minutach z Mauritiusem — gra nisko i defensywnie.</p>
+      <dl><dt>Somalia</dt><dd>eliminacje wstępne: 0:0 i 0:0 z Mauritiusem, awans po karnych (4:2)</dd><dt>Gambia</dt><dd>pierwszy od lat mecz o stawkę w Banjulu (stadion po renowacji, 13–14 tys. widzów); w el. PNA 2025 3. miejsce w grupie, 8 pkt w 6 meczach</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>defensywny styl Somalii potwierdzony wynikami</li><li>Gambia nie jest drużyną, która regularnie strzela po 4 gole</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>różnica klas — jeśli Somalia straci pierwszego gola wcześnie, może się posypać</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Gambia strzela w pierwszych 20 minutach, Somalia się rozpada i kończy się 4:0.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://en.wikipedia.org/wiki/2027_Africa_Cup_of_Nations_qualification_preliminary_round">Wikipedia — el. wstępne</a> (przeczytane), <a href="https://thepoint.gm/africa/gambia/sports/independence-stadium-to-host-gambia-somalia-afcon-qualifier-appetizer">The Point (Gambia)</a> (przeczytane)</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni</h3><ul><li><strong>Togo @ 1.57</strong> — pierwszy mecz w historii tych drużyn, Burundi 8:0 z Czadem w el. wstępnych; za mało danych. <strong>Gill @ 1.55, Ulm @ 1.48</strong> — nie zbadane do wymaganego poziomu.</li></ul></section>
+
+<section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">7 (+15 otw.)</td><td class="num">5–1–1</td><td class="num">83%</td><td class="num">82%</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy — z przewagą</td><td class="num">2 (+6 otw.)</td><td class="num">0–1–1</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-50.0%</td><td class="num">—</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">5 (+9 otw.)</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+1.00 u</td><td class="num pos">+20.0%</td><td class="num">+4.3%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">4 (+2 otw.)</td><td class="num">4–0–0</td><td class="num">100%</td><td class="num">86%</td><td class="num pos">+0.75 u</td><td class="num pos">+18.8%</td><td class="num">+6.1%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">1 (+4 otw.)</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">81%</td><td class="num pos">+0.25 u</td><td class="num pos">+25.0%</td><td class="num">+2.5%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">1 (+8 otw.)</td><td class="num">0–0–1</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">+0.0%</td><td class="num">—</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">1 (+1 otw.)</td><td class="num">0–1–0</td><td class="num">0%</td><td class="num">70%</td><td class="num neg">-1.00 u</td><td class="num neg">-100.0%</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">18 (+12 otw.)</td><td class="num">13–5–0</td><td class="num">72%</td><td class="num">77%</td><td class="num neg">-2.08 u</td><td class="num neg">-11.5%</td><td class="num">+1.3%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">5 (+6 otw.)</td><td class="num">5–0–0</td><td class="num">100%</td><td class="num">85%</td><td class="num pos">+0.88 u</td><td class="num pos">+17.6%</td><td class="num">+2.1%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">7 (+4 otw.)</td><td class="num">7–0–0</td><td class="num">100%</td><td class="num">80%</td><td class="num pos">+1.60 u</td><td class="num pos">+22.9%</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">3 (+2 otw.)</td><td class="num">1–2–0</td><td class="num">33%</td><td class="num">70%</td><td class="num neg">-1.55 u</td><td class="num neg">-51.8%</td><td class="num">+0.8%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">3</td><td class="num">0–3–0</td><td class="num">0%</td><td class="num">65%</td><td class="num neg">-3.00 u</td><td class="num neg">-100.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.2 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.23 → <strong>wygrana</strong> (82:100) <em>(papier)</em></li><li>Phoenix Mercury – Las Vegas Aces: h2h away @ 1.22 → <strong>wygrana</strong> (82:100)</li><li>Los Angeles Sparks – Golden State Valkyries: h2h away @ 1.19 → <strong>wygrana</strong> (75:76) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.56 → <strong>przegrana</strong> (86:66) <em>(papier)</em></li><li>Minnesota Lynx – Indiana Fever: h2h away @ 1.59 → <strong>przegrana</strong> (86:66)</li><li>Washington Mystics – Chicago Sky: h2h home @ 1.15 → <strong>wygrana</strong> (101:93) <em>(papier)</em></li><li>Washington Mystics – Chicago Sky: h2h home @ 1.12 → <strong>wygrana</strong> (101:93)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2)</li><li>Portugal – Wales: h2h home @ 1.22 → <strong>wygrana</strong> (1:0)</li><li>Serbia – Greece: totals under 3 @ 1.3 → <strong>zwrot</strong> (1:2)</li><li>Liechtenstein – Lithuania: totals under 3.5 @ 1.19 → <strong>wygrana</strong> (0:2) <em>(papier)</em></li><li>Portugal – Wales: h2h home @ 1.16 → <strong>wygrana</strong> (1:0) <em>(papier)</em></li><li>Serbia – Greece: totals under 3.5 @ 1.22 → <strong>wygrana</strong> (1:2) <em>(papier)</em></li><li>Austria – Israel: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li></ul>
+</section>
+
+  <section id="wnioski"><h2>Wnioski</h2><ul><li>Nic nowego nie zostało dziś rozliczone (poranne typy BJK Cup i tenis rozliczą się po meczach). Pełna lista piłkarska dała 104 mecze, ale w przerwie reprezentacyjnej to głównie niższe ligi — realną wartość przyniosły eliminacje PNA.</li></ul></section>
+  <section><h2>Uwagi</h2><ul>
+    <li>Typy Nigeria–Madagaskar U3.5 i Gambia–Somalia U3.5 to różne mecze — niezależne. Oba hokejowe też są niezależne.</li>
+    <li>Zakłady pojedyncze, nie łączyć w AKO. Kurs 1.40 oznacza ok. 71 % — nawet dobry typ przegra mniej więcej co trzeci–czwarty raz. Stawiaj tylko to, co możesz stracić.</li>
+    <li>Źródła niedostępne: Sofascore (403), Flashscore (renderowane skryptem — tylko jako trop).</li></ul></section>
+</main>
+</body>
+</html>

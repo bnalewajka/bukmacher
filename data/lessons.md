@@ -26,3 +26,8 @@ Cotygodniowy przegląd (`references/self-review.md`) czyta go w całości.
 - Przebieg według nowego standardu (≥ 2 źródła, ≥ 1 przeczytane): 10 finalistów, 11 stron przeczytanych w całości. Najmocniejsze argumenty wyszły dopiero z pełnych tekstów, np. brak Urnauta i uraz Šterna w Słowenii (rp.pl, polsatsport.pl). Samo streszczenie wyszukiwarki by tego nie dało.
 - fifa.com, liiga.fi i tabele EuroVolley na Wikipedii nie dają się czytać (treść ładowana skryptem albo pusta). Tabelę Liigi warto brać z innego serwisu, np. suomikiekko.com, a dane o kadrach ASEAN z prasy lokalnej.
 - Dwa typy na ten sam mecz (Polska ML i under 4.5 seta) zostały oznaczone jako skorelowane. Rozważyć regułę: najwyżej jeden typ na mecz.
+
+## 2026-09-25_1328_typy.html
+- Pełna lista piłkarska (homepage-data.php) dała 104 mecze w oknie, ale w przerwie reprezentacyjnej ~85% to niższe ligi / rezerwy / U21 — filtr jakości odrzuca większość. Wartość leżała w eliminacjach PNA (reprezentacje, dobre pokrycie prasowe).
+- Zapowiedzi africasoccer.com bywają puste (szablony z zerami) — nie liczyć ich jako przeczytanego źródła; lepsze: Al Jazeera, Wikipedia (wyniki eliminacji), lokalna prasa (thepoint.gm).
+- Godziny startu w źródłach potrafią się różnić (siatkówka Tunezja–Kamerun: betexplorer 16:00 UTC vs volleyballworld 17:00 UTC) — w raporcie podać obie.

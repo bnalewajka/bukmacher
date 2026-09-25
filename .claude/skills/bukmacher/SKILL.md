@@ -158,6 +158,18 @@ Use WebSearch/WebFetch for news, injury reports, press conferences and official 
 (club sites, NBA injury report, DailyFaceoff, ATP/WTA, PlusLiga, FIVB). Ignore prediction
 sites and tipster "pewniaki": they are not evidence. Form your own probability estimate
 (`p_est`) for each finalist and write one line on *what has to happen for this bet to lose*.
+
+**Research minimum for anything published as a pick** (the ledger rejects a pick without it):
+- at least **2 independent sources** (different publishers — two articles copying the same
+  agency text count as one), and
+- at least **1 of them read in full** with WebFetch (or an official page: club, league, ATP/WTA,
+  federation) — search-result snippets and AI summaries are leads, not evidence; they have
+  invented results of matches not yet played. Every fact that moves `p_est` must come from a
+  page actually read, and state/date-check it (is it about *this* match, this season?).
+
+Record them in the pick as `"sources": [{"url": …, "what": "absences / form / h2h …",
+"read": true|false}, …]`. A finalist you could not research to this standard goes to the
+ledger as `paper` (with whatever sources you have), not as a pick — say so in the report.
 Then sort each finalist into a tier (bars in `references/analysis.md` §12):
 
 - **value** — `p_est` ≥ implied + 0.03: the analysis found something the price misses;

@@ -28,6 +28,9 @@ reports of the last 7 days in `reports/`.
 - **Tiers.** Do "value" picks (p_est ≥ implied + 0.03) beat "fair" picks on hit rate vs p_est
   and on CLV? If not, p_est does not separate them and the tier label is noise. Do "paper"
   bets (dropped just below implied) win as often as fair picks? Then p_est is too pessimistic.
+- **Research depth.** Do picks whose `sources` include more pages read in full do better
+  (hit rate vs p_est, CLV) than thinly researched ones? Were any lost picks built on a fact
+  that turned out wrong or outdated — which source was it?
 - **Ranges, sports, markets.** Where do losses and negative CLV concentrate? (e.g. basketball
   moneylines at 1.20–1.29, football unders, Euroleague openers.)
 - **Process.** From `lessons.md`: recurring causes — a missed absence, stale price, wrong

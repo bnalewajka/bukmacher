@@ -17,6 +17,8 @@ Entry schema (fields the run must fill; the rest is added here):
   report       report file name, e.g. "2026-09-24_1851_typy.html"
   kind         "pick" | "paper"
   tier         picks only: "value" | "fair"
+  sources      picks: >= 2 independent sources, >= 1 read in full —
+               [{"url": "https://…", "what": "absences", "read": true}, …]; optional for paper
   range        "1.10-1.19" | "1.20-1.29" | "1.30-1.44" | "1.45-1.60" | "custom"
   sport, competition, home, away, start_utc
   market       "h2h" | "dc" | "dnb" | "totals" | "spread" | "btts"
@@ -97,12 +99,28 @@ def save(entries: list[dict], path: Optional[Path] = None) -> None:
     tmp.replace(path)
 
 
+def source_errors(sources: Any) -> list[str]:
+    """A published pick needs >= 2 sources from different sites, >= 1 of them read in full."""
+    if not isinstance(sources, list) or not all(isinstance(x, dict) and str(x.get("url", "")).startswith("http")
+                                                for x in sources):
+        return ["a pick needs sources: [{url, what, read}, …]"]
+    errs = []
+    hosts = {x["url"].split("/")[2].removeprefix("www.") for x in sources}
+    if len(hosts) < 2:
+        errs.append("a pick needs >= 2 independent sources (different sites)")
+    if not any(x.get("read") is True for x in sources):
+        errs.append("a pick needs >= 1 source read in full (read: true), not only a search snippet")
+    return errs
+
+
 def validate(e: dict) -> list[str]:
     errs = [f"missing {k}" for k in REQUIRED if e.get(k) in (None, "")]
     if e.get("kind") not in ("pick", "paper"):
         errs.append("kind must be pick|paper")
     if e.get("kind") == "pick" and e.get("tier") not in TIERS:
         errs.append(f"a pick needs tier {'|'.join(TIERS)}")
+    if e.get("kind") == "pick":
+        errs += source_errors(e.get("sources"))
     if e.get("market") not in MARKETS:
         errs.append(f"market must be one of {sorted(MARKETS)}")
     elif e.get("selection") not in MARKETS[e["market"]]:

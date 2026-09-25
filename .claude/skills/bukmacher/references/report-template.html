@@ -17,6 +17,8 @@ Rules for filling it:
 - Mark the edge cell with class "pos" when p_est > implied, "neg" otherwise; put a price that is
   only good at one bookmaker in the note (e.g. "tylko LV BET; STS 1.16").
 - Sources are real links (<a href>) with the fetch time; a failed source goes into "Uwagi".
+  Each pick's sources line states how many sources and how many were read in full (SKILL.md
+  research minimum: >= 2 independent, >= 1 read) — the same list as the ledger entry.
 - Up to 3 picks per range from the "value" and "fair" tiers (SKILL.md Step 4), each with its
   tier badge: <span class="tier value">z przewagą</span> or <span class="tier fair">uczciwa cena</span>.
   Only when no candidate reaches even the fair tier, replace the table and picks with
@@ -162,7 +164,7 @@ Rules for filling it:
         <div><strong>Ryzyka</strong><ul><li>{… w tym reguły rozliczenia u bukmachera}</li></ul></div>
       </div>
       <p class="loses"><strong>Jak ten zakład przegrywa:</strong> {jedno zdanie, realistyczny scenariusz}</p>
-      <p class="sources"><strong>Źródła:</strong> <a href="{url}">{nazwa}</a> ({godzina pobrania}), …</p>
+      <p class="sources"><strong>Źródła ({n}, przeczytane w całości: {m}):</strong> <a href="{url}">{nazwa}</a> — {co z niego wynika}, …</p>
     </article>
 
     <h3 class="sub">Odrzuceni kandydaci</h3>

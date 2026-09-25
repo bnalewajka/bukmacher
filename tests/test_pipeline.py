@@ -295,12 +295,16 @@ def test_ledger_roundtrip(tmp_path=None):
             "home": "Boston", "away": "Philadelphia", "start_utc": "2026-09-23T00:00:00Z", "market": "h2h",
             "selection": "home", "line": None, "period": "reg", "odds": 1.25, "bookmaker": "pinnacle",
             "source": "oddsapi", "p_est": 0.82, "tier": "fair",
+            "sources": [{"url": "https://www.nhl.com/news/preview", "what": "lineups", "read": True},
+                        {"url": "https://www.espn.com/nhl/story", "what": "injuries", "read": False}],
             "ref": {"source": "espn", "sport": "hockey", "league": "nhl", "event_id": "9"}}
     picks = [base, {**base, "kind": "paper", "market": "totals", "selection": "under", "line": 5.5, "odds": 1.5},
              {**base, "ref": {"source": "espn"}},                        # incomplete ref -> rejected
-             {k: v for k, v in base.items() if k != "tier"}]             # pick without tier -> rejected
+             {k: v for k, v in base.items() if k != "tier"},             # pick without tier -> rejected
+             {**base, "sources": [{"url": "https://a.com/1", "read": True}, {"url": "https://a.com/2", "read": True}]},  # one site
+             {**base, "sources": [{"url": "https://a.com/1", "read": False}, {"url": "https://b.com/2", "read": False}]}]  # none read
     src = tmp.with_name("bk_picks.json"); src.write_text(json.dumps(picks))
-    assert ledger_mod.cmd_add(str(src)) == 1                              # two rejected
+    assert ledger_mod.cmd_add(str(src)) == 1                              # four rejected
     entries = ledger_mod.load(tmp); assert len(entries) == 2
     rows = [{"refs": {"espn": {"event_id": "9"}}, "market_norm": "h2h", "selection_norm": "home", "line": None, "odds": o}
             for o in (1.20, 1.22, 1.30)]

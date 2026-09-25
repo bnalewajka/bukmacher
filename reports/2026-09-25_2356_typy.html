@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-25 23:56</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-25 21:57 UTC / 23:57 czasu PL (CEST). Zegar zweryfikowany o 21:49:41 UTC przez api.github.com, Cloudflare, Google i ESPN (rozbieżność &lt; 1 s) — werdykt OK.</p>
+    <p class="meta">Okno: 2026-09-25 23:49 – 2026-09-26 07:49 czasu PL (21:49–05:49 UTC). Tryb automatyczny (GitHub Actions, serwer USA): Sofascore i betexplorer niedostępne (403/429), źródła to ESPN + The Odds API + research WebSearch/WebFetch.</p>
+    <p class="meta">Przeanalizowano 35 potwierdzonych wydarzeń w oknie: 32 z ESPN (piłka nożna 12, hokej 4, tenis 16, koszykówka 0, siatkówka 0) + 3 widoczne wyłącznie w The Odds API (2× Brazylijska Série B, 1× WTA Singapur). Realne (nie US-only) kursy uzyskano dla 6 wydarzeń: NHL przedsezon ×4, meksykańska Liga MX ×2, Série B ×2, WTA Singapur ×1 — z Pinnacle, Unibet, Betsson, Coolbet, William Hill, Tipico, PMU, bet365-owych odpowiedników itd. Kursy pobrane o 21:51 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u własnego bukmachera przed postawieniem zakładu. Ceny podane pochodzą z bukmacherów zagranicznych (Pinnacle/Unibet/…), polskie bukmacherzy bywają zbliżeni, ale nie identyczni — zawsze zweryfikuj.</p>
+    <p class="summary"><strong>Wynik tego przebiegu: brak nowych typów w żadnym z czterech zakresów.</strong> Po odrzuceniu cen dostępnych wyłącznie u bukmacherów US-only (DraftKings, BetOnline — niedostępne dla polskiego gracza) w całym 8-godzinnym oknie zostały tylko dwie selekcje z realnym, wielobukmacherskim pokryciem w wybranych przedziałach kursowych — obie odpadły po analizie (patrz niżej). To strukturalna cecha tego okna (CONCACAF Nations League, NWSL i kolumbijska Primera A bez pokrycia poza US-only; sparingi NHL; tenis WTA/ATP z Azji bez kursów), a nie luka w analizie.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 0 typów</a>
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84%; wymagane p_est ≈ implikowane + 0.03. W zakresie: 1 selekcja o tej medianie kursu w oknie, 0 z realnym (nie US-only) pokryciem.</p>
+    <p class="empty">Zakres pusty — w oknie nie było ani jednej selekcji w tym przedziale wycenionej przez bukmachera dostępnego dla polskiego gracza.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Gotham FC – Chicago Stars FC (NWSL), zwycięstwo Gotham @ 1.111</strong> — jedyna cena to DraftKings (US-only, ESPN BET); The Odds API nie obejmuje NWSL. Bez odpowiednika u bukmachera dostępnego w Polsce nie da się tego postawić, więc nie kwalifikuje się niezależnie od ceny.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78%; wymagane p_est ≈ implikowane + 0.03.</p>
+    <p class="empty">Zakres pusty — żadna selekcja z realnym pokryciem kursowym (ESPN lub The Odds API, wyłączając US-only) nie wylądowała w tym przedziale w całym 8-godzinnym oknie. Najbliższe ceny: São Bernardo (underdog, ~5.5–6.6), Monterrey na wyjeździe (~1.9–2.2) i Rangers ML (patrz zakres 1.30–1.44) — żadna nie mediuje w 1.20–1.29.</p>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69%; wymagane p_est ≈ implikowane + 0.03. Jedyny kandydat z realnym pokryciem: New York Rangers ML.</p>
+    <p class="empty">Zakres pusty — jedyny kandydat z tego przedziału nie przechodzi nawet progu „uczciwej ceny” po analizie (patrz niżej).</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>New York Islanders – New York Rangers (NHL, przedsezon), zwycięstwo Rangers @ 1.44 (Pinnacle, mediana 1.435, 2 bukmacherów)</strong> — implikowane 0.694, p_est własne ok. 0.60 (poniżej progu). To ostatni mecz przedsezonu obu drużyn: NHL.com i SI.com (przeczytane w całości) potwierdzają, że u Rangers gra Igor Szesterkin cały mecz, a u Islanders Siemion Warłamow — czyli obaj wystawiają docelowego bramkarza — ale pole gry przed nimi to w ogromnej większości zawodnicy AHL/prospekci walczący o miejsce w składzie (u Rangers m.in. Kartye, Veleno, Chmelar, Dorofeyev; u Islanders m.in. Highmore, Luff, Chaffee, MacLean, Foudy, Eiserman — z wyjątkiem paru regularnych jak Duclair, Perreault czy Zibanejad). Przy takim składzie pola gry różnica jakości bramkarzy nie przekłada się wiarygodnie na przewagę 69% — to efektywnie mecz towarzyski z nieprzewidywalnym wynikiem, niezależnie od nazwiska w bramce. Zapisane do rejestru jako „papier” (nie jako typ), żeby sprawdzić czy sparingi z dwoma potwierdzonymi „jedynkami” w bramce są bardziej przewidywalne niż zwykłe sparingi — dotychczasowy wniosek z raportu 20:52 (ten sam strukturalny problem, inny mecz) był taki sam.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63%; wymagane p_est ≈ implikowane + 0.03. Jedyny kandydat z realnym pokryciem: Grêmio Novorizontino (gospodarz).</p>
+    <p class="empty">Zakres pusty — jedyny kandydat z realnym, wielobukmacherskim pokryciem (Grêmio Novorizontino) nie przechodzi progu „uczciwej ceny” po doczytaniu potwierdzonych zawieszeń u faworyta (patrz niżej). Uwaga: ten sam mecz jest już otwartym typem w raporcie sprzed ok. godziny (20:52, kurs 1.52, p_est 0.67) — ta pozycja NIE jest tu duplikowana w rejestrze; to jest aktualizacja ryzyka do tamtej rekomendacji, patrz „Wnioski”.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Grêmio Novorizontino – São Bernardo (Brazylijska Série B), zwycięstwo gospodarzy @ 1.53 (Unibet, mediana 1.50, 13 bukmacherów zagranicznych)</strong> — implikowane przy wziętej cenie 0.654 (zdewigowana mediana rynku 0.646). Dwa niezależne, w całości przeczytane źródła (Terra.com.br i pierwotny research potwierdzony przez agencyjny news) zgodnie podają, że środkowy obrońca Patrick i pomocnik Matheus Bianqui są zawieszeni za trzecią żółtą kartkę — czyli gospodarz traci jednego z dwóch środkowych obrońców i regularnego pomocnika defensywnego. (Ostrzeżenie: prawdopodobny skład z Gazeta Esportiva wciąż wystawia obu tych zawodników w podstawowym składzie — to najpewniej nieaktualny/szablonowy grafik, więc zignorowany na rzecz konkretnej informacji o zawieszeniu z dwóch innych źródeł). Kontekst pozostaje korzystny dla gospodarzy (3. miejsce/50 pkt vs 12. miejsce/41 pkt, mecz u siebie), ale São Bernardo jest w dobrej formie (3 zwycięstwa w 5 meczach, w tym ostatnie 1:0 z Atlético-GO) i wraca do gry Daniel Amorim (ławka). Bilans: podwójna, potwierdzona absencja w defensywie/pomocy faworyta obniża moją estymację do ok. 0.63 — poniżej progu opłacalności przy tej cenie. To nie jest typ „z przewagą” ani nawet „uczciwa cena” po tej informacji.</li>
+      <li><strong>Boyacá Chicó FC – Deportivo Pasto (Kolumbia, Primera A), hendykep/total @ 1.49–1.50</strong> — jedyna cena to DraftKings (US-only); brak odpowiednika u bukmachera dostępnego w Polsce.</li>
+      <li><strong>Racing Louisville FC – San Diego Wave FC (NWSL), total under 3.5 @ 1.571</strong> — jedyna cena to DraftKings (US-only).</li>
+      <li><strong>Seattle Reign FC – Boston Legacy FC (NWSL), total over 2.5 @ 1.588</strong> — jedyna cena to DraftKings (US-only).</li>
+      <li><strong>Colorado Avalanche – Winnipeg Jets (NHL, przedsezon), zwycięstwo Colorado @ 1.51</strong> — jedyna cena to BetOnline (US-only); dodatkowo ten sam problem sparingu co Islanders–Rangers wyżej.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">19 (+4 otw.)</td><td class="num">14–4–1</td><td class="num">78%</td><td class="num">80%</td><td class="num neg">-0.24 u</td><td class="num neg">-1.3%</td><td class="num">+1.7%</td></tr><tr><td>Typy — z przewagą</td><td class="num">6 (+2 otw.)</td><td class="num">4–1–1</td><td class="num">80%</td><td class="num">76%</td><td class="num pos">+0.51 u</td><td class="num pos">+8.5%</td><td class="num">+1.0%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">13 (+2 otw.)</td><td class="num">10–3–0</td><td class="num">77%</td><td class="num">82%</td><td class="num neg">-0.75 u</td><td class="num neg">-5.8%</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">6</td><td class="num">6–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.03 u</td><td class="num pos">+17.2%</td><td class="num">+3.3%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">4 (+1 otw.)</td><td class="num">3–1–0</td><td class="num">75%</td><td class="num">82%</td><td class="num neg">-0.22 u</td><td class="num neg">-5.5%</td><td class="num">+2.7%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">7 (+2 otw.)</td><td class="num">4–2–1</td><td class="num">67%</td><td class="num">76%</td><td class="num neg">-0.53 u</td><td class="num neg">-7.6%</td><td class="num">+0.4%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">2 (+1 otw.)</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">71%</td><td class="num neg">-0.52 u</td><td class="num neg">-26.0%</td><td class="num">+1.0%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">30 (+1 otw.)</td><td class="num">21–9–0</td><td class="num">70%</td><td class="num">78%</td><td class="num neg">-4.41 u</td><td class="num neg">-14.7%</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">11</td><td class="num">11–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+1.98 u</td><td class="num pos">+18.0%</td><td class="num">+3.0%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">11</td><td class="num">8–3–0</td><td class="num">73%</td><td class="num">79%</td><td class="num neg">-1.16 u</td><td class="num neg">-10.5%</td><td class="num">+2.0%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">5 (+1 otw.)</td><td class="num">2–3–0</td><td class="num">40%</td><td class="num">72%</td><td class="num neg">-2.23 u</td><td class="num neg">-44.5%</td><td class="num">-0.2%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">3</td><td class="num">0–3–0</td><td class="num">0%</td><td class="num">65%</td><td class="num neg">-3.00 u</td><td class="num neg">-100.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Salzburg – Villach: h2h home @ 1.36 → <strong>przegrana</strong> (2:4)</li><li>Armenia – Latvia: totals under 3.5 @ 1.28 → <strong>wygrana</strong> (2:0)</li><li>Georgia – Northern Ireland: dc 1X @ 1.22 → <strong>przegrana</strong> (0:1)</li><li>Georgia – Northern Ireland: totals under 3.5 @ 1.24 → <strong>wygrana</strong> (0:1) <em>(papier)</em></li><li>Armenia – Latvia: spread away 1.5 @ 1.32 → <strong>przegrana</strong> (2:0) <em>(papier)</em></li><li>Gambia – Somalia: totals under 3.5 @ 1.48 → <strong>wygrana</strong> (2:1)</li><li>Nigeria – Madagascar: h2h home @ 1.2 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Gambia – Somalia: h2h home @ 1.15 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Ilves – KooKoo: h2h home @ 1.37 → <strong>wygrana</strong> (6:0)</li><li>Slovenia – Poland: h2h away @ 1.25 → <strong>wygrana</strong> (0:3)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Salzburg – Villach (hokej, h2h gospodarz @ 1.36) → przegrana 2:4.</strong> Nic w analizie nie wskazywało na aż taką porażkę gospodarzy; traktować jako szum na małej próbie austriackiej ligi, ale przy kolejnych typach z tej ligi sprawdzać głębiej rotację bramkarzy (nie było to zrobione tym razem).</li>
+      <li><strong>Georgia – Northern Ireland: DC 1X @ 1.22 przegrana, ale total under 3.5 na ten sam mecz (papier) wygrany.</strong> Potwierdza wcześniejszy wniosek (raport 1310): przy jednym meczu z dwoma nieskorelowanymi rynkami wynik jednego nic nie mówi o jakości analizy drugiego — total i wynik meczu to różne zakłady o różnym ryzyku, nie warto ich mieszać w jednej ocenie.</li>
+      <li><strong>Nowe dla tego raportu: Grêmio Novorizontino – São Bernardo.</strong> Raport z 20:52 postawił ten mecz jako „uczciwa cena” (p_est 0.67 @ 1.52) na podstawie lance.com.br i gazetaesportiva.com — żadne z tych źródeł nie wspomniało o zawieszeniach. Doczytanie Terra.com.br i pierwotnego newsa agencyjnego ok. godzinę później ujawniło potwierdzoną podwójną absencję (Patrick, Matheus Bianqui — trzecia żółta kartka) u faworyta, co obniża moją własną estymację poniżej progu opłacalności. Wniosek na przyszłość: przy typach na piłkarskie ligi drugiego szczebla sprawdzać osobno serwis dot. dyscypliny/kartek (nie tylko „prawdopodobny skład”), bo probable-lineup bywa szablonowy i nie uwzględnia świeżych zawieszeń — ta rozbieżność między Gazeta Esportiva (wystawia zawieszonych w składzie) a Terra.com.br (informuje o zawieszeniu) pokazuje, że jedno źródło typu „prawdopodobny skład” nie wystarcza.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.15 oznacza ok. 87% implikowanego prawdopodobieństwa, 1.50 — ok. 67%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore (403, blokada datacenter) i betexplorer (429/US-only) — zastąpione przez ESPN + The Odds API + WebSearch/WebFetch, zgodnie z trybem automatycznym.</li>
+      <li>The Odds API: pozostało ok. 453 kredytów z miesięcznego limitu 500 (zużyto 8 na 4 klucze sportowe: NHL przedsezon, Série B, Liga MX, WTA Singapur; rynki h2h+totals, bez --extra-markets).</li>
+      <li>Grêmio Novorizontino – São Bernardo jest już otwartym typem w rejestrze z raportu 2026-09-25_2052_typy.html (ten sam mecz, kurs 1.52, p_est 0.67) — celowo NIE dodano drugi raz do rejestru w tym przebiegu, żeby nie liczyć jednego realnego wyniku dwa razy w statystykach; potraktuj powyższą sekcję jako aktualizację ryzyka do tamtej pozycji, nie nową rekomendację.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

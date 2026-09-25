@@ -84,13 +84,17 @@ typy czekające na rozliczenie, archiwum.
 
 | Workflow | Kiedy (czas PL, lato) | Co robi |
 |---|---|---|
-| `report.yml` | 10:17, 16:17, 20:17 | Claude (Sonnet 5, subskrypcja) uruchamia skill bez pytań: rozlicza poprzednie typy, analizuje okno 6/4/8 h, zapisuje raport i typy do dziennika, publikuje stronę |
-| `settle.yml` | 04:43 | rozliczenie bez Claude (ESPN, The Odds API) i odświeżenie strony |
-| `review.yml` | niedziela 08:23 | przegląd tygodniowy (Opus): kalibracja, CLV, błędy → poprawki skilla, wpis w `data/changelog.md` |
+| `report.yml` | 10:13, 16:13, 20:13 | Claude (Sonnet 5, subskrypcja) uruchamia skill bez pytań: rozlicza poprzednie typy, analizuje okno 6/4/8 h, zapisuje raport i typy do dziennika, publikuje stronę |
+| `settle.yml` | 04:41 | rozliczenie bez Claude (ESPN, The Odds API) i odświeżenie strony |
+| `review.yml` | niedziela 08:21 | przegląd tygodniowy (Opus): kalibracja, CLV, błędy → poprawki skilla, wpis w `data/changelog.md` |
 | `publish.yml` | po każdym z powyższych | buduje stronę (`scripts/build_site.py`) i wdraża na GitHub Pages |
 
 Dane: `data/ledger.jsonl` (każdy typ i kandydat „na papierze”, wynik, CLV), `data/lessons.md`
 (wnioski z raportów), `data/changelog.md` (zmiany skilla z uzasadnieniem).
+
+Harmonogram działa tylko, gdy ostatni commit zmieniający cron ma autora z e-mailem połączonym
+z kontem GitHub (to repo ma lokalnie `user.email` = adres noreply konta bnalewajka). Commit z
+niepołączonym e-mailem (np. firmowym) po cichu wyłącza zaplanowane uruchomienia.
 
 Sekrety repo: `CLAUDE_CODE_OAUTH_TOKEN` (`claude setup-token`), `ODDS_API_KEY`.
 Ręczne uruchomienie: `gh workflow run report.yml -f hours=4`.

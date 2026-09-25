@@ -5,7 +5,7 @@ name: review
 
 on:
   schedule:
-    - cron: "23 6 * * 0"   # Sunday 08:23 CEST / 07:23 CET
+    - cron: "21 6 * * 0"   # Sunday 08:21 CEST / 07:21 CET
   workflow_dispatch:
     inputs:
       model:

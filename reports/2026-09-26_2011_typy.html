@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-26 20:11</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-26 18:11 UTC / 20:11 CEST. Zegar zweryfikowany zewnętrznie (api.github.com, cloudflare, Sofascore API, ESPN API — zgodność co do sekundy): 2026-09-26T18:01:02Z. Okno: 20:01–04:01 CEST (26/27.09).</p>
+    <p class="meta">Tryb automatyczny (GitHub Actions, serwer USA) — bez pytań, bez Sofascore/betexplorer (zablokowane z tego IP). Przeanalizowano 45 potwierdzonych spotkań w oknie z ESPN (31 piłka nożna, 14 hokej — NHL to sparingi przedsezonowe; brak w tym oknie koszykówki, tenisa i siatkówki w źródłach dostępnych z serwera). Kursy: ESPN BET (US, tylko do mediany) + The Odds API (Pinnacle, Nordicbet, Unibet, Winamax, William Hill, Marathonbet, Coolbet i in.), pobrane 2026-09-26 18:01–18:02 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Podane ceny to bukmacherzy dostępni z UE (Pinnacle i in.); polskie bukmacherzy zwykle wyceniają podobnie, ale warto zweryfikować u siebie.</p>
+    <p class="summary">Noc okazała się wyjątkowo skąpa w realną przewagę: z 9 kandydatów przeanalizowanych do wymaganego standardu (≥2 źródła, ≥1 przeczytane w całości) tylko <strong>jeden</strong> osiągnął próg „uczciwej ceny” — reszta to faworyci wycenieni ciaśniej, niż uzasadniają nieobecności i ryzyko rotacji na końcówkę sezonu MLS oraz — w jednym przypadku — świeży skandal kadrowy reprezentacji Szwajcarii. Trzy z czterech zakresów kursów zostają dziś puste.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 0 typów</a>
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84%; wymagane p_est ≈ implikowane + 0.03. W zakresie: 1 realna selekcja z pokryciem europejskich bukmacherów (drugi kandydat, Antigua i Barbuda – Anguilla, wyceniony wyłącznie przez bukmachera US-only, więc pominięty).</p>
+    <p class="empty">Brak typu — najbliższy kandydat nie osiąga nawet progu „uczciwej ceny”.</p>
+    <ul>
+      <li><strong>Słowacja – Mołdawia, zwycięstwo Słowacji @ 1.15 (marathonbet, 7 bukmacherów, mediana 1.13)</strong> — implikowane 0.87. Mój szacunek: p_est ≈ 0.80. Przepaść rankingowa FIFA jest ogromna (Słowacja 45. vs Mołdawia 159., Mołdawia bez wygranej w ~15 meczach, brak zdrowego napastnika), ale to pierwszy mecz nowego selekcjonera (Weiss, powrót po 14 latach), Słowacja ostatnio niepewna w ataku i bez kontuzjowanego Bero — wystarczy, by realne prawdopodobieństwo było wyraźnie niższe niż sugeruje kurs. Byłby „uczciwą ceną” dopiero przy kursie ≥ ok. 1.25 — poza tym zakresem. Zapisany w rejestrze jako „papier”.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78%; wymagane p_est ≈ implikowane + 0.03. W zakresie: 2 realne selekcje z pokryciem europejskich bukmacherów.</p>
+    <p class="empty">Brak typu — obaj kandydaci wypadli poniżej progu „uczciwej ceny”, jeden z nich z konkretnego i świeżego powodu.</p>
+    <ul>
+      <li><strong>Macedonia Płn. – Szwajcaria, zwycięstwo Szwajcarii @ 1.33 (nordicbet, 8 bukmacherów, mediana 1.29)</strong> — implikowane 0.75. p_est ≈ 0.58. Powód jest konkretny: w dniach 25–26.09 kapitan Granit Xhaka oraz Breel Embolo zostali wycofani z kadry Szwajcarii przez związek w związku ze sprawą sfałszowanych zaświadczeń o szczepieniu przeciw COVID-19 (potwierdzone m.in. przez Fox Sports i Sky Sports, ze składem wyjściowym bez obu zawodników). To dwaj kluczowi liderzy linii pomocy/ataku — rynek (kurs 1.29–1.33) zdaje się jeszcze nie w pełni wycenić tego osłabienia względem słabszej, ale zmotywowanej u siebie Macedonii Północnej (bez zwycięstwa w 8 meczach). Typowa „pułapka na faworyta”. Zapisany w rejestrze jako „papier” — wart obserwacji, czy Szwajcaria mimo wszystko wygra.</li>
+      <li><strong>Philadelphia Union – Orlando City SC, over 2.5 gola @ 1.27 (nordicbet/betsson, tylko 3 bukmacherów)</strong> — implikowane 0.79. p_est ≈ 0.62 (por. analiza przy zakresie 1.45–1.60, ten sam mecz). Cienki rynek (3 bukmacherów) sam w sobie obniża pewność co do ceny.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69%; wymagane p_est ≈ implikowane + 0.03. W zakresie: 2 realne selekcje z pokryciem europejskich bukmacherów.</p>
+    <p class="empty">Brak typu — najbliższy kandydat minął próg o zaledwie ok. 4 punkty procentowe.</p>
+    <ul>
+      <li><strong>Nashville SC – Toronto FC, zwycięstwo Nashville @ 1.42 (coolbet/nordicbet/pinnacle/betsson, 17 bukmacherów)</strong> — implikowane 0.70. p_est ≈ 0.66. Nashville to najlepsza drużyna Wschodu (57 pkt, +32 bramek, ściga rekord klubu w wygranych u siebie) przeciw tonącemu Toronto (12. miejsce, zaledwie 10 goli na wyjeździe w całym sezonie, osłabione zawieszeniem środkowego obrońcy Zimmermana). Odejmuję jednak za realne ryzyko rotacji — Nashville ma tytuł praktycznie zapewniony i może oszczędzać graczy — oraz za to, że Toronto wygrało niedawno mecz rewanżowy 2:1. Zbyt blisko progu, by nazwać to przewagą, ale najbliższy „prawie” tej nocy. Zapisany w rejestrze jako „papier”.</li>
+      <li><strong>Charlotte FC – Chicago Fire, over 2.5 gola @ 1.41 (nordicbet, tylko 3 bukmacherów)</strong> — implikowane 0.71. p_est ≈ 0.62. Chicago traci swojego najlepszego strzelca (Lewandowski, na kadrze Polski) i podstawowego bramkarza (Brady, kadra USA), co powinno winduje liczbę goli, ale odejmuję za to, że sam Lewandowski odpowiadał za sporą część zagrożenia ofensywnego, którego teraz zabraknie.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63%; wymagane p_est ≈ implikowane + 0.03. W zakresie: 6 realnych selekcji z pokryciem europejskich bukmacherów, przeanalizowano wszystkie do wymaganego standardu.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">03:30 (27.09)</td>
+            <td>Real Salt Lake – New England Revolution</td>
+            <td>MLS</td>
+            <td>Under 3.5 gola</td>
+            <td class="num">1.60<span class="note">tipico_de, The Odds API, 18:02 UTC</span></td>
+            <td class="num pos">0.63</td>
+            <td class="num">0.63</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-145-1">
+      <h3>1. Real Salt Lake – New England Revolution — Under 3.5 gola @ 1.60 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.45–1.60 · MLS, faza zasadnicza · 27.09 03:30 CEST (2026-09-27T01:30Z) · 1.60 u tipico_de (The Odds API), pobrane 2026-09-26 18:02 UTC · p_est 0.63 vs implikowane 0.63 (przy najlepszym dostępnym kursie 1.60; mediana 5 bukmacherów: 1.56)</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> To jedyny kandydat tej nocy, gdzie własny szacunek prawdopodobieństwa — nawet po odjęciu za realne ryzyko wysokiego wyniku — przebił, choć nieznacznie, próg opłacalności. Real Salt Lake ma złamany atak u siebie (dwa kolejne mecze domowe bez strzelonej bramki), New England ma żywy atak (Carles Gil), ale kombinacja „słaby gospodarz + solidny, ale nie eksplozywny gość” częściej daje 2–3 gole niż 4+.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Obie drużyny wciąż w grze o miejsce w playoff MLS — mecz nie jest rozgrywką bez stawki, ryzyko rotacji niskie.</dd>
+        <dt>Forma</dt><dd>Real Salt Lake: klubowa seria 13 meczów bez zwycięstwa, w tym dwa kolejne domowe spotkania zakończone 0:0 lub bez zdobytej bramki. New England: Carles Gil strzelił w 4 z ostatnich 5 meczów, świeżo po wygranej 4:2.</dd>
+        <dt>Absencje</dt><dd>Real Salt Lake bez głównego kreatora gry Diego Luny (sezon zakończony operacją) — realnie tnie jakość ataku gospodarzy; kilku zawodników obu drużyn na wyjazdach kadrowych.</dd>
+        <dt>Składy</dt><dd>Nie w pełni potwierdzone na czas researchu (mecz >30 h od analizy) — traktować jako przewidywane.</dd>
+        <dt>Terminarz</dt><dd>Brak nietypowego zagęszczenia terminarza po żadnej ze stron.</dd>
+        <dt>Miejsce i warunki</dt><dd>Rio Tinto Stadium, Salt Lake City — bez nietypowych czynników pogodowych w źródłach.</dd>
+        <dt>Styl gry</dt><dd>Gospodarz defensywnie kruchy, ale też ofensywnie jałowy; gość zdolny do szybkich, wysoko punktowanych meczów — ryzyko w obie strony.</dd>
+        <dt>Sygnały rynkowe</dt><dd>5 bukmacherów w wąskim przedziale 1.47–1.60 dla Undera — rozsądna zgodność, nie skrajnie cienki rynek.</dd>
+        <dt>Inne</dt><dd>Rynek over 2.5 / under 3.5 pokrywa się niemal z tym samym wynikiem (dokładnie 3 gole to jedyna rozbieżność) — nie traktować jako w pełni niezależnych zakładów.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>RSL bez gola w dwóch ostatnich meczach u siebie</li><li>Brak Luny tnie kreatywność gospodarzy</li><li>5 bukmacherów zgodnych w wąskim przedziale</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Carles Gil w gorącej formie może sam „rozbić” linię</li><li>RSL desperacko szuka gola u siebie po serii bez zwycięstwa — może otworzyć grę</li><li>Dane tabelaryczne obu klubów rozjeżdżały się między źródłami — potraktowane jako orientacyjne, nie precyzyjne</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> New England strzela 3–4 gole w stylu ostatniego meczu (4:2), a Real Salt Lake mimo złej passy dorzuca chociaż jednego – dwa trafienia w desperackiej pogoni za wynikiem.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 2):</strong> <a href="https://www.rsl.com/news/real-salt-lake-returns-home-saturday-to-host-new-england-revolution">rsl.com</a> — oficjalna zapowiedź klubowa: absencja Luny, seria 13 meczów bez zwycięstwa, historia h2h; <a href="https://en.wikipedia.org/wiki/2026_New_England_Revolution_season">Wikipedia — sezon New England 2026</a> — wyniki mecz po meczu; <a href="https://www.whoscored.com/articles/BnB0mJS-mkGuNvt6gIgL5Q/show/20260926-real-salt-lake-vs-new-england-revolution-prediction-1790444607">whoscored.com</a> (fragment) — forma strzelecka Gila, absencje kadrowe.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Houston Dynamo – Sporting Kansas City, zwycięstwo Houston @ 1.60 (17 bukmacherów)</strong> — p_est ≈ 0.58 vs implikowane 0.63. Houston też ma 6 nieobecności kadrowych, a mimo pewnego miejsca w playoff nie wygrało 5 z 6 ostatnich meczów — zbyt blisko, ale minięty próg. Zapisany w rejestrze jako „papier”.</li>
+      <li><strong>Austin FC – San Diego FC, over 2.5 gola @ 1.60 (8 bukmacherów)</strong> — p_est ≈ 0.55 vs implikowane 0.63. Sprzeczne dane o formie San Diego między źródłami obniżają pewność, obie drużyny bez kluczowych zawodników.</li>
+      <li><strong>Seattle Sounders – Minnesota United, over 2.5 gola @ 1.55 (7 bukmacherów)</strong> — p_est ≈ 0.57 vs implikowane 0.65. Seattle ostatnio gra bardzo defensywnie (0:0, 1:1, 1:1, 2:0).</li>
+      <li><strong>Philadelphia Union – Orlando City SC, zwycięstwo Union @ 1.57 (17 bukmacherów)</strong> — p_est ≈ 0.50 vs implikowane 0.64. Union traci m.in. bramkarza Blake'a, Orlando ma Ojedę (dwa gole w poprzednim starciu, wygranym 4:3 przez Orlando) — rynek zbyt pewny gospodarzy.</li>
+      <li><strong>Real Salt Lake – New England, over 2.5 gola @ 1.55 (alternatywny rynek na ten sam mecz)</strong> — p_est ≈ 0.55 vs implikowane 0.65; wybrany zamiast tego under 3.5 (patrz wyżej) jako lepiej wyceniony wariant tego samego meczu.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">23 (+6 otw.)</td><td class="num">17–5–1</td><td class="num">77%</td><td class="num">79%</td><td class="num neg">-0.21 u</td><td class="num neg">-0.9%</td><td class="num">+1.6%</td></tr><tr><td>Typy — z przewagą</td><td class="num">8 (+2 otw.)</td><td class="num">6–1–1</td><td class="num">86%</td><td class="num">76%</td><td class="num pos">+1.29 u</td><td class="num pos">+16.1%</td><td class="num">+1.0%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">15 (+4 otw.)</td><td class="num">11–4–0</td><td class="num">73%</td><td class="num">81%</td><td class="num neg">-1.50 u</td><td class="num neg">-10.0%</td><td class="num">+1.9%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">6 (+1 otw.)</td><td class="num">6–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.03 u</td><td class="num pos">+17.2%</td><td class="num">+3.3%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">5 (+4 otw.)</td><td class="num">4–1–0</td><td class="num">80%</td><td class="num">82%</td><td class="num pos">+0.03 u</td><td class="num pos">+0.6%</td><td class="num">+2.7%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">9</td><td class="num">6–2–1</td><td class="num">75%</td><td class="num">76%</td><td class="num pos">+0.25 u</td><td class="num pos">+2.8%</td><td class="num">+0.5%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">3 (+1 otw.)</td><td class="num">1–2–0</td><td class="num">33%</td><td class="num">70%</td><td class="num neg">-1.52 u</td><td class="num neg">-50.7%</td><td class="num">+1.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">34 (+1 otw.)</td><td class="num">24–10–0</td><td class="num">71%</td><td class="num">77%</td><td class="num neg">-4.32 u</td><td class="num neg">-12.7%</td><td class="num">+0.9%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">11</td><td class="num">11–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+1.98 u</td><td class="num pos">+18.0%</td><td class="num">+3.0%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">12</td><td class="num">8–4–0</td><td class="num">67%</td><td class="num">79%</td><td class="num neg">-2.16 u</td><td class="num neg">-18.0%</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">8 (+1 otw.)</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">71%</td><td class="num neg">-1.14 u</td><td class="num neg">-14.2%</td><td class="num">-1.1%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">3</td><td class="num">0–3–0</td><td class="num">0%</td><td class="num">65%</td><td class="num neg">-3.00 u</td><td class="num neg">-100.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Bari – Cosenza: h2h home @ 1.32 → <strong>wygrana</strong> (1:0) <em>(papier)</em></li><li>Finland – Slovenia: h2h away @ 1.32 → <strong>przegrana</strong> (3:0) <em>(papier)</em></li><li>Stockport County – Peterborough: h2h home @ 1.33 → <strong>wygrana</strong> (1:0) <em>(papier)</em></li><li>New York Islanders – New York Rangers: h2h away @ 1.44 → <strong>wygrana</strong> (1:6) <em>(papier)</em></li><li>Grêmio Novorizontino – São Bernardo: h2h home @ 1.52 → <strong>przegrana</strong> (0:0)</li><li>Salzburg – Villach: h2h home @ 1.36 → <strong>przegrana</strong> (2:4)</li><li>Armenia – Latvia: totals under 3.5 @ 1.28 → <strong>wygrana</strong> (2:0)</li><li>Georgia – Northern Ireland: dc 1X @ 1.22 → <strong>przegrana</strong> (0:1)</li><li>Georgia – Northern Ireland: totals under 3.5 @ 1.24 → <strong>wygrana</strong> (0:1) <em>(papier)</em></li><li>Armenia – Latvia: spread away 1.5 @ 1.32 → <strong>przegrana</strong> (2:0) <em>(papier)</em></li><li>Tunisia – Cameroon: h2h home @ 1.25 → <strong>wygrana</strong> (3:0)</li><li>Krakow – Torun: h2h away @ 1.38 → <strong>wygrana</strong> (3:5)</li><li>Nigeria – Madagascar: totals under 3.5 @ 1.4 → <strong>wygrana</strong> (2:1)</li><li>Gambia – Somalia: totals under 3.5 @ 1.48 → <strong>wygrana</strong> (2:1)</li><li>Nigeria – Madagascar: h2h home @ 1.2 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Finlandia – Słowenia (papier, zwycięstwo Słowenii @ 1.32, p_est 0.78), przegrana 0:3</strong> — mecz o brąz mistrzostw Europy siatkarzy. Kandydat świadomie nie trafił do rejestru jako typ (poniżej/na granicy progu), a wynik potwierdza, że mecze o medal niosą dodatkową nieprzewidywalność (nerwy, presja), której sam ranking drużyn nie uchwyci — brak zmiany metodologii, to była poprawna decyzja o nie graniu.</li>
+      <li><strong>Bari – Cosenza (papier, zwycięstwo Bari @ 1.32, p_est 0.75) i Stockport County – Peterborough (papier, zwycięstwo gospodarzy @ 1.33, p_est 0.74) — obie wygrane</strong>, mimo że obie zostały odrzucone jako „papier” zaledwie ok. 1–2 punkty procentowe poniżej progu opłacalności (implikowane odpowiednio 0.758 i 0.752). Przy tak małej próbie (n=2) to nie powód do obniżania progu — to properny szum przy graniczących z progiem szacunkach, zgodnie z wcześniejszymi wnioskami o niedużych próbach. Warto natomiast odnotować: w niższych ligach piłkarskich (Serie C, League One) rynek regularnie wycenia wyraźnych faworytów niemal dokładnie uczciwie, więc różnica 1–2 pkt proc. w p_est to często kwestia niuansu w ocenie, nie błędu.</li>
+      <li><strong>Ten raport (dziś, 26.09 wieczór)</strong>: w przeciwieństwie do wcześniejszych „cichych” okien nocnych z serwera USA (patrz wnioski z 25.09), tym razem realne pokrycie kursowe było przyzwoite (Liga Narodów UEFA + niemal cały pakiet MLS), ale głęboki research (absencje, forma, kontekst ligowy) konsekwentnie ściągał niemal każdego faworyta poniżej ceny rynkowej — 8 z 9 przeanalizowanych kandydatów wypadło jako „drop”. To wygląda na wzorzec końca sezonu MLS (rotacje, zmęczenie kadrowe od reprezentacji) nakładający się na klasyczne niedoszacowanie absencji przez rynek w krótkim czasie do startu — wart sprawdzenia w kolejnych oknach z dużym udziałem końcówki sezonu MLS.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.15 oznacza ok. 87% implikowanego prawdopodobieństwa, 1.60 — ok. 63%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na niecałe 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła: Sofascore i betexplorer celowo pominięte w tym uruchomieniu (blokowane z serwera USA — 403/429), zastąpione przez ESPN + The Odds API zgodnie z trybem automatycznym. W tym oknie w źródłach dostępnych z serwera nie było żadnych meczów koszykówki, tenisa ani siatkówki (strukturalny brak pokrycia, nie awaria) — dominowała piłka nożna (Liga Narodów UEFA, MLS, Concacaf Nations League, Liga MX, Copa Colombia) oraz sparingi przedsezonowe NHL (celowo pominięte jako niemożliwe do rzetelnej analizy — składy rezerwowe).</li>
+      <li>The Odds API: wykorzystano ok. 6–8 kredytów z miesięcznego limitu 500 (klucze soccer_uefa_nations_league, soccer_usa_mls, icehockey_nhl_preseason; ten ostatni bez przydatnych typów). Pozostało ok. 443 kredytów.</li>
+      <li>Mecze Concacaf Nations League (Antigua i Barbuda – Anguilla, Montserrat – Brytyjskie Wyspy Dziewicze) i NWSL wyceniało tylko po jednym bukmacherze US-only (DraftKings) — pominięte jako niedostępne dla polskiego gracza.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

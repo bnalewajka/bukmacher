@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-26 23:42</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakresy kursów: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60</h1>
+    <p class="meta">Wygenerowano: 2026-09-26 21:42 UTC / 2026-09-26 23:42 CEST. Zegar zweryfikowany: tak (system + api.github.com, cloudflare.com, sofascore.com, espn.com — zgodność co do sekundy; verified_utc 2026-09-26T21:33:59Z). Okno: 2026-09-26 23:33 – 2026-09-27 07:33 czasu PL (2026-09-26T21:33:59Z – 2026-09-27T05:33:59Z UTC).</p>
+    <p class="meta">Przeanalizowano: 44 spotkania w oknie (piłka nożna 27, hokej 9, tenis 8, koszykówka 0, siatkówka 0), z czego 12 selekcji przeszło pełny research w wybranych zakresach kursów. Źródła kursów: ESPN (kursy wbudowane w listę meczów) i The Odds API (MLS, rynki h2h+totals, budżet 4 kredyty, pozostało ok. 439/500). Kursy pobrane o 21:34:46 UTC. Tryb automatyczny (GitHub Actions) — bez pytań, Sofascore i betexplorer zablokowane z adresu IP serwera.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u własnego bukmachera przed postawieniem zakładu. Ceny podane niżej pochodzą z bukmacherów europejskich (The Odds API); polskie bukmacherzy zwykle wyceniają podobnie, ale warto zweryfikować kurs przed obstawieniem.</p>
+    <p class="summary">Ten run nie daje ani jednego typu „z przewagą” lub „uczciwą ceną” w żadnym z czterech zakresów — po dogłębnym researchu wszystkich 12 kandydatów (głównie sobotni pakiet MLS) każdy wypadł poniżej progu opłacalności (p_est &lt; implikowane), więc każdy zakres jest pusty. Hokej (sparingi przedsezonowe NHL) i tenis (WTA/ATP niższej rangi) nie miały żadnej wyceny bukmacherskiej w tym oknie i zostały wykluczone w całości. Trzy najbliższe „prawie” kandydatury zapisano w rejestrze jako papier do dalszej obserwacji.</p>
+    <nav class="ranges">
+      <a href="#z-110">1.10–1.19 · 0 typów</a>
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności ok. 91–84%. W zakresie: 1 selekcja z jakąkolwiek ceną, 0 nadających się do analizy.</p>
+    <p class="empty">Brak typu. Jedyny kandydat w tym przedziale — Antigua and Barbuda – Anguilla (CONCACAF Nations League, faworyt gospodarzy @ 1.111) — miał cenę tylko u jednego bukmachera amerykańskiego (DraftKings, niedostępny dla polskiego gracza) bez żadnego odpowiednika u bukmachera europejskiego, więc nie spełnia zasady „bez potwierdzonej ceny nie ma raportu”. To też mecz dwóch najsłabszych reprezentacji regionu (cienki rynek, praktycznie brak solidnych źródeł o składach) — nawet gdyby cena była dostępna, jakość danych dyskwalifikowałaby go z klasy „typ”.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Antigua and Barbuda – Anguilla, zwycięstwo gospodarzy @ 1.111 (DraftKings, US-only)</strong> — brak ceny u bukmachera europejskiego/polskiego; dodatkowo cienki rynek reprezentacji karaibskich bez wiarygodnych źródeł o składach.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności ok. 83–78%. W zakresie: 2 selekcje z ceną europejskiego bukmachera, obie przeanalizowane.</p>
+    <p class="empty">Brak typu — obaj kandydaci wypadli wyraźnie poniżej progu opłacalności po researchu.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Vancouver Whitecaps – D.C. United, zwycięstwo gospodarzy @ 1.28 (leovegas_se, 21 bukmacherów)</strong> — Vancouver liderem Konferencji Zachodniej (49 pkt), ale przegrali 3 z ostatnich 5 meczów domowych na BC Place; DC United (11. miejsce Wschodu, gra o wszystko) ma sprawdzonych strzelców (Baribo, Munteanu) zdolnych wykorzystać rozchwianą defensywę gospodarzy. p_est 0.68 vs implikowane 0.781 — uczciwa cena byłaby dopiero przy ok. 1.47.</li>
+      <li><strong>Philadelphia Union – Orlando City SC, powyżej 2.5 gola @ 1.25 (williamhill, 3 bukmacherów)</strong> — Philadelphia w fantastycznej, wysokobramkowej formie (11 meczów bez porażki), ale prawdopodobna nieobecność/ograniczona dyspozycja Griezmanna (uraz uda z półfinału US Open Cup) obniża potencjał bramkowy Orlando. p_est 0.72 vs implikowane 0.80 — uczciwa cena byłaby dopiero przy ok. 1.39.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności ok. 77–69%. W zakresie: 7 selekcji z ceną europejskiego bukmachera, 5 przeanalizowanych w głębi (pozostałe dwie to duplikaty tych samych meczów w innych zakresach).</p>
+    <p class="empty">Brak typu — wszystkie przeanalizowane kandydatury wypadły poniżej progu opłacalności; najbliżej progu były zakłady na gole w meczach CF Montréal – FC Cincinnati i San Jose – Portland.</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>CF Montréal – FC Cincinnati, powyżej 2.5 gola @ 1.44 (williamhill, 3 bukmacherów)</strong> — Montréal ma najgorszą defensywę Wschodu (53 stracone w 26 meczach), ale Cincinnati traci swojego najlepszego strzelca Denkeya (14 goli) na wyjazd reprezentacyjny, co obcina potencjał ataku gości. p_est 0.62 vs implikowane 0.694 — uczciwa cena dopiero przy ok. 1.61.</li>
+      <li><strong>San Jose Earthquakes – Portland Timbers, powyżej 2.5 gola @ 1.36 (williamhill, 3 bukmacherów)</strong> — San Jose bez podstawowego bramkarza (Gunn), Portland z niemal całkowicie zdziesiątkowaną formacją obronną, ale mecz może się równie dobrze zamknąć w niskobramkowym schemacie, jeśli Portland ustawi się głęboko. p_est 0.66 vs implikowane 0.735 — uczciwa cena dopiero przy ok. 1.52.</li>
+      <li><strong>Charlotte FC – Chicago Fire FC, powyżej 2.5 gola @ 1.41 (nordicbet, 3 bukmacherów)</strong> — Chicago traci najlepszego strzelca Lewandowskiego i rezerwowego bramkarza do reprezentacji, co obniża też ich własny potencjał ofensywny mimo formy Charlotte. p_est 0.60 vs implikowane 0.709.</li>
+      <li><strong>Nashville SC – Toronto FC, zwycięstwo gospodarzy @ 1.47 (leovegas_se, 21 bukmacherów; mediana 1.41)</strong> — Nashville lider Wschodu, ale przegrał ostatni bezpośredni mecz z Toronto (2:1, 9.09) i gra z rezerwowym bramkarzem (Willis za Schwake, wyjazd reprezentacyjny); Toronto ma w formie duet Sallói/Sargent. p_est 0.58 vs implikowane 0.68 — potwierdza ocenę "odrzucony" z analizy sprzed ok. 90 minut w poprzednim raporcie.</li>
+      <li><strong>Vancouver Whitecaps – D.C. United, powyżej 2.5 gola @ 1.35 (williamhill, 3 bukmacherów)</strong> — ten sam mecz co w zakresie 1.20–1.29; p_est 0.63 vs implikowane 0.741.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności ok. 69–63%. W zakresie: 25 selekcji z ceną europejskiego bukmachera (w większości spready/Asian lines wyłącznie u bukmacherów US-only, odrzucone), 5 selekcji z realną wyceną przeanalizowanych w głębi.</p>
+    <p class="empty">Brak typu — nawet dwie najbliższe kandydatury (Houston Dynamo i Austin FC) zostały ocenione tuż poniżej progu i trafiły do rejestru jako „papier” do sprawdzenia, czy analiza jest zbyt ostrożna.</p>
+    <h3 class="sub">Odrzuceni kandydaci (najbliżsi progu — zapisani w rejestrze jako „papier”)</h3>
+    <ul>
+      <li><strong>Houston Dynamo FC – Sporting Kansas City, zwycięstwo gospodarzy @ 1.65 (onexbet, 21 bukmacherów; mediana 1.58)</strong> — Houston niepokonany w 11 kolejnych meczach domowych, najmniej straconych bramek u siebie w MLS, ale gra bez czterech zawodników (w tym środkowego obrońcy Antonio Carlosa); SKC ostatni w tabeli Zachodu, ale ich napastnik Andre Luiz strzelił 3 gole w 2 ostatnich meczach. p_est 0.60 vs implikowane 0.606 — różnica praktycznie w granicach szumu, dlatego zapisany jako papier, nie odrzucony bez śladu.</li>
+      <li><strong>Austin FC – San Diego FC, powyżej 2.5 gola @ 1.65 (onexbet, 10 bukmacherów; mediana 1.594)</strong> — Austin traci dużo bramek (44 stracone w sezonie), a San Diego ma parę Dreyer/Ingvartsen (11 goli każdy), ale Austin od kilku meczów gra bardzo defensywnie (kilka remisów 1:1 i 0:0) i Ingvartsen dogrywał ostatni mecz z urazem. p_est 0.58 vs implikowane 0.606 — również blisko progu, zapisany jako papier.</li>
+      <li><strong>Philadelphia Union – Orlando City SC, zwycięstwo gospodarzy @ 1.57 (coolbet, 21 bukmacherów; mediana 1.513)</strong> — ten sam mecz co w zakresie 1.20–1.29 (inny rynek); p_est 0.60 vs implikowane 0.637.</li>
+      <li><strong>Seattle Sounders FC – Minnesota United FC, powyżej 2.5 gola @ 1.55 (williamhill, 7 bukmacherów)</strong> — Minnesota w dobrej formie strzeleckiej (17 goli w 6 meczach), ale historyczny bezpośredni bilans tego starcia jest niskobramkowy (śr. 2.83 gola, ostatnio 0:0), a obie strony brakuje kluczowych napastników. p_est 0.55 vs implikowane 0.645.</li>
+      <li><strong>LA Galaxy – Colorado Rapids, poniżej 3.5 gola @ 1.56 (unibet_se, 4 bukmacherów)</strong> — obie drużyny walczą bezpośrednio o miejsce w playoff, ale ich ostatnie mecze (i bezpośredni mecz w marcu, 4:1) są bardzo wysokobramkowe (śr. >3 gole/mecz w ostatnich 10 spotkaniach każdej z drużyn) — rynek wycenia "under" zbyt nisko względem realnego tempa gry obu zespołów. p_est 0.48 wyraźnie poniżej implikowanego 0.641 — najgorszy z przeanalizowanych kandydatów.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+    <h2>Skuteczność</h2>
+    <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+    <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">27 (+3 otw.)</td><td class="num">21–5–1</td><td class="num">81%</td><td class="num">79%</td><td class="num pos">+1.06 u</td><td class="num pos">+3.9%</td><td class="num">+1.3%</td></tr><tr><td>Typy — z przewagą</td><td class="num">9 (+1 otw.)</td><td class="num">7–1–1</td><td class="num">88%</td><td class="num">78%</td><td class="num pos">+1.56 u</td><td class="num pos">+17.3%</td><td class="num">+1.1%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">18 (+2 otw.)</td><td class="num">14–4–0</td><td class="num">78%</td><td class="num">80%</td><td class="num neg">-0.50 u</td><td class="num neg">-2.8%</td><td class="num">+1.5%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">7</td><td class="num">7–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.22 u</td><td class="num pos">+17.4%</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">7 (+2 otw.)</td><td class="num">6–1–0</td><td class="num">86%</td><td class="num">82%</td><td class="num pos">+0.58 u</td><td class="num pos">+8.3%</td><td class="num">+2.2%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">9</td><td class="num">6–2–1</td><td class="num">75%</td><td class="num">76%</td><td class="num pos">+0.25 u</td><td class="num pos">+2.8%</td><td class="num">+0.5%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">4 (+1 otw.)</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">69%</td><td class="num neg">-0.99 u</td><td class="num neg">-24.8%</td><td class="num">+0.8%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">37 (+2 otw.)</td><td class="num">27–10–0</td><td class="num">73%</td><td class="num">77%</td><td class="num neg">-3.48 u</td><td class="num neg">-9.4%</td><td class="num">+1.2%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">12</td><td class="num">12–0–0</td><td class="num">100%</td><td class="num">83%</td><td class="num pos">+2.13 u</td><td class="num pos">+17.8%</td><td class="num">+3.0%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">13</td><td class="num">9–4–0</td><td class="num">69%</td><td class="num">77%</td><td class="num neg">-1.83 u</td><td class="num neg">-14.1%</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">9 (+1 otw.)</td><td class="num">6–3–0</td><td class="num">67%</td><td class="num">71%</td><td class="num neg">-0.79 u</td><td class="num neg">-8.7%</td><td class="num">-0.0%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">3 (+1 otw.)</td><td class="num">0–3–0</td><td class="num">0%</td><td class="num">65%</td><td class="num neg">-3.00 u</td><td class="num neg">-100.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+    <h3 class="sub">Ostatnio rozliczone</h3>
+    <ul><li>Albania – Belarus: totals under 3.5 @ 1.27 → <strong>wygrana</strong> (2:0)</li><li>Slovakia – Moldova: spread home -1.5 @ 1.53 → <strong>wygrana</strong> (2:0)</li><li>North Macedonia – Switzerland: h2h away @ 1.35 → <strong>wygrana</strong> (0:3) <em>(papier)</em></li><li>Slovakia – Moldova: h2h home @ 1.15 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>North Macedonia – Switzerland: h2h away @ 1.33 → <strong>wygrana</strong> (0:3) <em>(papier)</em></li><li>Venezia – Cantu: h2h home @ 1.19 → <strong>wygrana</strong> (85:73)</li><li>ZSC Lions – EHC Kloten: h2h home @ 1.28 → <strong>wygrana</strong> (3:2)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Zero typów w tym uruchomieniu — wszystkie 12 kandydatów (głównie sobotni pakiet MLS) spadło poniżej progu opłacalności po researchu.</strong> To bezpośrednie potwierdzenie obserwacji z raportu 2026-09-26_2011: końcówka sezonu MLS (rotacje reprezentacyjne, zmęczenie, przetasowania w składach) systematycznie ściąga realne prawdopodobieństwo faworytów poniżej ceny rynkowej — tam był to 8 z 9 kandydatów, tutaj 12 z 12. Wzorzec jest już na tyle powtarzalny (dwa kolejne uruchomienia tego samego wieczoru), że kolejne okna z dużym udziałem sobotniego pakietu MLS powinny z góry zakładać wysoki odsetek odrzuceń, a nie traktować to jako anomalię pojedynczego raportu.</li>
+      <li><strong>Houston Dynamo (@1.65, p_est 0.60 vs implikowane 0.606) i Austin FC (@1.65, p_est 0.58 vs implikowane 0.606) różnią się od progu o mniej niż 3 pkt proc.</strong> — zapisane jako papier właśnie po to, by sprawdzić w kolejnych raportach, czy tak blisko granicy analiza jest niepotrzebnie zbyt ostrożna, czy margines bukmachera rzeczywiście domyka różnicę.</li>
+      <li><strong>Całe wieczorne NHL (9 sparingów przedsezonowych) i cały pakiet tenisowy (8 spotkań WTA/ATP niższej rangi) nie miały żadnej wyceny bukmacherskiej</strong> — ani ESPN (puste "espn_odds"), ani The Odds API (0 wydarzeń dla icehockey_nhl mimo poszerzenia regionów eu+us; klucze tennis_atp/tennis_wta okazały się nieaktywne w tym planie). To potwierdza wcześniejszy wniosek, że sparingi NHL i turnieje tenisowe niższej rangi praktycznie nie mają podaży rynku possible do analizy w tym oknie czasowym z serwera USA — nie warto próbować ich forsować przy kolejnych uruchomieniach, tylko od razu ograniczyć się do lig z realnym pokryciem (tu: MLS).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.15 oznacza ok. 87% implikowanego prawdopodobieństwa, 1.50 — ok. 67%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Ceny pochodzą z bukmacherów europejskich dostępnych przez The Odds API (Pinnacle, William Hill, LeoVegas, Coolbet, NordicBet, 1xBet, Unibet, Winamax…) — polscy bukmacherzy zwykle wyceniają podobnie, ale sprawdź cenę przed obstawieniem.</li>
+      <li>Pozostało ok. 439/500 kredytów The Odds API na ten miesiąc (budżet tego uruchomienia: 4 kredyty, sports keys icehockey_nhl + soccer_usa_mls, rynki h2h+totals, bez --extra-markets).</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore i betexplorer (zablokowane / 403 z adresu IP serwera GitHub Actions — zgodnie z ograniczeniem trybu automatycznego, nie były wywoływane); ESPN standings API (403); The Odds API dla icehockey_nhl (0 wydarzeń — prawdopodobnie sparingi przedsezonowe bez wyceny) i tennis_atp/tennis_wta (klucze nieaktywne w obecnym planie) — zastąpione WebSearch/WebFetch przy researchu drużynowym.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

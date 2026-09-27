@@ -243,7 +243,7 @@ def test_odds_and_shortlist(tmp_path=None):
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     ranges = {r["label"]: r["candidates"] for r in json.loads(out.with_name("bk_sl.json").read_text())["ranges"]}
-    assert set(ranges) == {"1.10-1.19", "1.20-1.29", "1.30-1.44", "1.45-1.60"}
+    assert set(ranges) == {"1.20-1.29", "1.30-1.44", "1.45-1.60"}      # nothing below 1.20
     in_two = [(r, c["key"], c["market_norm"], c["selection"], str(c["line"])) for r, cs in ranges.items() for c in cs]
     assert len(in_two) == len({x[1:] for x in in_two})  # contiguous ranges: nothing listed twice
     sl = ranges["1.20-1.29"]
@@ -322,6 +322,8 @@ def test_ledger_roundtrip(tmp_path=None):
     st = ledger_mod.build_stats(ledger_mod.load(tmp))
     assert st["by_kind"]["pick"]["settled"] == 1 and st["by_kind"]["paper"]["roi"] == -1.0
     assert st["by_tier"]["fair"]["won"] == 1 and st["by_tier"]["value"]["n"] == 0
+    assert st["by_kind"]["pick"]["profit_net_u"] == round(1.25 * 0.88 - 1, 3)   # 12 % stake tax
+    assert pick["ev_net"] == round(0.82 * 1.25 * 0.88 - 1, 4)
     assert "Skuteczność" in ledger_mod.html_fragment(st)
 
 

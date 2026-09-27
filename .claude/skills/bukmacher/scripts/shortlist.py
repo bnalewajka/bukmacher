@@ -2,8 +2,9 @@
 """Turn odds.json into a ranked shortlist per odds range.
 
 Ranges are fixed and contiguous, so every selection lands in exactly one of them (by its
-median price across bookmakers): 1.10-1.19, 1.20-1.29, 1.30-1.44, 1.45-1.60. By default all
-four are built in one run; --ranges picks some, --min/--max defines a custom one.
+median price across bookmakers): 1.20-1.29, 1.30-1.44, 1.45-1.60. By default all
+three are built in one run (nothing below 1.20: after Poland's 12 % stake tax a 1.15 needs a
+~99 % hit rate to break even); --ranges picks some, --min/--max defines a custom one.
 
 Ranking logic (why): the user wants the *most likely* outcome available inside the range,
 not the highest price. So we rank by the best available de-vigged (fair)
@@ -12,7 +13,7 @@ fair probability is an *upper bound* on truth for short prices (margin is loaded
 favourites), so the final judgement must come from the analysis step, not this table.
 
 Usage:
-  python3 shortlist.py odds.json --out shortlist.json                  # all four ranges
+  python3 shortlist.py odds.json --out shortlist.json                  # all three ranges
   python3 shortlist.py odds.json --ranges 1.20-1.29,1.30-1.44 --out shortlist.json
   python3 shortlist.py odds.json --min 1.15 --max 1.25 --per-event 2 --top 40 --out shortlist.json
 """
@@ -29,8 +30,7 @@ from bk_lib import dump_json, load_json, table
 AGG_FAMILIES = {"h2h", "double_chance", "dnb", "btts", "totals", "team_total", "handicap", "sets", "games"}
 
 # (label, lower bound inclusive, upper bound exclusive) — contiguous, so no selection is counted twice.
-RANGES = (("1.10-1.19", 1.10, 1.20), ("1.20-1.29", 1.20, 1.30), ("1.30-1.44", 1.30, 1.45),
-          ("1.45-1.60", 1.45, 1.605))
+RANGES = (("1.20-1.29", 1.20, 1.30), ("1.30-1.44", 1.30, 1.45), ("1.45-1.60", 1.45, 1.605))
 
 
 def main() -> int:

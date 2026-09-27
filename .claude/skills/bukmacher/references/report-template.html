@@ -2,9 +2,9 @@
 <!--
 Report template (Polish by default). Copy this file, keep the structure and the CSS, fill every
 {placeholder} and delete this comment. Repeat the <section class="range"> block once per odds
-range the user chose (default all four: 1.10–1.19, 1.20–1.29, 1.30–1.44, 1.45–1.60, in that
-order), with a matching link in <nav class="ranges">; inside it repeat <article class="pick">
-per proposal (max 3) and <li> per rejected candidate. Anchors: id="z-110", "z-120", "z-130",
+range the user chose (default all three: 1.20–1.29, 1.30–1.44, 1.45–1.60, in that
+order; nothing below 1.20), with a matching link in <nav class="ranges">; inside it repeat <article class="pick">
+per proposal (max 3) and <li> per rejected candidate. Anchors: id="z-120", "z-130",
 "z-145"; pick ids "z-120-1", "z-120-2", …
 
 Rules for filling it:
@@ -108,7 +108,6 @@ Rules for filling it:
     <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
     <p class="summary">{1–2 zdania: w których zakresach jest realna przewaga, gdzie nic nie warto grać, przy jakich kursach nie grać}</p>
     <nav class="ranges">
-      <a href="#z-110">1.10–1.19 · {n} typy</a>
       <a href="#z-120">1.20–1.29 · {n} typy</a>
       <a href="#z-130">1.30–1.44 · {n} typy</a>
       <a href="#z-145">1.45–1.60 · {n} typy</a>
@@ -124,7 +123,7 @@ Rules for filling it:
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th><th>EV po podatku</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -137,6 +136,7 @@ Rules for filling it:
             <td class="num pos">{0.88}</td>
             <td class="num">{0.83}</td>
             <td><span class="tier {value|fair}">{z przewagą|uczciwa cena}</span></td>
+            <td class="num {pos|neg}">{p_est × kurs × 0.88 − 1, np. −4.2%}</td>
           </tr>
         </tbody>
       </table>

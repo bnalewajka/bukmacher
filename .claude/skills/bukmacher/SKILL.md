@@ -1,8 +1,8 @@
 ---
 name: bukmacher
 description: >-
-  Find the most probable sports-betting selections in each odds range (1.10-1.19, 1.20-1.29,
-  1.30-1.44, 1.45-1.60; all four by default) among real matches starting in the next 4/8/12/24 hours, using live fixture feeds, real bookmaker odds and a
+  Find the most probable sports-betting selections in each odds range (1.20-1.29, 1.30-1.44,
+  1.45-1.60; all three by default; nothing below 1.20) among real matches starting in the next 4/8/12/24 hours, using live fixture feeds, real bookmaker odds and a
   deep, self-made pre-match analysis (motivation, form, absences, lineups, schedule, market signals)
   across football, volleyball, basketball, hockey and tennis, and deliver a Polish HTML report with
   several proposals per range, the reasoning, pluses and risks. Use this skill whenever the user asks for
@@ -33,9 +33,10 @@ Two things are the user's call and change the whole run, so ask for them with on
 `AskUserQuestion` call unless the user already stated them in the prompt:
 
 1. **Horizon**: 4 h (Recommended, default), 8 h, 12 h, 24 h.
-2. **Odds ranges** (`multiSelect: true`): `1.10–1.19`, `1.20–1.29`, `1.30–1.44`, `1.45–1.60`.
-   Say in the question that the default is all four — and if the user selects nothing, or
-   answers "all"/"domyślnie", run all four. The ranges are contiguous and fixed in
+2. **Odds ranges** (`multiSelect: true`): `1.20–1.29`, `1.30–1.44`, `1.45–1.60`.
+   Say in the question that the default is all three — and if the user selects nothing, or
+   answers "all"/"domyślnie", run all three. **Nothing below 1.20** (owner's rule): after the
+   12 % Polish stake tax such prices need a ~95–99 % hit rate just to break even. The ranges are contiguous and fixed in
    `scripts/shortlist.py` (`RANGES`); a selection belongs to the range of its *median* price.
    "Other" lets them type a custom range (e.g. `1.25–1.35`) → `--min/--max`. A single price in
    the prompt ("kurs około 1.20") means the range that contains it — don't ask again.
@@ -176,6 +177,12 @@ Then sort each finalist into a tier (bars in `references/analysis.md` §12):
 - **fair** — implied ≤ `p_est` < implied + 0.03: among the most likely outcomes at this price,
   priced about right — a legitimate pick, labelled as such;
 - **drop** — `p_est` < implied: overpriced by your own estimate; never published as a pick.
+
+The tiers compare you with the market. What the owner actually earns is after **Poland's 12 %
+stake tax**: a win pays 0.88 × kurs per unit staked. For every pick also compute
+**EV po podatku = p_est × kurs × 0.88 − 1** and show it; break-even is p_est = 1 / (0.88 × kurs)
+(1.24 → 91.6 %, 1.45 → 78.4 %, 1.60 → 71.0 %). Say plainly in the report when a pick is
+negative after tax (most short prices are) — the owner decides with that number in view.
 
 Never analyse a game that has already started (T0 vs start time) or a price you did not fetch.
 

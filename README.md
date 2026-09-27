@@ -77,6 +77,11 @@ Kurs 1.20 to ~83 % implikowanego prawdopodobieństwa — nawet najlepiej wybrany
 średnio raz na 6–7 razy. To narzędzie analityczne, nie gwarancja. Obstawiaj wyłącznie środki,
 których utratę akceptujesz.
 
+## Podatek
+
+Zakresy kursów: 1.20–1.29, 1.30–1.44, 1.45–1.60 (nic poniżej 1.20). Każdy typ ma „EV po podatku”
+(12 % od stawki: wygrana = 0.88 × kurs), a statystyki pokazują wynik brutto i po podatku.
+
 ## Automatyczne raporty i skuteczność
 
 Strona: **https://bnalewajka.github.io/bukmacher/** — najnowszy raport, statystyki skuteczności,

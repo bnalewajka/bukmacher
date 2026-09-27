@@ -21,7 +21,7 @@ Entry schema (fields the run must fill; the rest is added here):
   tier         picks only: "value" | "fair"
   sources      picks: >= 2 independent sources, >= 1 read in full —
                [{"url": "https://…", "what": "absences", "read": true}, …]; optional for paper
-  range        "1.10-1.19" | "1.20-1.29" | "1.30-1.44" | "1.45-1.60" | "custom"
+  range        "1.20-1.29" | "1.30-1.44" | "1.45-1.60" | "custom"  (older entries: "1.10-1.19")
   sport, competition, home, away, start_utc
   market       "h2h" | "dc" | "dnb" | "totals" | "spread" | "btts"
   selection    h2h/dnb/spread: "home"|"away"|"draw"(h2h only); dc: "1X"|"12"|"X2";
@@ -75,7 +75,10 @@ MARKETS = {"h2h": {"home", "away", "draw"}, "dnb": {"home", "away"}, "spread": {
            "dc": {"1X", "12", "X2"}, "totals": {"over", "under"}, "btts": {"yes", "no"}}
 # a match is assumed over this long after the start; earlier it is not even looked up
 DURATION = {"football": 2.25, "hockey": 3.0, "basketball": 2.75, "tennis": 4.0, "volleyball": 2.75}
-RANGES = ("1.10-1.19", "1.20-1.29", "1.30-1.44", "1.45-1.60")
+RANGES = ("1.20-1.29", "1.30-1.44", "1.45-1.60")
+# Polish betting tax: 12 % of the stake, so a winning bet returns 0.88 x odds per unit staked.
+# Net figures assume the tax is also lost on a push (conservative; books differ).
+TAX = 0.12
 TIERS = {"value": "z przewagą", "fair": "uczciwa cena"}
 STATUS_PL = {"won": "wygrana", "lost": "przegrana", "push": "zwrot", "half_won": "pół wygranej",
              "half_lost": "pół przegranej", "manual": "do ręcznego rozliczenia"}
@@ -181,7 +184,8 @@ def cmd_add(path: str) -> int:
         seen["any"].add(key)
         if e["kind"] == "pick":
             seen["pick"].add(key)
-        e.update({"status": "open", "implied": round(1 / e["odds"], 4), "added_utc": iso(now_utc())})
+        e.update({"status": "open", "implied": round(1 / e["odds"], 4), "added_utc": iso(now_utc()),
+                  "ev_net": round(e["p_est"] * e["odds"] * (1 - TAX) - 1, 4)})
         entries.append(e)
         ids.add(e["id"])
     save(entries)
@@ -403,6 +407,7 @@ def summarize(rows: list[dict]) -> dict:
     decided = [e for e in settled if e["status"] != "push"]
     wins = sum(1 if e["status"] == "won" else 0.5 if e["status"] in ("half_won", "half_lost") else 0 for e in decided)
     profit = sum(e["profit"] for e in settled)
+    profit_net = sum(e["payout"] * (1 - TAX) - 1 for e in settled)
     # Brier / calibration on decided bets only; a half result counts as 0.5
     outcome = lambda e: 1.0 if e["status"] in ("won",) else 0.75 if e["status"] == "half_won" else \
         0.25 if e["status"] == "half_lost" else 0.0
@@ -416,6 +421,7 @@ def summarize(rows: list[dict]) -> dict:
         "avg_p_est": round(sum(e["p_est"] for e in decided) / len(decided), 4) if decided else None,
         "avg_odds": round(sum(e["odds"] for e in settled) / len(settled), 3) if settled else None,
         "profit_u": round(profit, 3), "roi": round(profit / len(settled), 4) if settled else None,
+        "profit_net_u": round(profit_net, 3), "roi_net": round(profit_net / len(settled), 4) if settled else None,
         "brier": round(sum((e["p_est"] - outcome(e)) ** 2 for e in decided) / len(decided), 4) if decided else None,
         "clv_avg": round(sum(clvs) / len(clvs), 4) if clvs else None,
         "clv_pos_share": round(sum(c > 0 for c in clvs) / len(clvs), 4) if clvs else None,
@@ -463,13 +469,16 @@ def html_fragment(st: dict) -> str:
     """Stats section for the report template (uses its CSS classes)."""
     def row(label: str, s: dict) -> str:
         cls = "pos" if s["profit_u"] > 0 else "neg" if s["profit_u"] < 0 else ""
+        net_cls = "pos" if s["profit_net_u"] > 0 else "neg" if s["profit_net_u"] < 0 else ""
         still_open = f" (+{s['open']} otw.)" if s["open"] else ""
         return (f"<tr><td>{label}</td><td class=\"num\">{s['settled']}{still_open}</td>"
                 f"<td class=\"num\">{s['won']}–{s['lost']}–{s['push']}</td><td class=\"num\">{_pct(s['hit_rate'])}</td>"
                 f"<td class=\"num\">{_pct(s['avg_p_est'])}</td><td class=\"num {cls}\">{_sgn(s['profit_u'])} u</td>"
-                f"<td class=\"num {cls}\">{_sgn(s['roi'], True)}</td><td class=\"num\">{_sgn(s['clv_avg'], True)}</td></tr>")
+                f"<td class=\"num {cls}\">{_sgn(s['roi'], True)}</td>"
+                f"<td class=\"num {net_cls}\">{_sgn(s['profit_net_u'])} u</td>"
+                f"<td class=\"num\">{_sgn(s['clv_avg'], True)}</td></tr>")
     head = ("<thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th>"
-            "<th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead>")
+            "<th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead>")
     rows = [row("<strong>Typy — razem</strong>", st["by_kind"]["pick"])]
     rows += [row(f"Typy — {label}", st["by_tier"][t]) for t, label in TIERS.items() if st["by_tier"][t]["n"]]
     rows += [row(f"Typy {r}", s) for r, s in st["by_range"]["pick"].items() if s["n"]]
@@ -483,7 +492,7 @@ def html_fragment(st: dict) -> str:
                 f" → <strong>{STATUS_PL.get(e['status'], e['status'])}</strong>{score}{paper}</li>")
     recent = "".join(item(e) for e in st["recent"])
     return ("<section id=\"skutecznosc\">\n  <h2>Skuteczność</h2>\n"
-            "  <p class=\"meta\">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty "
+            "  <p class=\"meta\">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty "
             "względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza "
             "rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>\n"
             f"  <div class=\"table-wrap\"><table>{head}<tbody>{''.join(rows)}</tbody></table></div>\n"

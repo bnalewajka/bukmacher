@@ -106,10 +106,10 @@ independently from the price and to name the failure mode of the bet.
 
   | Range | Break-even | `p_est` for "value" |
   |---|---|---|
-  | 1.10–1.19 | 91–84 % | 1/kurs + 0.03 (e.g. 1.15 → 0.90) |
   | 1.20–1.29 | 83–78 % | e.g. 1.20 → 0.86, 1.25 → 0.83 |
   | 1.30–1.44 | 77–69 % | e.g. 1.35 → 0.77, 1.40 → 0.74 |
   | 1.45–1.60 | 69–63 % | e.g. 1.50 → 0.70, 1.60 → 0.66 |
 
-  The lower the price, the less the margin forgives: at 1.10–1.19 the book's de-vigged number
-  is usually already above the truth, so a proposal there needs a concrete, verified reason.
+  After the 12 % Polish stake tax the break-even is 1 / (0.88 × kurs): 1.20 → 94.7 %,
+  1.30 → 87.4 %, 1.45 → 78.4 %, 1.60 → 71.0 %. Report EV after tax for every pick; nothing
+  below 1.20 is analysed at all.

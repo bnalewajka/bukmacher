@@ -61,3 +61,8 @@ Cotygodniowy przegląd (`references/self-review.md`) czyta go w całości.
 - Sobota: 6–1; porażka Wydad – Temara U3.5 (1:3). Unders w słabiej opisanych ligach (Botola) opierały się na jednym źródle formy — przy takich ligach wymagać drugiego źródła z wynikami rywala, nie tylko faworyta.
 - Reguła zawieszeń zadziałała jako filtr: Dania (uczciwa cena) → papier, bo żadne przeczytane źródło nie wymieniało zawieszeń. W podglądach Sports Mole sekcja o zawieszeniach bywa pusta — Yahoo („predicted lineup and team news”) wprost pisze „no players suspended”, warto go czytać przy typach 1X2/DC.
 - Źródła potrafią się rozjeżdżać co do godziny (Jemen – Katar, KAC – Graz: 15:30 vs 17:30) i terminarza (Tychy dwa mecze tego samego dnia) — przy rozbieżności nie publikować, dopóki nie potwierdzi tego strona ligi.
+
+## 2026-09-27_1649_typy.html
+- Pierwszy przebieg z zakresami „okazji”: 112 meczów / 7 650 selekcji wycenionych — polskie książki zgodne w granicach kilku %; żadna cena nie przebija uczciwej o ≥ 13.6% (próg podatku) poza artefaktami. Okazje trzeba szukać w informacjach niewycenionych, nie w samym skanie cen.
+- Handicapy tenisowe (±1.5) na betexplorerze: część książek podaje sety, część gemy pod tą samą linią → fałszywe „edge” 20–29%. Wykluczać tenisowe AH z automatycznego rankingu okazji albo porównywać tylko w obrębie jednej książki.
+- Duża informacja (Graz99ers bez 11 graczy, bramkarz-debiutant) była już w kursie (KAC 1.41 w 60 min) — newsy ogłoszone dzień wcześniej rynek zdąża wycenić.

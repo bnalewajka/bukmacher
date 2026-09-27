@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 27.09 16:49</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — niedziela 27.09, 17:30–23:59, zakresy 1.20–1.60 i okazje 1.61–3.00</h1>
+    <p class="meta">Wygenerowano: 2026-09-27 14:49 UTC / 16:49 CEST. Zegar zweryfikowany (clock.py, dryf &lt; 1 s). Przebieg lokalny (polskie IP): betexplorer + ESPN.</p>
+    <p class="meta">Przejrzano 309 meczów w oknie (piłka 191, koszykówka 48, hokej 37, tenis 27, siatkówka 6); po odrzuceniu niższych lig, młodzieży, rezerw i sparingów 137; ceny polskich bukmacherów (STS, eFortuna, Betclic, Superbet, LV BET, Fuksiarz, BETFAN) pobrane dla <strong>112 meczów, 7 650 selekcji</strong> (1X2, DNB, handicapy, sumy, BTTS). Research: 7 finalistów, 10 wyszukiwań, 5 stron przeczytanych w całości. Kursy pobrane 14:45–14:50 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu. Podatek 12% od stawki: wygrana = 0.88 × kurs.</p>
+    <p class="summary"><strong>Dziś wieczorem nie ma zakładu, który byłby na plus po podatku — i nie ma nowego typu, którego nie przepłacałbyś.</strong> Na 112 wycenionych meczach żadna cena polskiego bukmachera nie odbiega od uczciwej ceny rynku o więcej niż ~13,6%, których wymaga podatek, poza artefaktami (handicapy tenisowe mieszające sety z gemami, pojedyncze odstające ceny BETFAN/Betclic). Najmocniejsza informacja dnia — Graz99ers bez 11 graczy i z debiutującym bramkarzem — jest już w kursie (KAC 1.41 w 60 min). Typy z raportu 16:17 pozostają aktualne.</p>
+    <nav class="ranges">
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+      <a href="#z-161">Okazje 1.61–2.00 · 0</a>
+      <a href="#z-201">Okazje 2.01–3.00 · 0</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-161">
+    <h2>Okazje 1.61–2.00</h2>
+    <p class="meta">Warunek: EV po podatku ≥ 0, czyli p_est ≥ 1 / (0.88 × kurs) — przy 1.90 to 59.8%.</p>
+    <p class="empty">Brak okazji. Najbliżej (papier):</p>
+    <ul>
+      <li><strong>KAC – Graz99ers, ponad 5.5 gola @ 1.90 (LV BET; mediana 1.81, 7 bukm.)</strong> — obaj bramkarze rezerwowi (KAC bez Dahma, w Grazu 20-letni debiutant Grascher), Graz z krótką ławką. p_est 0.54 vs wymagane 0.598 → EV po podatku −9.7%. <a href="https://99ers.at/graz99ers-auch-beim-kac-stark-dezimiert/">99ers.at</a>, <a href="https://www.hockey-news.info/kac-muss-gegen-graz99ers-auf-vier-cracks-verzichten/">hockey-news.info</a> (oba przeczytane).</li>
+      <li>Handicapy tenisowe z „przewagą” 20–29% (Challengery Columbus/Porto/Curitiba, zawsze Betclic lub STS) — <strong>odrzucone jako artefakt</strong>: te same linie ±1.5 u jednych bukmacherów to sety, u innych gemy.</li>
+      <li>Olympiacos – PAOK, ponad 185.5 pkt @ 3.85 (BETFAN, mediana 2.25) — jedna odstająca cena, poza zakresem i bez potwierdzenia.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-201">
+    <h2>Okazje 2.01–3.00</h2>
+    <p class="meta">Warunek: p_est ≥ 1 / (0.88 × kurs) — przy 2.55 to 44.6%.</p>
+    <p class="empty">Brak okazji. Najbliżej (papier):</p>
+    <ul>
+      <li><strong>KAC – Graz99ers, KAC −2.5 @ 2.55 (LV BET; mediana 2.35)</strong> — rynek daje KAC 40% na wygraną 3+ golami; nawet przy osłabieniu Grazu oceniam 43% &lt; 44.6% → EV po podatku −3.5%. Uwaga: Graz z tym samym osłabionym składem wygrał w piątek z Vienną 3:2 po dogrywce.</li>
+      <li>Norwegia – Portugalia, remis @ 4.10 (Fuksiarz) — poza zakresem; przewaga rynkowa tylko +3.6%.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="empty">Brak nowych typów (bez powtórek z 16:17).</p>
+    <ul><li><strong>KAC wygra z dogrywką @ 1.28 (LV BET)</strong> — p_est 0.78 = implikowane 0.781, EV po podatku −12%; start 17:30, papier.</li></ul>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="empty">Brak nowych typów.</p>
+    <ul>
+      <li><strong>Lynx – Liberty (WNBA, 1. mecz play-off) @ 1.35 eFortuna</strong> — Liberty bez Sabally, Stewart z bólem kolana, Jones niepewna; ale Liberty wygrały 2 z 3 meczów w sezonie. p_est 0.74 &lt; 0.741 → papier (<a href="https://winsidr.com/2026/09/2026-wnba-playoffs-preview-round-1-new-york-liberty-vs-minnesota-lynx/">winsidr</a>).</li>
+      <li><strong>Dania – Walia @ 1.42 Superbet</strong> — Walia bez Rodona, Lawlora, Wilsona, Brooksa; już na papierze w raporcie 16:17 (brak źródła o zawieszeniach Duńczyków).</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="empty">Brak typów — kandydaci (Bolzano 1.55, Fortaleza 1.57, NY Cosmos 1.63) bez informacji, które zmieniałyby rynkową ocenę.</p>
+  </section>
+
+  <p class="meta">Typy z raportu 16:17 (Bytom, Holandia X2 / wygrana, Austria–Kosowo U3.5, Niemcy–Grecja U4.5, Izrael–Irlandia U3.5) są nadal aktualne i nie zostały tu powtórzone.</p>
+
+<section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">30 (+6 otw.)</td><td class="num">23–6–1</td><td class="num">79%</td><td class="num">79%</td><td class="num pos">+0.98 u</td><td class="num pos">+3.3%</td><td class="num neg">-2.74 u</td><td class="num">+1.3%</td></tr><tr><td>Typy — z przewagą</td><td class="num">10 (+2 otw.)</td><td class="num">7–2–1</td><td class="num">78%</td><td class="num">78%</td><td class="num pos">+0.56 u</td><td class="num pos">+5.6%</td><td class="num neg">-0.71 u</td><td class="num">+1.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">20 (+4 otw.)</td><td class="num">16–4–0</td><td class="num">80%</td><td class="num">79%</td><td class="num pos">+0.42 u</td><td class="num pos">+2.1%</td><td class="num neg">-2.03 u</td><td class="num">+1.2%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">7 (+1 otw.)</td><td class="num">7–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.22 u</td><td class="num pos">+17.4%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">9 (+3 otw.)</td><td class="num">7–2–0</td><td class="num">78%</td><td class="num">82%</td><td class="num neg">-0.10 u</td><td class="num neg">-1.1%</td><td class="num neg">-1.17 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">9 (+2 otw.)</td><td class="num">6–2–1</td><td class="num">75%</td><td class="num">76%</td><td class="num pos">+0.25 u</td><td class="num pos">+2.8%</td><td class="num neg">-0.86 u</td><td class="num">+0.5%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">5</td><td class="num">3–2–0</td><td class="num">60%</td><td class="num">68%</td><td class="num neg">-0.39 u</td><td class="num neg">-7.8%</td><td class="num neg">-0.94 u</td><td class="num">+1.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">42 (+4 otw.)</td><td class="num">30–12–0</td><td class="num">71%</td><td class="num">75%</td><td class="num neg">-3.85 u</td><td class="num neg">-9.2%</td><td class="num neg">-8.42 u</td><td class="num">+1.2%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">12 (+2 otw.)</td><td class="num">12–0–0</td><td class="num">100%</td><td class="num">83%</td><td class="num pos">+2.13 u</td><td class="num pos">+17.8%</td><td class="num pos">+0.43 u</td><td class="num">+3.0%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">13 (+1 otw.)</td><td class="num">9–4–0</td><td class="num">69%</td><td class="num">77%</td><td class="num neg">-1.83 u</td><td class="num neg">-14.1%</td><td class="num neg">-3.17 u</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">10 (+1 otw.)</td><td class="num">7–3–0</td><td class="num">70%</td><td class="num">71%</td><td class="num neg">-0.36 u</td><td class="num neg">-3.6%</td><td class="num neg">-1.52 u</td><td class="num">+0.1%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">7</td><td class="num">2–5–0</td><td class="num">29%</td><td class="num">62%</td><td class="num neg">-3.78 u</td><td class="num neg">-54.0%</td><td class="num neg">-4.17 u</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Real Salt Lake – New England Revolution: totals under 3.5 @ 1.6 → <strong>wygrana</strong> (3:0)</li><li>Nashville SC – Toronto FC: h2h home @ 1.42 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Houston Dynamo FC – Sporting Kansas City: h2h home @ 1.6 → <strong>przegrana</strong> (0:2) <em>(papier)</em></li><li>Houston Dynamo FC – Sporting Kansas City: h2h home @ 1.65 → <strong>przegrana</strong> (0:2) <em>(papier)</em></li><li>Austin FC – San Diego FC: totals over 2.5 @ 1.65 → <strong>wygrana</strong> (3:3) <em>(papier)</em></li><li>Philadelphia Union – Orlando City SC: h2h home @ 1.57 → <strong>wygrana</strong> (4:2) <em>(papier)</em></li><li>Wydad AC – Widad Temara: totals under 3.5 @ 1.25 → <strong>przegrana</strong> (1:3)</li><li>France – Poland: h2h away @ 1.32 → <strong>wygrana</strong> (1:3)</li><li>Albania – Belarus: totals under 3.5 @ 1.27 → <strong>wygrana</strong> (2:0)</li><li>Slovakia – Moldova: spread home -1.5 @ 1.53 → <strong>wygrana</strong> (2:0)</li><li>North Macedonia – Switzerland: h2h away @ 1.35 → <strong>wygrana</strong> (0:3) <em>(papier)</em></li><li>Slovakia – Moldova: h2h home @ 1.15 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>North Macedonia – Switzerland: h2h away @ 1.33 → <strong>wygrana</strong> (0:3) <em>(papier)</em></li><li>Venezia – Cantu: h2h home @ 1.19 → <strong>wygrana</strong> (85:73)</li><li>ZSC Lions – EHC Kloten: h2h home @ 1.28 → <strong>wygrana</strong> (3:2)</li></ul>
+</section>
+
+  <section id="wnioski">
+    <h2>Wnioski</h2>
+    <ul>
+      <li>Skan cen 112 meczów pokazał, że polscy bukmacherzy są między sobą zgodni co do ceny w granicach kilku procent; „okazje” po podatku (≥ 13.6% ponad uczciwą cenę) pojawiają się tylko jako artefakty danych. Realna droga do okazji to informacja, której kurs nie zdążył uwzględnić — dziś jej nie było.</li>
+      <li>Handicapy tenisowe na betexplorerze mieszają rynki (sety vs gemy) pod tą samą linią — do odfiltrowania w skanie cen.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO. Graj odpowiedzialnie — tylko to, co możesz stracić.</li>
+      <li>Rozbieżność godzin: Lynx–Liberty (betexplorer 20:00, źródła USA 21:00 PL) — sprawdź u bukmachera.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-27 20:50</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakresy kursów: 1.20–1.29, 1.30–1.44, 1.45–1.60, okazje 1.61–2.00 i 2.01–3.00</h1>
+    <p class="meta">Wygenerowano: 2026-09-27 18:45 UTC / 20:45 CEST (tryb automatyczny, GitHub Actions, bez pytań — parametry z polecenia). Zegar zweryfikowany: tak (GitHub API, Cloudflare, Google, Sofascore, ESPN — rozbieżność &lt;1 s). Okno: 27.09 20:39–28.09 04:39 CEST (18:39–02:39 UTC).</p>
+    <p class="meta">Przeanalizowano 24 mecze startujące w oknie (piłka nożna 18, koszykówka 3, tenis 3; siatkówka i hokej — brak wydarzeń w oknie) z ESPN. Kursy z ESPN BET (DraftKings, tylko orientacyjnie — US-only) i The Odds API (Pinnacle, Unibet, Betsson, William Hill, 1xBet, Marathonbet, NordicBet, LeoVegas, Coolbet, Winamax, PMU, Tipico, Sport888 — europejskie książki, ceny zbliżone do polskich bukmacherów). Uruchomienie z serwera USA: Sofascore i betexplorer zablokowane (403/429), więc bez context.py — research wyłącznie WebSearch/WebFetch. Kursy pobrane 18:39–18:45 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u własnego bukmachera przed postawieniem zakładu. Ceny podane tu pochodzą z europejskich książek (Odds API) — polski bukmacher może różnić się o kilka procent.</p>
+    <p class="summary">Realna przewaga w tym oknie jest bardzo skromna: tylko 2 typy przeszły próg „uczciwej ceny”, oba w paśmie 1.45–1.60 (WNBA play-off i Liga MX), i oba mają ujemną EV po polskim podatku od zakładu — sygnał, że przy tych kursach nawet trafiony typ nie daje zarobku po opodatkowaniu. Pasma 1.20–1.29, 1.30–1.44 oraz obie „okazje” (1.61–2.00, 2.01–3.00) są dziś puste: albo w oknie nie ma tak krótko wycenionego faworyta, albo jedyna dostępna cena to amerykańska książka niedostępna dla polskiego gracza, albo własny szacunek prawdopodobieństwa wypadł poniżej progu opłacalności rynku.</p>
+    <nav class="ranges">
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 0 typów</a>
+      <a href="#z-145">1.45–1.60 · 2 typy</a>
+      <a href="#z-161">Okazje 1.61–2.00 · 0</a>
+      <a href="#z-201">Okazje 2.01–3.00 · 0</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78 %; wymagane p_est ≈ implikowane + 0.03. W tym oknie: 0 selekcji w tym paśmie.</p>
+    <p class="empty">Brak. Żaden faworyt w całym 8-godzinnym oknie nie był wyceniony tak krótko — najkrótsze realne ceny (koszykarskie mecze WNBA, patrz niżej) zaczynały się dopiero od 1.32–1.35, czyli już w kolejnym paśmie. Nic nie zostało tu sztucznie wciśnięte.</p>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %; wymagane p_est ≈ implikowane + 0.03. W paśmie: 5 selekcji, przeanalizowano 4 (jedna — Curaçao–Nikaragua — pominięta z braku czasu na research cienko opisanego meczu Ligi Narodów CONCACAF i braku ceny poza DraftKings).</p>
+    <p class="empty">Brak typu — żaden kandydat nie osiągnął nawet progu „uczciwej ceny” po researchu, a jedna obiecująca selekcja miała tylko amerykańską wycenę. Najbliżej progu: Columbus Crew – Inter Miami CF, „Over 2.5” @ 1.44 (nordicbet) — własny szacunek 67 % przy wymaganych ≥ 69,4 %; zapisany do rejestru jako obserwacja (papier).</p>
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Atlanta Dream – Washington Mystics (WNBA, gra 1 rundy 1 play-off), zwycięstwo Atlanty @ 1.34 (pinnacle)</strong> — rynek wycenia 74,6%, nasz szacunek 60–63%: Waszyngton wygrał sezonowy bilans 2–1, a w tych dwóch meczach obrona Austin/Iriafen ograniczyła Angel Reese do 13 i 7 punktów — to nie hipoteza, tylko powtórzony wzorzec.</li>
+      <li><strong>Golden State Valkyries – Dallas Wings (WNBA, gra 1 rundy 1 play-off), zwycięstwo Golden State @ 1.35 (unibet_se)</strong> — rynek wycenia 74,1%, nasz szacunek 66–68%: Dallas kończy sezon serią 7–1 ze zdrową Paige Bueckers, a Valkyries nigdy nie wygrały meczu play-off w historii klubu (0–2 w zeszłym sezonie) i potknęły się pod koniec sezonu zasadniczego.</li>
+      <li><strong>Curaçao – Nikaragua (Liga Narodów CONCACAF), zwycięstwo Curaçao @ 1.392</strong> — jedyna cena to DraftKings (US-only, niedostępna dla polskiego gracza), a mecz nie zmieścił się w budżecie researchu tego uruchomienia — pominięty bez analizy, nie odrzucony merytorycznie.</li>
+      <li><strong>Germany – Greece, Israel – Republic of Ireland, Norway – Portugal, Real Oviedo – Sporting Gijón</strong> — wszystkie zaczynały się 5–20 minut od momentu zbierania danych; przy czasie potrzebnym na research i raport rozpoczęłyby się, zanim jakikolwiek typ mógłby zostać opublikowany — wykluczone z zasady „nie analizować meczu, który już się zaczął”.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63 %; wymagane p_est ≈ implikowane + 0.03. W paśmie: 17 selekcji, głęboki research na 5 (WNBA, Liga MX, NWSL, towarzyski Boliwia–Paragwaj).</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th><th>EV po podatku</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">22:00</td>
+            <td>Las Vegas Aces – Indiana Fever</td>
+            <td>WNBA play-off (G1, Bo3)</td>
+            <td>Zwycięstwo Las Vegas</td>
+            <td class="num">1.57<span class="note">pinnacle, The Odds API, 18:44 UTC</span></td>
+            <td class="num pos">0.64</td>
+            <td class="num">0.637</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+            <td class="num neg">−11.6%</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="num">03:00 (28.09)</td>
+            <td>León – FC Juárez</td>
+            <td>Liga MX (Meksyk)</td>
+            <td>Zwycięstwo León</td>
+            <td class="num">1.58<span class="note">pinnacle, The Odds API, 18:45 UTC</span></td>
+            <td class="num pos">0.63</td>
+            <td class="num">0.633</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+            <td class="num neg">−12.4%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-145-1">
+      <h3>1. Las Vegas Aces – Indiana Fever — zwycięstwo Las Vegas @ 1.57 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.45–1.60 · WNBA, play-off rundy 1, gra 1 z 3 (Bo3) · 27.09 22:00 CEST (20:00 UTC) · 1.57 pinnacle, The Odds API, pobrano 18:44 UTC · p_est 0.64 vs implikowane 0.637</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> To jedyny kandydat w całym oknie, w którym własny szacunek prawdopodobieństwa (uwzględniający realny problem zdrowotny Indiany) w ogóle dogania próg opłacalności rynku — pozostałe dwa mecze WNBA (Atlanta, Golden State) wypadły poniżej progu z konkretnych, udokumentowanych powodów meczowych (patrz odrzuceni w paśmie 1.30–1.44).</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Gra 1 najlepszego z 3 rundy 1 play-off (3. vs 6. miejsce) — przegrana nie kończy sezonu, ale stawia pod presją serwisu na wyjeździe.</dd>
+        <dt>Forma</dt><dd>Las Vegas wchodzi w play-offy z serią 7 zwycięstw z rzędu; A'ja Wilson walczy o 3. z rzędu tytuł MVP (26,2 pkt/mecz). Indiana w sezonie zasadniczym pokonała jednak Las Vegas 2 razy na 3 spotkania.</dd>
+        <dt>Absencje</dt><dd>Indiana: Tyasha Harris — sezon zakończony (złamanie nogi); Aliyah Boston — wątpliwa (nawracający uraz podudzia, trenowała w sobotę); Caitlin Clark grająca, ale ostatni mecz sezonu zasadniczego zaliczyła fatalnie (1/12 z gry).</dd>
+        <dt>Składy</dt><dd>Oficjalne składy WNBA publikowane zwykle tuż przed startem; kluczowa niewiadoma to minutaż Boston.</dd>
+        <dt>Terminarz</dt><dd>Obie drużyny miały pełny tydzień przygotowań po zakończeniu sezonu zasadniczego — brak czynnika zmęczenia.</dd>
+        <dt>Miejsce i warunki</dt><dd>Michelob Ultra Arena, Las Vegas — przewaga własnej hali.</dd>
+        <dt>Styl gry</dt><dd>Las Vegas: najlepsza defensywa ligi napędzana przez Wilson. Indiana: silnie uzależniona od duetu Clark/Boston pod koszem — obszar akurat osłabiony kontuzją.</dd>
+        <dt>Sygnały rynkowe</dt><dd>14 książek wycenia mecz, cena stabilna w wąskim przedziale 1.50–1.57 (Pinnacle najwyżej) — brak wyraźnego dryfu w żadną stronę.</dd>
+        <dt>Inne</dt><dd>Format Bo3 oznacza, że nawet porażka gospodarza w G1 nie przesądza serii — ale kurs dotyczy wyłącznie tego meczu.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Pełne zdrowie i gorąca forma Las Vegas kontra osłabiona kontuzjami Indiana.</li><li>Przewaga własnej hali w meczu eliminacyjnym.</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Indiana wygrała 2 z 3 meczów sezonu zasadniczego z tym rywalem — to nie jest hipotetyczne zagrożenie, tylko powtórzony wynik.</li><li>Mecze play-off bywają nieprzewidywalne niezależnie od bilansu sezonu.</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Boston gra mimo urazu na rozsądnym poziomie, a Clark odbija się formą — dokładnie tak, jak Indiana zrobiła to dwukrotnie w sezonie zasadniczym przeciw tej samej Las Vegas.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 1):</strong> <a href="https://www.si.com/wnba/fever/what-we-know-aliyah-boston-injury-status-update-fever-vs-aces-game-1">SI.com</a> — status kontuzji Boston (przeczytane w całości), <a href="https://sports.yahoo.com/articles/caitlin-clark-features-indiana-fever-070612256.html">Yahoo Sports</a> — raport kontuzji Indiany, forma Clark, <a href="https://www.cbssports.com/wnba/gametracker/preview/WNBA_20260927_IND@LVA/">CBS Sports</a> — zapowiedź meczu, seeding.</p>
+    </article>
+
+    <article class="pick" id="z-145-2">
+      <h3>2. León – FC Juárez — zwycięstwo León @ 1.58 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.45–1.60 · Liga MX (Meksyk) · 28.09 03:00 CEST (01:00 UTC) · 1.58 pinnacle, The Odds API, pobrano 18:45 UTC · p_est 0.63 vs implikowane 0.633</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> León ma udokumentowaną passę czystych kont w domu i historię dominacji nad tym akurat rywalem, a Juárez — mimo pierwszego zwycięstwa sezonu — wciąż strukturalnie jest najgorszą drużyną ligi. To jedyny kandydat piłkarski w tym paśmie z ceną dostępną poza DraftKings i z solidnym, dwukrotnie potwierdzonym researchem.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>León broni górnej połowy tabeli (7. miejsce, 14 pkt po 9 kolejkach); Juárez gra wyłącznie o honor — ostatnie miejsce w tabeli nawet po pierwszym zwycięstwie sezonu.</dd>
+        <dt>Forma</dt><dd>León: 3 zwycięstwa z rzędu u siebie, wszystkie do zera. Juárez: 8 kolejek bez zwycięstwa (4 bramki strzelone, 23 stracone), przełamane dopiero 18.09 wygraną 2:0 z Tigres pod nowym trenerem Gustavo Lemą.</dd>
+        <dt>Absencje</dt><dd>W przeczytanych źródłach nie znaleziono nazwisk istotnych, potwierdzonych absencji po żadnej ze stron — niepewność w obie strony.</dd>
+        <dt>Składy</dt><dd>Brak oficjalnie potwierdzonych składów przed publikacją tego raportu; standardowo ogłaszane bliżej startu.</dd>
+        <dt>Terminarz</dt><dd>Zwykły tydzień ligowy dla obu drużyn, brak sygnałów przeciążenia kalendarza.</dd>
+        <dt>Miejsce i warunki</dt><dd>Estadio León — gospodarz wygrał 4 z 4 ostatnich spotkań z Juárez na tym stadionie.</dd>
+        <dt>Styl gry</dt><dd>Solidna, stała defensywa gospodarzy kontra zespół tracący blisko 3 gole na mecz w tym sezonie.</dd>
+        <dt>Sygnały rynkowe</dt><dd>17 książek, cena stabilna (mediana 1.54, Pinnacle 1.58) — brak wyraźnego dryfu.</dd>
+        <dt>Inne</dt><dd>Pierwsze podsumowania wyszukiwania (AI) błędnie sugerowały, że Juárez jest w dobrej formie/wyżej w tabeli — sprzeczne z rzeczywistością. Skorygowane dopiero po dwóch w pełni przeczytanych, niezależnych źródłach (FoxSports MX i Récord), które zgodnie potwierdzają ostatnie miejsce Juárez z 3 punktami.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Passa czystych kont u siebie i wyraźna przewaga h2h na własnym stadionie.</li><li>Rywal wciąż najgorszy w lidze mimo jednego zwycięstwa.</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Świeża pewność siebie Juárez po pierwszym zwycięstwie sezonu — klasyczna "pułapka" po przełamaniu złej passy.</li><li>Krawędź nad progiem opłacalności jest minimalna (0,63 vs 0,633) — to praktycznie cena rynkowa, nie odkryta przewaga.</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Juárez, napędzony pierwszym zwycięstwem sezonu i nowym trenerem, gra odważniej niż wcześniej i wywozi remis lub niespodziewane zwycięstwo z kontry bądź stałego fragmentu gry.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 2):</strong> <a href="https://www.foxsports.com.mx/2026/09/18/liga-mx-tabla-general-de-posiciones-tras-la-jornada-9-del-torneo-apertura-2026/">Fox Sports MX</a> — tabela ligowa, forma Juárez (przeczytane w całości), <a href="https://www.record.com.mx/historia/asi-quedo-la-tabla-general-de-la-jornada-9-del-apertura-2026-2026092006074583610">Récord</a> — potwierdzenie ostatniego miejsca Juárez z 3 pkt (przeczytane w całości), <a href="https://www.clarosports.com/futbol/liga-mx/tabla-de-posiciones-del-apertura-2026-quien-es-el-lider-de-la-liga-mx-jornada-9/">ClaroSports</a> — potwierdzająca tabela.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Bolivia – Paraguay (towarzyski, Audi Field, Waszyngton — bez czynnika wysokościowego, wbrew wstępnym założeniom), zwycięstwo Paragwaju @ 1.465</strong> — własny szacunek 58–60% wobec progu 68,3%: obie kadry w pełnym oknie FIFA i w miarę silnych składach, ale Paragwaj świeżo po Mundialu może rotować, a mecze towarzyskie bywają z natury nieprzewidywalne. Jedyna cena to DraftKings (US-only) — i tak nieprzeznaczona do publikacji.</li>
+      <li><strong>Bay FC – Orlando Pride (NWSL), Over 2.5 @ 1.588</strong> — własny szacunek ok. 58%, dokładnie zgodny z ceną rynkową (58,1%) — brak przewagi. Cena tylko z DraftKings (US-only).</li>
+      <li><strong>Utah Royals – North Carolina Courage (NWSL), Over 2.5 @ 1.541</strong> — własny szacunek 66% wobec rynkowych 59,4% (obie drużyny osłabione: kapitan i obrończyni Utah zawieszone czerwonymi kartkami, Courage bez 5 zawodniczek rotacji) — realna przewaga wg researchu, ale jedyna dostępna cena to DraftKings (US-only, niedostępna dla polskiego gracza) — zapisany do rejestru jako obserwacja (papier), nie jako typ.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-161">
+    <h2>Okazje 1.61–2.00</h2>
+    <p class="meta">Kryterium: dodatnia EV po podatku (p_est × kurs × 0.88 ≥ 1). W paśmie: 15 selekcji, głęboki research na kandydatach z Columbus Crew – Inter Miami i León – Juárez.</p>
+    <p class="empty">Brak typu — żaden kandydat nie osiągnął dodatniej EV po podatku. Najbliżej: Columbus Crew – Inter Miami CF, „Over 3.5” @ 2.04 (onexbet) — potrzebne p_est ≥ 55,7% po podatku, własny szacunek ok. 50% (zgodny z rynkową wyceną, obie defensywy dziurawe, ale bez wyraźnej przewagi w żadną stronę). León – Juárez „Over 2.5” @ 1.65 potrzebowałby p_est ≥ 68,9%, a szacunek to ok. 60%.</p>
+  </section>
+
+  <section class="range" id="z-201">
+    <h2>Okazje 2.01–3.00</h2>
+    <p class="meta">Kryterium: dodatnia EV po podatku (p_est × kurs × 0.88 ≥ 1). W paśmie: 15 selekcji, głęboki research na Columbus Crew – Inter Miami.</p>
+    <p class="empty">Brak typu. Najbliżej: Inter Miami CF (zwycięstwo) @ 2.35 (onexbet) — potrzebne p_est ≥ 48,4% po podatku, własny szacunek 44% (Messi i Suárez potwierdzeni w składzie i w formie, ale Miami gra bez aż 7 zawodników rotacji, część na wyjazdach reprezentacyjnych, część kontuzjowanych na dłużej) — zapisany do rejestru jako obserwacja (papier), zbyt blisko granicy, by to zignorować przy kolejnych oknach. Ciekawostka poza zakresem: w dwóch meczach WNBA z pasma 1.30–1.44 (Atlanta Dream, Golden State Valkyries) realna wartość według naszego researchu leżała po stronie underdoga (odpowiednio Washington Mystics @ 3.44 i Dallas Wings @ 3.42, oba u Pinnacle) — ale te kursy przekraczają ustalony pułap 3.00, więc nie są tu rekomendowane.</p>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">34 (+2 otw.)</td><td class="num">26–7–1</td><td class="num">79%</td><td class="num">79%</td><td class="num pos">+0.78 u</td><td class="num pos">+2.3%</td><td class="num neg">-3.39 u</td><td class="num">+1.4%</td></tr><tr><td>Typy — z przewagą</td><td class="num">11 (+1 otw.)</td><td class="num">8–2–1</td><td class="num">80%</td><td class="num">78%</td><td class="num pos">+1.01 u</td><td class="num pos">+9.2%</td><td class="num neg">-0.43 u</td><td class="num">+1.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">23 (+1 otw.)</td><td class="num">18–5–0</td><td class="num">78%</td><td class="num">80%</td><td class="num neg">-0.23 u</td><td class="num neg">-1.0%</td><td class="num neg">-2.96 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">10 (+2 otw.)</td><td class="num">8–2–0</td><td class="num">80%</td><td class="num">82%</td><td class="num pos">+0.12 u</td><td class="num pos">+1.2%</td><td class="num neg">-1.09 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">11</td><td class="num">7–3–1</td><td class="num">70%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-2.7%</td><td class="num neg">-1.58 u</td><td class="num">+0.5%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">5</td><td class="num">3–2–0</td><td class="num">60%</td><td class="num">68%</td><td class="num neg">-0.39 u</td><td class="num neg">-7.8%</td><td class="num neg">-0.94 u</td><td class="num">+1.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">46 (+4 otw.)</td><td class="num">34–12–0</td><td class="num">74%</td><td class="num">74%</td><td class="num neg">-1.56 u</td><td class="num neg">-3.4%</td><td class="num neg">-6.90 u</td><td class="num">+1.2%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">13 (+2 otw.)</td><td class="num">9–4–0</td><td class="num">69%</td><td class="num">77%</td><td class="num neg">-1.83 u</td><td class="num neg">-14.1%</td><td class="num neg">-3.17 u</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">11 (+1 otw.)</td><td class="num">8–3–0</td><td class="num">73%</td><td class="num">71%</td><td class="num pos">+0.04 u</td><td class="num pos">+0.4%</td><td class="num neg">-1.28 u</td><td class="num">+0.2%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">7</td><td class="num">2–5–0</td><td class="num">29%</td><td class="num">62%</td><td class="num neg">-3.78 u</td><td class="num neg">-54.0%</td><td class="num neg">-4.17 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num ">+0.00 u</td><td class="num">—</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">43%</td><td class="num pos">+1.55 u</td><td class="num pos">+155.0%</td><td class="num pos">+1.24 u</td><td class="num">—</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Serbia – Netherlands: dc X2 @ 1.13 → <strong>wygrana</strong> (1:2)</li><li>Serbia – Netherlands: h2h away @ 1.45 → <strong>wygrana</strong> (1:2)</li><li>Austria – Kosovo: totals under 3.5 @ 1.33 → <strong>przegrana</strong> (3:1)</li><li>Denmark – Wales: h2h home @ 1.41 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Klagenfurt – Graz99ers: spread home -2.5 @ 2.55 → <strong>wygrana</strong> (6:2) <em>(papier)</em></li><li>Bytom – Krakow: h2h home @ 1.22 → <strong>wygrana</strong> (7:3)</li><li>Tortona – Verona: h2h home @ 1.19 → <strong>wygrana</strong> (101:93) <em>(papier)</em></li><li>Torun – Sanok: h2h home @ 1.13 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Real Salt Lake – New England Revolution: totals under 3.5 @ 1.6 → <strong>wygrana</strong> (3:0)</li><li>Nashville SC – Toronto FC: h2h home @ 1.42 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Houston Dynamo FC – Sporting Kansas City: h2h home @ 1.6 → <strong>przegrana</strong> (0:2) <em>(papier)</em></li><li>Houston Dynamo FC – Sporting Kansas City: h2h home @ 1.65 → <strong>przegrana</strong> (0:2) <em>(papier)</em></li><li>Austin FC – San Diego FC: totals over 2.5 @ 1.65 → <strong>wygrana</strong> (3:3) <em>(papier)</em></li><li>Philadelphia Union – Orlando City SC: h2h home @ 1.57 → <strong>wygrana</strong> (4:2) <em>(papier)</em></li><li>Wydad AC – Widad Temara: totals under 3.5 @ 1.25 → <strong>przegrana</strong> (1:3)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Austria – Kosovo, Under 3.5 @ 1.33, przegrana (3:1)</strong> — mecz miał otwarty, ofensywny charakter mimo analizy wskazującej na solidność defensywną obu stron; pasmo 1.45–1.60 pozostaje najsłabszym koszykiem skuteczności (typy 60%, papier na dłuższą metę 29%) — przy underach w tym paśmie trzeba mocniej ważyć tempo i styl obu drużyn, nie tylko bilans bramkowy.</li>
+      <li><strong>Klagenfurt – Graz99ers, handicap -2.5 @ 2.55, wygrana (6:2, papier)</strong> — dobry przykład działania okazji: informacja o 11 brakujących zawodnikach i bramkarzu-debiutancie była już częściowo w kursie 60 minut, ale handicap meczowy (2.5) jeszcze nie w pełni ją uwzględniał. Potwierdza sens szukania okazji w rynkach pochodnych, nie tylko w 1X2.</li>
+      <li><strong>Dzisiejsze WNBA (Atlanta Dream, Golden State Valkyries)</strong> — dwóch z trzech faworytów rundy 1 play-off okazało się przecenionych względem naszego researchu (Reese vs obrona Waszyngtonu; Valkyries 0–2 w historii play-off klubu kontra rozpędzone Dallas), a realna wartość leżała po stronie underdoga powyżej pułapu 3.00 ustalonego dla tego uruchomienia — więc nie trafiła do raportu. Warto rozważyć osobne śledzenie takich przypadków, gdyby właściciel kiedyś podniósł górny pułap zakresów.</li>
+      <li><strong>León – Juárez</strong> — pierwsze podsumowania wyszukiwania błędnie sugerowały dobrą formę Juárez; złapane dopiero po dwóch w pełni przeczytanych, niezależnych źródłach (Fox Sports MX, Récord). Potwierdza wcześniejszą zasadę z tego dziennika: snippety wyszukiwania to nie dowód, zwłaszcza w ligach z mniejszym pokryciem redakcyjnym w języku angielskim.</li>
+      <li><strong>Automatyczny dobór kluczy The Odds API</strong> — domyślny budżet kredytowy (credit-budget 4, 2 klucze) pominął WNBA i Liga MX mimo realnych wydarzeń w oknie; jedyną wyceną pozostałby wtedy DraftKings (US-only, bezużyteczny dla polskiego gracza). Trzeba było ręcznie dociągnąć te dwa klucze osobnymi wywołaniami odds.py. Przy oknach z dużym udziałem lig USA/Meksyku warto od razu podnosić budżet kredytowy, żeby auto-dobór złapał więcej kluczy za jednym razem.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87 % implikowanego prawdopodobieństwa, 1.50 — ok. 67 %: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore i betexplorer (403/429 z serwera USA — pominięte celowo zgodnie z regułami trybu automatycznego, zastąpione ESPN + The Odds API + WebSearch/WebFetch). Squawka i El Sol de León (403 przy próbie doczytania Liga MX) — zastąpione Fox Sports MX i Récord.</li>
+      <li>The Odds API: pozostało 425 kredytów z miesięcznego limitu 500 po tym uruchomieniu (budżet dla WNBA i Liga MX dociągnięty ręcznie ponad domyślny automatyczny dobór).</li>
+      <li>Oba opublikowane typy mają ujemną EV po 12% polskim podatku od zakładu (−11,6% i −12,4%) — to typowe dla kursów w tym przedziale nawet przy trafnej analizie; decyzja o postawieniu zakładu należy do właściciela z tą liczbą przed oczami.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

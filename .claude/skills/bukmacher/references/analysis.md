@@ -27,6 +27,10 @@ independently from the price and to name the failure mode of the bet.
 - Injuries, suspensions (card accumulation!), illness, international duty, personal leave,
   transfer-listed players frozen out. Not just "is the star out" but who plays instead and
   how the team performed without them this season.
+- Football: check suspensions in a source that lists cards/suspensions for this round (league
+  or federation site, a news piece naming who is banned) — a predicted XI is not that check.
+  A "probable lineup" once listed two suspended starters of the favourite (Série B, entry
+  2026-09-25_2052_typy#1, lost). No such check read → the candidate stays paper.
 - Goalkeeper / starting goalie / setter / point guard — the single position that changes the
   probability the most in each sport. In hockey, confirm the starting goalie or discount the bet.
 - Tennis: injuries carried from the last tournament, medical time-outs, walkovers this month,

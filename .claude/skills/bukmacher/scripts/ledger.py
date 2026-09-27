@@ -5,6 +5,8 @@ One JSON object per line in <project>/data/ledger.jsonl. Two kinds of entries:
   pick   — a proposal published in a report (counts for the headline stats), with a tier:
            "value" (p_est ≥ implied + 0.03) or "fair" (implied ≤ p_est < implied + 0.03),
   paper  — a candidate dropped just below implied (tracked to learn whether p_est is too low).
+A selection already in the ledger (same teams, day, market, selection, line) is not added
+again as paper, nor again as a pick — one real result must count once.
 
 Commands:
   add PICKS.json           append entries (a JSON list; schema below), validated
@@ -144,11 +146,21 @@ def validate(e: dict) -> list[str]:
     return errs
 
 
+def selection_key(e: dict) -> tuple:
+    """Identity of a bet: a later report re-proposing it must not count the same result twice."""
+    line = e.get("line")
+    return (str(e.get("home", "")).strip().lower(), str(e.get("away", "")).strip().lower(),
+            str(e.get("start_utc", ""))[:10], e.get("market"), e.get("selection"),
+            None if line is None else float(line))
+
+
 def cmd_add(path: str) -> int:
     new = json.loads(Path(path).read_text())
     new = new if isinstance(new, list) else [new]
     entries = load()
     ids = {e["id"] for e in entries}
+    seen = {"pick": {selection_key(e) for e in entries if e.get("kind") == "pick"},
+            "any": {selection_key(e) for e in entries}}
     bad = 0
     for i, e in enumerate(new, 1):
         errs = validate(e)
@@ -161,6 +173,14 @@ def cmd_add(path: str) -> int:
         if e["id"] in ids:
             eprint(f"[ledger] {e['id']} already recorded, skipped")
             continue
+        key = selection_key(e)
+        if key in seen["pick" if e["kind"] == "pick" else "any"]:
+            eprint(f"[ledger] {e['id']} ({e['home']} – {e['away']} {e['market']} {e['selection']}) "
+                   f"already in the ledger as the same selection, skipped")
+            continue
+        seen["any"].add(key)
+        if e["kind"] == "pick":
+            seen["pick"].add(key)
         e.update({"status": "open", "implied": round(1 / e["odds"], 4), "added_utc": iso(now_utc())})
         entries.append(e)
         ids.add(e["id"])

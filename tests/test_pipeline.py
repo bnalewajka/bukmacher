@@ -325,6 +325,30 @@ def test_ledger_roundtrip(tmp_path=None):
     assert "Skuteczność" in ledger_mod.html_fragment(st)
 
 
+def test_ledger_skips_repeated_selection():
+    """A later report re-proposing the same bet must not count its result twice (paper or pick)."""
+    tmp = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_test_dupes.jsonl"
+    tmp.unlink(missing_ok=True)
+    ledger_mod.LEDGER = tmp
+    base = {"report": "a.html", "kind": "paper", "range": "1.45-1.60", "sport": "football", "competition": "MLS",
+            "home": "Houston Dynamo FC", "away": "Sporting Kansas City", "start_utc": "2026-09-27T00:30:00Z",
+            "market": "h2h", "selection": "home", "line": None, "period": "ft", "odds": 1.60,
+            "bookmaker": "x", "source": "oddsapi", "p_est": 0.58,
+            "ref": {"source": "oddsapi", "sport_key": "soccer_usa_mls", "event_id": "e1"}}
+    pick = {**base, "kind": "pick", "tier": "fair", "p_est": 0.66,
+            "sources": [{"url": "https://a.com/1", "read": True}, {"url": "https://b.com/2", "read": False}]}
+    first = tmp.with_name("bk_dupes_a.json"); first.write_text(json.dumps([base, {**base, "selection": "away"}]))
+    assert ledger_mod.cmd_add(str(first)) == 0
+    second = tmp.with_name("bk_dupes_b.json")
+    second.write_text(json.dumps([{**base, "report": "b.html", "odds": 1.65},          # same paper again -> skipped
+                                  {**pick, "report": "b.html"},                        # promoted to a pick -> kept
+                                  {**pick, "report": "b.html", "odds": 1.62},          # same pick twice -> skipped
+                                  {**base, "report": "b.html", "line": 2.5, "market": "totals", "selection": "over"}]))
+    assert ledger_mod.cmd_add(str(second)) == 0
+    kinds = [(e["kind"], e["selection"], e["odds"]) for e in ledger_mod.load(tmp)]
+    assert kinds == [("paper", "home", 1.60), ("paper", "away", 1.60), ("pick", "home", 1.60), ("paper", "over", 1.60)]
+
+
 def test_espn_window_across_midnight():
     """ESPN rejects a date range with 400; each day must be asked separately and merged."""
     calls = []

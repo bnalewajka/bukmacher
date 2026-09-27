@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 27.09 16:17</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — niedziela 27.09, 17:00–23:59, wszystkie zakresy</h1>
+    <p class="meta">Wygenerowano: 2026-09-27 14:17 UTC / 16:17 CEST. Zegar zweryfikowany (clock.py, dryf &lt; 1 s). Uruchomienie lokalne (polskie IP): betexplorer + ESPN.</p>
+    <p class="meta">Przeanalizowano: 380 meczów w oknie (piłka 222, koszykówka 69, hokej 53, tenis 30, siatkówka 6) + ESPN 22; ceny polskich bukmacherów dla 22 meczów; 16 finalistów, 17 wyszukiwań, 10 stron przeczytanych w całości. Kursy pobrane 14:15 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Wieczór Ligi Narodów. Dwa typy z przewagą: <strong>Niemcy – Grecja poniżej 4.5 gola @ 1.24</strong> (Niemcy bez Musiali i Havertza) i <strong>wygrana Holandii w Belgradzie @ 1.45</strong> (Serbia bez napastników i w serii porażek). Uwaga: dwa typy na Serbia – Holandia są skorelowane.</p>
+    <nav class="ranges"><a href="#z-110">1.10–1.19 · 1 typ</a><a href="#z-120">1.20–1.29 · 3 typy</a><a href="#z-130">1.30–1.44 · 2 typy</a><a href="#z-145">1.45–1.60 · 0 typów</a><a href="#skutecznosc">Skuteczność</a></nav>
+  </header>
+  <section class="range" id="z-110">
+    <h2>Kursy 1.10–1.19</h2>
+    <p class="meta">Próg opłacalności 91–84 %; klasa „z przewagą” ≥ implikowane + 0.03, „uczciwa cena” ≥ implikowane.</p>
+    <h3 class="sub">Ranking</h3><div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">18:00</td><td>Serbia – Netherlands</td><td>Europe: UEFA Nations League</td><td>Holandia nie przegra (X2)</td><td class="num">1.13<span class="note">STS.pl</span></td><td class="num ">0.90</td><td class="num">0.885</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div><h3 class="sub">Analiza propozycji</h3>
+    <article class="pick">
+      <h3>1. Serbia – Netherlands — Holandia nie przegra (X2) @ 1.13 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.10–1.19 · Europe: UEFA Nations League · 18:00 PL (16:00 UTC) · 1.13 STS.pl (betexplorer, 14:15 UTC) · p_est 0.90 vs implikowane 0.885</p>
+      <p><strong>Dlaczego:</strong> Serbia gra bez Vlahovicia i Cvetkovicia, ma serię L-L-L (1:2 z Grecją, 1:5 z Meksykiem, 0:3 z RZP). Holandia bez Brobbeya i Malena, ale bez zawieszeń; w czwartek dominowała Niemcy (xG 3.18:1.45 wg bulinews).</p>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Serbia wygrywa po golu ze stałego fragmentu i dowozi 1:0 w Belgradzie.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://www.sportsmole.co.uk/football/serbia/uefa-nations-league/preview/serbia-vs-netherlands-prediction-team-news-lineups_605775.html">www.sportsmole.co.uk</a> — absencje obu drużyn, forma Serbii (przeczytane), <a href="https://sports.yahoo.com/articles/netherlands-xi-vs-serbia-predicted-050500578.html">sports.yahoo.com</a> — absencje Holandii, brak zawieszeń (przeczytane)</p>
+    </article>
+    <h3 class="sub">Odrzuceni kandydaci</h3><ul><li>Tortona @ 1.19 — bez Eboui i Di Meo, rozbity okres przygotowawczy, Verona z doświadczonymi Amerykanami; 0.83 &lt; 0.840.</li><li>Toruń w 60 min @ 1.13 — 4/4 i 24:6, ale wygrana w regulaminowym czasie przy kursie 1.13 wymaga 0.885; oceniam 0.86.</li></ul>
+  </section>
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78 %; klasa „z przewagą” ≥ implikowane + 0.03, „uczciwa cena” ≥ implikowane.</p>
+    <h3 class="sub">Ranking</h3><div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">17:00</td><td>Bytom – Krakow</td><td>Poland: Polish Hockey League</td><td>wygrana Bytom (z dogrywką i karnymi)</td><td class="num">1.22<span class="note">LV BET</span></td><td class="num ">0.83</td><td class="num">0.820</td><td><span class="tier fair">uczciwa cena</span></td></tr><tr><td>2</td><td class="num">20:45</td><td>Germany – Greece</td><td>Europe: UEFA Nations League</td><td>poniżej 4.5 gola</td><td class="num">1.24<span class="note">STS.pl</span></td><td class="num pos">0.86</td><td class="num">0.806</td><td><span class="tier value">z przewagą</span></td></tr><tr><td>3</td><td class="num">20:45</td><td>Israel – Ireland</td><td>Europe: UEFA Nations League</td><td>poniżej 3.5 gola</td><td class="num">1.28<span class="note">LV BET</span></td><td class="num ">0.80</td><td class="num">0.781</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div><h3 class="sub">Analiza propozycji</h3>
+    <article class="pick">
+      <h3>1. Bytom – Krakow — wygrana Bytom (z dogrywką i karnymi) @ 1.22 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.29 · Poland: Polish Hockey League · 17:00 PL (15:00 UTC) · 1.22 LV BET (betexplorer, 14:15 UTC) · p_est 0.83 vs implikowane 0.820</p>
+      <p><strong>Dlaczego:</strong> Bytom 4 wygrane w 5 (bramki 25:11), Cracovia 0 z 4 (6:18) i w piątek przegrała 3:5 z Toruniem.</p>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> bramkarz Cracovii ma mecz życia i goście wygrywają w dogrywce lub karnych.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://hokej.gkskatowice.eu/tabela/i-zespol">hokej.gkskatowice.eu</a> — tabela: Bytom 4-1 25:11, Cracovia 0-4 6:18 (przeczytane), <a href="https://polskihokej.eu/games/1688/mks-cracovia-mhl-bs-polonia-bytom-mhl">polskihokej.eu</a> — termin/miejsce meczu</p>
+    </article>
+    <article class="pick">
+      <h3>2. Germany – Greece — poniżej 4.5 gola @ 1.24 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.20–1.29 · Europe: UEFA Nations League · 20:45 PL (18:45 UTC) · 1.24 STS.pl (betexplorer, 14:15 UTC) · p_est 0.86 vs implikowane 0.806</p>
+      <p><strong>Dlaczego:</strong> Niemcy bez Musiali i Havertza (kontuzje z czwartku), w meczu z Holandią wykreowali tylko 1.45 xG; Grecja gra zwartym blokiem i wygrała 2:1 w Belgradzie.</p>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Grecja szybko strzela, Niemcy muszą gonić, mecz się otwiera i kończy 3:2 lub 4:1.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://bulinews.com/germany-greece-preview-team-news-and-predicted-lineups-1">bulinews.com</a> — Musiala i Havertz kontuzjowani, xG 1.45 vs NED (przeczytane), <a href="https://sports.yahoo.com/articles/preview-germany-vs-greece-team-185000121.html">sports.yahoo.com</a> — wyniki, brak absencji Grecji (przeczytane)</p>
+    </article>
+    <article class="pick">
+      <h3>3. Israel – Ireland — poniżej 3.5 gola @ 1.28 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.29 · Europe: UEFA Nations League · 20:45 PL (18:45 UTC) · 1.28 LV BET (betexplorer, 14:15 UTC) · p_est 0.80 vs implikowane 0.781</p>
+      <p><strong>Dlaczego:</strong> Obie drużyny przegrały w czwartek (Izrael 1:3, Irlandia 0:1), Izrael bez zawieszonego Abu Farhiego, Irlandia bez bramkarza Bazunu i po nerwowym głosowaniu nad bojkotem; mecz na neutralnym terenie w Debreczynie.</p>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> otwarty mecz dwóch słabych obron — 2:2 i gol w końcówce na 3:2.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://sports.yahoo.com/articles/israel-vs-ireland-match-preview-091500169.html">sports.yahoo.com</a> — wyniki 1:3 i 0:1, zawieszenie Abu Farhiego, Bazunu wycofany (przeczytane), <a href="https://tribuna.com/en/news/2026-09-26-republic-of-ireland-confirm-israel-nations-league-clash-will-go-ahead-after-squad-vote">tribuna.com</a> — głosowanie kadry Irlandii</p>
+    </article>
+    <h3 class="sub">Odrzuceni kandydaci</h3><ul><li>Olympiacos – PAOK (finał Superpucharu) @ 1.28 — PAOK po zwycięstwie nad PAO; brak przeczytanego źródła o składach; 0.78 &lt; 0.781.</li></ul>
+  </section>
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %; klasa „z przewagą” ≥ implikowane + 0.03, „uczciwa cena” ≥ implikowane.</p>
+    <h3 class="sub">Ranking</h3><div class="table-wrap"><table><thead><tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody><tr><td>1</td><td class="num">18:00</td><td>Serbia – Netherlands</td><td>Europe: UEFA Nations League</td><td>wygrana Netherlands</td><td class="num">1.45<span class="note">LV BET</span></td><td class="num pos">0.72</td><td class="num">0.690</td><td><span class="tier value">z przewagą</span></td></tr><tr><td>2</td><td class="num">18:00</td><td>Austria – Kosovo</td><td>Europe: UEFA Nations League</td><td>poniżej 3.5 gola</td><td class="num">1.33<span class="note">STS.pl</span></td><td class="num ">0.76</td><td class="num">0.752</td><td><span class="tier fair">uczciwa cena</span></td></tr></tbody></table></div><h3 class="sub">Analiza propozycji</h3>
+    <article class="pick">
+      <h3>1. Serbia – Netherlands — wygrana Netherlands @ 1.45 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.30–1.44 · Europe: UEFA Nations League · 18:00 PL (16:00 UTC) · 1.45 LV BET (betexplorer, 14:15 UTC) · p_est 0.72 vs implikowane 0.690</p>
+      <p><strong>Dlaczego:</strong> jak wyżej — Holandia wyraźnie lepsza, Serbia w najsłabszej formie od lat i bez dwóch napastników.</p>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> remis 1:1 — Holandia nie przebija się przez zwartą obronę, jak w końcówce z Niemcami dopiero w doliczonym czasie.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://www.sportsmole.co.uk/football/serbia/uefa-nations-league/preview/serbia-vs-netherlands-prediction-team-news-lineups_605775.html">www.sportsmole.co.uk</a> — Serbia bez Vlahovicia, Cvetkovicia; forma L-L-L (1:5 Meksyk, 0:3 RZP) (przeczytane), <a href="https://sports.yahoo.com/articles/netherlands-xi-vs-serbia-predicted-050500578.html">sports.yahoo.com</a> — Holandia: Brobbey, Malen out, Timber niepewny; brak zawieszeń (przeczytane)</p>
+    </article>
+    <article class="pick">
+      <h3>2. Austria – Kosovo — poniżej 3.5 gola @ 1.33 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.30–1.44 · Europe: UEFA Nations League · 18:00 PL (16:00 UTC) · 1.33 STS.pl (betexplorer, 14:15 UTC) · p_est 0.76 vs implikowane 0.752</p>
+      <p><strong>Dlaczego:</strong> Austria bez Laimera, Gregoritscha, Sabitzera, Alaby; Kosowo wygrało 1:0 z Irlandią grając trójką obrońców.</p>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Austria traci gola (traciła w każdym z 5 ostatnich), odpowiada dwoma i jest 3:1 lub 2:2 z golem w doliczonym czasie.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.sportsmole.co.uk/football/austria/uefa-nations-league/preview/austria-vs-kosovo-prediction-team-news-lineups_605764.html">www.sportsmole.co.uk</a> — Austria bez Laimera, Gregoritscha, Sabitzera; wyniki 3:1 i 1:0 (przeczytane), <a href="https://www.sofascore.com/news/austria-vs-kosovo-preview-form-lineups-and-players-to-watch">www.sofascore.com</a> — forma i ustawienia</p>
+    </article>
+    <h3 class="sub">Odrzuceni kandydaci</h3><ul><li>Dania @ 1.41 — uczciwa cena (0.71 vs 0.709), ale żadne przeczytane źródło nie sprawdza zawieszeń Duńczyków (reguła z przeglądu 27.09) → papier.</li></ul>
+  </section>
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63 %; klasa „z przewagą” ≥ implikowane + 0.03, „uczciwa cena” ≥ implikowane.</p>
+    <p class="empty">Brak typu: żaden kandydat w tym zakresie nie przeszedł researchu (Austria @ 1.57–1.60 przepłacona przy absencjach, Klagenfurt @ 1.46 bez danych o bramkarzach).</p>
+    
+  </section>
+<section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ. W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">30 (+6 otw.)</td><td class="num">23–6–1</td><td class="num">79%</td><td class="num">79%</td><td class="num pos">+0.98 u</td><td class="num pos">+3.3%</td><td class="num">+1.3%</td></tr><tr><td>Typy — z przewagą</td><td class="num">10 (+2 otw.)</td><td class="num">7–2–1</td><td class="num">78%</td><td class="num">78%</td><td class="num pos">+0.56 u</td><td class="num pos">+5.6%</td><td class="num">+1.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">20 (+4 otw.)</td><td class="num">16–4–0</td><td class="num">80%</td><td class="num">79%</td><td class="num pos">+0.42 u</td><td class="num pos">+2.1%</td><td class="num">+1.2%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">7 (+1 otw.)</td><td class="num">7–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.22 u</td><td class="num pos">+17.4%</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">9 (+3 otw.)</td><td class="num">7–2–0</td><td class="num">78%</td><td class="num">82%</td><td class="num neg">-0.10 u</td><td class="num neg">-1.1%</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">9 (+2 otw.)</td><td class="num">6–2–1</td><td class="num">75%</td><td class="num">76%</td><td class="num pos">+0.25 u</td><td class="num pos">+2.8%</td><td class="num">+0.5%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">5</td><td class="num">3–2–0</td><td class="num">60%</td><td class="num">68%</td><td class="num neg">-0.39 u</td><td class="num neg">-7.8%</td><td class="num">+1.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">42 (+4 otw.)</td><td class="num">30–12–0</td><td class="num">71%</td><td class="num">75%</td><td class="num neg">-3.85 u</td><td class="num neg">-9.2%</td><td class="num">+1.2%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">12 (+2 otw.)</td><td class="num">12–0–0</td><td class="num">100%</td><td class="num">83%</td><td class="num pos">+2.13 u</td><td class="num pos">+17.8%</td><td class="num">+3.0%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">13 (+1 otw.)</td><td class="num">9–4–0</td><td class="num">69%</td><td class="num">77%</td><td class="num neg">-1.83 u</td><td class="num neg">-14.1%</td><td class="num">+1.1%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">10 (+1 otw.)</td><td class="num">7–3–0</td><td class="num">70%</td><td class="num">71%</td><td class="num neg">-0.36 u</td><td class="num neg">-3.6%</td><td class="num">+0.1%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">7</td><td class="num">2–5–0</td><td class="num">29%</td><td class="num">62%</td><td class="num neg">-3.78 u</td><td class="num neg">-54.0%</td><td class="num">+1.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Real Salt Lake – New England Revolution: totals under 3.5 @ 1.6 → <strong>wygrana</strong> (3:0)</li><li>Nashville SC – Toronto FC: h2h home @ 1.42 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Houston Dynamo FC – Sporting Kansas City: h2h home @ 1.6 → <strong>przegrana</strong> (0:2) <em>(papier)</em></li><li>Houston Dynamo FC – Sporting Kansas City: h2h home @ 1.65 → <strong>przegrana</strong> (0:2) <em>(papier)</em></li><li>Austin FC – San Diego FC: totals over 2.5 @ 1.65 → <strong>wygrana</strong> (3:3) <em>(papier)</em></li><li>Philadelphia Union – Orlando City SC: h2h home @ 1.57 → <strong>wygrana</strong> (4:2) <em>(papier)</em></li><li>Wydad AC – Widad Temara: totals under 3.5 @ 1.25 → <strong>przegrana</strong> (1:3)</li><li>France – Poland: h2h away @ 1.32 → <strong>wygrana</strong> (1:3)</li><li>Albania – Belarus: totals under 3.5 @ 1.27 → <strong>wygrana</strong> (2:0)</li><li>Slovakia – Moldova: spread home -1.5 @ 1.53 → <strong>wygrana</strong> (2:0)</li><li>North Macedonia – Switzerland: h2h away @ 1.35 → <strong>wygrana</strong> (0:3) <em>(papier)</em></li><li>Slovakia – Moldova: h2h home @ 1.15 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>North Macedonia – Switzerland: h2h away @ 1.33 → <strong>wygrana</strong> (0:3) <em>(papier)</em></li><li>Venezia – Cantu: h2h home @ 1.19 → <strong>wygrana</strong> (85:73)</li><li>ZSC Lions – EHC Kloten: h2h home @ 1.28 → <strong>wygrana</strong> (3:2)</li></ul>
+</section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Sobota 26.09:</strong> typy 6–1 (+1.19 u, CLV +0.7%). Jedyna porażka: Wydad – Temara poniżej 3.5 (1:3) — Wydad bez wygranej w 5, ale Temara strzeliła 3; unders w słabo zbadanych ligach (Botola) traktować ostrożniej.</li>
+      <li><strong>Ogółem:</strong> 30 typów rozliczonych 23–6–1, trafność 79% przy p_est 79%, +0.98 u (ROI +3.3%), CLV +1.3% — kalibracja trafiona.</li>
+      <li>Nowa reguła z przeglądu tygodniowego (zawieszenia w piłce) zastosowana: Dania przesunięta na papier z braku sprawdzenia zawieszeń.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO. Holandia X2 i wygrana Holandii to ten sam mecz — przegrywają razem przy porażce Holandii.</li>
+      <li>Kurs 1.15 oznacza ok. 87 % implikowanego prawdopodobieństwa, 1.50 — ok. 67 %. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Rozbieżności godzin: Yemen – Katar (goal.com 17:55 lokalnie vs inne źródła 15:00 GMT) — kandydat odrzucony także przez sprzeczne dane o formie. Tychy @ 1.25 odrzucone — źródła podają sprzeczny terminarz.</li>
+      <li>Źródła, które zawiodły: Sofascore (403); The Odds API nieużywane w tym przebiegu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

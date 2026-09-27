@@ -2,8 +2,8 @@
 """Turn odds.json into a ranked shortlist per odds range.
 
 Ranges are fixed and contiguous, so every selection lands in exactly one of them (by its
-median price across bookmakers): 1.20-1.29, 1.30-1.44, 1.45-1.60. By default all
-three are built in one run (nothing below 1.20: after Poland's 12 % stake tax a 1.15 needs a
+median price across bookmakers): 1.20-1.29, 1.30-1.44, 1.45-1.60 and the "opportunity"
+ranges 1.61-2.00, 2.01-3.00. By default all five are built in one run (nothing below 1.20: after Poland's 12 % stake tax a 1.15 needs a
 ~99 % hit rate to break even); --ranges picks some, --min/--max defines a custom one.
 
 Ranking logic (why): the user wants the *most likely* outcome available inside the range,
@@ -13,7 +13,7 @@ fair probability is an *upper bound* on truth for short prices (margin is loaded
 favourites), so the final judgement must come from the analysis step, not this table.
 
 Usage:
-  python3 shortlist.py odds.json --out shortlist.json                  # all three ranges
+  python3 shortlist.py odds.json --out shortlist.json                  # all five ranges
   python3 shortlist.py odds.json --ranges 1.20-1.29,1.30-1.44 --out shortlist.json
   python3 shortlist.py odds.json --min 1.15 --max 1.25 --per-event 2 --top 40 --out shortlist.json
 """
@@ -30,7 +30,13 @@ from bk_lib import dump_json, load_json, table
 AGG_FAMILIES = {"h2h", "double_chance", "dnb", "btts", "totals", "team_total", "handicap", "sets", "games"}
 
 # (label, lower bound inclusive, upper bound exclusive) — contiguous, so no selection is counted twice.
-RANGES = (("1.20-1.29", 1.20, 1.30), ("1.30-1.44", 1.30, 1.45), ("1.45-1.60", 1.45, 1.605))
+RANGES = (("1.20-1.29", 1.20, 1.30), ("1.30-1.44", 1.30, 1.45), ("1.45-1.60", 1.45, 1.605),
+          ("1.61-2.00", 1.605, 2.005), ("2.01-3.00", 2.005, 3.005))
+# "Opportunity" ranges: at these prices a pick is only worth publishing when it beats the market
+# by more than the 12 % tax, so candidates are ranked by how far the best price exceeds the
+# market's own fair price (a price discrepancy), not by probability.
+OPPORTUNITY = {"1.61-2.00", "2.01-3.00"}
+TAX = 0.12
 
 
 def main() -> int:
@@ -94,11 +100,15 @@ def main() -> int:
         best, best_book = max(a["takeable"]) if a["takeable"] else (max(a["prices"]), "US-only")
         med = statistics.median(a["prices"])
         fair = max(a["fair"]) if a["fair"] else None
+        fair_med = statistics.median(a["fair"]) if a["fair"] else None
         cands.append({
             **{k: a[k] for k in ("key", "sport", "competition", "start_utc", "home", "away", "market", "market_norm",
                                  "selection", "line")},
             "best_odds": best, "best_book": best_book, "median_odds": round(med, 3), "n_books": len(a["prices"]),
             "implied_best": round(1 / best, 4), "fair_prob": round(fair, 4) if fair else None,
+            # value of the best price if the books' median de-vigged probability were the truth
+            "edge_market": round(fair_med * best - 1, 4) if fair_med else None,
+            "ev_net_market": round(fair_med * best * (1 - TAX) - 1, 4) if fair_med else None,
             "drift": round(statistics.mean(a["drift"]), 3) if a["drift"] else None,
             "books": a["books"][:8],
         })
@@ -109,6 +119,9 @@ def main() -> int:
     for label, lo, hi in ranges:
         # the median decides the range; the best price is shown so a single generous book is visible
         in_range = [c for c in cands if lo <= c["median_odds"] < hi]
+        if label in OPPORTUNITY:  # biggest price discrepancies first; needs >= 2 books to mean anything
+            in_range = sorted((c for c in in_range if c["n_books"] >= 2),
+                              key=lambda c: -(c["edge_market"] if c["edge_market"] is not None else -9))
         kept, per = [], defaultdict(int)
         for c in in_range:
             if per[c["key"]] >= args.per_event:
@@ -119,7 +132,7 @@ def main() -> int:
                 break
         print(f"\n# range {label}: {len(in_range)} matching selections, showing {len(kept)}")
         print(table(kept, ["start_utc", "sport", "home", "away", "market", "selection", "line", "median_odds",
-                           "best_odds", "best_book", "n_books", "fair_prob", "drift"], max_width=28))
+                           "best_odds", "best_book", "n_books", "fair_prob", "edge_market", "drift"], max_width=28))
         out.append({"label": label, "band": [lo, round(hi - 0.005, 2)], "candidates": kept})
     if args.out:
         dump_json({"ranges": out}, args.out)

@@ -2,9 +2,11 @@
 <!--
 Report template (Polish by default). Copy this file, keep the structure and the CSS, fill every
 {placeholder} and delete this comment. Repeat the <section class="range"> block once per odds
-range the user chose (default all three: 1.20–1.29, 1.30–1.44, 1.45–1.60, in that
-order; nothing below 1.20), with a matching link in <nav class="ranges">; inside it repeat <article class="pick">
-per proposal (max 3) and <li> per rejected candidate. Anchors: id="z-120", "z-130",
+range the user chose (default all five: 1.20–1.29, 1.30–1.44, 1.45–1.60, then the
+"okazje" ranges 1.61–2.00, 2.01–3.00, in that order; nothing below 1.20). In the okazje
+ranges every pick must show a positive "EV po podatku"; say what the edge is (news not in the
+price, a lagging book…), with a matching link in <nav class="ranges">; inside it repeat <article class="pick">
+per proposal (max 3) and <li> per rejected candidate. Anchors: id="z-120", "z-130", "z-161", "z-201",
 "z-145"; pick ids "z-120-1", "z-120-2", …
 
 Rules for filling it:
@@ -111,6 +113,8 @@ Rules for filling it:
       <a href="#z-120">1.20–1.29 · {n} typy</a>
       <a href="#z-130">1.30–1.44 · {n} typy</a>
       <a href="#z-145">1.45–1.60 · {n} typy</a>
+      <a href="#z-161">Okazje 1.61–2.00 · {n}</a>
+      <a href="#z-201">Okazje 2.01–3.00 · {n}</a>
       <a href="#skutecznosc">Skuteczność</a>
     </nav>
   </header>

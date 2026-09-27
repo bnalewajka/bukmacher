@@ -77,7 +77,7 @@ jobs:
         if: steps.fresh.outputs.skip != 'true'
         shell: bash   # -o pipefail: a failing claude must not hide behind tee
         run: |
-          claude -p "/bukmacher Tryb automatyczny (GitHub Actions, bez pytań): horyzont ${{ steps.window.outputs.hours }} h, wszystkie zakresy kursów (od 1.20). Postępuj według sekcji 'Automated run (GitHub Actions)' w SKILL.md." \
+          claude -p "/bukmacher Tryb automatyczny (GitHub Actions, bez pytań): horyzont ${{ steps.window.outputs.hours }} h, wszystkie zakresy kursów (od 1.20, z okazjami do 3.00). Postępuj według sekcji 'Automated run (GitHub Actions)' w SKILL.md." \
             --model "${{ inputs.model || 'claude-sonnet-5' }}" \
             --dangerously-skip-permissions \
             --max-turns 200 \

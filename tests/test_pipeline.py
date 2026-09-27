@@ -243,7 +243,7 @@ def test_odds_and_shortlist(tmp_path=None):
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     ranges = {r["label"]: r["candidates"] for r in json.loads(out.with_name("bk_sl.json").read_text())["ranges"]}
-    assert set(ranges) == {"1.20-1.29", "1.30-1.44", "1.45-1.60"}      # nothing below 1.20
+    assert set(ranges) == {"1.20-1.29", "1.30-1.44", "1.45-1.60", "1.61-2.00", "2.01-3.00"}  # nothing below 1.20
     in_two = [(r, c["key"], c["market_norm"], c["selection"], str(c["line"])) for r, cs in ranges.items() for c in cs]
     assert len(in_two) == len({x[1:] for x in in_two})  # contiguous ranges: nothing listed twice
     sl = ranges["1.20-1.29"]
@@ -422,6 +422,30 @@ def test_betexplorer_full_football_list():
     assert [(r["home"], r["away"], r["competition"]) for r in rows] == [("Armenia", "Latvia", "Europe: UEFA Nations League")]
     assert rows[0]["start_utc"] == bk_lib.iso(now + timedelta(hours=2)) and rows[0]["odds"] == [1.85, 3.45, 4.28]
     assert calls and calls[0]["end"] == "all"
+
+
+def test_opportunity_ranges():
+    """Above 1.60: ranked by price discrepancy, and a pick must be EV+ after the 12 % tax."""
+    fx = {"key": "k", "sport": "football", "home": "A", "away": "B", "start_utc": "2026-09-24T18:00:00Z", "sources": {}}
+    rows = []
+    for bk, (h, d, a) in {"pinnacle": (1.85, 3.6, 4.6), "sts": (1.95, 3.5, 4.4), "betclic": (1.80, 3.6, 4.7)}.items():
+        g = f"t|{bk}|k|h2h"
+        rows += [odds_mod.row(fx, "h2h", s, o, bk, "oddsapi", group=g) for s, o in (("A", h), ("Draw", d), ("B", a))]
+    odds_mod.add_fair_probs(rows)
+    out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_opp_odds.json"
+    out.write_text(json.dumps({"rows": rows}))
+    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--ranges", "1.61-2.00",
+                          "--out", str(out.with_name("bk_opp_sl.json"))], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    c = json.loads(out.with_name("bk_opp_sl.json").read_text())["ranges"][0]["candidates"][0]
+    assert c["best_odds"] == 1.95 and c["best_book"] == "sts" and c["edge_market"] > 0
+    pick = {"report": "r", "kind": "pick", "tier": "value", "range": "1.61-2.00", "sport": "football", "home": "A",
+            "away": "B", "start_utc": "2026-09-24T18:00:00Z", "market": "h2h", "selection": "home", "period": "ft",
+            "odds": 1.95, "bookmaker": "sts", "source": "betexplorer", "p_est": 0.56,
+            "sources": [{"url": "https://a.com/x", "read": True}, {"url": "https://b.com/y", "read": True}],
+            "ref": {"source": "espn", "sport": "soccer", "league": "x", "event_id": "1"}}
+    assert any("positive after" in e for e in ledger_mod.validate(pick))          # 0.56 x 1.95 x 0.88 < 1
+    assert not ledger_mod.validate({**pick, "p_est": 0.60})                       # 0.60 x 1.95 x 0.88 = 1.03
 
 
 def test_cli_help():

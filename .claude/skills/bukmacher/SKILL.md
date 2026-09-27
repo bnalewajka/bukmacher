@@ -2,7 +2,8 @@
 name: bukmacher
 description: >-
   Find the most probable sports-betting selections in each odds range (1.20-1.29, 1.30-1.44,
-  1.45-1.60; all three by default; nothing below 1.20) among real matches starting in the next 4/8/12/24 hours, using live fixture feeds, real bookmaker odds and a
+  1.45-1.60) and real value opportunities at 1.61-2.00 and 2.01-3.00 (all five by default;
+  nothing below 1.20) among real matches starting in the next 4/8/12/24 hours, using live fixture feeds, real bookmaker odds and a
   deep, self-made pre-match analysis (motivation, form, absences, lineups, schedule, market signals)
   across football, volleyball, basketball, hockey and tennis, and deliver a Polish HTML report with
   several proposals per range, the reasoning, pluses and risks. Use this skill whenever the user asks for
@@ -33,9 +34,10 @@ Two things are the user's call and change the whole run, so ask for them with on
 `AskUserQuestion` call unless the user already stated them in the prompt:
 
 1. **Horizon**: 4 h (Recommended, default), 8 h, 12 h, 24 h.
-2. **Odds ranges** (`multiSelect: true`): `1.20–1.29`, `1.30–1.44`, `1.45–1.60`.
-   Say in the question that the default is all three — and if the user selects nothing, or
-   answers "all"/"domyślnie", run all three. **Nothing below 1.20** (owner's rule): after the
+2. **Odds ranges** (`multiSelect: true`, max 4 options — offer `1.20–1.44`, `1.45–1.60`,
+   `1.61–2.00 (okazje)`, `2.01–3.00 (okazje)`): the ranges are 1.20–1.29, 1.30–1.44, 1.45–1.60,
+   1.61–2.00, 2.01–3.00. Say in the question that the default is all five — and if the user
+   selects nothing, or answers "all"/"domyślnie", run all five. **Nothing below 1.20** (owner's rule): after the
    12 % Polish stake tax such prices need a ~95–99 % hit rate just to break even. The ranges are contiguous and fixed in
    `scripts/shortlist.py` (`RANGES`); a selection belongs to the range of its *median* price.
    "Other" lets them type a custom range (e.g. `1.25–1.35`) → `--min/--max`. A single price in
@@ -177,6 +179,18 @@ Then sort each finalist into a tier (bars in `references/analysis.md` §12):
 - **fair** — implied ≤ `p_est` < implied + 0.03: among the most likely outcomes at this price,
   priced about right — a legitimate pick, labelled as such;
 - **drop** — `p_est` < implied: overpriced by your own estimate; never published as a pick.
+
+**Opportunity ranges (1.61–2.00, 2.01–3.00) work differently.** They exist to find genuine
+value, not likely outcomes: the shortlist ranks them by `edge_market` (how far the best Polish
+price exceeds the books' median fair price — a price discrepancy, a slow book, a stale line),
+and a pick is published **only if it is positive after tax**: p_est × kurs × 0.88 ≥ 1
+(1.80 → p_est ≥ 63.1 %, 2.20 → ≥ 51.7 %, 2.80 → ≥ 40.6 %). Everything else there is paper.
+Typical sources of a real edge: team news the price hasn't absorbed (confirmed absences,
+rotation before a bigger game, goalie/starter changes), one book lagging the market, and
+markets where the favourite's short price pushes value onto the other side (draw no bet, +AH,
+unders in low-event match-ups). Treat a big `edge_market` on one book as a possible error
+until a second book or a fact supports it. `ledger.py add` rejects an opportunity pick that is
+negative after tax. Up to 3 picks per opportunity range; empty is fine — say so.
 
 The tiers compare you with the market. What the owner actually earns is after **Poland's 12 %
 stake tax**: a win pays 0.88 × kurs per unit staked. For every pick also compute

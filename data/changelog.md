@@ -39,3 +39,8 @@ Next review: kalibracja przy n≈60; value vs fair (czy „value” dojdzie do 2
 Findings: dotychczasowe „przewagi” i zysk liczone od kursu brutto. Po 12 % podatku od stawki (wygrana = 0.88 × kurs) 30 rozliczonych typów: brutto +0.98 u (ROI +3.3 %), **netto −2.74 u (ROI −9.1 %)**; value −0.71 u, fair −2.03 u netto. Próg rentowności po podatku = 1 / (0.88 × kurs): 1.20 → 94.7 %, 1.45 → 78.4 %.
 Changes: zakres 1.10–1.19 usunięty (shortlist/ledger/SKILL/szablon/workflow); przy każdym typie „EV po podatku = p_est × kurs × 0.88 − 1”, raport mówi wprost, gdy jest ujemne; statystyki i strona pokazują zysk po podatku (push liczony konserwatywnie z utratą podatku). Klasy value/fair bez zmian (porównanie z rynkiem).
 How we will know: kolumna „Po podatku” w statystykach; następny przegląd powinien ocenić, czy przy kursach ≤ 1.60 w ogóle da się wyjść na plus po podatku — jeśli nie, rozważyć wyższe zakresy kursów.
+
+## 2026-09-27 — zakresy „okazji” 1.61–2.00 i 2.01–3.00 (decyzja właściciela)
+Findings: po podatku 12 % krótkie kursy (≤ 1.60) wymagają przewagi 10–15 pkt nad rynkiem — nieosiągalnej przy naszym CLV ~1–2 %; przy wyższych kursach wymagana przewaga w pkt jest mniejsza (2.00 → +6.8 pkt).
+Changes: dwa nowe zakresy „okazje”; shortlist szereguje je wg `edge_market` (najlepsza cena vs mediana uczciwej ceny z książek), nie wg prawdopodobieństwa; typ tylko gdy EV po podatku ≥ 0 (ledger to egzekwuje), inaczej papier; SKILL.md opisuje źródła prawdziwej przewagi (newsy niewycenione, spóźniona książka, DNB/+AH/under). Test na ranking i walidację.
+How we will know: po ~20 typach „okazji” — wynik po podatku i CLV; jeśli ujemne, okazje to szum.

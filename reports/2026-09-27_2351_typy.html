@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-27 23:51</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakresy kursów: 1.20–1.29, 1.30–1.44, 1.45–1.60, 1.61–2.00 (okazje), 2.01–3.00 (okazje)</h1>
+    <p class="meta">Wygenerowano: 2026-09-27 21:52 UTC / 2026-09-27 23:52 CEST. Zegar zweryfikowany: tak (api.github.com, cloudflare.com, sofascore.com, espn.com — zgodne w granicach 1 s). Okno: 2026-09-27 23:37 – 2026-09-28 07:37 CEST (21:37–05:37 UTC).</p>
+    <p class="meta">Przeanalizowano: 40 spotkań w oknie (piłka nożna 11, koszykówka 2, tenis 27, siatkówka 0, hokej 0) z ESPN. Realną wycenę europejskich bukmacherów (The Odds API: Pinnacle, Unibet, bet365-class books) udało się dociągnąć tylko dla 3 z tych spotkań — 24 selekcje trafiły do rankingu w wybranych zakresach, z czego 5 miało wycenę wyłącznie u bukmacherów US-only (DraftKings/ESPN BET, BetOnline…) i zostało odrzuconych jako nieosiągalne dla polskiego grającego. Bieżący plan The Odds API: 421 kredytów pozostało po tym uruchomieniu.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Bardzo cienki wieczór dla automatycznego, bezserwerowego (Sofascore/betexplorer zablokowane w USA) skanu: jedyny typ, który przeszedł próg „uczciwej ceny” po researchu, to Over 2.5 w MLS Columbus Crew – Inter Miami (1.30–1.44). Dwaj faworyci WNBA (Atlanta Dream, Golden State Valkyries), którzy wyglądali obiecująco na pierwszy rzut oka, po głębszym researchu okazali się przecenieni — potwierdza to analiza z raportu sprzed 3 godzin (2026-09-27_2050_typy.html) na tym samym meczu. Żadna z okazji (1.61–3.00) nie dała dodatniej EV po podatku.</p>
+    <nav class="ranges">
+      <a href="#z-120">1.20–1.29 · 0 typów</a>
+      <a href="#z-130">1.30–1.44 · 1 typ</a>
+      <a href="#z-145">1.45–1.60 · 0 typów</a>
+      <a href="#z-161">Okazje 1.61–2.00 · 0</a>
+      <a href="#z-201">Okazje 2.01–3.00 · 0</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.29</h2>
+    <p class="meta">Próg opłacalności 83–78 %; wymagane p_est ≈ implikowane + 0.03. W tym oknie: 0 selekcji w tym paśmie cenowym.</p>
+    <p class="empty">Brak typu — w oknie 8 h nie znalazła się żadna selekcja (u żadnego bukmachera, europejskiego czy US-only), której mediana kursu wypadałaby w przedziale 1.20–1.29. Najniższe realne ceny tej nocy zaczynały się od ok. 1.32–1.35 (WNBA play-offy).</p>
+  </section>
+
+  <section class="range" id="z-130">
+    <h2>Kursy 1.30–1.44</h2>
+    <p class="meta">Próg opłacalności 77–69 %; wymagane p_est ≈ implikowane + 0.03. W paśmie: 4 selekcje (3 z ceną europejską, 1 tylko US-only i odrzucona), przeanalizowano wszystkie 3 osiągalne.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th><th>EV po podatku</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">01:00</td>
+            <td>Columbus Crew – Inter Miami CF</td>
+            <td>MLS</td>
+            <td>Totals Over 2.5</td>
+            <td class="num">1.43<span class="note">nordicbet/betsson, The Odds API, 21:38 UTC</span></td>
+            <td class="num pos">0.71</td>
+            <td class="num">0.70</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+            <td class="num neg">−10.6%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-130-1">
+      <h3>1. Columbus Crew – Inter Miami CF — Totals Over 2.5 @ 1.43 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.30–1.44 · MLS, Lower.com Field (Columbus) · 01:00 CEST 28.09 (23:00 UTC 27.09) · 1.43 u nordicbet/betsson (i szereg innych ksiąg EU, 3 książki widziały tę linię), The Odds API, pobrane 21:38 UTC · p_est 0.71 vs implikowane 0.70</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to jedyna selekcja w całym oknie, którą po realnym researchu (a nie tylko de-vigowanej cenie rynkowej) można ocenić powyżej progu opłacalności. Oba zespoły ostatnio grają bardzo otwarty futbol, a pierwsze tegoroczne starcie tych klub (1.08.2026) skończyło się 2:2 przy 24 strzałach łącznie — konkretny, potwierdzony wzorzec dla tej właśnie par, nie tylko ogólna forma ligowa.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Mecz ligowy bez bezpośrednich staken tabelowych aż tak wysokich jak w finiszu sezonu, ale oba zespoły grają o pozycję do play-off; nie ma przesłanek do rotacji dla samej rotacji.</dd>
+        <dt>Forma</dt><dd>Inter Miami: 1W–4D w ostatnich 5 ligowych, 14 strzelonych–8 straconych (ok. 4,4 gola/mecz łącznie) — bardzo wysokoscoringowo, ale też dużo remisów. Columbus: 3W–2L, 8–4 w ostatnich 5 (2,4/mecz łącznie), ostatni mecz przegrany 0:1 z NY Red Bulls (niska liczba goli w tamtym meczu).</dd>
+        <dt>Absencje</dt><dd>Obie strony grają bez sporej części rotacji: Miami bez 7 zawodników na zgrupowaniach kadrowych + Silvetti i Allende wyłączeni do końca sezonu po operacjach, Fray (pachwina) i Morales (czwórka) urazowani — ale Messi, De Paul, Suárez i Casemiro potwierdzeni w składzie. Columbus bez Abou Ali (rekonwalescencja po ACL), Tapii/Camacho/Bangoury (uraz/kadra) i czterech kolejnych zawodników na zgrupowaniach (Adams, Hagen, Moreira, Mrowka). Ograniczona głębia obrony po obu stronach częściej oznacza więcej goli niż mniej.</dd>
+        <dt>Składy</dt><dd>Projekcja Inter Miami z pierwszym składem gwiazd (World Soccer Talk, 27.09) potwierdzona; Columbus bez oficjalnego line-upu w chwili pisania, ale absencje wg tego samego źródła.</dd>
+        <dt>Terminarz</dt><dd>Brak istotnego przeciążenia kalendarza w porównaniu do przerwy reprezentacyjnej — obie strony wracają po zgrupowaniach, co samo w sobie sprzyja rozkojarzeniu defensywnemu.</dd>
+        <dt>Miejsce i warunki</dt><dd>Lower.com Field, Columbus — bez szczególnych czynników pogodowych odnotowanych w źródłach.</dd>
+        <dt>Styl gry</dt><dd>Miami atakuje dużą liczbą podań i posiadania (53,6% w pierwszym starciu), Columbus kontratakuje efektywnie (13 strzałów przy mniejszym posiadaniu w tamtym meczu) — styl obu klubów sprzyja wymianie sytuacji, nie duszeniu meczu.</dd>
+        <dt>Sygnały rynkowe</dt><dd>3 książki EU wystawiają tę linię (nordicbet, betsson na 1.43, williamhill 1.40) — mało płynności w porównaniu do 1X2 (21 książek), ale bez wyraźnego dryfu; to nie jest linia, którą rynek intensywnie handluje.</dd>
+        <dt>Inne</dt><dd>Ten sam kandydat (przy 1.44) był już odnotowany jako obserwacja „papier” w raporcie z 20:50 dzisiejszego dnia z szacunkiem 0.67 (poniżej progu) — dodatkowe źródło (relacja z pierwszego starcia, 24 strzały) przesunęło szacunek do 0.71, czyli tuż nad próg. To bardzo blisko granicy, nie mocny typ.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Konkretny h2h z tego sezonu z 4 golami, nie tylko ogólna forma ligowa.</li>
+          <li>Osłabiona defensywa po obu stronach (kadra + urazy) sprzyja większej liczbie goli.</li>
+          <li>Messi i De Paul grają — Miami nie ustawi się głęboko defensywnie mając gwiazdy w składzie.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Bardzo mała płynność linii (3 książki) — cena może się szybko przesunąć.</li>
+          <li>Ostatni mecz Columbus (0:1) był niskoscoringowy — możliwy powrót do bardziej zachowawczego stylu na własnym stadionie.</li>
+          <li>EV po podatku jest wyraźnie ujemne (−10,6%) — to typ „prawdopodobny”, nie „opłacalny” po 12% podatku.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> jedna ze stron gra ostrożnie (np. Columbus broni remisu/wygranej na własnym stadionie po niedawnej porażce), a Miami mimo gwiazd nie przełamuje zorganizowanej defensywy — wynik typu 1:1 lub 1:0.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://worldsoccertalk.com/news/lionel-messi-loses-seven-teammates-for-inter-miamis-clash-vs-columbus-crew-due-to-fifa-break/">World Soccer Talk</a> — pełna lista absencji Miami i potwierdzenie Messiego/De Paula w składzie; <a href="https://www.intermiamicf.com/news/match-recap-inter-miami-cf-draws-at-home-against-columbus-crew">Inter Miami CF (oficjalna relacja)</a> — wynik i statystyki pierwszego starcia tego sezonu (2:2, 24 strzały łącznie).</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Atlanta Dream – Washington Mystics (WNBA, gra 1 I rundy play-off), zwycięstwo Atlanty @ 1.34 (pinnacle)</strong> — rynek wycenia 74,6%, po researchu szacunek 0.62: Mystics wygrały bilans sezonowy 1–2, a w decydującym 3. meczu Shakira Austin (5 bloków) ograniczyła Angel Reese do 1/12 z gry — potwierdzone w dwóch niezależnych źródłach (ESPN recap, wyszukiwanie StatMuse/Bleacher Report). Ten sam wniosek co w raporcie z 20:50 dzisiejszego wieczoru na tym samym meczu, teraz z dodatkowym potwierdzeniem konkretnej statystyki z 3. meczu.</li>
+      <li><strong>Golden State Valkyries – Dallas Wings (WNBA, gra 1 I rundy play-off), zwycięstwo Golden State @ 1.35 (unibet_se)</strong> — rynek wycenia 74,1%, po researchu szacunek 0.67: mimo sezonowego sweepu 3–0 (śr. +12,3 pkt), Dallas kończy sezon serią 7–1 ze zdrową Paige Bueckers (3 kolejne mecze 25+5), a Valkyries nigdy nie wygrały meczu play-off w historii klubu (0–2 z Minnesota Lynx w 2025, roztrwoniona 17-punktowa przewaga w 2. meczu) — potwierdzone niezależnie (NBC Sports Bay Area, Yahoo Sports). Rejestr już zawierał tę selekcję jako obserwację z tego samego wniosku z raportu 20:50.</li>
+      <li><strong>Curaçao – Nicaragua (Concacaf Nations League), zwycięstwo Curaçao @ 1.408</strong> — jedyna cena to ESPN BET (US-only, DraftKings), brak jakiejkolwiek europejskiej książki w The Odds API dla tej ligi w tym oknie — nieosiągalne dla polskiego grającego, nie analizowano dalej.</li>
+    </ul>
+  </section>
+
+  <section class="range" id="z-145">
+    <h2>Kursy 1.45–1.60</h2>
+    <p class="meta">Próg opłacalności 69–63 %; wymagane p_est ≈ implikowane + 0.03. W paśmie: 5 selekcji, wszystkie wycenione wyłącznie u bukmacherów US-only.</p>
+    <p class="empty">Brak typu — wszystkie 5 kandydatów tego pasma (León – FC Juárez zwycięstwo/handicap, Haiti – Costa Rica handicap, Trinidad and Tobago – Dominican Republic handicap, Utah Royals – North Carolina Courage totals) miały wycenę tylko u ESPN BET/DraftKings (US-only) — żadna europejska ani polska księgowość nie wystawiła tych linii w tym uruchomieniu, więc nie są to ceny osiągalne dla polskiego grającego. Structuralny brak podaży rynku (Liga Narodów Concacaf drugoplanowych federacji, NWSL, Liga MX niższej rangi), nie luka w analizie.</p>
+  </section>
+
+  <section class="range" id="z-161">
+    <h2>Okazje 1.61–2.00</h2>
+    <p class="meta">Kryterium: dodatnia EV po podatku (p_est × kurs × 0.88 ≥ 1). W paśmie: 11 selekcji (wszystkie totals z 3 meczów o realnej cenie EU), głęboki research na wszystkich trzech spotkań.</p>
+    <p class="empty">Brak typu — żaden kandydat nie miał dodatniego <code>edge_market</code> względem mediany rynkowej (wszystkie od −0.016 do −0.05, czyli najlepsza osiągalna cena była gorsza niż uczciwa wycena rynku), a własny research nie znalazł niezależnej przewagi ponad to, co rynek już wycenił. Najbliżej: Columbus Crew – Inter Miami CF „Under 3.5” @ 1.86 (onexbet) — wymagane p_est ≥ 61,1% po podatku; własny szacunek ok. 55–60% (dokładnie rozdzielone między Under/Over przy oczekiwanej ~3 gole), za mało pewne, by uznać za typ. Golden State Valkyries – Dallas Wings totals @ 154.5 — trzy dotychczasowe starcia tego sezonu dały 171, 170 i 148 punktów (śr. 163, powyżej linii), ale próbka n=3 zbyt mała przy odmiennym kontekście play-off, by cokolwiek z tego wywnioskować z pewnością.</p>
+  </section>
+
+  <section class="range" id="z-201">
+    <h2>Okazje 2.01–3.00</h2>
+    <p class="meta">Kryterium: dodatnia EV po podatku (p_est × kurs × 0.88 ≥ 1). W paśmie: 3 selekcje z Columbus Crew – Inter Miami CF (zwycięstwo Columbus, zwycięstwo Miami, Over 3.5).</p>
+    <p class="empty">Brak typu. Zwycięstwo Columbus @ 3.05 (nordicbet) wymagałoby p_est ≥ 37,3% po podatku — własny szacunek ok. 32–33% (remis jest realną trzecią opcją: pierwsze starcie sezonu skończyło się 2:2, a Miami remisowało 4 z ostatnich 5 meczów). Zwycięstwo Inter Miami @ 2.25 (leovegas_se) wymagałoby ≥ 50,5% — szacunek ok. 40% (Miami mocno osłabione kadrowo, mimo gwiazd w składzie). Zapisane do rejestru jako obserwacja (papier) zwycięstwo Columbus, najbliższe progu.</p>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">36 (+2 otw.)</td><td class="num">28–7–1</td><td class="num">80%</td><td class="num">79%</td><td class="num pos">+1.30 u</td><td class="num pos">+3.6%</td><td class="num neg">-3.18 u</td><td class="num">+1.5%</td></tr><tr><td>Typy — z przewagą</td><td class="num">12</td><td class="num">9–2–1</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+1.25 u</td><td class="num pos">+10.4%</td><td class="num neg">-0.34 u</td><td class="num">+1.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">24 (+2 otw.)</td><td class="num">19–5–0</td><td class="num">79%</td><td class="num">80%</td><td class="num pos">+0.05 u</td><td class="num pos">+0.2%</td><td class="num neg">-2.84 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">11</td><td class="num">7–3–1</td><td class="num">70%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-2.7%</td><td class="num neg">-1.58 u</td><td class="num">+0.5%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">5 (+2 otw.)</td><td class="num">3–2–0</td><td class="num">60%</td><td class="num">68%</td><td class="num neg">-0.39 u</td><td class="num neg">-7.8%</td><td class="num neg">-0.94 u</td><td class="num">+1.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">50 (+3 otw.)</td><td class="num">37–13–0</td><td class="num">74%</td><td class="num">74%</td><td class="num neg">-1.10 u</td><td class="num neg">-2.2%</td><td class="num neg">-6.97 u</td><td class="num">+1.3%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">15</td><td class="num">11–4–0</td><td class="num">73%</td><td class="num">77%</td><td class="num neg">-1.27 u</td><td class="num neg">-8.5%</td><td class="num neg">-2.92 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">12 (+1 otw.)</td><td class="num">8–4–0</td><td class="num">67%</td><td class="num">71%</td><td class="num neg">-0.95 u</td><td class="num neg">-8.0%</td><td class="num neg">-2.28 u</td><td class="num">+0.1%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">7 (+1 otw.)</td><td class="num">2–5–0</td><td class="num">29%</td><td class="num">62%</td><td class="num neg">-3.78 u</td><td class="num neg">-54.0%</td><td class="num neg">-4.17 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">54%</td><td class="num pos">+0.90 u</td><td class="num pos">+90.0%</td><td class="num pos">+0.67 u</td><td class="num">—</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">1 (+1 otw.)</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">43%</td><td class="num pos">+1.55 u</td><td class="num pos">+155.0%</td><td class="num pos">+1.24 u</td><td class="num">—</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Germany – Greece: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (0:1)</li><li>Israel – Ireland: totals under 3.5 @ 1.28 → <strong>wygrana</strong> (0:3)</li><li>Minnesota Lynx W – New York Liberty W: h2h home @ 1.35 → <strong>przegrana</strong> (75:91) <em>(papier)</em></li><li>Olympiacos – PAOK: h2h home @ 1.28 → <strong>wygrana</strong> (101:96) <em>(papier)</em></li><li>Klagenfurt – Graz99ers: spread home -2.5 @ 2.55 → <strong>wygrana</strong> (6:2) <em>(papier)</em></li><li>Klagenfurt – Graz99ers: h2h home @ 1.28 → <strong>wygrana</strong> (6:2) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Olympiacos – PAOK (papier, h2h home @ 1.28), wygrana 101:96</strong> — odrzucony typ na derby greckiej ligi wygrał; przy n=1 to jeszcze szum, ale warto obserwować, czy gospodarze w tej lidze są systematycznie niedoszacowani przez nasz próg.</li>
+      <li><strong>Klagenfurt – Graz99ers (papier: h2h home @ 1.28, handicap -2.5 @ 2.55), wygrana 6:2</strong> — obie odrzucone selekcje na tego samego faworyta austriackiej ekstraligi hokeja wygrały; potwierdza wcześniejszy wniosek z raportu 20:50 o niedoszacowaniu handicapu przy znanej absencji 11 zawodników rywala — tym razem sam h2h też się nie doszacował. Rozważyć podniesienie p_est dla wyraźnych faworytów w tej lidze przy dużych, potwierdzonych absencjach rywala.</li>
+      <li><strong>Minnesota Lynx W – New York Liberty W (papier, h2h home @ 1.35), przegrana 75:91</strong> — poprawnie odrzucony jako typ (WNBA play-off, drużyna na wyjeździe okazała się silniejsza mimo statusu underdoga); brak korekty potrzebnej, mechanizm zadziałał zgodnie z przeznaczeniem.</li>
+      <li><strong>Dzisiejsze WNBA (Atlanta Dream, Golden State Valkyries)</strong> — to już drugie uruchomienie tego wieczoru (po 20:50), które niezależnie potwierdza przecenienie obu faworytów I rundy play-off względem konkretnych, sprawdzalnych faktów (obrona Mystics ograniczająca Reese, fatalna historia play-off Valkyries) — mechanizm liczenia identyczności selekcji w rejestrze (ten sam mecz/rynek nie liczy się dwa razy) zadziałał poprawnie i zapobiegł podwójnemu naliczeniu tego samego wyniku.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87 % implikowanego prawdopodobieństwa, 1.50 — ok. 67 %: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Uruchomienie w chmurze (GitHub Actions, serwer USA): Sofascore i betexplorer celowo pominięte (403/429/geo-blok z amerykańskiego IP); kursy z ESPN + The Odds API (soccer_usa_mls, basketball_wnba — 2 z 3 wykrytych kluczy, budżet 4 kredyty, zużyte w całości; 421 kredytów zostało w planie). Cały pakiet tenisowy (27 spotkań ATP/WTA w oknie) nie miał żadnej wyceny — The Odds API nie ma obecnie żadnego aktywnego klucza tenisowego w tym planie (sprawdzone bezpośrednio przez /v4/sports/). Ceny podane są z europejskich bukmacherów (Pinnacle, nordicbet, betsson, unibet…) — sprawdź je u własnego bukmachera przed obstawieniem; polskie księgi zwykle są zbliżone.</li>
+      <li>Próby odczytu pełnej treści przez WebFetch nie powiodły się dla stron espn.com (puste/JS) i wnba.com (tylko metadane meczu) — zastąpione przez Yahoo Sports, World Soccer Talk, oficjalne strony klubów/lig (intermiamicf.com, valkyries.wnba.com), Basketball-Reference i Atlanta News First, każdorazowo z co najmniej jednym źródłem przeczytanym w całości.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

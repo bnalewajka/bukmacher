@@ -12,6 +12,7 @@ Usage:
   python3 betexplorer.py next --sport hockey --hours 4 [--now 2026-09-24T16:47:03Z] [--out f.json]
   python3 betexplorer.py odds <match_id> 1x2 dc ou ah bts dnb ha   # prints per line/column median, max, PL books
   python3 betexplorer.py result <match_url>
+  python3 betexplorer.py move <match_id> <bettype> [--line 2.5] [--col 0]   # opening -> now, Polish books
 
 Sports: football, hockey, basketball, tennis, volleyball. Bet types: 1x2, dc, ou, ah, bts, dnb,
 ha (home/away, no draw — basketball, tennis, volleyball).
@@ -168,6 +169,38 @@ def price_summary(match_id: str, bettype: str, line: str = "", col: int = 0) -> 
                                          if any(k.lower() in r["bookmaker"].lower() for k in PL_BOOKS)}}
 
 
+def movement(match_id: str, bettype: str, line: str = "", col: int = 0,
+             books: tuple[str, ...] = ("STS.pl", "eFortuna.pl", "Superbet.pl", "Betclic.pl")) -> Optional[dict]:
+    """Median opening and current price of one selection across Polish books (opening = first
+    archived price; a cell without history never moved). move = current / opening - 1."""
+    body, _ = http_get(f"{BASE}/match-odds-old/{match_id}/1/{bettype}/0/en/", headers=XHR, ttl=300)
+    frag = json.loads(body).get("odds", "")
+    opens, nows = [], []
+    for tr in re.findall(r"<tr data-bid.*?</tr>", frag, re.S):
+        bk = re.search(r'title="([^"]+)"', tr)
+        ln = re.search(r'table-main__doubleparameter">([^<]*)<', tr)
+        if not bk or html.unescape(bk.group(1)) not in books or (ln.group(1).strip() if ln else "") != line:
+            continue
+        cells = re.findall(r"<td([^>]*data-odd=[^>]*)>", tr)
+        if len(cells) <= col:
+            continue
+        at = dict(re.findall(r'(data-[a-z-]+)="([^"]*)"', cells[col]))
+        now = float(at["data-odd"])
+        opening = now
+        if at.get("data-oid"):
+            hb, _ = http_get(f"{BASE}/archive-odds/{at['data-oid']}/{at['data-bid']}/{at['data-bt']}/"
+                             f"{at['data-sc']}/{at['data-hcp']}/", headers=XHR, ttl=300)
+            hist = json.loads(hb or b"[]")
+            if hist:
+                opening = float(hist[-1]["odd"])
+        opens.append(opening)
+        nows.append(now)
+    if not nows:
+        return None
+    o, n = statistics.median(opens), statistics.median(nows)
+    return {"open": o, "now": n, "move": round(n / o - 1, 4), "n_books": len(nows)}
+
+
 # ------------------------------------------------------------------------------ results
 def result(url: str, ttl: int = 300) -> dict:
     """Final state of a match page: finished flag, score, partial scores, stage (AET, After Penalties…)."""
@@ -198,6 +231,8 @@ def main() -> int:
     n.add_argument("--hours", type=float, default=4); n.add_argument("--now"); n.add_argument("--out")
     o = sub.add_parser("odds"); o.add_argument("match_id"); o.add_argument("bettypes", nargs="+")
     r = sub.add_parser("result"); r.add_argument("url")
+    mv = sub.add_parser("move"); mv.add_argument("match_id"); mv.add_argument("bettype")
+    mv.add_argument("--line", default=""); mv.add_argument("--col", type=int, default=0)
     args = ap.parse_args()
     try:
         if args.cmd == "next":
@@ -217,6 +252,8 @@ def main() -> int:
                             pl = ", ".join(f"{k}={v}" for k, v in s["pl"].items())
                             print(f"  line {line or '-':>6} col {col}: med {s['median']:.2f}  max {s['max']:.2f} "
                                   f"({s['max_book']})  n={s['n_books']}  [{pl}]")
+        elif args.cmd == "move":
+            print(json.dumps(movement(args.match_id, args.bettype, args.line, args.col)))
         elif args.cmd == "result":
             print(json.dumps(result(args.url), ensure_ascii=False))
     except HttpError as e:

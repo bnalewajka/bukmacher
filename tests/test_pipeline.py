@@ -241,7 +241,8 @@ def test_odds_and_shortlist(tmp_path=None):
         r["fetched_at"] = "x"
     out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_test_odds.json"
     out.write_text(json.dumps({"rows": rows}))
-    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--per-event", "4", "--out", str(out.with_name("bk_sl.json"))],
+    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--ranges", "all", "--per-event", "4",
+                          "--out", str(out.with_name("bk_sl.json"))],
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     ranges = {r["label"]: r["candidates"] for r in json.loads(out.with_name("bk_sl.json").read_text())["ranges"]}
@@ -397,7 +398,8 @@ def test_best_price_ignores_us_only_books():
             (("1.59", "betonlineag"), ("1.52", "pinnacle"), ("1.55", "unibet_eu"), ("1.50", "betsson"))]
     out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_us_odds.json"
     out.write_text(json.dumps({"rows": rows}))
-    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--out", str(out.with_name("bk_us_sl.json"))],
+    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--ranges", "all",
+                          "--out", str(out.with_name("bk_us_sl.json"))],
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     c = next(c for r in json.loads(out.with_name("bk_us_sl.json").read_text())["ranges"] for c in r["candidates"])

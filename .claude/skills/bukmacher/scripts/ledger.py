@@ -76,7 +76,7 @@ MARKETS = {"h2h": {"home", "away", "draw"}, "dnb": {"home", "away"}, "spread": {
            "dc": {"1X", "12", "X2"}, "totals": {"over", "under"}, "btts": {"yes", "no"}}
 # a match is assumed over this long after the start; earlier it is not even looked up
 DURATION = {"football": 2.25, "hockey": 3.0, "basketball": 2.75, "tennis": 4.0, "volleyball": 2.75}
-RANGES = ("1.20-1.29", "1.30-1.44", "1.45-1.60", "1.61-2.00", "2.01-3.00")
+RANGES = ("1.20-1.30", "1.20-1.29", "1.30-1.44", "1.45-1.60", "1.61-2.00", "2.01-3.00")
 # Above 1.60 only real opportunities are published: the pick must be in the value tier.
 OPPORTUNITY = {"1.61-2.00", "2.01-3.00"}
 # Polish betting tax: 12 % of the stake, so a winning bet returns 0.88 x odds per unit staked.

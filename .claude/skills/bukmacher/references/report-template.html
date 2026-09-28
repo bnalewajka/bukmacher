@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <!--
 Report template (Polish by default). Copy this file, keep the structure and the CSS, fill every
-{placeholder} and delete this comment. Repeat the <section class="range"> block once per odds
-range the user chose (default all five: 1.20–1.29, 1.30–1.44, 1.45–1.60, then the
-"okazje" ranges 1.61–2.00, 2.01–3.00, in that order; nothing below 1.20). In the okazje
-ranges every pick must be "z przewagą"; say what the edge is (news not in the price, a lagging
-book…), with a matching link in <nav class="ranges">; inside it repeat <article class="pick">
-per proposal (max 3) and <li> per rejected candidate. Anchors: id="z-120", "z-130", "z-161", "z-201",
-"z-145"; pick ids "z-120-1", "z-120-2", …
+{placeholder} and delete this comment. DEFAULT = "typ dnia": ONE <section class="range"> with
+id="z-120" titled "Typ dnia · kursy 1.20–1.30", holding the 1–2 picks (<article class="pick">,
+ids "z-120-1", "z-120-2") and up to 3 notable rejections (<li>); the nav keeps one chip for it
+plus "Skuteczność". Only when the user asked for other ranges, repeat the section per range
+(1.20–1.29 z-120, 1.30–1.44 z-130, 1.45–1.60 z-145, okazje 1.61–2.00 z-161, 2.01–3.00 z-201;
+up to 3 picks each; in okazje every pick must be "z przewagą" and say what the edge is).
 
 Rules for filling it:
 - One self-contained file: inline CSS only, no external scripts, fonts or images, so it opens
@@ -21,11 +20,10 @@ Rules for filling it:
 - Sources are real links (<a href>) with the fetch time; a failed source goes into "Uwagi".
   Each pick's sources line states how many sources and how many were read in full (SKILL.md
   research minimum: >= 2 independent, >= 1 read) — the same list as the ledger entry.
-- Up to 3 picks per range from the "value" and "fair" tiers (SKILL.md Step 4), each with its
-  tier badge: <span class="tier value">z przewagą</span> or <span class="tier fair">uczciwa cena</span>.
+- Typ dnia: 1–2 picks ranked by p_est (SKILL.md Step 5), each with its tier badge: <span class="tier value">z przewagą</span> or <span class="tier fair">uczciwa cena</span>.
   Only when no candidate reaches even the fair tier, replace the table and picks with
   <p class="empty"> saying so, and list the closest candidates with the price that would make them fair.
-- Each nav chip shows the range and its number of proposals ("1.20–1.29 · 2 typy").
+- Each nav chip shows the section and its number of picks ("Typ dnia 1.20–1.30 · 2 typy").
 - "Skuteczność": replace the placeholder section with the fragment `ledger.py stats --html`
   wrote (it is a complete <section id="skutecznosc">). "Wnioski": one line per settled loss
   (and per paper bet that won) — was it foreseeable, and what changes because of it.

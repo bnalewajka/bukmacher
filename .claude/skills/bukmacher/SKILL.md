@@ -1,23 +1,33 @@
 ---
 name: bukmacher
 description: >-
-  Find the most probable sports-betting selections in each odds range (1.20-1.29, 1.30-1.44,
-  1.45-1.60) and real value opportunities at 1.61-2.00 and 2.01-3.00 (all five by default;
-  nothing below 1.20) among real matches starting in the next 4/8/12/24 hours, using live fixture feeds, real bookmaker odds and a
-  deep, self-made pre-match analysis (motivation, form, absences, lineups, schedule, market signals)
-  across football, volleyball, basketball, hockey and tennis, and deliver a Polish HTML report with
-  several proposals per range, the reasoning, pluses and risks. Use this skill whenever the user asks for
-  betting tips, "typy", "pewniaki", "co obstawić", "kurs 1.20", the safest bet today/tonight, a
-  betting analysis of upcoming games, a bet scan for the next hours, or anything about bukmacher /
-  zakłady / sports odds — even if they do not say "skill" or name a sport.
+  Find today's one or two most probable sports bets priced 1.20-1.30 ("typ dnia") among real
+  matches in the next hours — live fixtures, real Polish-bookmaker odds, a deep self-made
+  pre-match analysis (absences, lineups, form, motivation, schedule, market moves) across
+  football, volleyball, basketball, hockey and tennis — and deliver a short Polish HTML report
+  with the pick(s), the reasoning, pluses, risks and how it loses. Other odds ranges (up to
+  1.60) and value "okazje" (1.61-3.00) only on request. Use this skill whenever the user asks
+  for betting tips, "typy", "typ dnia", "pewniaki", "co obstawić", "kurs 1.20", the safest bet
+  today/tonight, a betting analysis of upcoming games, or anything about bukmacher / zakłady /
+  sports odds — even if they do not say "skill" or name a sport.
 ---
 
-# Bukmacher — najbardziej prawdopodobne typy w zakresach kursów
+# Bukmacher — typ dnia: najbardziej prawdopodobny zakład po kursie 1.20–1.30
 
-The job: among **every** real fixture starting inside the chosen time window, across the five
-sports, find — separately for each chosen odds range — the handful of bookmaker selections
-whose *true* probability you believe is highest, and explain why — with confirmed events, confirmed prices,
+**What the owner wants** (keep this in front of everything else): once or twice a day, one or
+two bets priced **1.20–1.30** with the **highest possible chance of winning**, backed by real
+research. Not value hunting, not chasing price moves, not long reports. Among **every** real
+fixture in the window, across the five sports, find the selection(s) at 1.20–1.30 whose *true*
+probability you believe is highest, and explain why — with confirmed events, confirmed prices
 and an honest list of risks. You are the analyst; tipster sites are not.
+
+What the data says about "safest" at this price (research in `scripts/odds_movement.py`,
+46 k football + 2 k ATP matches): a favourite at 1.20–1.30 wins ~77–80 % whatever its price did
+before — a drop that already happened does not make it safer, the current price has absorbed
+it. What does matter: the price itself (1.20 ≈ 80 %, 1.30 ≈ 74 %), facts the price has not
+absorbed yet (confirmed absences, fatigue, motivation), and avoiding traps — thin lower-tier
+data, unconfirmed lineups, and **favourites whose price rose > 10 % since opening** (they win
+clearly less than their price says in both football and tennis).
 
 Scripts live in `scripts/` (Python 3.9+, stdlib only). Run them with the skill's base directory
 as the working directory (it is printed when the skill loads) and keep intermediate files in a
@@ -28,24 +38,17 @@ API keys (`ODDS_API_KEY`, `APISPORTS_KEY`) are read from the environment or, fai
 a gitignored `.env` file in the skill directory (`KEY=value` per line). Never print a key or
 write it anywhere else.
 
-## Step 0 — Parameters (ask, don't assume)
+## Step 0 — Parameters
 
-Two things are the user's call and change the whole run, so ask for them with one
-`AskUserQuestion` call unless the user already stated them in the prompt:
+Default run (no questions needed when the user just asks for typy / typ dnia): **odds 1.20–1.30,
+horizon = the rest of today** (from now + 45 min to 23:59 Europe/Warsaw; before 06:00 take the
+same calendar day), **1–2 picks**. Ask with `AskUserQuestion` only if the prompt leaves the
+horizon genuinely unclear (e.g. "na wieczór" vs "na jutro").
 
-1. **Horizon**: 4 h (Recommended, default), 8 h, 12 h, 24 h.
-2. **Odds ranges** (`multiSelect: true`, max 4 options — offer `1.20–1.44`, `1.45–1.60`,
-   `1.61–2.00 (okazje)`, `2.01–3.00 (okazje)`): the ranges are 1.20–1.29, 1.30–1.44, 1.45–1.60,
-   1.61–2.00, 2.01–3.00. Say in the question that the default is all five — and if the user
-   selects nothing, or answers "all"/"domyślnie", run all five. Nothing below 1.20 (owner's rule). The ranges are contiguous and fixed in
-   `scripts/shortlist.py` (`RANGES`); a selection belongs to the range of its *median* price.
-   "Other" lets them type a custom range (e.g. `1.25–1.35`) → `--min/--max`. A single price in
-   the prompt ("kurs około 1.20") means the range that contains it — don't ask again.
-
-Optional third question only if the prompt hints at it: restrict sports, or a bookmaker
-region for The Odds API (`eu` default; Polish bookmakers are not in the API — say so).
-Where no interactive tool exists (headless run), use the defaults and state that at the top of
-the report.
+Other ranges only when asked explicitly: 1.20–1.29, 1.30–1.44, 1.45–1.60 (`shortlist.py
+--ranges all` or a list) and the value "okazje" 1.61–2.00, 2.01–3.00 (see Step 4). Nothing
+below 1.20 (owner's rule). A single price in the prompt ("kurs około 1.25") means the daily
+band. Headless run: use the defaults and say so at the top of the report.
 
 ## Step 1 — Verify the clock
 
@@ -107,8 +110,8 @@ nothing is played. If the window is quiet (few events), say so rather than stret
 
 ```bash
 python3 scripts/odds.py --fixtures work/fixtures.json --out work/odds.json
-python3 scripts/shortlist.py work/odds.json --out work/shortlist.json   # all four ranges
-# only some: --ranges 1.20-1.29,1.30-1.44   ·   custom: --min 1.25 --max 1.35
+python3 scripts/shortlist.py work/odds.json --out work/shortlist.json   # 1.20-1.30 (default)
+# on request: --ranges all | 1.30-1.44,1.45-1.60 | custom --min 1.25 --max 1.35
 ```
 
 `odds.py` pulls every market the sources expose (1X2, double chance, draw-no-bet, totals,
@@ -133,11 +136,18 @@ so the de-vigged number is an upper bound on the truth. Read `references/markets
 markets worth considering per sport, and their traps (hockey 60-minute vs incl. OT, tennis
 retirement rules, volleyball set handicaps, Asian handicap refunds).
 
-Keep 5–10 candidates **per range** spanning sports and market types; do not let one sport or
-one league dominate just because it has more fixtures. The same fixture may appear in several
-ranges through different markets (e.g. a 1.15 win and a 1.40 handicap) — analyse the match
-once and reuse it. Prefer a market that makes losing require two
-independent things to go wrong over a plain win at the same price.
+Keep **8–12 finalists** at 1.20–1.30 spanning sports and market types; do not let one sport
+or one league dominate just because it has more fixtures. Prefer a market that makes losing
+require two independent things to go wrong over a plain win at the same price (DNB, double
+chance, +AH, "win or refund if 1:2 in sets", unders in low-event match-ups).
+
+**Red flag — check before researching:** for each finalist run
+`python3 scripts/betexplorer.py move <match_id> <bettype> [--line …] [--col …]` (median of the
+Polish books, opening → now). A favourite whose price **rose more than 10 %** since opening is
+dropped (the market knows something bad; historically these win clearly less than even their
+new price says). A price that fell is neither a plus nor a minus at the same current price —
+don't prefer it for that reason. In the cloud (no betexplorer) use `initial_odds` where the
+feed has it and say when the move could not be checked.
 
 ## Step 4 — Deep analysis (this is where the value is)
 
@@ -208,18 +218,18 @@ Never analyse a game that has already started (T0 vs start time) or a price you 
 
 ## Step 5 — Rank and report
 
-Within each range rank by `p_est`, tie-break by edge (`p_est × odds − 1`) and by liquidity
-(number of books agreeing). **Every range gets up to 3 picks** — the owner wants the most
-likely bets at each price level on every run, not only the rare ones with an edge. Take them
-from the value and fair tiers, value first; mark each pick's tier in the report ("z przewagą" /
-"uczciwa cena"). A range stays empty only when no candidate reaches even the fair tier (then
-say so and show the closest ones with the price that would make them fair), or when the window
-has no usable fixtures at that price. The report
-is **one HTML file with a section per range**: copy `references/report-template.html`
+**Typ dnia: pick the 1–2 finalists with the highest `p_est`** (tie-break: more books agreeing,
+then the lower-risk market). Each must have `p_est` ≥ the implied probability of the price
+(never publish something you think is overpriced) and must meet the research minimum; the tier
+label ("z przewagą" / "uczciwa cena") is shown but does not decide — probability does. If no
+finalist qualifies, say so plainly and name the closest one and what would make it playable
+(a confirmed lineup, a price of at least X). When other ranges were requested, give up to 3
+picks per requested range the same way. The report is **one short HTML file** (the typ dnia
+section first, then up to 3 notable rejections): copy `references/report-template.html`
 (self-contained, inline CSS, light/dark, phone-friendly), fill it in the user's language
 (Polish by default) and save it to `reports/<YYYY-MM-DD_HHMM>_typy.html` in the project. In
-the reply give a ranking table per range and the one-line "how it loses" per proposal in
-Markdown — not the whole HTML — and **always end
+the reply give the pick(s) as a small table (time, match, bet, price + bookmaker, p_est) with
+2–3 lines of why and the one-line "how it loses" — not the whole HTML — and **always end
 the reply with the report's `file://` link** on its own line, ready to paste into a browser.
 Build it from the saved file, never by hand, so spaces and Polish characters are encoded:
 

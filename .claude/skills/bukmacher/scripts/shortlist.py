@@ -36,14 +36,17 @@ RANGES = (("1.20-1.29", 1.20, 1.30), ("1.30-1.44", 1.30, 1.45), ("1.45-1.60", 1.
 # by more than the 12 % tax, so candidates are ranked by how far the best price exceeds the
 # market's own fair price (a price discrepancy), not by probability.
 OPPORTUNITY = {"1.61-2.00", "2.01-3.00"}
+# The owner's default: one or two of the most likely bets priced 1.20-1.30 ("typ dnia").
+DAILY = ("1.20-1.30", 1.20, 1.305)
 TAX = 0.12
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("odds_json")
-    ap.add_argument("--ranges", default="all",
-                    help="'all' or comma-separated labels: " + ", ".join(r[0] for r in RANGES))
+    ap.add_argument("--ranges", default="daily",
+                    help="'daily' (1.20-1.30, default), 'all' or comma-separated labels: "
+                         + ", ".join(r[0] for r in RANGES))
     ap.add_argument("--min", type=float, dest="lo", help="custom range, lower bound (with --max)")
     ap.add_argument("--max", type=float, dest="hi", help="custom range, upper bound inclusive")
     ap.add_argument("--per-event", type=int, default=3, help="max selections kept per event and range")
@@ -57,6 +60,8 @@ def main() -> int:
         if not (args.lo and args.hi and args.lo < args.hi):
             ap.error("--min and --max go together, with min < max")
         ranges = [(f"{args.lo:.2f}-{args.hi:.2f}", args.lo, args.hi + 0.005)]
+    elif args.ranges == "daily":
+        ranges = [DAILY]
     elif args.ranges == "all":
         ranges = list(RANGES)
     else:

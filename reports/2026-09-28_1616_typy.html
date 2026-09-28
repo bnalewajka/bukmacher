@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typ dnia 2026-09-28 16:16</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typ dnia · kursy 1.20–1.30 · pon. 28.09 (do 23:59)</h1>
+    <p class="meta">Wygenerowano 16:16 (czas PL). Przejrzane: 77 meczów (piłka, tenis, hokej, koszykówka), 59 zakładów w paśmie 1.20–1.30 u polskich bukmacherów, 16 finalistów. Kursy z betexplorer (STS, eFortuna, Betclic, Superbet, BETFAN, LV BET, Fuksiarz), pobrane ok. 16:15.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu. Pojedyncze zakłady, nie AKO.</p>
+    <nav class="ranges"><a href="#z-120">Typ dnia 1.20–1.30 · 2 typy</a><a href="#skutecznosc">Skuteczność</a></nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>#</th><th>Godz. (PL)</th><th>Mecz</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="num">17:05</td><td>Piros – Hassan (Challenger Bari, mączka)</td><td>wygrana Pirosa</td><td class="num">1.23<span class="note">STS (mediana 1.20)</span></td><td class="num pos">0.83</td><td class="num">0.813</td><td><span class="tier fair">uczciwa cena</span></td></tr>
+        <tr><td>2</td><td class="num">18:00</td><td>Łotwa – Cypr (Liga Narodów D)</td><td>poniżej 3 goli (linia azjatycka; 3 gole = zwrot)</td><td class="num">1.22<span class="note">BETFAN (mediana 1.22)</span></td><td class="num pos">0.82*</td><td class="num">0.820</td><td><span class="tier fair">uczciwa cena</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="meta">* dla linii azjatyckiej: szansa wygranej wśród wyników bez zwrotu. W praktyce: wygrana przy 0–2 golach (~66%), zwrot przy 3 (~18%), przegrana przy 4+ (~16%).</p>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Piros – Hassan — wygrana Pirosa @ 1.23 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Challenger Bari (mączka) · 17:05 PL (15:05 UTC) · 1.23 STS, mediana 1.20 z 7 bukm. · kurs od otwarcia 1.23 → 1.20 (bez czerwonej flagi) · p_est 0.83 vs implik. 0.813</p>
+      <p><strong>Dlaczego:</strong> Piros (nr 118) to w tym sezonie dominator Challengerów: 4 tytuły w 2026 (Lugano, Madryt, Braszów, Jassy — trzy na mączce), bilans 41–18, na mączce 27–13, w karierze 13 tytułów na mączce. Hassan w 2026: 21–22. Pierwszy mecz tych zawodników.</p>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>ulubiona nawierzchnia i forma sezonu</li><li>duża różnica klasy i wyników w 2026</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Challenger — cieńsze dane, brak informacji o zdrowiu z bieżącego tygodnia</li><li>źródła różnią się co do godziny startu — sprawdź w aplikacji bukmachera</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Hassan wygrywa wymiany z głębi kortu, Piros traci seta w tie-breaku i przegrywa trzeciego.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://en.wikipedia.org/wiki/Zsombor_Piros">Wikipedia — Piros</a> (ranking, tytuły 2026; przeczytane), <a href="https://tennistonic.com/tennis-news/1058380/h2h-prediction-of-zsombor-piros-vs-benjamin-hassan-in-bari-challenger-with-odds-preview-pick-28th-september-2026/">Tennis Tonic</a> (bilanse 2026 obu zawodników).</p>
+    </article>
+
+    <article class="pick" id="z-120-2">
+      <h3>2. Łotwa – Cypr — poniżej 3 goli (azjatycki) @ 1.22 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Liga Narodów D · 18:00 PL (16:00 UTC) · 1.22 BETFAN (mediana 1.22, 5 bukm.) · kurs od otwarcia 1.32 → 1.21 (rynek gra pod mało goli) · p_est 0.82 vs implik. 0.820</p>
+      <p><strong>Dlaczego:</strong> dwie z najsłabiej strzelających reprezentacji: Łotwa ma w ostatnich 14 meczach tylko 2 wygrane (obie 1:0), w 1. kolejce przegrała 0:2 z Armenią i jest bez Ikaunieksa i pięciu innych kontuzjowanych; Cypr przegrał 1:2 z Czarnogórą. Żadna nie strzeliła więcej niż 1 gola w 1. kolejce. Brak informacji o zawieszeniach.</p>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>przegrana dopiero przy 4+ golach, przy 3 golach zwrot</li><li>rynek od otwarcia przesuwa się w stronę małej liczby goli</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>obie drużyny słabe w obronie (Łotwa straciła 2, Cypr 2)</li><li>linia azjatycka: sprawdź, że bukmacher oferuje „poniżej 3” ze zwrotem</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> wczesny gol otwiera mecz dwóch słabych obron i kończy się 3:1 albo 2:2 z golem w końcówce na 2:3.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.sportsmole.co.uk/football/latvia/uefa-nations-league/preview/latvia-vs-cyprus-prediction-team-news-lineups_605834.html">Sports Mole</a> (forma, skład, brak zawieszeń; przeczytane), <a href="https://www.sofascore.com/news/latvia-vs-cyprus-preview-form-stats-and-players-to-watch">Sofascore News</a> (kontuzje Łotwy, niska liczba goli).</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni (najbliżej)</h3>
+    <ul>
+      <li><strong>Szwecja – Polska, poniżej 4.5 @ 1.20–1.22</strong> — ostatni mecz tych drużyn 3:2, Szwecja traciła 5 i 3 gole na MŚ; p_est 0.78 &lt; 0.82. (Uwaga: Bednarek w przewidywanym składzie — informacja o jego zawieszeniu z rana była błędna.)</li>
+      <li><strong>Turcja – Włochy, poniżej 4.5 @ 1.21 i poniżej 4 @ 1.28</strong> — <strong>czerwona flaga</strong>: kurs na under wzrósł od otwarcia o 11–15 % (rynek gra pod gole). Dotyczy też porannego typu „poniżej 3.5 @ 1.47”.</li>
+      <li><strong>Belgia – Francja, poniżej 4.5 @ 1.23</strong> — rynek widzi otwarty mecz (uczciwa szansa 0.77 &lt; 0.81).</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">39 (+3 otw.)</td><td class="num">31–7–1</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+2.90 u</td><td class="num pos">+7.4%</td><td class="num neg">-2.13 u</td><td class="num">+1.6%</td></tr><tr><td>Typy — z przewagą</td><td class="num">12 (+1 otw.)</td><td class="num">9–2–1</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+1.25 u</td><td class="num pos">+10.4%</td><td class="num neg">-0.34 u</td><td class="num">+1.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">27 (+2 otw.)</td><td class="num">22–5–0</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+1.65 u</td><td class="num pos">+6.1%</td><td class="num neg">-1.79 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">12 (+1 otw.)</td><td class="num">8–3–1</td><td class="num">73%</td><td class="num">75%</td><td class="num pos">+0.15 u</td><td class="num pos">+1.2%</td><td class="num neg">-1.31 u</td><td class="num">+0.9%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">7 (+1 otw.)</td><td class="num">5–2–0</td><td class="num">71%</td><td class="num">66%</td><td class="num pos">+0.76 u</td><td class="num pos">+10.9%</td><td class="num neg">-0.17 u</td><td class="num">+1.3%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num ">+0.00 u</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">57 (+11 otw.)</td><td class="num">43–14–0</td><td class="num">75%</td><td class="num">72%</td><td class="num pos">+1.97 u</td><td class="num pos">+3.5%</td><td class="num neg">-5.11 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">15 (+4 otw.)</td><td class="num">11–4–0</td><td class="num">73%</td><td class="num">77%</td><td class="num neg">-1.27 u</td><td class="num neg">-8.5%</td><td class="num neg">-2.92 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">16 (+3 otw.)</td><td class="num">12–4–0</td><td class="num">75%</td><td class="num">70%</td><td class="num pos">+0.53 u</td><td class="num pos">+3.3%</td><td class="num neg">-1.46 u</td><td class="num">+0.5%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">8 (+2 otw.)</td><td class="num">3–5–0</td><td class="num">38%</td><td class="num">62%</td><td class="num neg">-3.24 u</td><td class="num neg">-40.5%</td><td class="num neg">-3.81 u</td><td class="num">+1.0%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">1 (+1 otw.)</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">54%</td><td class="num pos">+0.90 u</td><td class="num pos">+90.0%</td><td class="num pos">+0.67 u</td><td class="num">—</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">3 (+1 otw.)</td><td class="num">2–1–0</td><td class="num">67%</td><td class="num">40%</td><td class="num pos">+2.60 u</td><td class="num pos">+86.7%</td><td class="num pos">+1.93 u</td><td class="num">+9.8%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Jacquet K. – Rublev A.: h2h away @ 1.35 → <strong>wygrana</strong> (0:2) <em>(papier)</em></li><li>Basilashvili N. – Davidovich Fokina A.: h2h away @ 1.45 → <strong>wygrana</strong> (1:2)</li><li>León – FC Juarez: h2h home @ 1.58 → <strong>wygrana</strong> (2:1)</li><li>Golden State Valkyries – Dallas Wings: h2h home @ 1.35 → <strong>wygrana</strong> (104:80) <em>(papier)</em></li><li>Columbus Crew – Inter Miami CF: totals over 2.5 @ 1.44 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Columbus Crew – Inter Miami CF: h2h away @ 2.35 → <strong>przegrana</strong> (2:1) <em>(papier)</em></li><li>Utah Royals – North Carolina Courage: totals over 2.5 @ 1.541 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Atlanta Dream – Washington Mystics: h2h home @ 1.34 → <strong>wygrana</strong> (92:77) <em>(papier)</em></li><li>Columbus Crew – Inter Miami CF: h2h home @ 3.05 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Las Vegas Aces – Indiana Fever: h2h home @ 1.57 → <strong>wygrana</strong> (102:85)</li><li>Germany – Greece: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (0:1)</li><li>Israel – Ireland: totals under 3.5 @ 1.28 → <strong>wygrana</strong> (0:3)</li><li>Minnesota Lynx W – New York Liberty W: h2h home @ 1.35 → <strong>przegrana</strong> (75:91) <em>(papier)</em></li><li>Olympiacos – PAOK: h2h home @ 1.28 → <strong>wygrana</strong> (101:96) <em>(papier)</em></li><li>Serbia – Netherlands: dc X2 @ 1.13 → <strong>wygrana</strong> (1:2)</li></ul>
+</section>
+
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; stawiaj tylko to, co możesz stracić.</li>
+      <li>Hokej (Maxa liga, Allsvenskan) i koszykówka w paśmie 1.20–1.30 odrzucone: brak informacji o bramkarzach / składach.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

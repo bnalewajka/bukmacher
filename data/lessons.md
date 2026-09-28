@@ -90,3 +90,7 @@ Cotygodniowy przegląd (`references/self-review.md`) czyta go w całości.
 - KHL i ekstraliga białoruska nie mają cen u polskich bukmacherów — pomijać przy skanowaniu hokeja.
 - Wyszukiwarka podała zapowiedź Metal Ligaen z lutego 2026 jako aktualną — przy hokeju zawsze sprawdzać datę artykułu; bez aktualnego źródła o bramkarzach tylko papier.
 - Eliminacje ATP/WTA w Pekinie: godziny w źródłach różne od listy betexplorera (Kecmanović–Mannarino o 10:00 UTC vs 09:15 na liście) — eliminacje traktować jako słabe dane.
+
+## 2026-09-28_1616_typy.html
+- Czerwona flaga zadziałała: under 4.5/4 w Turcja – Włochy podrożał od otwarcia o 11–15 % (rynek gra pod gole) — odrzucone; poranny typ U3.5 @ 1.47 na tym samym meczu idzie pod prąd rynku.
+- Poranna informacja o zawieszeniu Bednarka była błędna (przewidywany skład z nim w obronie) — podsumowania wyszukiwarki nie wystarczą do zawieszeń; potrzebne źródło, które je wymienia.

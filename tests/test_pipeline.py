@@ -26,6 +26,7 @@ import context as ctx_mod  # noqa: E402
 import ledger as ledger_mod  # noqa: E402
 import betexplorer as be_mod  # noqa: E402
 import tennis_elo as elo_mod  # noqa: E402
+import odds_movement as move_mod  # noqa: E402
 
 T0 = datetime(2026, 9, 24, 16, 0, tzinfo=timezone.utc)
 
@@ -460,6 +461,21 @@ def test_tennis_elo_math():
     for _ in range(5):
         e.update({"tour": "atp", "winner": "A B.", "loser": "C D.", "surface": "Hard", "date": "2026-01-01"})
     assert e.prob("atp", "a b", "c d", "Hard") > 0.8 and e.n[("atp", "a b")] == 5
+
+
+def test_odds_movement_two_way():
+    assert abs(move_mod.fair2(1.40, 2.85) - 0.671) < 0.001
+    assert move_mod.bucket_of(-0.12) == "spadek > 10%" and move_mod.bucket_of(0.0) == "±2% (bez zmian)"
+    assert move_mod.bucket_of(0.07) == "wzrost 5–10%"
+    rows = [  # favourite = lower price in the chosen reference (opening or closing)
+        {"tour": "atp", "open": [1.50, 2.60], "close": [1.35, 3.10], "winner": 0},   # shortened ~10 %, won
+        {"tour": "atp", "open": [2.60, 1.50], "close": [2.40, 1.60], "winner": 0},   # fav (p2) drifted, lost
+        {"tour": "wta", "open": [1.20, 4.50], "close": [1.25, 4.00], "winner": 0},   # outside the band
+    ]
+    g = move_mod.tennis_groups(rows, 1.30, 1.60, "opening")
+    assert [len(v) for v in g.values()] == [1, 1] and g["spadek 5–10%"][0]["won"] and not g["wzrost 5–10%"][0]["won"]
+    st = move_mod.bucket_stats(g)
+    assert st["spadek 5–10%"]["roi_open"] == 0.5 and st["wzrost 5–10%"]["roi_close"] == -1.0
 
 
 def test_cli_help():

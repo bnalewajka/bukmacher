@@ -94,3 +94,8 @@ Cotygodniowy przegląd (`references/self-review.md`) czyta go w całości.
 ## 2026-09-28_1616_typy.html
 - Czerwona flaga zadziałała: under 4.5/4 w Turcja – Włochy podrożał od otwarcia o 11–15 % (rynek gra pod gole) — odrzucone; poranny typ U3.5 @ 1.47 na tym samym meczu idzie pod prąd rynku.
 - Poranna informacja o zawieszeniu Bednarka była błędna (przewidywany skład z nim w obronie) — podsumowania wyszukiwarki nie wystarczą do zawieszeń; potrzebne źródło, które je wymienia.
+
+## 2026-09-28_1903_typy.html
+- Medvedev D. – Safiullin R. (typ @ 1.43 i papier @ 1.45), Hurkacz H. – Shapovalov D. (@ 1.7) — wszystkie trzy typy rozliczone w tym uruchomieniu wygrały zgodnie z oczekiwaniem (CLV +1.4% do +6.2%), bez korekt.
+- Pierwszy raport bez żadnego kandydata w paśmie 1.20–1.30: wieczór Ligi Narodów UEFA (mecze wyrównane, brak faworyta poniżej 1.45) + el. Ligi Narodów CONCACAF karaibskich reprezentacji, które w oknie miały wyłącznie pojedyncze notowania DraftKings (US-only, niedostępne dla gracza w Polsce) — potwierdza, że puste pasmo 1.20-1.30 to czasem prawidłowy wynik, nie błąd researchu.
+- Dwa mecze szwedzkiej ekstraligi hokeja (Västerås IK–Kalmar HC, Nybro Vikings–Modo Hockey) pojawiły się w The Odds API mimo braku pokrycia w fixtures.py (Sofascore 403, ESPN bez hokeja) — The Odds API potrafi odkrywać wydarzenia niezależnie od listy fixtures; warto to uwzględnić przy interpretacji liczby wydarzeń w oknie.

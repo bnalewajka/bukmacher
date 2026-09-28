@@ -425,7 +425,7 @@ def test_betexplorer_full_football_list():
 
 
 def test_opportunity_ranges():
-    """Above 1.60: ranked by price discrepancy, and a pick must be EV+ after the 12 % tax."""
+    """Above 1.60: ranked by price discrepancy, and a pick must be in the value tier."""
     fx = {"key": "k", "sport": "football", "home": "A", "away": "B", "start_utc": "2026-09-24T18:00:00Z", "sources": {}}
     rows = []
     for bk, (h, d, a) in {"pinnacle": (1.85, 3.6, 4.6), "sts": (1.95, 3.5, 4.4), "betclic": (1.80, 3.6, 4.7)}.items():
@@ -444,8 +444,8 @@ def test_opportunity_ranges():
             "odds": 1.95, "bookmaker": "sts", "source": "betexplorer", "p_est": 0.56,
             "sources": [{"url": "https://a.com/x", "read": True}, {"url": "https://b.com/y", "read": True}],
             "ref": {"source": "espn", "sport": "soccer", "league": "x", "event_id": "1"}}
-    assert any("positive after" in e for e in ledger_mod.validate(pick))          # 0.56 x 1.95 x 0.88 < 1
-    assert not ledger_mod.validate({**pick, "p_est": 0.60})                       # 0.60 x 1.95 x 0.88 = 1.03
+    assert any("tier 'value'" in e for e in ledger_mod.validate({**pick, "tier": "fair"}))   # a fair price is no opportunity
+    assert not ledger_mod.validate(pick)
 
 
 def test_cli_help():

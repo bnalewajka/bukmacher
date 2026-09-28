@@ -22,7 +22,7 @@ Entry schema (fields the run must fill; the rest is added here):
   sources      picks: >= 2 independent sources, >= 1 read in full —
                [{"url": "https://…", "what": "absences", "read": true}, …]; optional for paper
   range        "1.20-1.29" | "1.30-1.44" | "1.45-1.60" | "1.61-2.00" | "2.01-3.00" | "custom"
-               (older entries: "1.10-1.19"); a pick in 1.61-2.00 / 2.01-3.00 must be EV+ after tax
+               (older entries: "1.10-1.19"); a pick in 1.61-2.00 / 2.01-3.00 must be tier "value"
   sport, competition, home, away, start_utc
   market       "h2h" | "dc" | "dnb" | "totals" | "spread" | "btts"
   selection    h2h/dnb/spread: "home"|"away"|"draw"(h2h only); dc: "1X"|"12"|"X2";
@@ -77,7 +77,7 @@ MARKETS = {"h2h": {"home", "away", "draw"}, "dnb": {"home", "away"}, "spread": {
 # a match is assumed over this long after the start; earlier it is not even looked up
 DURATION = {"football": 2.25, "hockey": 3.0, "basketball": 2.75, "tennis": 4.0, "volleyball": 2.75}
 RANGES = ("1.20-1.29", "1.30-1.44", "1.45-1.60", "1.61-2.00", "2.01-3.00")
-# Above 1.60 only real opportunities are published: the pick must be positive after tax.
+# Above 1.60 only real opportunities are published: the pick must be in the value tier.
 OPPORTUNITY = {"1.61-2.00", "2.01-3.00"}
 # Polish betting tax: 12 % of the stake, so a winning bet returns 0.88 x odds per unit staked.
 # Net figures assume the tax is also lost on a push (conservative; books differ).
@@ -129,13 +129,8 @@ def validate(e: dict) -> list[str]:
         errs.append(f"a pick needs tier {'|'.join(TIERS)}")
     if e.get("kind") == "pick":
         errs += source_errors(e.get("sources"))
-    if e.get("kind") == "pick" and e.get("range") in OPPORTUNITY:
-        try:
-            if float(e["p_est"]) * float(e["odds"]) * (1 - TAX) - 1 < 0:
-                errs.append("an opportunity-range pick must be positive after the 12 % tax "
-                            "(p_est x odds x 0.88 >= 1) — otherwise record it as paper")
-        except (KeyError, TypeError, ValueError):
-            pass
+    if e.get("kind") == "pick" and e.get("range") in OPPORTUNITY and e.get("tier") != "value":
+        errs.append("an opportunity-range pick must be tier 'value' (p_est >= implied + 0.03) — else paper")
     if e.get("market") not in MARKETS:
         errs.append(f"market must be one of {sorted(MARKETS)}")
     elif e.get("selection") not in MARKETS[e["market"]]:

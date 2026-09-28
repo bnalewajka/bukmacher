@@ -37,8 +37,7 @@ Two things are the user's call and change the whole run, so ask for them with on
 2. **Odds ranges** (`multiSelect: true`, max 4 options — offer `1.20–1.44`, `1.45–1.60`,
    `1.61–2.00 (okazje)`, `2.01–3.00 (okazje)`): the ranges are 1.20–1.29, 1.30–1.44, 1.45–1.60,
    1.61–2.00, 2.01–3.00. Say in the question that the default is all five — and if the user
-   selects nothing, or answers "all"/"domyślnie", run all five. **Nothing below 1.20** (owner's rule): after the
-   12 % Polish stake tax such prices need a ~95–99 % hit rate just to break even. The ranges are contiguous and fixed in
+   selects nothing, or answers "all"/"domyślnie", run all five. Nothing below 1.20 (owner's rule). The ranges are contiguous and fixed in
    `scripts/shortlist.py` (`RANGES`); a selection belongs to the range of its *median* price.
    "Other" lets them type a custom range (e.g. `1.25–1.35`) → `--min/--max`. A single price in
    the prompt ("kurs około 1.20") means the range that contains it — don't ask again.
@@ -183,20 +182,16 @@ Then sort each finalist into a tier (bars in `references/analysis.md` §12):
 **Opportunity ranges (1.61–2.00, 2.01–3.00) work differently.** They exist to find genuine
 value, not likely outcomes: the shortlist ranks them by `edge_market` (how far the best Polish
 price exceeds the books' median fair price — a price discrepancy, a slow book, a stale line),
-and a pick is published **only if it is positive after tax**: p_est × kurs × 0.88 ≥ 1
-(1.80 → p_est ≥ 63.1 %, 2.20 → ≥ 51.7 %, 2.80 → ≥ 40.6 %). Everything else there is paper.
+and a pick there must be in the **value** tier (p_est ≥ implied + 0.03) — a fair price is
+not an opportunity. Everything else there is paper.
 Typical sources of a real edge: team news the price hasn't absorbed (confirmed absences,
 rotation before a bigger game, goalie/starter changes), one book lagging the market, and
 markets where the favourite's short price pushes value onto the other side (draw no bet, +AH,
 unders in low-event match-ups). Treat a big `edge_market` on one book as a possible error
-until a second book or a fact supports it. `ledger.py add` rejects an opportunity pick that is
-negative after tax. Up to 3 picks per opportunity range; empty is fine — say so.
+until a second book or a fact supports it. `ledger.py add` rejects an opportunity pick that is not
+"value". Up to 3 picks per opportunity range; empty is fine — say so.
 
-The tiers compare you with the market. What the owner actually earns is after **Poland's 12 %
-stake tax**: a win pays 0.88 × kurs per unit staked. For every pick also compute
-**EV po podatku = p_est × kurs × 0.88 − 1** and show it; break-even is p_est = 1 / (0.88 × kurs)
-(1.24 → 91.6 %, 1.45 → 78.4 %, 1.60 → 71.0 %). Say plainly in the report when a pick is
-negative after tax (most short prices are) — the owner decides with that number in view.
+
 
 Never analyse a game that has already started (T0 vs start time) or a price you did not fetch.
 

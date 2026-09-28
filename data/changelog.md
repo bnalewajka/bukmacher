@@ -44,3 +44,6 @@ How we will know: kolumna „Po podatku” w statystykach; następny przegląd p
 Findings: po podatku 12 % krótkie kursy (≤ 1.60) wymagają przewagi 10–15 pkt nad rynkiem — nieosiągalnej przy naszym CLV ~1–2 %; przy wyższych kursach wymagana przewaga w pkt jest mniejsza (2.00 → +6.8 pkt).
 Changes: dwa nowe zakresy „okazje”; shortlist szereguje je wg `edge_market` (najlepsza cena vs mediana uczciwej ceny z książek), nie wg prawdopodobieństwa; typ tylko gdy EV po podatku ≥ 0 (ledger to egzekwuje), inaczej papier; SKILL.md opisuje źródła prawdziwej przewagi (newsy niewycenione, spóźniona książka, DNB/+AH/under). Test na ranking i walidację.
 How we will know: po ~20 typach „okazji” — wynik po podatku i CLV; jeśli ujemne, okazje to szum.
+
+## 2026-09-28 — warunek podatku usunięty (decyzja właściciela)
+Changes: typy nie są już oceniane ani blokowane wg EV po podatku; w zakresach okazji 1.61–3.00 warunkiem jest klasa „z przewagą” (p_est ≥ implikowane + 0.03). Kolumna „po podatku” zostaje tylko w statystykach strony, informacyjnie.

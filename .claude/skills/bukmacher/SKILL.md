@@ -172,6 +172,17 @@ sites and tipster "pewniaki": they are not evidence. Form your own probability e
 Record them in the pick as `"sources": [{"url": …, "what": "absences / form / h2h …",
 "read": true|false}, …]`. A finalist you could not research to this standard goes to the
 ledger as `paper` (with whatever sources you have), not as a pick — say so in the report.
+**Tennis: check the Elo model** (`scripts/tennis_elo.py`, ATP/WTA main tour only; run
+`python3 scripts/tennis_elo.py build` once per run to refresh, then
+`python3 scripts/tennis_elo.py predict "Surname I." "Surname I." --surface hard --odds <A> <B>`).
+Backtest 2025–26 (7 890 matches): the closing market beats Elo on Brier and log loss, every
+blend is worse than the market alone, and where they disagree by ≥ 10 points the market is
+right more often. So Elo **never moves p_est by itself**. Use it as a check: a big gap means
+something recent is in the price and not in the ratings (the data lag 2–3 weeks — this week's
+matches, qualifying runs, injuries); find that fact before you trust either side. For set
+scores prefer the market-derived split (winner / total sets / 2:0 prices) over Elo's
+independent-sets split, which underrates straight-sets wins by the underdog.
+
 Then sort each finalist into a tier (bars in `references/analysis.md` §12):
 
 - **value** — `p_est` ≥ implied + 0.03: the analysis found something the price misses;

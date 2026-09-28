@@ -25,6 +25,7 @@ import odds as odds_mod  # noqa: E402
 import context as ctx_mod  # noqa: E402
 import ledger as ledger_mod  # noqa: E402
 import betexplorer as be_mod  # noqa: E402
+import tennis_elo as elo_mod  # noqa: E402
 
 T0 = datetime(2026, 9, 24, 16, 0, tzinfo=timezone.utc)
 
@@ -448,8 +449,22 @@ def test_opportunity_ranges():
     assert not ledger_mod.validate(pick)
 
 
+def test_tennis_elo_math():
+    assert elo_mod.key("Davidovich Fokina A.") == elo_mod.key("Davidovich-Fokina A") == "davidovich fokina a"
+    for p in (0.3, 0.5, 0.67, 0.84):
+        sc = elo_mod.set_scores(p)
+        assert abs(sum(sc.values()) - 1) < 1e-9 and abs(sc["2:0"] + sc["2:1"] - p) < 1e-6
+    assert abs(elo_mod.market_fair(1.40, 2.85) - 0.671) < 0.001
+    assert abs(elo_mod.blend(0.7, 0.9, 1.0) - 0.7) < 1e-9
+    e = elo_mod.Elo()
+    for _ in range(5):
+        e.update({"tour": "atp", "winner": "A B.", "loser": "C D.", "surface": "Hard", "date": "2026-01-01"})
+    assert e.prob("atp", "a b", "c d", "Hard") > 0.8 and e.n[("atp", "a b")] == 5
+
+
 def test_cli_help():
-    for s in ("clock.py", "fixtures.py", "odds.py", "shortlist.py", "context.py", "ledger.py", "betexplorer.py"):
+    for s in ("clock.py", "fixtures.py", "odds.py", "shortlist.py", "context.py", "ledger.py", "betexplorer.py",
+              "tennis_elo.py"):
         res = subprocess.run([sys.executable, str(SCRIPTS / s), "--help"], capture_output=True, text=True)
         assert res.returncode == 0, s
 

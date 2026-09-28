@@ -47,3 +47,8 @@ How we will know: po ~20 typach „okazji” — wynik po podatku i CLV; jeśli 
 
 ## 2026-09-28 — warunek podatku usunięty (decyzja właściciela)
 Changes: typy nie są już oceniane ani blokowane wg EV po podatku; w zakresach okazji 1.61–3.00 warunkiem jest klasa „z przewagą” (p_est ≥ implikowane + 0.03). Kolumna „po podatku” zostaje tylko w statystykach strony, informacyjnie.
+
+## 2026-09-28 — model Elo dla tenisa (prośba właściciela)
+Findings: `tennis_elo.py` (tennis-data.co.uk, 2019–2026, 35 847 meczów, Elo ogólne + nawierzchnia, K = 250/(n+5)^0.4). Test out-of-sample 2025–26, 7 890 meczów: rynek (zamknięcie; Pinnacle albo średnia) Brier 0.2036 / log-loss 0.5918, Elo 0.2175 / 0.6241; każda mieszanka gorsza od samego rynku (najlepsza 95/5 = 0.5921); przy rozbieżności ≥ 10 pkt (2 354 mecze) rynek 0.2235 vs Elo 0.263 Brier. Dane opóźnione 2–3 tygodnie (brak bieżącego tygodnia).
+Changes: SKILL.md — Elo jako kontrola, nie źródło p_est; duża rozbieżność = szukać faktu (forma z bieżącego tygodnia, kwalifikacje, kontuzja). Test matematyki modelu.
+How we will know: przegląd tygodniowy może przebudować model (`build`) i sprawdzić, czy dodanie formy z bieżącego tygodnia zmniejsza przewagę rynku; dopóki blend nie bije rynku w teście — Elo nie wpływa na p_est.

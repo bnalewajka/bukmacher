@@ -85,3 +85,8 @@ Cotygodniowy przegląd (`references/self-review.md`) czyta go w całości.
 - Under oparty na absencjach w ataku nie wystarcza, gdy obie obrony też są rozbite (Austria – Kosowo 3:1 wczoraj; dziś Szwecja bez 4 obrońców i Polska bez zawieszonego Bednarka i Kiwiora → papier). Przy underach sprawdzać absencje obrońców i bramkarzy, nie tylko napastników.
 - Drugi dzień z rzędu bez okazji w zakresach 1.61–3.00 (381 selekcji, max +7% vs próg podatku 13.6%). Poranny skan cen okazji nie znajduje — potrzebny przebieg w dniu meczu tuż po składach.
 - Łotwa – Cypr U3 miało p_est powyżej ceny (Łotwa 5 meczów <2.5), ale odpadło na regule zawieszeń: Sports Mole game page i footballwhispers nie wymieniają zawieszeń. W niższych dywizjach LN szukać strony federacji / newsa o kartkach zamiast polegać na zapowiedziach.
+
+## 2026-09-28_0902_typy.html
+- KHL i ekstraliga białoruska nie mają cen u polskich bukmacherów — pomijać przy skanowaniu hokeja.
+- Wyszukiwarka podała zapowiedź Metal Ligaen z lutego 2026 jako aktualną — przy hokeju zawsze sprawdzać datę artykułu; bez aktualnego źródła o bramkarzach tylko papier.
+- Eliminacje ATP/WTA w Pekinie: godziny w źródłach różne od listy betexplorera (Kecmanović–Mannarino o 10:00 UTC vs 09:15 na liście) — eliminacje traktować jako słabe dane.

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 28.09 09:02 — tenis i hokej</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body><main>
+<header>
+<h1>Typy — tenis, hokej, koszykówka · 28.09 (09:30–23:59)</h1>
+<p class="meta">Wygenerowano: 2026-09-28 07:02 UTC / 09:02 CEST, lokalnie (polskie IP). Zegar zweryfikowany: tak (clock.py, 06:58:52 UTC). Okno: 09:30–23:59 PL.</p>
+<p class="meta">Przejrzano 111 meczów (tenis 81, hokej 27, koszykówka 3) po odrzuceniu ITF, debli, U20 i lig kobiecych; ceny polskich bukmacherów (STS, eFortuna, Betclic, Superbet, LV BET, Fuksiarz, BETFAN) pobrane dla wszystkich 111 (439 selekcji w zakresach 1.20–3.00), 14 finalistów zbadanych. KHL i liga białoruska: brak ofert u polskich bukmacherów. Kursy pobrane 07:00–07:05 UTC.</p>
+<p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+<p class="summary">Trzy typy z tenisa (półfinały ATP 250 w Chengdu i Hangzhou): <strong>Hurkacz @ 1.70</strong> jako okazja z przewagą (bilans 5–1 z Shapovalovem, Kanadyjczyk po 2,5-godzinnym ćwierćfinale), Davidovich Fokina i Miedwiediew jako uczciwie wycenieni faworyci. Hokej (Allsvenskan, Sparta, Aalborg) bez typu — zbyt mało aktualnych informacji o składach i bramkarzach. Koszykówka — tylko liga WASL, bez danych.</p>
+<nav class="ranges"><a href="#z-120">1.20–1.29 · 0</a><a href="#z-130">1.30–1.44 · 2 typy</a><a href="#z-145">1.45–1.60 · 0</a><a href="#z-161">Okazje 1.61–2.00 · 1</a><a href="#z-201">Okazje 2.01–3.00 · 0</a><a href="#skutecznosc">Skuteczność</a></nav>
+</header>
+
+<section class="range" id="z-120"><h2>Kursy 1.20–1.29</h2><p class="empty">Brak typu. Dimitrow @ 1.25 (Challenger Porto) na papierze — nr 127 po długiej przerwie, p_est 0.78 &lt; 0.80.</p></section>
+
+<section class="range" id="z-130"><h2>Kursy 1.30–1.44</h2>
+<h3 class="sub">Ranking</h3><div class="table-wrap"><table><thead><tr><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody>
+<tr><td class=num>11:00</td><td>Basilashvili – <strong>Davidovich Fokina</strong></td><td>ATP Chengdu, półfinał</td><td>wygrana Davidovicha Fokiny</td><td>1.45 eFortuna (med. 1.40)</td><td class=num>0.70</td><td class=num>0.690</td><td class=num><span class="tier fair">uczciwa cena</span></td></tr>
+<tr><td class=num>13:30</td><td><strong>Miedwiediew</strong> – Safiullin</td><td>ATP Hangzhou, półfinał</td><td>wygrana Miedwiediewa</td><td>1.43 Superbet (med. 1.42)</td><td class=num>0.70</td><td class=num>0.699</td><td class=num><span class="tier fair">uczciwa cena</span></td></tr>
+</tbody></table></div>
+<h3 class="sub">Analiza propozycji</h3>
+<article class="pick" id="z-130-1">
+      <h3>1. Basilashvili – Davidovich Fokina — wygrana Davidovicha Fokiny @ 1.45 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">ATP 250 Chengdu, półfinał · 11:00 PL (09:00 UTC) · 1.45 eFortuna.pl (betexplorer, 07:03 UTC), mediana 1.40 z 7 książek · p_est 0.70 vs implikowane 0.690</p>
+      <p><strong>Dlaczego ten typ:</strong> Rozstawiony z nr 2 Hiszpan przeszedł dwie rundy bez straty seta (6-4 6-4 z J.M. Cerúndolo, 6-1 7-5 z Mullerem), a Basilashvili (nr 145) gra szósty mecz w tygodniu po kwalifikacjach.</p>
+      <dl><dt>Forma</dt><dd>ADF: 2 wygrane w setach, po kontuzji pleców wygląda na w pełni zdrowego. Basilashvili: 3 wygrane w eliminacjach + 3 w drabince (Kecmanović, Van de Zandschulp, Brooksby), pierwszy półfinał ATP od Dohy 2022.</dd><dt>H2H</dt><dd>1–0 Basilashvili (Metz 2021, 3 sety) — stare, na innej nawierzchni.</dd><dt>Zmęczenie</dt><dd>Basilashvili 6 meczów w 7 dni; ADF 2.</dd><dt>Rynek</dt><dd>7 książek zgodnych 1.38–1.45; fair ok. 0.67 — moja korekta +3 pkt za zmęczenie rywala.</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>różnica rankingu (29 vs 145)</li><li>ADF świeży, bez straty seta</li><li>rywal po maratonie kwalifikacji</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Basilashvili gra najlepszy tenis od lat i ma mocny, ryzykowny serwis — potrafi „przestrzelić” rywala</li><li>ADF bywa nierówny mentalnie w końcówkach setów</li><li>w razie kreczu przed końcem 1. seta zakład jest zwracany u większości książek</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Basilashvili trafia serwis i forhend jak w 2021, wygrywa tie-break i drugiego seta w końcówce.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.atptour.com/en/news/chengdu-2026-sunday-report">atptour.com (Chengdu, ćwierćfinały)</a> — wyniki QF, statystyki serwisu, czas meczów, <a href="https://www.sportskeeda.com/tennis/alejandro-davidovich-fokina-vs-nikoloz-basilashvili-preview-head-to-head-odds-prediction-betting-tips-chengdu-open-2026-semifinal">sportskeeda.com</a> — rankingi, droga do półfinału, kontuzja pleców ADF</p>
+    </article>
+<article class="pick" id="z-130-2">
+      <h3>2. Miedwiediew – Safiullin — wygrana Miedwiediewa @ 1.43 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">ATP 250 Hangzhou, półfinał · 13:30 PL (11:30 UTC) · 1.43 Superbet.pl, mediana 1.42 z 7 książek · p_est 0.70 vs implikowane 0.699</p>
+      <p><strong>Dlaczego ten typ:</strong> Miedwiediew (rozstawiony z nr 1) w ćwierćfinale: 18 asów i 5 z 6 obronionych break pointów; Safiullin w pierwszym półfinale sezonu. Pierwszy zawodowy mecz tych graczy.</p>
+      <dl><dt>Forma</dt><dd>Miedwiediew: 2 wygrane (Royer w 2 setach, Wong 6-3 6-7 6-3). Safiullin: 3 wygrane, ostatnia 6-3 6-3.</dd><dt>Stawka</dt><dd>Miedwiediew walczy o miejsce w Finałach ATP (371 pkt przewagi nad 9. miejscem w wyścigu).</dd><dt>Rynek</dt><dd>fair ok. 0.66 — korekta +4 pkt za serwis i klasę na hardzie.</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>serwis w życiowej formie tygodnia</li><li>doświadczenie w półfinałach</li><li>motywacja wyścigu do Turynu</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Safiullin wypoczęty (krótsze mecze)</li><li>Miedwiediew stracił seta z Wongiem — nie jest to dominacja</li><li>brak H2H</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Safiullin wytrzymuje wymiany z linii końcowej, Miedwiediew traci cierpliwość i przegrywa w trzech setach.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.atptour.com/en/news/hangzhou-2026-sunday-report">atptour.com (Hangzhou, ćwierćfinały)</a> — wyniki QF, 18 asów Miedwiediewa, <a href="https://www.bleachernation.com/picks/2026/09/27/medvedev-vs-safiullin-prediction-at-the-hangzhou-open-monday-september-28/">bleachernation.com</a> — brak H2H, droga Safiullina</p>
+    </article>
+<h3 class="sub">Odrzuceni</h3><ul><li><strong>Rublew @ 1.36 (Jacquet)</strong> — Rublew był 3 punkty od porażki w ćwierćfinale, Jacquet (nr 85) pokonał Etcheverry’ego i Marozsána; p_est 0.72 &lt; 0.735 (już na papierze z raportu 08:35).</li>
+<li><strong>Kalmar @ 1.47 (Västerås, z dogrywką)</strong> — Kalmar 3–1, Västerås 0–4 w tabeli, ale brak drugiego źródła o składach/bramkarzach; papier.</li></ul>
+</section>
+
+<section class="range" id="z-145"><h2>Kursy 1.45–1.60</h2><p class="empty">Brak typu. Modo @ 1.52 (Nybro) — papier, tylko tabela ligi (Modo 1-2-0-1, Nybro 0-2-0-2), bez informacji o bramkarzach; p_est 0.63 &lt; 0.658. Sparta – Karlovy Vary i Aalborg — brak aktualnych źródeł (zapowiedź Aalborga była z lutego).</p></section>
+
+<section class="range" id="z-161"><h2>Okazje 1.61–2.00</h2>
+<h3 class="sub">Ranking</h3><div class="table-wrap"><table><thead><tr><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr></thead><tbody>
+<tr><td class=num>13:00</td><td><strong>Hurkacz</strong> – Shapovalov</td><td>ATP Chengdu, półfinał</td><td>wygrana Hurkacza</td><td>1.70 LV BET (med. 1.64)</td><td class=num>0.62</td><td class=num>0.588</td><td class=num><span class="tier value">z przewagą</span></td></tr>
+</tbody></table></div>
+<article class="pick" id="z-161-1">
+      <h3>1. Hurkacz – Shapovalov — wygrana Hurkacza @ 1.70 <span class="tier value">z przewagą</span></h3>
+      <p class="line">ATP 250 Chengdu, półfinał · 13:00 PL (11:00 UTC) · 1.70 LV BET (mediana 1.64; przy 1.64 implikowane 0.61 — przewaga tylko przy ≥ 1.68) · p_est 0.62 vs implikowane 0.588</p>
+      <p><strong>Dlaczego ten typ:</strong> Rynek wycenia to prawie jak rzut monetą z lekkim faworytem (fair ok. 0.57), a Hurkacz prowadzi 5–1 w bezpośrednich meczach (na hardzie 4–1, trzy ostatnie wygrane) i ma świeższe nogi: Shapovalov grał ćwierćfinał 2 h 34 min, Hurkacz skończył w dwóch setach.</p>
+      <dl><dt>H2H</dt><dd>5–1 Hurkacz, 4–1 na kortach twardych, 3 ostatnie mecze wygrane, w każdym z nich był tie-break (tennistemple).</dd><dt>Forma</dt><dd>Hurkacz: pierwszy półfinał ATP od ponad roku, w QF 14 asów i 7 z 8 obronionych break pointów. Shapovalov: finał w Los Cabos latem, w Chengdu 6-7 6-3 6-2 z Mannarino.</dd><dt>Styl</dt><dd>Serwis Hurkacza kontroluje mecz; leworęczny Shapovalov — Hurkacz ma 36–12 z leworęcznymi (według zapowiedzi).</dd><dt>Rynek</dt><dd>najlepsza cena tylko w LV BET (1.70); mediana 1.64.</dd></dl>
+      <div class="cols"><div><strong>Plusy</strong><ul><li>bilans 5–1 i przewaga w tie-breakach</li><li>świeższy fizycznie</li><li>serwis w formie</li></ul></div>
+      <div><strong>Ryzyka</strong><ul><li>Hurkacz nie grał półfinału od roku — nerwy w końcówkach</li><li>Shapovalov w dobrym sezonie, groźny returner przy drugim serwisie</li><li>przewaga istnieje tylko przy kursie ≥ 1.68</li></ul></div></div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Shapovalov wygrywa dwa tie-breaki — w ich meczach prawie zawsze decydują pojedyncze punkty.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 1):</strong> <a href="https://www.atptour.com/en/news/chengdu-2026-sunday-report">atptour.com (Chengdu, ćwierćfinały)</a> — wyniki QF, statystyki serwisu, czas meczów, <a href="https://en.tennistemple.com/h2h/hubert-hurkacz-vs-denis-shapovalov/4315/4499">tennistemple.com (H2H)</a> — 5–1, hard 4–1, trzy ostatnie wygrane</p>
+    </article>
+</section>
+
+<section class="range" id="z-201"><h2>Okazje 2.01–3.00</h2><p class="empty">Brak — żadna cena w tym zakresie nie przebijała wyraźnie uczciwej ceny rynku, a outsiderzy (Safiullin, Basilashvili, Shapovalov) są w moim ujęciu przewartościowani, nie niedowartościowani.</p></section>
+
+<section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">38 (+4 otw.)</td><td class="num">30–7–1</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+2.45 u</td><td class="num pos">+6.5%</td><td class="num neg">-2.40 u</td><td class="num">+1.5%</td></tr><tr><td>Typy — z przewagą</td><td class="num">12 (+1 otw.)</td><td class="num">9–2–1</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+1.25 u</td><td class="num pos">+10.4%</td><td class="num neg">-0.34 u</td><td class="num">+1.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">26 (+3 otw.)</td><td class="num">21–5–0</td><td class="num">81%</td><td class="num">79%</td><td class="num pos">+1.20 u</td><td class="num pos">+4.6%</td><td class="num neg">-2.06 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">11 (+2 otw.)</td><td class="num">7–3–1</td><td class="num">70%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-2.7%</td><td class="num neg">-1.58 u</td><td class="num">+0.5%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">7 (+1 otw.)</td><td class="num">5–2–0</td><td class="num">71%</td><td class="num">66%</td><td class="num pos">+0.76 u</td><td class="num pos">+10.9%</td><td class="num neg">-0.17 u</td><td class="num">+1.3%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">0 (+1 otw.)</td><td class="num">0–0–0</td><td class="num">—</td><td class="num">—</td><td class="num ">+0.00 u</td><td class="num ">—</td><td class="num ">+0.00 u</td><td class="num">—</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">56 (+12 otw.)</td><td class="num">42–14–0</td><td class="num">75%</td><td class="num">72%</td><td class="num pos">+1.62 u</td><td class="num pos">+2.9%</td><td class="num neg">-5.30 u</td><td class="num">+1.5%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">15 (+4 otw.)</td><td class="num">11–4–0</td><td class="num">73%</td><td class="num">77%</td><td class="num neg">-1.27 u</td><td class="num neg">-8.5%</td><td class="num neg">-2.92 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">15 (+4 otw.)</td><td class="num">11–4–0</td><td class="num">73%</td><td class="num">70%</td><td class="num pos">+0.17 u</td><td class="num pos">+1.2%</td><td class="num neg">-1.65 u</td><td class="num">+0.2%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">8 (+2 otw.)</td><td class="num">3–5–0</td><td class="num">38%</td><td class="num">62%</td><td class="num neg">-3.24 u</td><td class="num neg">-40.5%</td><td class="num neg">-3.81 u</td><td class="num">+1.0%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">1 (+1 otw.)</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">54%</td><td class="num pos">+0.90 u</td><td class="num pos">+90.0%</td><td class="num pos">+0.67 u</td><td class="num">—</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">3 (+1 otw.)</td><td class="num">2–1–0</td><td class="num">67%</td><td class="num">40%</td><td class="num pos">+2.60 u</td><td class="num pos">+86.7%</td><td class="num pos">+1.93 u</td><td class="num">+9.8%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>León – FC Juarez: h2h home @ 1.58 → <strong>wygrana</strong> (2:1)</li><li>Golden State Valkyries – Dallas Wings: h2h home @ 1.35 → <strong>wygrana</strong> (104:80) <em>(papier)</em></li><li>Columbus Crew – Inter Miami CF: totals over 2.5 @ 1.44 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Columbus Crew – Inter Miami CF: h2h away @ 2.35 → <strong>przegrana</strong> (2:1) <em>(papier)</em></li><li>Utah Royals – North Carolina Courage: totals over 2.5 @ 1.541 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Atlanta Dream – Washington Mystics: h2h home @ 1.34 → <strong>wygrana</strong> (92:77) <em>(papier)</em></li><li>Columbus Crew – Inter Miami CF: h2h home @ 3.05 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Las Vegas Aces – Indiana Fever: h2h home @ 1.57 → <strong>wygrana</strong> (102:85)</li><li>Germany – Greece: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (0:1)</li><li>Israel – Ireland: totals under 3.5 @ 1.28 → <strong>wygrana</strong> (0:3)</li><li>Minnesota Lynx W – New York Liberty W: h2h home @ 1.35 → <strong>przegrana</strong> (75:91) <em>(papier)</em></li><li>Olympiacos – PAOK: h2h home @ 1.28 → <strong>wygrana</strong> (101:96) <em>(papier)</em></li><li>Serbia – Netherlands: dc X2 @ 1.13 → <strong>wygrana</strong> (1:2)</li><li>Serbia – Netherlands: h2h away @ 1.45 → <strong>wygrana</strong> (1:2)</li><li>Austria – Kosovo: totals under 3.5 @ 1.33 → <strong>przegrana</strong> (3:1)</li></ul>
+</section>
+
+
+<section id="wnioski"><h2>Wnioski</h2><ul>
+<li>KHL i liga białoruska nie są w ofercie polskich bukmacherów (brak cen) — nie ma sensu ich skanować.</li>
+<li>Eliminacje w Pekinie (Kecmanović–Mannarino, WTA) mają inne godziny w źródłach niż w liście betexplorera; eliminacje traktować jako słabe dane.</li>
+<li>Hokej w niższych ligach europejskich (Allsvenskan, Dania) ma bardzo mało aktualnych źródeł o bramkarzach — bez tego tylko papier.</li>
+</ul></section>
+
+<section><h2>Uwagi</h2><ul><li>Zakłady pojedyncze; nie łączyć w AKO. Stawiaj tylko środki, których utratę akceptujesz.</li>
+<li>Tenis: w razie kreczu zasady rozliczenia różnią się między bukmacherami — sprawdź regulamin.</li>
+<li>Źródła, które zawiodły: Sofascore (403); zapowiedź Metal Ligaen była nieaktualna (luty 2026).</li></ul></section>
+</main></body></html>

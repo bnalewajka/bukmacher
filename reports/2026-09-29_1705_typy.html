@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-09-29 17:05</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 4 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-09-29 15:05 UTC / 17:05 CEST. Zegar zweryfikowany: tak (api.github.com, cloudflare, google, sofascore, espn — zgodne, dryf &lt;1 s). Okno: 17:05–21:05 CEST (15:05–19:05 UTC).</p>
+    <p class="meta">Przeanalizowano 15 spotkań z listy fixtures.py w oknie (piłka nożna 12, tenis WTA 3) + wydarzenia dokryte niezależnie przez The Odds API (koszykówka Euroliga, hokej SHL/Liiga) — 1098 selekcji z ESPN i The Odds API (Pinnacle, Unibet, Betsson, bet365, Marathon i in.). Kursy pobrane o 15:06 UTC. Tryb automatyczny (GitHub Actions, serwer USA): bez Sofascore/betexplorer.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Ceny w tym raporcie pochodzą z zagranicznych bukmacherów regulowanych w UE (Pinnacle i in.) — ceny polskich bukmacherów bywają zbliżone, ale zawsze zweryfikuj lokalnie.</p>
+    <p class="summary">W zakresie 1.20–1.30 wpadło 7 selekcji z 4 wydarzeń piłkarskich (Liga Narodów) i 3 koszykarskich (Euroliga). Cztery mecze piłkarskie (Hiszpania–Chorwacja, Słowacja–Kazachstan, Słowenia–Płn. Macedonia, Czechy–Anglia) mają już typy z wcześniejszych uruchomień dziś i zostały pominięte, by nie dublować. Z trzech meczów Euroligi jeden — Fenerbahce–Bayern — ma wyraźnie najwyższe p_est i realne wsparcie w newsach (rywal już bez 3 rotacyjnych zawodników); pozostałe dwa (Dubai–Barcelona, Valencia–Baskonia) trafiają do „papieru” z powodu niższego p_est lub niepewności własnego składu faworyta.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności 83–77%; wymagane p_est ≥ implikowane (klasa „uczciwa cena”) lub ≥ implikowane + 0.03 („z przewagą”). W zakresie: 7 selekcji z 7 wydarzeń, przeanalizowano dogłębnie 3 (4 mecze piłkarskie pominięte jako duplikaty wcześniejszych typów dzisiejszego dnia).</p>
+
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">19:45</td>
+            <td>Fenerbahce – Bayern Monachium</td>
+            <td>Koszykówka, Euroliga</td>
+            <td>Zwycięstwo gospodarzy</td>
+            <td class="num">1.28<span class="note">Pinnacle, The Odds API, 15:06 UTC</span></td>
+            <td class="num pos">0.80</td>
+            <td class="num">0.78</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Fenerbahce – Bayern Monachium — zwycięstwo Fenerbahce @ 1.28 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · Koszykówka, Euroliga, 2. kolejka · 19:45 PL (17:45 UTC) · 1.28 Pinnacle, The Odds API, pobrano 15:06 UTC · p_est 0.80 vs implikowane 0.78</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> Najwyższe p_est spośród wszystkich kandydatów w oknie (koszykarskich i piłkarskich, licząc tylko te bez wcześniejszego typu w dzisiejszych raportach). Rynek jest wyjątkowo spójny — 16 bukmacherów w przedziale 1.22–1.28 dla Fenerbahce, bez odstających notowań — a świeży news z oficjalnego raportu kontuzji Euroligi dorzuca przewagę, której cena jeszcze w pełni nie wycenia: rywal gra już drugi mecz z rzędu bez trzech rotacyjnych zawodników.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>2. kolejka fazy zasadniczej Euroligi 2026/27; Fenerbahce to obrońca tytułu (mistrz Euroligi 2025), otwarcie sezonu wygrane 78:68 z Virtus Bologna. Bayern też niepokonany (86:84 z Hapoelem Tel Awiw), ale to zespół środka tabeli, nie pretendent do tytułu.</dd>
+        <dt>Forma</dt><dd>Fenerbahce wygrało 4 z ostatnich 5 bezpośrednich spotkań z Bayernem, w tym wyjazdowe 76:67 w poprzednim sezonie. Bayern gra dobrze punktowo (95+ pkt w obu ligowych meczach), ale to nie przekłada się na wynik przeciwko głębszej ławce.</dd>
+        <dt>Absencje</dt><dd>Wg oficjalnego raportu kontuzji Euroligi (2. kolejka): u Fenerbahce Shane Larkin i Marcus Bingham są „game-time decision” — Fenerbahce wygrało 1. kolejkę bez Larkina, więc zespół już udowodnił, że sobie radzi bez niego. U Bayernu Niels Giffey, Kamar Baldwin i Duane Washington nie było w składzie na 1. kolejkę — jeśli nadal brakuje tej trójki, rywal jest wyraźnie okrojony.</dd>
+        <dt>Składy</dt><dd>Oficjalny raport przedmeczowy Euroligi zwykle wychodzi ok. 60–90 min przed startem (19:45 PL) — w momencie publikacji tego raportu jeszcze niedostępny; powyższe status GTD/absencje pochodzą z raportu rundy wydanego kilka dni wcześniej.</dd>
+        <dt>Terminarz</dt><dd>Obie drużyny grają swój 2. mecz sezonu bez dodatkowego zmęczenia międzynarodowymi podróżami tego tygodnia.</dd>
+        <dt>Miejsce i warunki</dt><dd>Ülker Sports Arena w Stambule — jedna z głośniejszych i trudniejszych hal dla gości w Euroligze.</dd>
+        <dt>Styl gry</dt><dd>Fenerbahce opiera się na głębokiej, doświadczonej rotacji i obronie; Bayern gra szybko i rzuca dużo z dystansu — podatny na przewagę fizyczną i doświadczenie Fenerbahce w końcówkach.</dd>
+        <dt>Sygnały rynkowe</dt><dd>16 bukmacherów wycenia Fenerbahce w wąskim przedziale 1.22–1.28 (mediana 1.25, Pinnacle 1.28) — brak rozjazdu między twardymi i miękkimi bukmacherami. Ruchu ceny od otwarcia nie dało się sprawdzić (brak Sofascore/betexplorer w trybie chmurowym) — potraktować to jako niepewność, nie plus.</dd>
+        <dt>Inne</dt><dd>Bardzo wczesny sezon (2. kolejka) — próbka meczów w tym sezonie minimalna, ocena opiera się głównie na składzie i historii klubowej, nie na bieżącej formie w Euroliedze.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Najwyższe p_est w oknie, spójna wycena u 16+ bukmacherów</li><li>Rywal już raz grał bez 3 rotacyjnych zawodników — ryzyko po stronie Bayernu, nie Fenerbahce</li><li>Fenerbahce udowodniło w 1. kolejce, że wygrywa nawet bez Larkina</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Larkin/Bingham GTD — jeśli obaj zagrają pełne minuty, to plus, ale status nieznany do ok. godziny przed meczem</li><li>Brak sprawdzenia ruchu kursu od otwarcia (brak dostępu do betexplorer/Sofascore z serwera USA)</li><li>Bardzo wczesny sezon — mała próbka formy 2026/27, ocena oparta głównie na jakości składu i historii</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Bayern trafia dużo z dystansu w otwartym, szybkim tempie (jak w obu dotychczasowych meczach) i wygrywa końcówkę tak jak zrobił to przeciw Hapoelowi, podczas gdy Fenerbahce gra rozkojarzony mecz 2. kolejki bez pełnej gotowości Larkina.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 1):</strong> <a href="https://www.eurohoops.net/en/euroleague/2013646/injury-report-round-2-milutinov-does-not-travel-to-kaunas/">Eurohoops — oficjalny raport kontuzji, 2. kolejka</a> — absencje obu drużyn (przeczytane w całości); <a href="https://fcbayern.com/basketball/en/news/2026-27/09/fenerbahce-istanbul---fc-bayern-basketball">FC Bayern — zapowiedź meczu</a> — kontekst składów i historia klubowa; <a href="https://www.euroleaguebasketball.net/en/euroleague/teams/fenerbahce-tarfin-istanbul/ulk/">Euroleague — strona drużyny Fenerbahce</a> — forma i bezpośrednie starcia.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Dubai Basketball – FC Barcelona, zwycięstwo gospodarzy @ 1.35</strong> — p_est 0.73 &lt; implikowane 0.74. Barcelona bez 3 rotacyjnych zawodników (Nebo, Evbuomwan — bark, Makoundou — kolano) to plus dla Dubaju, ale to dopiero 2. mecz nowego klubu w Euroliedze (otwarcie sezonu wygrane 78:77 z Realem Madryt jedynym punktem) — zbyt cienka próbka formy, by uzasadnić cenę niższą niż sugeruje sam rynek (fair_prob bukmacherów 0.729, blisko mojej oceny). Zapisane jako papier.</li>
+      <li><strong>Valencia Basket – Baskonia, zwycięstwo gospodarzy @ 1.28</strong> — p_est 0.75 &lt; implikowane 0.78. Sam faworyt ma niepewności: Sima, Corbalan i Mari nie pojechali na mecz 1. kolejki, a Osetkowski wraca z choroby — bez oficjalnego potwierdzenia składu na 2. kolejkę to zbyt duże ryzyko własne, by uznać cenę za bezpieczną mimo dobrego bilansu h2h. Zapisane jako papier.</li>
+      <li><strong>Hiszpania – Chorwacja / Słowacja – Kazachstan / Słowenia – Płn. Macedonia / Czechy – Anglia</strong> — cztery mecze Ligi Narodów UEFA dziś o 20:45 PL mają już typy zapisane w rejestrze z wcześniejszych uruchomień (0919 i 1130); pominięte w tym cyklu, by nie dublować tej samej selekcji.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">44 (+4 otw.)</td><td class="num">35–8–1</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+3.48 u</td><td class="num pos">+7.9%</td><td class="num neg">-2.22 u</td><td class="num">+1.7%</td></tr><tr><td>Typy — z przewagą</td><td class="num">13 (+2 otw.)</td><td class="num">10–2–1</td><td class="num">83%</td><td class="num">77%</td><td class="num pos">+1.95 u</td><td class="num pos">+15.0%</td><td class="num pos">+0.16 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">31 (+2 otw.)</td><td class="num">25–6–0</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+1.53 u</td><td class="num pos">+4.9%</td><td class="num neg">-2.37 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">2 (+4 otw.)</td><td class="num">2–0–0</td><td class="num">100%</td><td class="num">82%</td><td class="num pos">+0.45 u</td><td class="num pos">+22.5%</td><td class="num pos">+0.16 u</td><td class="num">+1.2%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">69</td><td class="num">51–18–0</td><td class="num">74%</td><td class="num">72%</td><td class="num pos">+0.84 u</td><td class="num pos">+1.2%</td><td class="num neg">-7.54 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">18</td><td class="num">13–5–0</td><td class="num">72%</td><td class="num">77%</td><td class="num neg">-1.70 u</td><td class="num neg">-9.4%</td><td class="num neg">-3.66 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">2</td><td class="num">2–0–0</td><td class="num">100%</td><td class="num">78%</td><td class="num pos">+0.46 u</td><td class="num pos">+23.0%</td><td class="num pos">+0.17 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">19</td><td class="num">15–4–0</td><td class="num">79%</td><td class="num">70%</td><td class="num pos">+1.84 u</td><td class="num pos">+9.7%</td><td class="num neg">-0.66 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Tunisia – Botswana: h2h home @ 1.22 → <strong>przegrana</strong> (2:2) <em>(papier)</em></li><li>Turkey – Italy: totals under 3.5 @ 1.47 → <strong>przegrana</strong> (1:4)</li><li>Sweden – Poland: totals under 3.5 @ 1.5 → <strong>przegrana</strong> (3:1) <em>(papier)</em></li><li>Sweden – Poland: dc X2 @ 1.7 → <strong>przegrana</strong> (3:1) <em>(papier)</em></li><li>Turkey – Italy: totals under 2.5 @ 2.17 → <strong>przegrana</strong> (1:4) <em>(papier)</em></li><li>Belgium – France: dc X2 @ 1.29 → <strong>wygrana</strong> (0:1) <em>(papier)</em></li><li>Sweden – Poland: totals under 4.5 @ 1.22 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Belgium – France: totals under 4.5 @ 1.24 → <strong>wygrana</strong> (0:1) <em>(papier)</em></li><li>Vasteras – Kalmar: h2h away @ 1.47 → <strong>wygrana</strong> (2:3) <em>(papier)</em></li><li>Nybro – Modo: h2h away @ 1.52 → <strong>wygrana</strong> (2:3) <em>(papier)</em></li><li>Latvia – Cyprus: totals under 3 @ 1.28 → <strong>wygrana</strong> (0:0) <em>(papier)</em></li><li>Central Africa – Burkina Faso: h2h away @ 1.4 → <strong>wygrana</strong> (0:1) <em>(papier)</em></li><li>Latvia – Cyprus: totals under 3 @ 1.22 → <strong>wygrana</strong> (0:0)</li><li>Piros Z. – Hassan B.: h2h home @ 1.23 → <strong>wygrana</strong> (2:0)</li><li>Dimitrov G. – Rincon D.: h2h home @ 1.25 → <strong>do ręcznego rozliczenia</strong> <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>W tym cyklu nic nowego się nie rozliczyło (0 rozliczonych, 4 otwarte, 1 do ręcznego rozliczenia) — bez nowych wniosków. Ostatnie rozliczone typy i wynikające z nich lekcje są opisane w <code>data/lessons.md</code>.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.28 oznacza ok. 78% implikowanego prawdopodobieństwa — nawet dobrze wybrany typ w tym paśmie przegrywa średnio raz na 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Tryb automatyczny (serwer USA): Sofascore i betexplorer niedostępne (403/blokada IP), więc nie dało się sprawdzić ruchu kursu od otwarcia (czerwona flaga &gt;10%) dla żadnego kandydata — potraktowane jako niepewność w analizie, nie jako plus ani minus.</li>
+      <li>Budżet The Odds API: wykorzystano 4 kredyty (2 klucze × 2), pozostało ok. 407 z miesięcznego limitu 500.</li>
+      <li>W rejestrze jest jedna pozycja „do ręcznego rozliczenia” (Dimitrov G. – Rincon D.) — wymaga sprawdzenia wyniku ręcznie, poza zakresem tego raportu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

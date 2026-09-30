@@ -3,6 +3,10 @@
 Surowy log: każdy raport dopisuje tu swoje „Wnioski” pod nagłówkiem z nazwą pliku.
 Cotygodniowy przegląd (`references/self-review.md`) czyta go w całości.
 
+## 2026-09-30_2141_typy.html
+- Paris FC – Arsenal (kobiety, UEFA WCL), zwycięstwo Arsenalu @ 1.30, papier → przegrana (2:2) — trafnie sklasyfikowane jako „na papierze”: własny szacunek (0.68) już przed meczem był niżej niż implikowane (0.77), głównie przez słabą formę Arsenalu w WSL i grożny Paris FC mimo porażki 2:5 z Barceloną. Filtr progu p_est ≥ implikowane zadziałał poprawnie — gdyby to był typ, byłaby to strata. Bez zmian w metodzie.
+- Jedyny kandydat w paśmie 1.20–1.30 w tym oknie (de Minaur – Navone, ATP Pekin) odpadł po researchu mimo korzystnego H2H i powierzchni: de Minaur ma w 2026 r. udokumentowany wzorzec zaskakujących porażek z niżej notowanymi rywalami we wczesnych rundach (Kypson, Jodar, van de Zandschulp na US Open), co zbiło p_est (0.76) poniżej implikowanego (0.81) i poniżej zdewigowanej średniej rynku (0.79) — dobry przykład „faktu, którego cena jeszcze nie wyceniła w pełni” z sekcji Step 4 SKILL.md, tym razem działającego na niekorzyść faworyta.
+
 ## 2026-09-24_1851_typy.html
 - Raport z 18:35 błędnie odczytał ruch kursu (under 2.5 Liechtenstein – Litwa 1.77 → 1.56 opisany jako ruch „w stronę overa”). Skrócenie kursu = rynek gra pod tę stronę. Przy każdym dryfie pisać wprost: „kurs X spadł/wzrósł z A do B”, zanim wyciągnie się wniosek.
 - Raport z 18:35 dopuścił typy tylko ~1 pkt nad progiem opłacalności (Olympiacos 1.25, Portugalia 1.22 w jednym bukmacherze); próg „+0.03” w kolejnym raporcie je odrzucił. Ceny dostępne u jednego bukmachera (LV BET 1.22, Betclic 1.25/1.67) oznaczać jako takie — Betclic pokazywał też nierealne 1.07, więc pojedyncze odstające ceny traktować jako możliwy błąd danych.

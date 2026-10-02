@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-03 00:33</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-02 22:33 UTC / 2026-10-03 00:33 CEST. Zegar zweryfikowany: tak (api.github.com, Cloudflare, Google, Sofascore, ESPN — dryf &lt;1 s na wszystkich poza Wikipedią; <code>scripts/clock.py</code>). Okno: 00:33–08:33 CEST (2026-10-02T22:33Z – 2026-10-03T06:33Z).</p>
+    <p class="meta">Przeanalizowano: 59 spotkań (piłka nożna 13, hokej 17 — głównie NHL i NCAA, koszykówka 1, tenis 28) w 4 sportach; siatkówka bez wydarzeń w oknie. Kursy z ESPN BET + The Odds API (10 aktywnych kluczy, 2157+170 selekcji) — tryb chmurowy (GitHub Actions), bez Sofascore/betexplorera (403 z IP datacenter). Kursy pobrane ok. 22:34 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u własnego bukmachera przed postawieniem zakładu. Ceny poniżej pochodzą z bukmacherów europejskich (The Odds API); polscy bukmacherzy powinni być blisko tych wartości, ale nie zostały sprawdzone bezpośrednio w tym uruchomieniu.</p>
+    <p class="summary">W paśmie 1.20–1.30 w całym 8-godzinnym oknie znalazły się tylko 4 selekcje z realną, wielobukmacherską wyceną — 3 z WTA China Open i jedna duplikat już otwartej pozycji (WNBA, patrz niżej). Dwóch z trzech faworytów tenisowych (Bencic, Svitolina) badanie odrzuciło mimo krótkiej ceny: obaj mają świeże, nieoczywiste sygnały ryzyka (kontuzja/rdza, zmęczenie turniejem reprezentacji), które zdaniem analizy nie są w pełni wycenione. Jedynym typem dnia jest Leylah Fernandez (WTA China Open) — gorąca forma po tytule w Singapurze, bez kontuzji po obu stronach, uczciwa cena.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 74–80%; wymagane p_est ≥ implikowane (uczciwa cena) lub ≥ implikowane + 0.03 (z przewagą). W paśmie: 4 selekcje (3 nowe + 1 duplikat otwartej pozycji), przeanalizowane w całości.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">08:00 (3.10)</td>
+            <td>Kamilla Rakhimova – Leylah Fernandez</td>
+            <td>WTA China Open, Pekin</td>
+            <td>Zwycięstwo Fernandez</td>
+            <td class="num">1.31<span class="note">Pinnacle, The Odds API, 22:34 UTC (mediana 1.29/20 ksiąg)</span></td>
+            <td class="num pos">0.79</td>
+            <td class="num">0.76</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Kamilla Rakhimova – Leylah Fernandez — zwycięstwo Fernandez @ 1.31 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · WTA China Open (Pekin), runda główna · 08:00 PL / 3.10 (06:00 UTC) · kurs 1.31 @ Pinnacle (The Odds API; mediana 1.29 z 20 bukmacherów, m.in. sport888 1.30, williamhill 1.30, unibet_nl 1.30), pobrano 22:34 UTC · p_est 0.79 vs implikowane 0.76</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to jedyny z trzech nowych kandydatów tenisowych w paśmie, dla którego badanie nie znalazło żadnego sygnału podważającego cenę faworyta — w dwóch pozostałych (Bencic, Siniakova–Svitolina) znaleziono konkretne, świeże fakty obniżające realne prawdopodobieństwo poniżej ceny rynkowej (patrz "Odrzuceni"). Tu jest odwrotnie: świeża forma Fernandez (tytuł w Singapurze tydzień wcześniej, pokonanie mistrzyni French Open Andreevej) jest argumentem mocniejszym niż goła różnica rankingowa, a żadna z zawodniczek nie figuruje na pełnej liście wycofań z turnieju.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Rutynowy wczesny mecz WTA 1000 w Pekinie — bez specjalnych okoliczności, obie zawodniczki grają o punkty rankingowe i dalszy bieg turnieju.</dd>
+        <dt>Forma</dt><dd>Fernandez w gorącej formie: tytuł w Singapurze (hardy kort) 27.09, pokonała mistrzynię French Open Mirrę Andreevą 6:2, 7:5 w półfinale i rozbiła Talię Gibson 7:5, 6:0 w finale — 6. tytuł w karierze, seria 5 zwycięstw z rzędu. Rakhimova weszła do turnieju jako szczęśliwa przegrana po porażce w finale kwalifikacji z Birrell (decydujący tie-break) i wygrała swój mecz 1. rundy.</dd>
+        <dt>Absencje</dt><dd>Brak — sprawdzona pełna lista wycofań z turnieju (m.in. Anisimova, Pegula, Raducanu, Eala); żadna z dwóch zawodniczek na niej nie figuruje.</dd>
+        <dt>Składy</dt><dd>Nie dotyczy (tenis) — obie strony zdrowe wg powyższej listy.</dd>
+        <dt>Terminarz</dt><dd>Fernandez podróżowała z Singapuru prosto do Pekinu, ale miała wolny los w 1. rundzie — to jej pierwszy mecz w turnieju. Rakhimova ma już w nogach ciężki decydujący set kwalifikacji i cały mecz 1. rundy na miejscu — więcej gier, ale też więcej rytmu meczowego lokalnie.</dd>
+        <dt>Miejsce i warunki</dt><dd>Kort twardy, Pekin, początek października — standardowe warunki China Open.</dd>
+        <dt>Styl gry</dt><dd>Sezon na kortach twardych był dla Fernandez słaby do połowy roku, ale tytuł w Singapurze wygląda jak realny przełom formy, nie jednorazowy wyskok — pokonała po drodze zawodniczkę wyższej klasy (Andreeva). Jedyny h2h (Wuhan 2024) — Fernandez wygrała w trzech setach 6:2, 5:7, 7:6(4), zamykając wyrównany mecz.</dd>
+        <dt>Sygnały rynkowe</dt><dd>20 bukmacherów zgodnych w wąskim przedziale 1.24–1.32 (Pinnacle najwyżej, 1.31); brak danych o dryfie ceny w tym kanale (The Odds API nie podaje kursu otwarcia dla tego wydarzenia) — nie można potwierdzić reguły "wzrost &gt;10% = pułapka", ale nie ma też sygnału ostrzegawczego z żadnego źródła.</dd>
+        <dt>Inne</dt><dd>Jeden wynik wyszukiwania w trakcie researchu podał fałszywy, już rozegrany wynik tego meczu (typowa halucynacja AI-streszczenia dla meczu, który jeszcze się nie odbył) — odrzucony po dwóch niezależnych odczytach stron szkicu turnieju (Wikipedia, WTA Tour), które jednoznacznie pokazują status "nierozegrany".</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Świeży tytuł na korcie twardym w Singapurze, w tym zwycięstwo nad mistrzynią French Open — mocniejszy sygnał formy niż sama różnica rankingowa (#31 vs #76).</li>
+          <li>Brak kontuzji/wycofań po obu stronach, potwierdzone pełną listą wycofań z turnieju.</li>
+          <li>Jedyny h2h na korzyść Fernandez, choć w trzech setach.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Krótki odstęp między finałem w Singapurze (27.09) a meczem w Pekinie — mimo wolnego losu w 1. rundzie, to wciąż podróż i brak czasu na pełną regenerację.</li>
+          <li>Rakhimova wchodzi rozgrzana i bez presji jako szczęśliwa przegrana, z rytmem meczowym z kwalifikacji i 1. rundy na miejscu.</li>
+          <li>Wczesne rundy WTA 1000 na kortach twardych bywają zmienne przeciwko wyżej notowanej, ale mniej rozgrzanej na miejscu zawodniczce.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> rozgrzana, nieobciążona presją Rakhimova wykorzystuje swój lokalny rytm meczowy i podróżne zmęczenie Fernandez, wygrywając w dwóch lub trzech setach.</p>
+      <p class="sources"><strong>Źródła (5, przeczytane w całości: 5):</strong> <a href="https://en.wikipedia.org/wiki/Leylah_Fernandez">Wikipedia — Leylah Fernandez</a> — ranking, sezon 2026, tytuł w Singapurze; <a href="https://www.wtatennis.com/tournaments/china-open/draws">WTA Tour — drabinka China Open</a> — potwierdzenie rundy i statusu "nierozegrany"; <a href="https://en.wikipedia.org/wiki/Kamilla_Rakhimova">Wikipedia — Kamilla Rakhimova</a> — ranking, wyniki 2026; <a href="https://www.tennismajors.com/wta-tour-news/china-open-rakhimova-into-second-round-787148.html">Tennis Majors</a> — ścieżka Rakhimovej (kwalifikacje, wejście jako szczęśliwa przegrana, wygrana 1. rundy); <a href="https://www.tennis365.com/tennis-news/china-open-withdrawal-list-wta-2026-alex-eala-jessica-pegula-emma-raducanu">Tennis365</a> — pełna lista wycofań z turnieju, żadna z zawodniczek nie figuruje.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Belinda Bencic – Anastasia Zakharova, zwycięstwo Bencic @ 1.22–1.25</strong> — mimo dużej przepaści rankingowej (ok. #13 vs #105–110) i słabego rywala w 1. rundzie (dzika karta gospodarzy), Bencic wraca po ponad miesiącu bez meczu i serii problemów (wycofanie w Cincinnati, porażka 1. rundy US Open) wynikających z kontuzji biodra z Montrealu — rdza i nierozwiązany do końca problem fizyczny realnie obniżają p_est (ocena: ok. 0.74) poniżej implikowanego (ok. 0.80). Zanotowane w ledgerze jako papier.</li>
+      <li><strong>Katerina Siniakova – Elina Svitolina, zwycięstwo Svitolina @ 1.27–1.30</strong> — bilans h2h 5:0 dla Svitoliny wygląda jednoznacznie, ale 4 z 5 meczów szły do decydującego seta, a ostatni (marzec 2026) zakończył się wycofaniem Siniakovej, nie jej porażką w grze. Świtolina rozegrała dwa ciężkie trzysetowe mecze BJK Cup dla Ukrainy kończące się przegranym finałem 27.09 i ma w tym sezonie historię kontuzji kostki (wycofanie z Cincinnati) — krótki odstęp, podróż i emocjonalny ciężar przegranego finału reprezentacji to świeże ryzyko, które zdaniem analizy nie jest w pełni wycenione (p_est ok. 0.73 vs implikowane ok. 0.77). Zanotowane w ledgerze jako papier.</li>
+      <li><strong>Golden State Valkyries – Dallas Wings, zwycięstwo Valkyries @ ok. 1.28–1.30</strong> — ten sam mecz (decydujący mecz 3 playoff WNBA, 03:00 PL) jest już otwartą pozycją z poprzedniego raportu (2026-10-02_2135); nie dodawany drugi raz, bez nowej analizy.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+    <h2>Skuteczność</h2>
+    <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+    <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">54 (+1 otw.)</td><td class="num">43–9–2</td><td class="num">83%</td><td class="num">78%</td><td class="num pos">+4.63 u</td><td class="num pos">+8.6%</td><td class="num neg">-2.41 u</td><td class="num">+2.0%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">39 (+1 otw.)</td><td class="num">32–7–0</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+2.40 u</td><td class="num pos">+6.2%</td><td class="num neg">-2.57 u</td><td class="num">+1.8%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">12 (+1 otw.)</td><td class="num">10–1–1</td><td class="num">91%</td><td class="num">81%</td><td class="num pos">+1.60 u</td><td class="num pos">+13.3%</td><td class="num neg">-0.03 u</td><td class="num">+3.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">80</td><td class="num">59–20–1</td><td class="num">75%</td><td class="num">72%</td><td class="num pos">+1.15 u</td><td class="num pos">+1.4%</td><td class="num neg">-8.59 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">7</td><td class="num">6–1–0</td><td class="num">86%</td><td class="num">75%</td><td class="num pos">+0.65 u</td><td class="num pos">+9.3%</td><td class="num neg">-0.27 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+    <h3 class="sub">Ostatnio rozliczone</h3>
+    <ul><li>Alex Molcan – Karen Khachanov: h2h away @ 1.26 → <strong>wygrana</strong> (0:2)</li><li>Linda Noskova – Elena-Gabriela Ruse: h2h home @ 1.29 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Linda Fruhvirtova – Liudmila Samsonova: h2h away @ 1.21 → <strong>wygrana</strong> (1:2)</li><li>Malta – Gibraltar: h2h home @ 1.28 → <strong>przegrana</strong> (1:1)</li><li>Denis Shapovalov – Sho Shimabukuro: h2h home @ 1.33 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Aoi Ito – Kimberly Birrell: h2h away @ 1.3 → <strong>wygrana</strong> (0:2)</li><li>Sonay Kartal – Andrea Lazaro Garcia: h2h home @ 1.3 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Alex de Minaur – Mariano Navone: h2h home @ 1.24 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Taylor Fritz – Jaume Munar: h2h home @ 1.33 → <strong>przegrana</strong> (1:2) <em>(papier)</em></li><li>Benfica – Bayern Munich: h2h away @ 1.27 → <strong>wygrana</strong> (0:3) <em>(papier)</em></li><li>AIK – Visby/Roma HK: h2h home @ 1.29 → <strong>wygrana</strong> (6:2)</li><li>Paris FC – Arsenal: h2h away @ 1.3 → <strong>przegrana</strong> (2:2) <em>(papier)</em></li><li>Botafogo-SP – Ponte Preta: h2h home @ 1.25 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Spain – Croatia: h2h home @ 1.24 → <strong>wygrana</strong> (4:1)</li><li>Slovakia – Kazakhstan: h2h home @ 1.29 → <strong>wygrana</strong> (2:1)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Brak nowych rozliczeń w tym cyklu</strong> — od poprzedniego raportu (2026-10-02_2135) minęło ok. 1 h, zbyt mało, by cokolwiek się zakończyło; jedyna otwarta pozycja (Valkyries – Dallas Wings) wciąż nie wystartowała.</li>
+      <li><strong>Kolejny, już wielokrotny przypadek wymyślonego przez wyszukiwarkę wyniku nierozegranego meczu</strong> (Rakhimova – Fernandez) — potwierdzony i obalony przez dwa niezależne, w całości przeczytane odczyty stron drabinki (Wikipedia, WTA Tour). Wzorzec jest teraz na tyle częsty, że żaden wynik meczu z wyszukiwania nie powinien być przyjmowany bez takiej weryfikacji.</li>
+      <li><strong>Nowy, dobrze udokumentowany przykład "pułapki faworyta" bez dostępu do danych o dryfie ceny</strong> — w trybie chmurowym (brak Sofascore/betexplorera) nie można sprawdzić reguły "kurs wzrósł &gt;10% od otwarcia", ale sam research (kontuzja/rdza Bencic, zmęczenie turniejem reprezentacji Świtoliny) wystarczył, by odrzucić dwóch z trzech faworytów tenisowych w paśmie mimo krótkiej ceny rynkowej — dowód, że fakty pozarankingowe mogą zastąpić sygnał rynkowy, gdy ten jest niedostępny.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.31 oznacza ok. 76% implikowanego prawdopodobieństwa: nawet dobrze wybrany typ w tym paśmie przegrywa z grubsza co 4 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Tryb automatyczny (GitHub Actions, IP datacenter USA): Sofascore odpowiada błędem 403 i jest pomijany (brak kontekstu składów/absencji z tego źródła, brak danych o dryfie ceny dla większości wydarzeń); betexplorer niedostępny z zasady w tym trybie. Kursy pochodzą z ESPN BET i The Odds API. Build modelu Elo ATP/WTA (<code>tennis_elo.py build</code>) nie powiódł się — tennis-data.co.uk zwrócił 403 (Cloudflare) z IP runnera; ocena p_est oparta wyłącznie na researchu tekstowym, bez kontrolnego porównania z Elo.</li>
+      <li>The Odds API: automatyczny dobór kluczy (budżet 16 kredytów) wybrał 8 z 10 aktywnych kluczy wg liczby wydarzeń; dwa pominięte (po 1 wydarzeniu: Serie A brazylijska, Chile Campeonato) dociągnięto ręcznie (+4 kredyty). Łącznie wykorzystano 20 kredytów, pozostało 414 z miesięcznego limitu.</li>
+      <li>17 z 59 wydarzeń w oknie to drugoligowy hokej NCAA i AHL (cienki rynek, bez wiarygodnej wyceny), a kilka mniejszych federacji Concacaf Nations League i NWSL miało wyłącznie notowania US-only lub żadnych — pominięte zgodnie z zasadami SKILL.md. Siatkówka: brak jakichkolwiek wydarzeń w oknie (ESPN nie pokrywa tego sportu, Sofascore zablokowane).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

@@ -275,9 +275,12 @@ The same skill runs three times a day from `.github/workflows/report.yml` (promp
   never from exchanges or US-only books (BetOnline, GTbets, DraftKings…), which a Polish bettor
   cannot use; they only count towards the median.
 - **Credits.** Free plan, 500 a month for ~90 runs:
-  `odds.py --sources espn,oddsapi --oddsapi-markets h2h,totals --credit-budget 4`, never
-  `--extra-markets`. Print the remaining credits in the report's "Uwagi". Below 60 credits
-  left, use `--credit-budget 0` (ESPN only) and say so.
+  `odds.py --sources espn,oddsapi --oddsapi-markets h2h,totals --credit-budget auto`, never
+  `--extra-markets`. `auto` spreads the credits left over the runs left this month (≈ 4 at
+  the start of a month, 0 below 60 left). That number is the whole run's budget: no manual
+  top-ups with extra `--oddsapi-keys` calls — in the first 3 days of October top-ups took
+  the spend to ~55 credits a day and would have emptied the plan by the 10th. If a key you
+  needed was cut, name it in "Uwagi" instead. Print the remaining credits there too.
 - **Every run, in this order:** `ledger.py settle` → `ledger.py stats --html work/stats.html`
   → fixtures/odds → `ledger.py snapshot work/odds.json` (closing-price proxy for open bets) →
   shortlist → analysis → report → `ledger.py add work/picks.json`. Picks need a `ref` copied

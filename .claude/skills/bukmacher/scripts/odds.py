@@ -23,10 +23,12 @@ bookmaker (so it is comparable across selections), and implied_prob = 1/odds.
 from __future__ import annotations
 
 import argparse
+import calendar
+import json
 import re
 import sys
 from collections import defaultdict
-from datetime import timedelta
+from datetime import datetime, timedelta
 from typing import Any, Optional
 
 from bk_lib import (HttpError, devig, dump_json, env_key, eprint, event_key, fractional_to_decimal, http_get,
@@ -44,7 +46,8 @@ MARKET_RULES = [
 
 
 def market_norm(name: str) -> str:
-    n = (name or "").lower()
+    # The Odds API keys use underscores (draw_no_bet, double_chance, team_totals)
+    n = (name or "").lower().replace("_", " ")
     for pat, cat in MARKET_RULES:
         if re.search(pat, n):
             return cat
@@ -202,6 +205,20 @@ def _sport_key_rank(sport: dict, competitions: set[str]) -> int:
     return 0 if title and any(title in c or c in title for c in competitions) else 1
 
 
+# Free plan: 500 credits a month. Below the reserve a run goes ESPN-only (SKILL.md); report runs
+# average ~3.5 a day (3 scheduled + reruns/local), the nightly settlement uses a few credits too.
+CREDIT_RESERVE = 60
+RUNS_PER_DAY = 3.5
+
+
+def auto_budget(remaining: float, now: datetime, runs_per_day: float = RUNS_PER_DAY,
+                reserve: int = CREDIT_RESERVE, cap: int = 16) -> int:
+    """Credits this run may spend so the monthly plan lasts until it resets on the 1st:
+    (remaining − reserve) spread evenly over the runs left this month, capped."""
+    days_left = calendar.monthrange(now.year, now.month)[1] - now.day + 1
+    return max(0, min(cap, int((remaining - reserve) / (runs_per_day * days_left))))
+
+
 def _events_in_window(key: str, sport_key: str, span_from: str, span_to: str) -> int:
     """Number of events of a sport key starting in the window — /events costs no credits."""
     try:
@@ -214,17 +231,23 @@ def _events_in_window(key: str, sport_key: str, span_from: str, span_to: str) ->
 def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float, max_keys: int,
                  extra: bool, only_keys: Optional[set[str]],
                  sport_keys: Optional[list[str]] = None, markets: str = "h2h,spreads,totals",
-                 credit_budget: Optional[int] = None) -> tuple[list[dict], list[str]]:
+                 credit_budget: Optional[int | str] = None) -> tuple[list[dict], list[str]]:
     """Featured odds for the sport keys that actually have events in the window.
 
     Key discovery is free (/sports, /events); each /odds call costs len(markets) x len(regions)
     credits, so keys are ranked (competitions already in fixtures.json first, then by number of
-    events in the window) and cut to --max-keys and --credit-budget."""
+    events in the window) and cut to --max-keys and --credit-budget ("auto": auto_budget() from
+    the credits left, read from the free /sports call)."""
     errors: list[str] = []
     try:
-        sports = http_get_json(f"{ODDS_API}/sports", params={"apiKey": key}, ttl=3600)
+        body, hdr = http_get(f"{ODDS_API}/sports", params={"apiKey": key}, ttl=0 if credit_budget == "auto" else 3600)
+        sports = json.loads(body)
     except HttpError as e:
         return [], [f"oddsapi sports: {e}"]
+    if credit_budget == "auto":
+        left = hdr.get("x-requests-remaining")
+        credit_budget = auto_budget(float(left), now_utc()) if left else 4
+        eprint(f"[oddsapi] credit budget auto: {credit_budget} ({left or '?'} credits left this month)")
     span_from, span_to = iso(t0 - timedelta(minutes=5)), iso(t0 + timedelta(hours=hours))
     if sport_keys:
         active = {s["key"] for s in sports if s.get("active")}
@@ -375,7 +398,9 @@ def main() -> int:
     ap.add_argument("--oddsapi-keys", help="comma separated The Odds API sport keys to query instead of "
                                            "auto-picking (e.g. soccer_uefa_nations_league,basketball_euroleague)")
     ap.add_argument("--oddsapi-markets", default="h2h,spreads,totals", help="featured markets (1 credit each per key)")
-    ap.add_argument("--credit-budget", type=int, help="max The Odds API credits this run may spend on /odds")
+    ap.add_argument("--credit-budget", type=lambda v: v if v == "auto" else int(v),
+                    help="max The Odds API credits this run may spend on /odds; 'auto' = spread the credits "
+                         "left this month evenly over the runs left (see auto_budget)")
     ap.add_argument("--extra-markets", action="store_true", help="The Odds API additional markets per event (costly)")
     ap.add_argument("--only-keys", help="comma separated fixture keys to restrict per-event calls to")
     ap.add_argument("--sport", help="restrict to one sport")

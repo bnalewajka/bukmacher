@@ -392,6 +392,45 @@ def test_exchanges_and_lay_markets_dropped():
     assert {(r["bookmaker"], r["market"]) for r in rows} == {("pinnacle", "h2h")}
 
 
+def test_oddsapi_underscore_market_keys():
+    """The Odds API names markets draw_no_bet / double_chance / team_totals; they used to fall into
+    'other' (dropped by the shortlist) or, for team_totals, into the match 'totals'."""
+    assert [odds_mod.market_norm(k) for k in ("draw_no_bet", "double_chance", "team_totals", "h2h", "totals_h1")] \
+        == ["dnb", "double_chance", "team_total", "h2h", "period"]
+    fx = {"key": "k", "sport": "football", "home": "Croatia", "away": "England", "start_utc": "2026-10-03T18:45:00Z",
+          "sources": {}}
+    ev = {"bookmakers": [{"key": "pinnacle", "markets": [{"key": "draw_no_bet", "outcomes": [
+        {"name": "Croatia", "price": 3.6}, {"name": "England", "price": 1.3}]}]}]}
+    rows = odds_mod._oddsapi_rows(fx, ev)
+    assert {(r["market_norm"], r["selection_norm"]) for r in rows} == {("dnb", "home"), ("dnb", "away")}
+
+
+def test_credit_budget_auto():
+    from datetime import datetime as dt
+    assert odds_mod.auto_budget(500, dt(2026, 10, 1)) == 4      # month start: the old fixed 4
+    assert odds_mod.auto_budget(335, dt(2026, 10, 4)) == 2      # overspent early -> less per run
+    assert odds_mod.auto_budget(59, dt(2026, 10, 20)) == 0      # below the reserve: ESPN only
+    assert odds_mod.auto_budget(500, dt(2026, 10, 31)) == 16    # leftovers at month end, capped
+    calls = []
+
+    def fake_get(url, params=None, headers=None, timeout=25, retries=2, ttl=0):
+        calls.append(url)
+        if url.endswith("/sports"):
+            return json.dumps([{"key": f"soccer_{i}", "group": "Soccer", "title": f"L{i}", "active": True,
+                                "has_outrights": False} for i in range(5)]).encode(), {"x-requests-remaining": "335"}
+        return b"[]", {"x-requests-remaining": "333"}
+
+    saved = (odds_mod.http_get, odds_mod._events_in_window, odds_mod.now_utc)
+    odds_mod.http_get, odds_mod._events_in_window = fake_get, lambda *a: 3
+    odds_mod.now_utc = lambda: datetime(2026, 10, 4, 12, tzinfo=timezone.utc)
+    try:
+        odds_mod.from_oddsapi([], "KEY", "eu", datetime(2026, 10, 4, 12, tzinfo=timezone.utc), 8, 12, False, None,
+                              markets="h2h,totals", credit_budget="auto")
+    finally:
+        odds_mod.http_get, odds_mod._events_in_window, odds_mod.now_utc = saved
+    assert sum("/odds" in u for u in calls) == 1     # budget 2 = one key at 2 credits
+
+
 def test_best_price_ignores_us_only_books():
     fx = {"key": "k", "sport": "basketball", "home": "A", "away": "B", "start_utc": "2026-09-24T23:00:00Z", "sources": {}}
     rows = [odds_mod.row(fx, "h2h", "A", o, bk, "oddsapi") for o, bk in

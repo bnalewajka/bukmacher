@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-05 23:37</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-05 21:37 UTC / 23:37 CEST. Zegar zweryfikowany: tak — system + GitHub API, Cloudflare, Google, Sofascore, ESPN zgodne w granicach ~1 s (jedno odczytanie z Wikipedii odstawało o ~28 569 s — zignorowane jako artefakt CDN/cache). Okno: 23:37–07:37 CEST (21:37–05:37 UTC), tryb automatyczny GitHub Actions.</p>
+    <p class="meta">Przeanalizowano: 43 spotkania (piłka nożna 9, koszykówka 5, hokej 4, tenis 25, siatkówka 0), 215 selekcji z ESPN (117) i The Odds API (98) — Sofascore i betexplorer niedostępne z IP runnera w trybie automatycznym. Kursy pobrane ok. 21:40 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Pasmo 1.20–1.30 jest w tym oknie całkowicie puste — nie z braku wydarzeń, ale z braku użytecznej wyceny akurat w tym przedziale. Żaden typ dnia nie został opublikowany; poniżej pełne wyjaśnienie i najbliżsi kandydaci.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 0 typy</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ~83–77%; wymagane p_est ≥ implikowane. W paśmie: 0 selekcji z użytecznej (nie-amerykańskiej, wielobukmacherskiej) wyceny; przeanalizowano 0.</p>
+
+    <p class="empty">Brak typu dnia. W całym 8-godzinnym oknie żadna selekcja nie wylądowała w paśmie 1.20–1.30 z ceną, którą polski grający mógłby faktycznie wykorzystać. Powody, w kolejności wagi:</p>
+    <ul>
+      <li><strong>Tenis (25 z 43 wydarzeń, WTA Suzhou Open, ATP China Open, ATP Shanghai Masters, WTA Samsun Open) — zero notowań.</strong> ESPN nie publikuje kursów bukmacherskich na tenis w ogóle (pole <code>espn_odds</code> puste dla wszystkich 25 meczów), a budżet The Odds API „auto" (2 kredyty z 315 pozostałych w miesiącu) wybrał automatycznie <code>basketball_nba_preseason</code> (najwięcej wydarzeń w oknie: 5) z 4 aktywnych kluczy sportowych (koszykówka przedsezonowa NBA, NHL, argentyńska Primera, WTA China Open), odcinając tenis od jakiejkolwiek wyceny. To już piąte-szóste powtórzenie tego samego wzorca w tej serii raportów (patrz 2026-10-04_2356, 2026-10-05_1928) — tenis historycznie jest najpłodniejszym źródłem typów w tym paśmie, ale ranking „klucz z największą liczbą wydarzeń" systematycznie go odcina na rzecz lig USA. Zasada trybu automatycznego zakazuje ręcznego doładowania kredytów ponad budżet „auto", więc w tym biegu nie dało się tego obejść.</li>
+      <li><strong>Koszykówka NBA — wszystkie 5 meczów to przedsezonowe sparingi (3–16 października 2026, sezon startuje 20 października), nie sezon regularny.</strong> Nawet gdyby jakaś cena wylądowała w paśmie, rotowane składy i luźne podejście trenerów do wyniku dyskwalifikują ją jako „cienkie dane" (reguła jakości danych z SKILL.md). Najniższa cena w tym oknie w ogóle: Los Angeles Lakers @ Sacramento Kings, mediana ~1.45–1.50 (7 bukmacherów, w tym Pinnacle), fair_prob ~0.66 — i tak dużo niżej niż wymagane ~0.80 przy cenie 1.20–1.30, i tak odpada przez sam status przedsezonowy.</li>
+      <li><strong>Hokej NHL (sezon regularny, wystartował 29 września 2026 — to nie sparingi) i piłka (Liga Narodów Concacaf, Argentyna, Kolumbia) — tylko notowania DraftKings.</strong> DraftKings jest bukmacherem wyłącznie amerykańskim; zgodnie z twardą zasadą SKILL.md taka pojedyncza cena nie może być cytowana jako grywalna (liczy się tylko do mediany). Najkrótszy faworyt z taką ceną: Tampa Bay Lightning @ Philadelphia Flyers 1.459 (fair_prob ~0.66) i Grenada @ Bonaire 1.476 (fair_prob ~0.63) — oba i tak poniżej wymaganego progu prawdopodobieństwa dla pasma 1.20–1.30, nawet gdyby cena była dostępna u europejskiego bukmachera.</li>
+    </ul>
+    <p>Żaden z powyższych „najbliższych" kandydatów nie jest więc odrzucony tylko z powodu braku ceny — nawet przy użytecznej europejskiej wycenie ich własne zdewigowane prawdopodobieństwo (0.63–0.66) leży daleko poniżej progu wymaganego przy kursie 1.20–1.30 (≈0.77–0.83). To nie jest przypadek „typ na granicy, zabrakło potwierdzenia" — w tym oknie po prostu nie ma faworyta tej klasy z dostępną, wiarygodną ceną.</p>
+
+    <h3 class="sub">Odrzuceni kandydaci (najbliżsi, kontekstowo)</h3>
+    <ul>
+      <li><strong>Los Angeles Lakers – Sacramento Kings, NBA (przedsezon), moneyline Lakers @ 1.42–1.50 (Pinnacle/Betsson/Unibet)</strong> — mecz przedsezonowy z rotowanymi składami (cienkie dane), a własna wycena bukmacherów (fair_prob ~0.66) i tak nie sięga progu dla pasma 1.20–1.30.</li>
+      <li><strong>Tampa Bay Lightning – Philadelphia Flyers, NHL, moneyline Lightning @ 1.459</strong> — jedyna cena to DraftKings (US-only, nieużywalna dla polskiego grającego); fair_prob ~0.66, poniżej progu nawet przy użytecznej cenie.</li>
+      <li><strong>Grenada – Bonaire, Liga Narodów Concacaf, moneyline Grenada @ 1.476</strong> — jedyna cena to DraftKings (US-only); fair_prob ~0.63, zbyt niskie na pasmo 1.20–1.30 niezależnie od źródła ceny.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">57</td><td class="num">45–10–2</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+4.23 u</td><td class="num pos">+7.4%</td><td class="num neg">-3.12 u</td><td class="num">+2.0%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">42</td><td class="num">34–8–0</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+2.00 u</td><td class="num pos">+4.8%</td><td class="num neg">-3.28 u</td><td class="num">+1.8%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">15</td><td class="num">12–2–1</td><td class="num">86%</td><td class="num">80%</td><td class="num pos">+1.20 u</td><td class="num pos">+8.0%</td><td class="num neg">-0.74 u</td><td class="num">+2.9%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">85</td><td class="num">63–21–1</td><td class="num">75%</td><td class="num">72%</td><td class="num pos">+1.21 u</td><td class="num pos">+1.4%</td><td class="num neg">-9.14 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">75%</td><td class="num pos">+0.71 u</td><td class="num pos">+5.9%</td><td class="num neg">-0.81 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Castellón – Ceuta: h2h home @ 1.25 → <strong>przegrana</strong> (1:1) <em>(papier)</em></li><li>Switzerland – Slovenia: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li><li>Spain – Czech Republic: totals over 2.5 @ 1.21 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Croatia – England: dnb away @ 1.3 → <strong>wygrana</strong> (0:7) <em>(papier)</em></li><li>Belinda Bencic – Anastasia Zakharova: h2h home @ 1.25 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Kamilla Rakhimova – Leylah Fernandez: h2h away @ 1.31 → <strong>przegrana</strong> (2:1)</li><li>Katerina Siniakova – Elina Svitolina: h2h away @ 1.3 → <strong>wygrana</strong> (1:2) <em>(papier)</em></li><li>Golden State Valkyries – Dallas Wings: h2h home @ 1.3 → <strong>wygrana</strong> (77:73)</li><li>Alex Molcan – Karen Khachanov: h2h away @ 1.26 → <strong>wygrana</strong> (0:2)</li><li>Linda Noskova – Elena-Gabriela Ruse: h2h home @ 1.29 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Linda Fruhvirtova – Liudmila Samsonova: h2h away @ 1.21 → <strong>wygrana</strong> (1:2)</li><li>Malta – Gibraltar: h2h home @ 1.28 → <strong>przegrana</strong> (1:1)</li><li>Denis Shapovalov – Sho Shimabukuro: h2h home @ 1.33 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Aoi Ito – Kimberly Birrell: h2h away @ 1.3 → <strong>wygrana</strong> (0:2)</li><li>Sonay Kartal – Andrea Lazaro Garcia: h2h home @ 1.3 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak nowych rozliczeń w tym cyklu (0 pozycji otwartych, 0 rozliczonych, 0 „manual" — <code>ledger.py settle</code> nie znalazł nic do zrobienia) — brak nowego wniosku korygującego z wyników.</li>
+      <li>Puste pasmo 1.20–1.30 to już szóste-siódme powtórzenie tego samego wzorca w tej serii raportów (2026-10-04_2356, 2026-10-05_1928, teraz): budżet The Odds API „auto" wybiera klucz sportowy wg liczby wydarzeń w oknie, nie wg szansy na trafienie w pasmo cenowe — w efekcie regularnie odcina tenis (ATP/WTA, historycznie najpłodniejsze źródło typów w tym paśmie) na rzecz lig USA (dziś: koszykówka przedsezonowa NBA, 5 wydarzeń vs 2–3 dla tenisa). Zakaz ręcznego doładowania kredytów ponad budżet „auto" (wprowadzony po przekroczeniu tempa wydawania na początku października) jest słusznym zabezpieczeniem budżetu miesięcznego, ale razem z tym rankingiem systematycznie zostawia tenis bez wyceny w automatycznych biegach. Do rozważenia przy najbliższym self-review: albo trwały priorytet dla aktywnych kluczy tenisowych w logice „auto" niezależnie od liczby wydarzeń, albo osobny, mały rezerwowy budżet kredytów przeznaczony wyłącznie na tenis w porach dnia, gdy gra ATP/WTA.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87% implikowanego prawdopodobieństwa, 1.50 — ok. 67%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore i betexplorer (blokowane/niedostępne z IP runnera GitHub Actions w trybie automatycznym — zgodnie z oczekiwaniem dla tego środowiska); zastąpione przez ESPN + The Odds API. ESPN nie notuje żadnych kursów na tenis (0 z 25 meczów). Budżet The Odds API „auto": wydano 2 z 315 kredytów pozostałych w miesiącu (1 klucz sportowy: <code>basketball_nba_preseason</code>); pozostało <strong>313 kredytów</strong>.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

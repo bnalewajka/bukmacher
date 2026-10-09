@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-09 21:49</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-09 19:44 UTC / 21:49 czasu PL. Zegar zweryfikowany: tak (system + GitHub/Cloudflare/Google/Sofascore/ESPN, zgodność do ~2 s). Okno: 21:44 PL 09.10 – 05:44 PL 10.10 (19:44–03:44 UTC).</p>
+    <p class="meta">Przeanalizowano: 42 wydarzenia z ESPN (piłka 7, koszykówka 3, hokej 26, tenis 6, siatkówka 0 — brak pokrycia w feedzie ESPN), 393 selekcje (ESPN BET 91 + The Odds API 302) obejmujące 23 unikalne wydarzenia. Kursy pobrane ok. 19:45 UTC. Tryb automatyczny (GitHub Actions) — Sofascore i betexplorer niedostępne z serwera USA, użyto ESPN + The Odds API.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Brak typu dnia w tym oknie: w całym zbiorze (393 selekcje, 5 sportów) najniższa realnie wyceniona cena to 1.40 (dwie linie handicapowe NHL +1.5) — żadna selekcja nie wpadła nawet w pobliże pasma 1.20–1.30. Tenis (WTA Suzhou, WTA Wuhan — 6 meczów) nie miał w tym uruchomieniu żadnej ceny z żadnego źródła. Poniżej dwaj najbliżsi realni kandydaci i czego by potrzebowali.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 0 typy</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 83–77 %; wymagane p_est ≥ implikowane. W paśmie: 0 selekcji wykrytych z 393 zebranych.</p>
+    <p class="empty">Brak typu w tym uruchomieniu — żadna selekcja w paśmie 1.20–1.30 nie miała potwierdzonej ceny u jakiegokolwiek bukmachera w tym oknie. Nic nie zostało opublikowane jako typ, nic nie trafiło nawet do analizy szczegółowej (research nie był potrzebny, bo próg cenowy odciął wszystkie kandydatury na starcie).</p>
+
+    <h3 class="sub">Najbliżsi realni kandydaci (poza pasmem)</h3>
+    <ul>
+      <li><strong>Columbus Blue Jackets – Pittsburgh Penguins (NHL, 23:00 UTC / 01:00 PL 10.10), Pittsburgh Penguins +1.5 (linia bramkowa) @ 1.40 (ESPN BET)</strong> — najniższa cena w całym zbiorze, wciąż 0.10 powyżej górnej granicy pasma. Linia bramkowa (underdog pokrywa handicap, jeśli nie przegra różnicą 2+ goli) to bezpieczniejszy typ niż czyste zwycięstwo, ale nie było czasu/zakresu na pełny research (poza pasmem). Żeby to zagrać w paśmie 1.20–1.30, cena musiałaby spaść o ok. 0.10–0.15 albo trzeba czekać na linię -1.5 u Columbus (niedostępną w tym zbiorze w ogóle, bo ESPN BET notuje tylko jedną stronę handicapu z niską ceną).</li>
+      <li><strong>Winnipeg Jets – Anaheim Ducks (NHL, 00:00 UTC 10.10 / 02:00 PL), Anaheim Ducks +1.5 (linia bramkowa) @ 1.40 (ESPN BET)</strong> — identyczna sytuacja: druga (i ostatnia) selekcja w zbiorze z ceną 1.40. Bez europejskiej ceny porównawczej (The Odds API nie objął dziś NHL w ramach budżetu, patrz Wnioski) nie da się ocenić, czy to uczciwa cena czy ruch rynku — zostaje poza progiem i bez researchu.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">61</td><td class="num">48–11–2</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+4.16 u</td><td class="num pos">+6.8%</td><td class="num neg">-3.66 u</td><td class="num">+2.0%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">46</td><td class="num">37–9–0</td><td class="num">80%</td><td class="num">78%</td><td class="num pos">+1.93 u</td><td class="num pos">+4.2%</td><td class="num neg">-3.82 u</td><td class="num">+1.8%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">19</td><td class="num">15–3–1</td><td class="num">83%</td><td class="num">80%</td><td class="num pos">+1.13 u</td><td class="num pos">+5.9%</td><td class="num neg">-1.29 u</td><td class="num">+2.9%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">86 (+1 otw.)</td><td class="num">64–21–1</td><td class="num">75%</td><td class="num">72%</td><td class="num pos">+1.48 u</td><td class="num pos">+1.7%</td><td class="num neg">-9.01 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">13 (+1 otw.)</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">75%</td><td class="num pos">+0.99 u</td><td class="num pos">+7.6%</td><td class="num neg">-0.69 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Galatasaray – Kasimpasa: h2h home @ 1.278 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Nuno Borges – Facundo Diaz Acosta: h2h home @ 1.32 → <strong>wygrana</strong> (2:0)</li><li>England – Czech Republic: totals over 2.5 @ 1.3 → <strong>wygrana</strong> (3:0)</li><li>Croatia – Spain: h2h away @ 1.31 → <strong>wygrana</strong> (1:2)</li><li>Linda Noskova – Ekaterina Alexandrova: h2h home @ 1.3 → <strong>przegrana</strong> (0:2)</li><li>Castellón – Ceuta: h2h home @ 1.25 → <strong>przegrana</strong> (1:1) <em>(papier)</em></li><li>Switzerland – Slovenia: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li><li>Spain – Czech Republic: totals over 2.5 @ 1.21 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Croatia – England: dnb away @ 1.3 → <strong>wygrana</strong> (0:7) <em>(papier)</em></li><li>Belinda Bencic – Anastasia Zakharova: h2h home @ 1.25 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Kamilla Rakhimova – Leylah Fernandez: h2h away @ 1.31 → <strong>przegrana</strong> (2:1)</li><li>Katerina Siniakova – Elina Svitolina: h2h away @ 1.3 → <strong>wygrana</strong> (1:2) <em>(papier)</em></li><li>Golden State Valkyries – Dallas Wings: h2h home @ 1.3 → <strong>wygrana</strong> (77:73)</li><li>Alex Molcan – Karen Khachanov: h2h away @ 1.26 → <strong>wygrana</strong> (0:2)</li><li>Linda Noskova – Elena-Gabriela Ruse: h2h home @ 1.29 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li></ul>
+</section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Galatasaray – Kasimpasa (odrzucony w raporcie 2026-10-09_1734 jako „papier": cena 1.278 tylko u DraftKings/ESPN BET — US-only, niedostępna dla polskiego grającego — i własne p_est 0.73 poniżej implikowanego 0.7825) wygrało 3:1. Osimhen faktycznie nie zagrał, ale Galatasaray i bez niego rozstrzygnęło mecz wysoko — przypomnienie, że jedna potwierdzona absencja gwiazdy nie musi ściągać prawdopodobieństwa wygranej silnego faworyta poniżej ceny rynkowej, gdy rywal jest wyraźnie słabszy; p_est 0.73 był tu zbyt konserwatywny. Rozstrzygnięcie o odrzuceniu i tak było poprawne proceduralnie (brak ceny u bukmachera dostępnego dla polskiego grającego), ale warto pamiętać przy podobnych przypadkach, żeby nie domyślnie zakładać, że sama absencja gwiazdy wystarcza do zejścia poniżej implikowanego.</li>
+      <li>Metodologiczna obserwacja z tego uruchomienia, powtarzająca znany wzorzec (np. 2026-10-06_2151, 2026-10-09_1734): budżet kredytów The Odds API „auto" (2 kredyty = 1 klucz sportowy) wybrał <code>icehockey_ahl</code> (9 wydarzeń), mimo że żaden z tych meczów AHL nie pokrywał się z żadnym z 42 wydarzeń już zebranych z ESPN (zero cross-matchu) — budżet całego uruchomienia poszedł więc na dane bez kontekstu/fixture i bez możliwości analizy, podczas gdy klucze pokrywające się z realnymi meczami z feedu (np. <code>icehockey_nhl</code>, <code>soccer_argentina_primera_division</code>, <code>basketball_wnba</code>) zostały pominięte. Ranking klucza w <code>odds.py</code> nie penalizuje wystarczająco zera nakrycia z własnym fixtures.json — do poprawy przy najbliższym self-review.</li>
+      <li>Tenis (WTA Suzhou, WTA Wuhan — 6 meczów w oknie) nie miał żadnej ceny z żadnego źródła w tym uruchomieniu: ESPN BET nie notuje tenisa w ogóle, a budżet The Odds API poszedł w całości na AHL (patrz wyżej). Historycznie tenis jest najpłodniejszym źródłem typów w paśmie 1.20–1.30 (patrz np. 2026-10-09_0137) — jego całkowita nieobecność w tym cyklu jest prawdopodobnie główną przyczyną zerowego wyniku, nie tylko realnie spokojnym rynkiem.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.20 to ok. 83% implikowanego prawdopodobieństwa, 1.30 — ok. 77%: nawet dobrze wybrany typ w tym paśmie przegrywa średnio raz na 5–6 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły / nie były użyte w tym uruchomieniu: Sofascore i betexplorer (zablokowane z serwera USA w trybie automatycznym — zastąpione przez ESPN + The Odds API); api-sports.io (brak <code>APISPORTS_KEY</code> w środowisku — pominięto). Siatkówka: ESPN nie ma pokrycia tego sportu w ogóle (0 wydarzeń), niezależnie od okna.</li>
+      <li>Budżet kredytów The Odds API: budżet automatyczny tej sesji = 2 kredyty (1 klucz sportowy), wykorzystany w całości na <code>icehockey_ahl</code> (9 meczów bez pokrycia z własnym fixtures.json — zero użytecznych danych, patrz Wnioski). Pozostało <strong>283 kredyty</strong> do końca miesiąca. Zgodnie z zasadą trybu automatycznego nie dokupiono dodatkowych kluczy mimo nieefektywnego trafienia.</li>
+      <li>Ceny z The Odds API pochodzą z bukmacherów europejskich (Pinnacle, Unibet, 1xBet, tipico, onexbet…) — cena u polskiego bukmachera bywa zbliżona, ale zawsze sprawdź ją przed postawieniem zakładu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

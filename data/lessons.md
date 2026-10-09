@@ -3,6 +3,11 @@
 Surowy log: każdy raport dopisuje tu swoje „Wnioski” pod nagłówkiem z nazwą pliku.
 Cotygodniowy przegląd (`references/self-review.md`) czyta go w całości.
 
+## 2026-10-09_1734_typy.html
+- Nic nowego nie rozliczyło się od ostatniego raportu — bez wniosków z wyników.
+- Automatyczny budżet kredytów The Odds API (2 kredyty = 1 klucz sportowy) wybrał klucz `soccer_efl_champ` (1 mecz, West Ham – QPR, poza paśmem 1.20–1.30) zamiast np. `soccer_netherlands_eredivisie`, który za tę samą cenę dałby realną europejską wycenę dla PSV – Heerenveen, czyli naszego najbliższego kandydata w paśmie. Wybór klucza w `odds.py` nie bierze pod uwagę, które ligi mają faworytów w interesującym paśmie cenowym (tylko ESPN BET/DraftKings to widzi, a to US-only, nieużywalne jako cena) — rozważyć przy self-review priorytetyzację kluczy po favourite-price z ESPN zamiast kolejności listowej.
+- ESPN's `fixtures.py` nie obejmuje koszykówki EuroLeague ani hokeja fińskiej Liigi/szwedzkiej Allsvenskan, mimo że The Odds API widział mecze w tych rozgrywkach w tym samym oknie (odkryte tylko jako poboczny log "sport keys with events" w `odds.py`, nie jako fixtures). W oknach bez NBA/WNBA/NHL/ATP/WTA pokrycie koszykówki/hokeja w trybie automatycznym może być iluzorycznie zerowe — możliwa dziura w `fixtures.py --sources espn` do sprawdzenia.
+
 ## 2026-09-30_2141_typy.html
 - Paris FC – Arsenal (kobiety, UEFA WCL), zwycięstwo Arsenalu @ 1.30, papier → przegrana (2:2) — trafnie sklasyfikowane jako „na papierze”: własny szacunek (0.68) już przed meczem był niżej niż implikowane (0.77), głównie przez słabą formę Arsenalu w WSL i grożny Paris FC mimo porażki 2:5 z Barceloną. Filtr progu p_est ≥ implikowane zadziałał poprawnie — gdyby to był typ, byłaby to strata. Bez zmian w metodzie.
 - Jedyny kandydat w paśmie 1.20–1.30 w tym oknie (de Minaur – Navone, ATP Pekin) odpadł po researchu mimo korzystnego H2H i powierzchni: de Minaur ma w 2026 r. udokumentowany wzorzec zaskakujących porażek z niżej notowanymi rywalami we wczesnych rundach (Kypson, Jodar, van de Zandschulp na US Open), co zbiło p_est (0.76) poniżej implikowanego (0.81) i poniżej zdewigowanej średniej rynku (0.79) — dobry przykład „faktu, którego cena jeszcze nie wyceniła w pełni” z sekcji Step 4 SKILL.md, tym razem działającego na niekorzyść faworyta.

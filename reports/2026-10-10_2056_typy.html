@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-10 20:56</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-10 18:50 UTC / 20:50 CEST. Zegar zweryfikowany: tak (api.github.com, cloudflare.com, google.com, sofascore.com, espn.com — zgodne, dryf &lt;1s). Okno: 20:50–04:50 CEST (18:50–02:50 UTC), 2026-10-10/11.</p>
+    <p class="meta">Przeanalizowano: 67 spotkań (piłka nożna 28, koszykówka 7, hokej 32, siatkówka 0, tenis 0), 3 selekcje w paśmie 1.20–1.30 po scaleniu bukmacherów. Źródła kursów: ESPN BET (wbudowane w listę meczów) + The Odds API (klucz <code>soccer_usa_mls</code>, 12 książek europejskich). Kursy pobrane ok. 18:51 UTC. Tryb automatyczny (GitHub Actions) — Sofascore i betexplorer niedostępne z serwerowego IP USA.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Jedyny realny kandydat w paśmie 1.20–1.30 w tym oknie: over 2.5 gola w Inter Miami CF – D.C. United (MLS), wyceniany zgodnie przez trzy europejskie książki. Dwaj inni kandydaci po medianie kursów (River Plate, Vasco da Gama) mieli cenę wyłącznie u DraftKings/ESPN BET — książki niedostępnej dla polskiego grającego — i zostali odrzuceni.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności 83–77 %; wymagane p_est ≈ implikowane + 0.03 dla klasy „z przewagą”. W paśmie: 3 selekcje po scaleniu bukmacherów, przeanalizowano 1 (dwie pozostałe odrzucone z powodu braku europejskiej ceny — zob. „Odrzuceni kandydaci”).</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">01:30</td>
+            <td>Inter Miami CF – D.C. United</td>
+            <td>MLS</td>
+            <td>Over 2.5 gola</td>
+            <td class="num">1.27<span class="note">betsson/nordicbet, The Odds API, 18:51 UTC</span></td>
+            <td class="num pos">0.80</td>
+            <td class="num">0.79</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Inter Miami CF – D.C. United — Over 2.5 gola @ 1.27 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · MLS, sezon regularny · 01:30 CEST, 11.10 (23:30 UTC, 10.10) · 1.27 u betsson i nordicbet (The Odds API), 18:51 UTC · p_est 0.80 vs implikowane 0.79</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to jedyna selekcja w całym 8-godzinnym oknie, która wylądowała w paśmie 1.20–1.30 z ceną potwierdzoną przez więcej niż jedną europejską książkę (betsson i nordicbet identycznie 1.27, williamhill 1.25) — dwaj inni kandydaci po medianie (River Plate @ 1.20, Vasco da Gama @ 1.303) mieli cenę wyłącznie u DraftKings/ESPN BET, book niedostępny dla polskiego grającego. Rynek totalsów, nie zwykła wygrana: obie strony mają sezon na tyle dziurawą defensywę, że to "ile goli", a nie "kto wygra", jest tu najbardziej przewidywalne.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Inter Miami 3. miejsce na Wschodzie (46 pkt, 12-10-5), praktycznie bezpieczne miejsce playoff; D.C. United 11. miejsce (30 pkt, 6-12-8), bez realnych szans na awans. Dla żadnej ze stron to nie mecz "o wszystko" — to zwykle oznacza więcej swobody ofensywnej i mniej defensywnej dyscypliny u obu, a nie mniej goli.</dd>
+        <dt>Forma</dt><dd>Ostatnie 5 Miami: W1 D3 L1 (1:2 w Columbus, 2:2 z San Diego, 2:0 z Cruz Azul, 2:2 z Nashville, 1:1 w Chicago). Ostatnie 5 DC: W1 D2 L2 (0:1 z Paderborn — sparing, nie liga, 3:3 w Vancouver, 1:2 z Charlotte, 0:0 z Atlanta, 2:1 z Columbus). Sezon: Miami 64 strzelone/50 straconych w 27 meczach (4.22 gola/mecz łącznie — bardzo wysoko), DC 34/42 w 26 meczach (2.92/mecz, typowo dla MLS). Wysoki wskaźnik u Miami wynika zarówno z ofensywy, jak i przeciekającej defensywy (-tak, +14 różnica, ale 50 straconych w 27 meczach to sporo).</dd>
+        <dt>Absencje</dt><dd>Miami: Tadeo Allende (kolano) i Santiago Morales (zawieszenie) brak — potwierdzone przez dwa niezależne źródła (fotmob, 365scores). DC: Gabriel Segal (uraz) brak. Żadna z absencji nie dotyczy kluczowych napastników pierwszego składu obu stron.</dd>
+        <dt>Składy</dt><dd>Przewidywany (nie potwierdzony) skład Miami wg 365scores zawiera Messiego, Suáreza i De Paula w ataku/pomocy — zestaw ofensywny, nie rotacyjny. Brak nowszych doniesień o kontuzji/wątpliwości Messiego w dostępnych źródłach na dziś; status "przewidywany" zostanie potwierdzony ok. godziny przed startem, po publikacji tego raportu.</dd>
+        <dt>Terminarz</dt><dd>Nie znaleziono sygnałów przeciążenia terminarzowego u żadnej ze stron w dostępnych źródłach; brak informacji o rotacji wynikającej z najbliższego kolejnego meczu.</dd>
+        <dt>Miejsce i warunki</dt><dd>Chase Stadium, Fort Lauderdale — stadion Miami, bez doniesień o złej pogodzie.</dd>
+        <dt>Styl gry</dt><dd>Oba zespoły grają otwarty, ofensywny futbol tego sezonu (DC: 3:3 w Vancouver w ostatnich tygodniach); mecz bez presji tabelowej zwykle sprzyja większej liczbie goli niż mecz "o punkty życia".</dd>
+        <dt>Sygnały rynkowe</dt><dd>3 europejskie książki (betsson, nordicbet, williamhill) zgodne w okolicy 1.25–1.27 na linii 2.5; linia 3.5 u innych książek (Pinnacle fair_prob ~0.50, pmu_fr, coolbet, tipico, leovegas, unibet) implikuje oczekiwaną sumę goli rzędu 3.5–3.8 — spójne z ceną na linii 2.5. Brak możliwości sprawdzenia historii kursu (The Odds API nie udostępnia initial_odds dla tego źródła w planie darmowym); porównywalna linia totalsów u ESPN BET (3.5) nie zmieniła się od otwarcia (1.714→1.714), bez sygnału driftu.</dd>
+        <dt>Inne</dt><dd>H2H ostatnich 5 spotkań: 3 na 5 zakończyło się ponad 2.5 gola (3:2, 1:3, 1:2), 2 nie (1:1, 1:0) — mała próbka, zgodna w ogólnym kierunku z resztą analizy.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Trzy niezależne europejskie książki zgodne co do ceny (1.25–1.27), potwierdzone drugą linią (3.5) u kolejnych 8 książek w tym samym kierunku.</li>
+          <li>Obie strony bez motywacji do głębokiej defensywnej dyscypliny (Miami bezpieczne w playoff, DC bez szans).</li>
+          <li>Sezonowy wskaźnik goli w meczach Miami (4.22/mecz) wyraźnie powyżej ligowej normy.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Skład Miami jest "przewidywany", nie potwierdzony — ewentualny odpoczynek Messiego/Suáreza przed Miami nie jest wykluczony, mimo braku takich doniesień na dziś.</li>
+          <li>Brak możliwości sprawdzenia historii kursu (czerwona flaga "drift >10%") z powodu ograniczeń planu darmowego The Odds API w trybie automatycznym.</li>
+          <li>Rozliczenie liczy 90 minut (FT) — ewentualne doliczone minuty nie wpływają, ale sędziowska decyzja o długości doliczonego czasu nie jest czynnikiem ryzyka dla tego rynku.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> zdyscyplinowany, małoeventowy mecz (np. 1:0, 2:0 lub 1:1) — DC broni się głęboko bez ambicji ofensywnych, a Miami nie wykorzystuje przewagi w sytuacjach, lub obie strony rotują skład myśląc już o kolejnych meczach.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://www.fotmob.com/matches/dc-united-vs-inter-miami-cf/5yxi759r">Fotmob</a> — forma ostatnich 5 meczów obu stron, absencje (Allende, Morales, Segal), bilans h2h; <a href="https://www.365scores.com/en-us/football/match/mls-104/dc-united-inter-miami-1339-54729-104">365Scores</a> — tabela i bilans goli sezonu, przewidywany skład (Messi w składzie), absencje, historia h2h z wynikami.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>River Plate – Estudiantes de Río Cuarto, zwycięstwo gospodarzy @ 1.20</strong> — cena wyłącznie u DraftKings/ESPN BET (US-only), niedostępna dla polskiego grającego; brak europejskiego bukmachera do porównania.</li>
+      <li><strong>Vasco da Gama – Remo, zwycięstwo gospodarzy @ 1.303</strong> — cena wyłącznie u DraftKings/ESPN BET (US-only), ten sam problem jak wyżej; dodatkowo kurs wzrósł od otwarcia (1.286→1.303), co przy favourcie byłoby samo w sobie czerwoną flagą.</li>
+      <li><strong>Mecze NBA w oknie (7, w tym Toronto–LA Clippers, Indiana–Atlanta)</strong> — klucz The Odds API <code>basketball_nba_preseason</code> potwierdza, że to sparingi przedsezonowe (10 października, przed startem sezonu regularnego NBA) — cienkie dane, rotacje gwiazd, pominięte niezależnie od ceny.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">61</td><td class="num">48–11–2</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+4.16 u</td><td class="num pos">+6.8%</td><td class="num neg">-3.66 u</td><td class="num">+2.0%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">46</td><td class="num">37–9–0</td><td class="num">80%</td><td class="num">78%</td><td class="num pos">+1.93 u</td><td class="num pos">+4.2%</td><td class="num neg">-3.82 u</td><td class="num">+1.8%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">19</td><td class="num">15–3–1</td><td class="num">83%</td><td class="num">80%</td><td class="num pos">+1.13 u</td><td class="num pos">+5.9%</td><td class="num neg">-1.29 u</td><td class="num">+2.9%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">87</td><td class="num">65–21–1</td><td class="num">76%</td><td class="num">72%</td><td class="num pos">+1.79 u</td><td class="num pos">+2.1%</td><td class="num neg">-8.87 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">14</td><td class="num">12–2–0</td><td class="num">86%</td><td class="num">75%</td><td class="num pos">+1.29 u</td><td class="num pos">+9.2%</td><td class="num neg">-0.54 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>PSV Eindhoven – Heerenveen: h2h home @ 1.303 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Galatasaray – Kasimpasa: h2h home @ 1.278 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Nuno Borges – Facundo Diaz Acosta: h2h home @ 1.32 → <strong>wygrana</strong> (2:0)</li><li>England – Czech Republic: totals over 2.5 @ 1.3 → <strong>wygrana</strong> (3:0)</li><li>Croatia – Spain: h2h away @ 1.31 → <strong>wygrana</strong> (1:2)</li><li>Linda Noskova – Ekaterina Alexandrova: h2h home @ 1.3 → <strong>przegrana</strong> (0:2)</li><li>Castellón – Ceuta: h2h home @ 1.25 → <strong>przegrana</strong> (1:1) <em>(papier)</em></li><li>Switzerland – Slovenia: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li><li>Spain – Czech Republic: totals over 2.5 @ 1.21 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Croatia – England: dnb away @ 1.3 → <strong>wygrana</strong> (0:7) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak nowych rozliczeń w tym cyklu (0 pozycji otwartych, 0 rozliczonych). Historyczny wzorzec z ostatnich raportów (Galatasaray – Kasimpasa, PSV – Heerenveen: oba odrzucone jako „papier" z powodu potwierdzonych absencji, oba wygrane) dalej sugeruje, że przy jasnym faworycie 1–2 potwierdzone absencje u słabszego rywala mogą ściągać p_est zbyt mocno w dół — przy tym typie (Inter Miami over 2.5) nie dotyczy to decyzji, bo p_est 0.80 jest już powyżej implikowanego.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.27 oznacza ok. 79% implikowanego prawdopodobieństwa: nawet dobrze wybrany typ w tym paśmie statystycznie przegrywa ok. raz na 5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore i betexplorer (403/429 z serwerowego IP USA, zgodnie z ograniczeniami trybu automatycznego) — zastąpione przez ESPN i WebSearch/WebFetch. Budżet The Odds API: 2 kredyty wykorzystane na klucz <code>soccer_usa_mls</code>, pozostało 277 z 500 kredytów na ten miesiąc.</li>
+      <li>Skład Inter Miami jest na razie „przewidywany”, nie potwierdzony przez klub — potwierdzenie (z udziałem Messiego) nastąpi ok. godziny przed startem o 23:30 UTC.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

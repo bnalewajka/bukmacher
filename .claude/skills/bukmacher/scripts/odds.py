@@ -91,7 +91,7 @@ def row(fx: dict, market: str, selection: str, odds: Optional[float], bookmaker:
         "odds": round(float(odds), 3),
         "initial_odds": round(float(initial), 3) if initial else None,
         "implied_prob": round(implied(float(odds)), 4), "bookmaker": bookmaker, "source": source,
-        "us_only": bookmaker.lower() in US_ONLY,
+        "us_only": bookmaker.lower().replace(" ", "") in US_ONLY,
         "group": group or f"{source}|{bookmaker}|{fx['key']}|{market}|{line}",
         # event ids the ledger settles from (copy into a pick's `ref`)
         "refs": {k: v for k, v in (fx.get("sources") or {}).items() if k in ("espn", "oddsapi")},
@@ -198,11 +198,18 @@ EXTRA_MARKETS = {
 }
 
 
-def _sport_key_rank(sport: dict, competitions: set[str]) -> int:
-    """0 = the key's title names a competition in fixtures.json, 1 = otherwise (credits go first
-    to leagues we know are playing in the window)."""
-    title = norm_name(sport.get("title") or "")
-    return 0 if title and any(title in c or c in title for c in competitions) else 1
+def _matched_events(events: list[dict], sport: str, fixtures: list[dict]) -> int:
+    """How many of a sport key's events are fixtures we already have (ESPN context to analyse).
+    Matched by teams and kick-off, not by the key's title: titles miss sponsors and abbreviations
+    ("ATP Shanghai Masters" vs ESPN "ATP: Rolex Shanghai Masters", "NHL" vs "National Hockey League")."""
+    by_key = {f["key"]: f for f in fixtures}
+    n = 0
+    for ev in events:
+        start = parse_time(ev.get("commence_time"))
+        home, away = ev.get("home_team", ""), ev.get("away_team", "")
+        if event_key(sport, home, away, start) in by_key or _fuzzy(by_key, sport, home, away, start):
+            n += 1
+    return n
 
 
 # Free plan: 500 credits a month. Below the reserve a run goes ESPN-only (SKILL.md); report runs
@@ -219,13 +226,13 @@ def auto_budget(remaining: float, now: datetime, runs_per_day: float = RUNS_PER_
     return max(0, min(cap, int((remaining - reserve) / (runs_per_day * days_left))))
 
 
-def _events_in_window(key: str, sport_key: str, span_from: str, span_to: str) -> int:
-    """Number of events of a sport key starting in the window — /events costs no credits."""
+def _events_in_window(key: str, sport_key: str, span_from: str, span_to: str) -> list[dict]:
+    """Events of a sport key starting in the window — /events costs no credits."""
     try:
-        return len(http_get_json(f"{ODDS_API}/sports/{sport_key}/events", params={
-            "apiKey": key, "dateFormat": "iso", "commenceTimeFrom": span_from, "commenceTimeTo": span_to}))
+        return http_get_json(f"{ODDS_API}/sports/{sport_key}/events", params={
+            "apiKey": key, "dateFormat": "iso", "commenceTimeFrom": span_from, "commenceTimeTo": span_to})
     except HttpError:
-        return 0
+        return []
 
 
 def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float, max_keys: int,
@@ -235,7 +242,7 @@ def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float,
     """Featured odds for the sport keys that actually have events in the window.
 
     Key discovery is free (/sports, /events); each /odds call costs len(markets) x len(regions)
-    credits, so keys are ranked (competitions already in fixtures.json first, then by number of
+    credits, so keys are ranked (most events already in fixtures.json first, then by number of
     events in the window) and cut to --max-keys and --credit-budget ("auto": auto_budget() from
     the credits left, read from the free /sports call)."""
     errors: list[str] = []
@@ -256,14 +263,17 @@ def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float,
     else:
         # all covered sports, not only those in fixtures.json: ESPN misses Euroleague, SHL, Liiga…
         wanted_groups = set(GROUPS.values())
-        competitions = {norm_name(f.get("competition") or "") for f in fixtures} - {""}
+        group_sport = {g: s for s, g in GROUPS.items()}
         cands = [s for s in sports if s.get("active") and s.get("group") in wanted_groups and not s.get("has_outrights")]
-        counted = [(s, _events_in_window(key, s["key"], span_from, span_to)) for s in cands]
-        counted = [(s, n) for s, n in counted if n]
-        counted.sort(key=lambda sn: (_sport_key_rank(sn[0], competitions), -sn[1]))
-        keys = [s["key"] for s, _ in counted]
-        eprint(f"[oddsapi] {len(keys)} sport keys with events in the window: "
-               + ", ".join(f"{s['key']}({n})" for s, n in counted))
+        counted = []
+        for s in cands:
+            events = _events_in_window(key, s["key"], span_from, span_to)
+            if events:
+                counted.append((s, _matched_events(events, group_sport[s["group"]], fixtures), len(events)))
+        counted.sort(key=lambda smn: (-smn[1], -smn[2]))
+        keys = [s["key"] for s, _, _ in counted]
+        eprint(f"[oddsapi] {len(keys)} sport keys with events in the window (in fixtures.json/all): "
+               + ", ".join(f"{s['key']}({m}/{n})" for s, m, n in counted))
     cost = len(markets.split(",")) * len(regions.split(","))
     if credit_budget is not None:
         max_keys = min(max_keys, max(0, credit_budget // cost))
@@ -327,9 +337,10 @@ def _fuzzy(by_key: dict, sport: str, home: str, away: str, start) -> Optional[di
 EXCHANGES = {"betfair_ex_eu", "betfair_ex_uk", "betfair_ex_au", "matchbook", "smarkets", "betdaq"}
 # Books that only take US (or offshore-to-US) customers: fine for the median, but a Polish bettor
 # cannot take their price, so shortlist.py never picks them as the best price when a European
-# book quotes the same bet. Keys as The Odds API / ESPN name them, lower-cased.
+# book quotes the same bet. Keys as The Odds API / ESPN name them, lower-cased, without spaces
+# (ESPN writes "Draft Kings", The Odds API "draftkings").
 US_ONLY = {"betonlineag", "betonline.ag", "betus", "bovada", "mybookieag", "lowvig", "gtbets", "betanysports",
-           "draftkings", "fanduel", "betmgm", "betrivers", "espnbet", "espn bet", "fliff", "hardrockbet",
+           "draftkings", "fanduel", "betmgm", "betrivers", "espnbet", "fliff", "hardrockbet",
            "ballybet", "betparx", "williamhill_us", "fanatics", "caesars"}
 
 

@@ -421,7 +421,7 @@ def test_credit_budget_auto():
         return b"[]", {"x-requests-remaining": "333"}
 
     saved = (odds_mod.http_get, odds_mod._events_in_window, odds_mod.now_utc)
-    odds_mod.http_get, odds_mod._events_in_window = fake_get, lambda *a: 3
+    odds_mod.http_get, odds_mod._events_in_window = fake_get, lambda *a: [{}, {}, {}]
     odds_mod.now_utc = lambda: datetime(2026, 10, 4, 12, tzinfo=timezone.utc)
     try:
         odds_mod.from_oddsapi([], "KEY", "eu", datetime(2026, 10, 4, 12, tzinfo=timezone.utc), 8, 12, False, None,
@@ -429,6 +429,55 @@ def test_credit_budget_auto():
     finally:
         odds_mod.http_get, odds_mod._events_in_window, odds_mod.now_utc = saved
     assert sum("/odds" in u for u in calls) == 1     # budget 2 = one key at 2 credits
+
+
+def test_oddsapi_keys_ranked_by_events_in_fixtures():
+    """Credits go to the key with most fixtures we have — not to an exact title match (J-League,
+    3 games, beat ATP Shanghai with 10 because ESPN calls it "ATP: Rolex Shanghai Masters"; AHL
+    with 0 of ours beat NHL because "NHL" is not "National Hockey League")."""
+    t0 = datetime(2026, 10, 10, 0, tzinfo=timezone.utc)
+    when = lambda h: (t0 + timedelta(hours=h)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    fixtures = ([{"key": f"tennis|p{i}|q{i}", "sport": "tennis", "competition": "ATP: Rolex Shanghai Masters",
+                  "home": f"Player{i} One", "away": f"Rival{i} Two", "start_utc": when(1 + i % 5)} for i in range(10)]
+                + [{"key": f"football|j{i}", "sport": "football", "competition": "Japanese J.League",
+                    "home": f"Jhome{i}", "away": f"Jaway{i}", "start_utc": when(2)} for i in range(3)]
+                + [{"key": f"hockey|n{i}", "sport": "hockey", "competition": "National Hockey League",
+                    "home": f"Nhome{i}", "away": f"Naway{i}", "start_utc": when(3)} for i in range(4)])
+    for f in fixtures:
+        f["key"] = bk_lib.event_key(f["sport"], f["home"], f["away"], bk_lib.parse_time(f["start_utc"]))
+    ev = lambda f: {"home_team": f["home"], "away_team": f["away"], "commence_time": f["start_utc"]}
+    events = {"tennis_atp_shanghai_masters": [ev(f) for f in fixtures[:10]],
+              "soccer_japan_j_league": [ev(f) for f in fixtures[10:13]],
+              "icehockey_nhl": [ev(f) for f in fixtures[13:]],
+              "icehockey_ahl": [{"home_team": f"A{i}", "away_team": f"B{i}", "commence_time": when(2)} for i in range(9)]}
+    sports = [{"key": "soccer_japan_j_league", "group": "Soccer", "title": "J League"},
+              {"key": "tennis_atp_shanghai_masters", "group": "Tennis", "title": "ATP Shanghai Masters"},
+              {"key": "icehockey_ahl", "group": "Ice Hockey", "title": "AHL"},
+              {"key": "icehockey_nhl", "group": "Ice Hockey", "title": "NHL"}]
+    for s in sports:
+        s.update(active=True, has_outrights=False)
+    calls = []
+
+    def fake_get(url, params=None, headers=None, timeout=25, retries=2, ttl=0):
+        calls.append(url)
+        return (json.dumps(sports).encode() if url.endswith("/sports") else b"[]"), {}
+
+    saved = (odds_mod.http_get, odds_mod._events_in_window)
+    odds_mod.http_get = fake_get
+    odds_mod._events_in_window = lambda key, sk, a, b: events[sk]
+    try:
+        odds_mod.from_oddsapi(fixtures, "KEY", "eu", t0, 8, 2, False, None, markets="h2h,totals")
+    finally:
+        odds_mod.http_get, odds_mod._events_in_window = saved
+    bought = [u.split("/sports/")[1].split("/")[0] for u in calls if u.endswith("/odds")]
+    assert bought == ["tennis_atp_shanghai_masters", "icehockey_nhl"]
+
+
+def test_us_only_book_names_with_spaces():
+    fx = {"key": "k", "sport": "football", "home": "A", "away": "B", "start_utc": "2026-10-09T17:00:00Z", "sources": {}}
+    assert odds_mod.row(fx, "h2h", "A", 1.28, "Draft Kings", "espn")["us_only"]
+    assert odds_mod.row(fx, "h2h", "A", 1.28, "ESPN BET", "espn")["us_only"]
+    assert not odds_mod.row(fx, "h2h", "A", 1.28, "pinnacle", "oddsapi")["us_only"]
 
 
 def test_best_price_ignores_us_only_books():

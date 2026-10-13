@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-13 02:58</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  .carry { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; color: var(--accent); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-13 00:58 UTC / 2026-10-13 02:58 CEST. Zegar zweryfikowany: tak (api.github.com, cloudflare, google — zgodność do ±1 s; <code>scripts/clock.py</code>). Okno: 2026-10-13 00:58 UTC (02:58 CEST) → 2026-10-13 08:58 UTC (10:58 CEST).</p>
+    <p class="meta">Przeanalizowano: 26 spotkań, wszystkie tenis (17 WTA Wuhan Open, 5 ATP Rolex Shanghai Masters, 1 WTA 125 Lisboa Belem, 3 WTA 125 Mallorca) — brak wydarzeń piłkarskich, koszykówki, hokeja i siatkówki w tym nocnym oknie u ESPN. 712 selekcji z The Odds API (budżet „auto": 3 kredyty → 1 z 3 aktywnych kluczy, <code>tennis_wta_wuhan_open</code>, 12 wydarzeń); ESPN nie dodał własnych kursów dla tenisa w tym oknie. Tryb automatyczny (GitHub Actions): Sofascore i betexplorer niedostępne z serwera CI (403/429/US-only), kontekst meczowy z WebSearch/WebFetch. Kursy pobrane 2026-10-13 00:59 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Ceny poniżej to europejskie bukmacherzy (Pinnacle, Winamax, Unibet…); polski bukmacher może się różnić o kilka setnych.</p>
+    <p class="summary">Jedyna selekcja, która po scaleniu bukmacherów wylądowała w paśmie 1.20–1.30 w tym 8-godzinnym oknie, to ten sam mecz co w poprzednim raporcie dnia (2026-10-13_0014): Katie Boulter – Diana Shnaider (WTA Wuhan Open, I runda), wygrana Shnaider. Mecz jeszcze się nie zaczął (start 06:30 CEST), cena i skład bukmacherów niezmienione, świeży przegląd nie przyniósł żadnego nowego sygnału ostrzegawczego (brak wycofań, brak kontuzji) — typ jest więc przeniesiony bez zmian, nie dodany jako nowa, druga pozycja w rejestrze (to wciąż ten sam, jeden realny zakład).</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ (przeniesiony)</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 77–83 %; wymagane p_est ≥ implikowane. W zakresie: 1 selekcja po scaleniu bukmacherów — ten sam mecz, co w raporcie opublikowanym 2h44min wcześniej tej samej nocy.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">06:30</td>
+            <td>Katie Boulter – Diana Shnaider</td>
+            <td>WTA Wuhan Open, I runda</td>
+            <td>Wygrana Shnaider</td>
+            <td class="num">1.25<span class="note">mediana 18 książek; Winamax DE 1.26, 00:59 UTC</span></td>
+            <td class="num pos">0.80</td>
+            <td class="num">0.80</td>
+            <td><span class="carry">przeniesiony</span> <span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Katie Boulter – Diana Shnaider — wygrana Shnaider @ 1.25 <span class="carry">przeniesiony</span> <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · WTA Wuhan Open (WTA 1000), I runda · 2026-10-13 06:30 CEST (04:30 UTC) · 1.25 mediana / 1.26 Winamax DE, The Odds API, pobrane 2026-10-13 00:59 UTC · p_est 0.80 vs implikowane 0.80</p>
+      <p><strong>Ten typ jest przeniesiony, nie nowy:</strong> dokładnie ten sam mecz i ta sama strona zostały już opublikowane jako typ dnia w raporcie 2026-10-13_0014 (wygenerowanym 2h44min wcześniej tej samej noce) z pełnym researchem (forma, h2h, absencje — patrz ten raport). Mecz się jeszcze nie zaczął, więc pozycja w rejestrze (<code>data/ledger.jsonl</code>) jest wciąż otwarta z tamtego wpisu; ten raport jej <strong>nie duplikuje</strong> — dodanie drugiego wpisu dla tego samego realnego zakładu zniekształciłoby statystyki skuteczności (jeden zakład liczony dwa razy).</p>
+      <p><strong>Co zmieniło się od poprzedniego raportu:</strong> nic istotnego. Cena identyczna (mediana 1.25, rozstęp bukmacherów 1.21–1.26, tak jak wcześniej — tylko inny bukmacher na górnej granicy: wcześniej Pinnacle 1.26, teraz Winamax DE 1.26, Pinnacle wciąż 1.26). Świeże sprawdzenie (WebSearch + WebFetch, LTA.org.uk w całości) nie znalazło żadnej nowej wiadomości o wycofaniu, kontuzji lub zmianie składu u żadnej z zawodniczek — oficjalna lista wycofań z Wuhan Open 2026 (Gauff, Anisimova, Mboko, Pliskova, Keys) nie dotyczy tego meczu. Jeden niezależny model (Dimers) daje Shnaider niżej, 72,7%, niż rynkowa zdewigowana wycena (Pinnacle fair_prob 0,77) i p_est z poprzedniego raportu (0,80) — rozjazd modeli jest typowy dla tenisa WTA poza TOP i sam w sobie nie jest nowym faktem przeciw typowi, ale obniża margines bezpieczeństwa: traktuję to jako potwierdzenie, że to „uczciwa cena", nie przewaga.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>I runda WTA 1000 — pełna motywacja obu stron, bez zmian od poprzedniego raportu.</dd>
+        <dt>Forma</dt><dd>Niezmienione względem raportu 2026-10-13_0014: Shnaider — SF/ćwierćfinał French Open (pokonała Sabalenkę), 4R Cincinnati, 3R US Open, konkurencyjna 3-setowa porażka z Alexandrovą w China Open. Boulter — 2R China Open przegrana z Muchovą 7:6(3) 6:1, 2 wygrane rundy eliminacji do Wuhan.</dd>
+        <dt>Absencje</dt><dd>Brak nowych sygnałów o kontuzji/wycofaniu (sprawdzono ponownie: lista wycofań Wuhan 2026 dotyczy Gauff, Anisimovej, Mboko, Pliskovej, Keys — żadna nie gra w tym meczu).</dd>
+        <dt>Składy</dt><dd>Nie dotyczy (tenis singiel).</dd>
+        <dt>Terminarz</dt><dd>Bez zmian — obie grały w Pekinie w ostatnim tygodniu, Boulter dodatkowo 2 mecze eliminacji.</dd>
+        <dt>Miejsce i warunki</dt><dd>Wuhan, kort twardy outdoor — neutralny.</dd>
+        <dt>Styl gry / h2h</dt><dd>Shnaider – Boulter 1:0 (finał Hong Kong Open 2024, 6:1 6:2) — bez zmian.</dd>
+        <dt>Sygnały rynkowe</dt><dd>18 bukmacherów 1.21–1.26, bez rozjazdu — identyczny obraz jak 2h44min wcześniej. Ruch kursu od otwarcia nieweryfikowalny w trybie chmurowym (The Odds API free nie podaje <code>initial_odds</code>).</dd>
+        <dt>Inne</dt><dd>Niezależny model Dimers: Shnaider 72,7% — wyraźnie niżej niż rynkowa de-vigowana wycena (77%) i p_est (80%); traktowane jako sygnał ostrzegawczy obniżający margines, nie jako nowy fakt dyskwalifikujący typ.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong>
+          <ul>
+            <li>Bez zmian od poprzedniego raportu: różnica rankingowa i dominujący bezpośredni pojedynek.</li>
+            <li>Świeży przegląd (2h44min później) nie znalazł żadnego nowego negatywnego sygnału.</li>
+            <li>Cena i zgodność 18 bukmacherów identyczne jak wcześniej — rynek się nie poruszył.</li>
+          </ul>
+        </div>
+        <div><strong>Ryzyka</strong>
+          <ul>
+            <li>p_est = implikowane dokładnie na granicy — to „uczciwa cena", nie przewaga.</li>
+            <li>Niezależny model (Dimers, 72,7%) wyceniałby ten mecz poniżej progu zakresu — rozjazd modeli nie jest rozstrzygający, ale ogranicza margines błędu.</li>
+            <li>Ruch kursu od otwarcia nieweryfikowalny w tym biegu — nie można wykluczyć, że rynek wie o czymś, czego nie znalazłem.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Boulter gra swój najlepszy hardkortowy tenis sezonu i wygrywa w dwóch setach albo w decydującym secie po słabszym dniu Shnaider.</p>
+      <p class="sources"><strong>Źródła tego sprawdzenia (2, przeczytane w całości: 1):</strong> <a href="https://www.lta.org.uk/news/2026/october/wuhan-open-2026-katie-boulter-draws-11th-seed-and-sonay-kartal-set-for-potential-clash-with-wimbledon-champion/">LTA, oficjalny podgląd</a> — przeczytany w całości, brak wzmianki o kontuzji/wycofaniu; <a href="https://www.tennis365.com/wta-tour/wuhan-open-withdrawal-list-alex-eala-uncertainty-emma-raducanu-return">tennis365 — lista wycofań z Wuhan Open 2026</a> — potwierdza, że Boulter i Shnaider nie są na liście. Pełny research formy/h2h pochodzi z raportu 2026-10-13_0014 (TASS, LTA, Wikipedia — statystyki kariery Shnaider, tennis365), nie powtórzony w całości tutaj.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <p class="empty">Brak — w tym oknie nie było innych selekcji w paśmie 1.20–1.30 po scaleniu bukmacherów (żaden inny mecz ATP Shanghai Masters czy niższych turniejów WTA 125 nie miał wystarczającej liczby cen, by to ocenić — patrz Uwagi).</p>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum. Bez zmian względem poprzedniego raportu (0 nowych rozliczeń w tym cyklu).</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">62</td><td class="num">49–11–2</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+4.43 u</td><td class="num pos">+7.1%</td><td class="num neg">-3.54 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">47</td><td class="num">38–9–0</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+2.20 u</td><td class="num pos">+4.7%</td><td class="num neg">-3.70 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">20</td><td class="num">16–3–1</td><td class="num">84%</td><td class="num">80%</td><td class="num pos">+1.40 u</td><td class="num pos">+7.0%</td><td class="num neg">-1.17 u</td><td class="num">+2.3%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">87</td><td class="num">65–21–1</td><td class="num">76%</td><td class="num">72%</td><td class="num pos">+1.79 u</td><td class="num pos">+2.1%</td><td class="num neg">-8.87 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">14</td><td class="num">12–2–0</td><td class="num">86%</td><td class="num">75%</td><td class="num pos">+1.29 u</td><td class="num pos">+9.2%</td><td class="num neg">-0.54 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Katie Boulter – Diana Shnaider: h2h away (Shnaider) @ 1.25 → <strong>otwarty</strong> (start 06:30 CEST, jeszcze się nie zaczął)</li><li>Inter Miami CF – D.C. United: totals over 2.5 @ 1.27 → <strong>wygrana</strong> (4:0)</li><li>PSV Eindhoven – Heerenveen: h2h home @ 1.303 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Galatasaray – Kasimpasa: h2h home @ 1.278 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Nuno Borges – Facundo Diaz Acosta: h2h home @ 1.32 → <strong>wygrana</strong> (2:0)</li><li>England – Czech Republic: totals over 2.5 @ 1.3 → <strong>wygrana</strong> (3:0)</li><li>Croatia – Spain: h2h away @ 1.31 → <strong>wygrana</strong> (1:2)</li><li>Linda Noskova – Ekaterina Alexandrova: h2h home @ 1.3 → <strong>przegrana</strong> (0:2)</li><li>Castellón – Ceuta: h2h home @ 1.25 → <strong>przegrana</strong> (1:1) <em>(papier)</em></li><li>Switzerland – Slovenia: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak nowych rozliczeń w tym cyklu (0 pozycji zamkniętych, 1 otwarta — Boulter–Shnaider, wciąż w toku). Brak nowego wniosku korygującego z wyników samej skuteczności.</li>
+      <li>Wniosek metodyczny z tego cyklu: gdy okno 8h dwóch kolejnych biegów (2026-10-13_0014 i ten, 2h44min później) się w większości pokrywa i nie przynosi żadnych nowych wydarzeń w paśmie 1.20–1.30, właściwą reakcją jest przeniesienie tego samego typu z notatką „bez zmian" i świeżym, krótkim sprawdzeniem wycofań/kontuzji — a nie dodanie drugiego wpisu do rejestru dla tego samego realnego zakładu. Zduplikowanie zawyżyłoby próbkę i sztucznie podwoiłoby wpływ jednego wyniku na statystyki skuteczności.</li>
+      <li>Ten sam budżetowy wzorzec co w poprzednich raportach (patrz <code>data/lessons.md</code>): „auto" dało tylko 3 kredyty (1 z 3 aktywnych kluczy), więc ATP Rolex Shanghai Masters (w tym Alex de Minaur – Karen Khachanov, potencjalnie w paśmie) oraz turnieje WTA 125 (Lisboa Belem, Mallorca) zostały bez europejskiej ceny — nie można ustalić, czy coś w tych rozgrywkach kwalifikowałoby się do typu dnia.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakład pojedynczy; nie łączyć w AKO.</li>
+      <li>Kurs 1.20 oznacza ok. 83% implikowanego prawdopodobieństwa, 1.30 — ok. 77%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 6 i raz na 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Typ w tym raporcie jest przeniesiony z raportu 2026-10-13_0014 (ten sam mecz, ta sama strona, niezmieniona cena) — <strong>nie został</strong> dodany jako nowy wpis do <code>data/ledger.jsonl</code>, aby nie liczyć tego samego realnego zakładu dwa razy w statystykach.</li>
+      <li>Tryb automatyczny: Sofascore i betexplorer zablokowane z IP serwera CI (403/429/US-only) — fixtures i kursy pochodzą z ESPN + The Odds API, kontekst z WebSearch/WebFetch. Budżet kredytów The Odds API „auto" pozwolił na 1 z 3 aktywnych kluczy w oknie (tennis_wta_wuhan_open, 12 wydarzeń, najwięcej w oknie) — ATP Shanghai Masters i turnieje WTA 125 zostały bez europejskiej ceny w tym biegu. Kredyty pozostałe po tym uruchomieniu: 263.</li>
+      <li>Ruch kursu od otwarcia (czerwona flaga &gt;10%) nie był weryfikowalny w tym biegu — The Odds API (plan darmowy) nie podaje <code>initial_odds</code>; znany, trwały limit trybu chmurowego (patrz <code>data/lessons.md</code>, wpis z 2026-10-08).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

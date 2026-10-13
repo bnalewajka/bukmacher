@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-13 22:20</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-13 20:20 UTC / 22:20 CEST (czas PL). Zegar zweryfikowany: tak — clock.py, zgodność z GitHub/Cloudflare/Google/Sofascore API (drift 0 s), źródło systemowe potwierdzone. Okno: 13.10.2026 22:20 – 14.10.2026 06:20 (czas PL).</p>
+    <p class="meta">Tryb automatyczny (GitHub Actions): bez pytań, horyzont 8 h. Przeanalizowano 31 spotkań (piłka nożna 3, koszykówka 5 — NBA przedsezon, hokej 16 NHL, tenis 7 — WTA Wuhan + ATP Shanghai Masters, siatkówka 0). Źródła kursów: ESPN (w tym ESPN BET, tylko-USA), The Odds API (Pinnacle i kilkanaście europejskich książek). Sofascore i betexplorer pominięte celowo w tym trybie (datacenter IP runnera dostaje 403/429 — patrz SKILL.md, sekcja „Automated run”).</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Jedyny kandydat w paśmie 1.20–1.30 po scaleniu bukmacherów z realną europejską ceną to WTA Wuhan: Iva Jović (świeża po wolnym losowaniu, 10. rozstawiona) przeciw zmęczonej trzysetowym meczem dzień wcześniej Dayanie Yastremsce. Jedyny inny surowy kandydat w paśmie (Toronto Raptors, NBA) odrzucony — to mecz przedsezonowy wycenialny wyłącznie u książki tylko-USA. Ruch ceny przed startem nie dało się sprawdzić w tym trybie (brak dostępu do betexplorer/initial_odds) — standardowe zastrzeżenie: sprawdź cenę ponownie przed obstawieniem.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności przy kursie 1.20–1.30 ≈ 77–83%; wymagane p_est ≥ implikowane (uczciwa cena) lub ≥ implikowane + 0.03 (z przewagą). W paśmie: 2 surowe selekcje po scaleniu bukmacherów, przeanalizowano w pełni 1 (druga odrzucona na starcie jako dane niskiej jakości — patrz „Odrzuceni kandydaci”).</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">06:10 (14.10)</td>
+            <td>Iva Jović – Dayana Yastremska</td>
+            <td>WTA Wuhan Open, 1/16 (R32)</td>
+            <td>Zwycięstwo meczu: Jović</td>
+            <td class="num">1.26<span class="note">betsson/nordicbet, The Odds API, 20:22 UTC; mediana 19 książek 1.26, najlepszy 1.29 (williamhill)</span></td>
+            <td class="num pos">0.80</td>
+            <td class="num">0.79</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Iva Jović – Dayana Yastremska — zwycięstwo Jović @ 1.26 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · WTA Wuhan Open (WTA 1000), 1/16 finału · 06:10 PL (04:10 UTC), 14.10.2026 · kurs 1.26 (betsson/nordicbet), The Odds API, pobrano 20:22 UTC · p_est 0.80 vs implikowane 0.79 (przy kursie 1.26); najlepsza dostępna cena 1.29 (williamhill) → implikowane 0.78</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to jedyna selekcja w całym 8-godzinnym oknie z medianą w paśmie 1.20–1.30 popartą szeroką, zgodną europejską wyceną (19 książek, rozrzut zaledwie 1.20–1.29 u faworyta — wyjątkowo wąski jak na ten kurs, co samo w sobie sugeruje zgodny konsensus rynku). Drugi surowy kandydat w paśmie (Toronto Raptors – New York Knicks, NBA) odpadł na starcie: to mecz przedsezonowy (sezon regularny NBA 2026-27 startuje dopiero 20.10 wg harmonogramu The Odds API), więc rotacje i ograniczone minuty gwiazd czynią cenę niewiarygodną niezależnie od jej wysokości, a jedyna dostępna cena (ESPN BET, 1.244) i tak pochodziła z książki tylko-USA.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Standardowy mecz 1/16 finału turnieju WTA 1000; dla obu zawodniczek liczą się punkty do rankingu i premia, bez dodatkowych okoliczności.</dd>
+        <dt>Forma</dt><dd>Jović: tytuł w Guadalajarze (19.09, pokonała m.in. Bucsę i Frech), udany start w Pekinie (wygrane z Dart i Rakhimovą) przerwany jednoznaczną porażką 6:1, 6:3 z Igą Świątek (7.10) — koniec serii 6 zwycięstw z rzędu, ale przegrana z najlepszą zawodniczką świata nie podważa jej formy wobec dużo słabszej rywalki. Yastremska: sezon nierówny, w Pekinie przegrała w 3. rundzie z Sinją Kraus 6:1, 6:4 (4.10); w Wuhan dzień wcześniej (13.10) z trudem pokonała Cristinę Bucsę 6:4, 5:7, 6:3 — trzysetowy, wyczerpujący mecz.</dd>
+        <dt>Absencje</dt><dd>Nie dotyczy (tenis, mecz pojedynczy); brak doniesień o kontuzji którejkolwiek zawodniczki aktualnej na ten mecz.</dd>
+        <dt>Składy</dt><dd>Parowanie potwierdzone oficjalnie na stronie turnieju (wtatennis.com, drabinka), bez podanego wyniku — mecz jeszcze się nie odbył w momencie researchu.</dd>
+        <dt>Terminarz</dt><dd>Kluczowa asymetria: Jović miała wolne losowanie w 1. rundzie (10. rozstawiona) i nie grała w Wuhan od porażki z Świątek 7.10 — 7 dni odpoczynku. Yastremska rozegrała trzysetowy mecz dzień wcześniej (13.10) — mniej regeneracji przed kolejnym meczem.</dd>
+        <dt>Miejsce i warunki</dt><dd>Optics Valley International Tennis Centre, Wuhan — kort twardy outdoor. Brak potwierdzonej prognozy pogody na ten konkretny mecz; brak doniesień o zakłóceniach.</dd>
+        <dt>Styl gry</dt><dd>Jović: czysta, płaska, agresywna gra z główki kortu; serwis i poruszanie się w defensywie to wskazywany przez sztab (Rick Macci) obszar do poprawy — potencjalna furtka dla returnu Yastremskiej. Yastremska: mocny, płaski return i serwis, potrafi zaskoczyć wyżej notowane rywalki (w przeszłości pokonywała m.in. Gauff, Pliskovą), ale niestabilna psychicznie/fizycznie w dłuższych turniejach.</dd>
+        <dt>Sygnały rynkowe</dt><dd>19 książek EU w wąskim przedziale 1.20–1.29 (fair_prob zdewigowany ~0.75–0.76, górna granica prawdziwego prawdopodobieństwa) — silny konsensus. Ruchu ceny względem otwarcia nie dało się sprawdzić w tym trybie (brak betexplorer/initial_odds w The Odds API) — standardowe ryzyko tego trybu, nie specyficzne dla tego meczu.</dd>
+        <dt>Inne</dt><dd>Pierwszy mecz h2h między zawodniczkami — brak historii bezpośrednich starć. Pierwotny research jednego z narzędzi pomocniczych pomylił przeciwniczkę Jović z 1. rundy (sugerując mecz z Mią Pohankovą) — zweryfikowano bezpośrednio na oficjalnej stronie WTA: Jović miała wolny los (bye) w 1/32, a wskazany mecz Pohankova–Wang dotyczył innej części drabinki. Para Jović–Yastremska jest potwierdzona.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Jović świeża (7 dni bez meczu + wolny los), Yastremska zmęczona trzysetowym meczem dzień wcześniej.</li>
+          <li>Bardzo szeroki, zgodny konsensus 19 europejskich książek (1.20–1.29) — brak rozstrzału sugerującego niepewność rynku.</li>
+          <li>Jović w wyraźnie lepszej dyspozycji sezonowej (tytuł WTA, awans do top 13) niż przeciwniczka.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Serwis i ruch w defensywie Jović to znane słabości — przy dobrym dniu Yastremskiej (specjalistki od returnu) możliwy jest szybki set dla underdoga.</li>
+          <li>Brak możliwości sprawdzenia ruchu kursu przed startem w tym trybie (cloud) — cena mogła się już przesunąć od pobrania (20:22 UTC) do startu (04:10 UTC, prawie 8h później); sprawdź kurs ponownie przed obstawieniem.</li>
+          <li>Dane o meczu pochodzą wyłącznie z The Odds API (ESPN nie uwzględniło tej pary w swoim serwisie) — brak niezależnego drugiego źródła „na żywo” potwierdzającego brak walkoweru tuż przed startem.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Yastremska wygrywa pierwszego seta dzięki mocnemu returnowi na niestabilnym serwisie Jović, a zmęczenie z poprzedniego dnia nie zdąży jej dogonić w krótkim, dwu-trzysetowym meczu.</p>
+      <p class="sources"><strong>Źródła (4, przeczytane w całości: 4):</strong> <a href="https://www.wtatennis.com/tournament/1075/wuhan/2026/draws">wtatennis.com — drabinka Wuhan 2026</a> — potwierdzenie pary, wolny los Jović w 1/32; <a href="https://www.tennismajors.com/people/Iva-Jovic">tennismajors.com — profil Jović</a> — ranking, wyniki sezonu 2026; <a href="https://www.flashscore.com/news/yastremska-dayana/CWtkHlUEnZdPEiqF">flashscore.com — newsy Yastremska</a> — forma, historia kontuzji; <a href="https://www.wtatennis.com/players/332285/iva-jovic/record">wtatennis.com — oficjalny rekord Jović</a>.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Toronto Raptors – New York Knicks (NBA), zwycięstwo Raptors @ 1.244</strong> — odrzucony bez pełnego researchu: to mecz przedsezonowy (sezon zasadniczy startuje 20.10 wg harmonogramu The Odds API), więc rotacje i ograniczone minuty gwiazd czynią wynik niemiarodajnym niezależnie od ceny; jedyna dostępna cena pochodziła z ESPN BET — książki tylko-USA, niedostępnej dla polskiego gracza.</li>
+      <li><strong>Elina Svitolina – Liudmila Samsonova (WTA Wuhan), zwycięstwo Svitolinej, najlepsza cena 1.29 (pmu_fr)</strong> — mediana po scaleniu 19 książek to 1.35, poza pasmem 1.20–1.30 (selekcja siedzi w paśmie swojej mediany, nie najlepszej pojedynczej ceny).</li>
+      <li><strong>Sonay Kartal – Belinda Bencic (WTA Wuhan), zwycięstwo Bencic, mediana 1.42</strong> — wyraźnie powyżej pasma 1.20–1.30, podano dla porównania jako najbliższy kolejny kandydat tenisowy w oknie.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">63</td><td class="num">50–11–2</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+4.69 u</td><td class="num pos">+7.4%</td><td class="num neg">-3.43 u</td><td class="num">+1.8%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">48</td><td class="num">39–9–0</td><td class="num">81%</td><td class="num">78%</td><td class="num pos">+2.46 u</td><td class="num pos">+5.1%</td><td class="num neg">-3.60 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">21</td><td class="num">17–3–1</td><td class="num">85%</td><td class="num">80%</td><td class="num pos">+1.66 u</td><td class="num pos">+7.9%</td><td class="num neg">-1.06 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">87 (+3 otw.)</td><td class="num">65–21–1</td><td class="num">76%</td><td class="num">72%</td><td class="num pos">+1.79 u</td><td class="num pos">+2.1%</td><td class="num neg">-8.87 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">14 (+3 otw.)</td><td class="num">12–2–0</td><td class="num">86%</td><td class="num">75%</td><td class="num pos">+1.29 u</td><td class="num pos">+9.2%</td><td class="num neg">-0.54 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Katie Boulter – Diana Shnaider: h2h away @ 1.26 → <strong>wygrana</strong> (0:2)</li><li>Inter Miami CF – D.C. United: totals over 2.5 @ 1.27 → <strong>wygrana</strong> (4:0)</li><li>PSV Eindhoven – Heerenveen: h2h home @ 1.303 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Galatasaray – Kasimpasa: h2h home @ 1.278 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Nuno Borges – Facundo Diaz Acosta: h2h home @ 1.32 → <strong>wygrana</strong> (2:0)</li><li>England – Czech Republic: totals over 2.5 @ 1.3 → <strong>wygrana</strong> (3:0)</li><li>Croatia – Spain: h2h away @ 1.31 → <strong>wygrana</strong> (1:2)</li><li>Linda Noskova – Ekaterina Alexandrova: h2h home @ 1.3 → <strong>przegrana</strong> (0:2)</li><li>Castellón – Ceuta: h2h home @ 1.25 → <strong>przegrana</strong> (1:1) <em>(papier)</em></li><li>Switzerland – Slovenia: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li><li>Spain – Czech Republic: totals over 2.5 @ 1.21 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Croatia – England: dnb away @ 1.3 → <strong>wygrana</strong> (0:7) <em>(papier)</em></li><li>Belinda Bencic – Anastasia Zakharova: h2h home @ 1.25 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Kamilla Rakhimova – Leylah Fernandez: h2h away @ 1.31 → <strong>przegrana</strong> (2:1)</li><li>Katerina Siniakova – Elina Svitolina: h2h away @ 1.3 → <strong>wygrana</strong> (1:2) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>W tym cyklu nic nowego się nie rozliczyło (0 zamkniętych pozycji; 3 „papierowe” z poprzedniego raportu — Inter Milan, Galatasaray, RB Leipzig — wciąż w toku, mecze startowały ok. 19:00 UTC i jeszcze trwały w momencie tego biegu). Brak nowego wniosku korygującego z wyników tym razem.</li>
+      <li>Obserwacja ze scoreboardu: w przedziale p_est 0.65–0.75 typy trafiają gorzej (33–67%) niż w sąsiednich przedziałach 0.75–0.90 (77–100%) — ale to wciąż tylko 9 obserwacji łącznie, więc na razie nie zmienia to wagi szacunków; warto to obserwować przy kolejnych self-review, gdyby próbka urosła i wzorzec się utrzymał.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87% implikowanego prawdopodobieństwa, 1.50 — ok. 67%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Tryb automatyczny (datacenter IP): Sofascore i betexplorer pominięte celowo (403/429/US-only), więc ruchu ceny względem otwarcia (drift) nie dało się sprawdzić dla żadnej selekcji w tym biegu — The Odds API nie zwraca ceny otwarcia. Ceny podane to europejskie książki z The Odds API (Pinnacle, Unibet, Betsson, williamhill, onexbet i in.) — ceny polskich bukmacherów powinny być zbliżone, ale sprawdź je przed postawieniem.</li>
+      <li>Budżet The Odds API: wykorzystano 4 kredyty w tym biegu (257 → 253 z miesięcznego limitu 500) — 2 na NHL (auto-budżet), 2 ręcznie dociągnięte na konkretne klucze turniejowe <code>tennis_atp_shanghai_masters</code> i <code>tennis_wta_wuhan_open</code> (odkryte dopiero po sprawdzeniu pełnej listy kluczy — nazwy nie pasowały do ogólnych <code>tennis_atp</code>/<code>tennis_wta</code>), bo to w tenisie znalazł się jedyny realny kandydat w paśmie. Sprawdzenie <code>basketball_nba</code> (1 kredyt wg stawki, finalnie 0 wydany) ujawniło przy okazji, że mecze NBA dziś to przedsezon — sezon zasadniczy startuje 20.10.2026.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: brak (ESPN i The Odds API odpowiedziały poprawnie; WebFetch na wtatennis.com i tennismajors.com zadziałał bez problemu).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

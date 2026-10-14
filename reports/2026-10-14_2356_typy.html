@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-14 23:56</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-14 21:56 UTC / 23:56 CEST (zegar zweryfikowany przez api.github.com, Cloudflare, Google i API Sofascore/ESPN, drift &lt; 1 s). Okno: 23:56–07:56 CEST (14/15.10.2026).</p>
+    <p class="meta">Przeanalizowano 35 spotkań w oknie (piłka 19, koszykówka 7, hokej 2, tenis 7, siatkówka 0) ze ESPN + ESPN BET i The Odds API (budżet kredytów „auto” = 2 = 1 klucz: <code>soccer_usa_mls</code>, 241 kredytów zostało w miesiącu). Tryb automatyczny (GitHub Actions, serwer w USA): bez Sofascore/betexplorer, ceny europejskie z The Odds API (Pinnacle i 20 innych książek) lub ESPN BET — sprawdź ostateczny kurs u własnego bukmachera.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Pasmo 1.20–1.30 było w tym oknie ponownie bardzo wąskie i w praktyce bez zmian względem poprzedniego raportu (20:53 CEST, ~1h wcześniej): po scaleniu bukmacherów tylko 3 selekcje trafiły w przedział, z czego dwie to ten sam mecz co w poprzednim raporcie (Nashville SC – Sporting Kansas City, wciąż nierozegrany), a trzecia (NBA, mecz przedsezonowy u jednej książki tylko-USA) odpada od razu jako dane zbyt cienkie. Typ dnia jest więc <strong>kontynuacją</strong> poprzedniego typu — bez nowego wpisu do rejestru — po świeżym sprawdzeniu, że nic się nie zmieniło.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ (bez zmian)</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ~77–83%; wymagane p_est ≥ implikowane (uczciwa cena), p_est ≥ implikowane + 0.03 (z przewagą). W paśmie: 3 selekcje po scaleniu, z czego 2 z tego samego, już opublikowanego meczu i 1 (NBA) odrzucona bez researchu.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">02:30 (15.10)</td>
+            <td>Nashville SC – Sporting Kansas City</td>
+            <td>MLS</td>
+            <td>Wygrana Nashville SC</td>
+            <td class="num">1.23<span class="note">Pinnacle, The Odds API, 21:56 UTC</span></td>
+            <td class="num pos">0.82</td>
+            <td class="num">0.81</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Nashville SC – Sporting Kansas City — wygrana Nashville SC @ 1.23 <span class="tier fair">uczciwa cena</span> <em>(bez zmian)</em></h3>
+      <p class="line">Zakres 1.20–1.30 · MLS, kolejka 32 · 02:30 CEST 15.10 (00:30 UTC) · 1.23 u Pinnacle, The Odds API, pobrane 21:56 UTC · p_est 0.82 vs implikowane 0.81</p>
+      <p><strong>To ten sam typ co w poprzednim raporcie (20:53 CEST), bez żadnej zmiany.</strong> Mecz jeszcze się nie zaczął (start 00:30 UTC), cena jest praktycznie identyczna (mediana 1.21, Pinnacle 1.23, drift od otwarcia -2,4% — faworyt lekko się skrócił, bez czerwonej flagi), a świeże sprawdzenie (WebSearch, raport medyczny Sporting KC) nie przyniosło żadnej nowej informacji względem poprzedniej analizy: wciąż ci sami gracze Sporting KC poza składem (m.in. Cisneros, Kinda, Pulido pewnie, Davis/Walter/Vujnovic wątpliwi), Nashville wciąż lider ligi walczący o Supporters' Shield. Pełne uzasadnienie (motywacja, forma, absencje, składy, terminarz, styl gry, sygnały rynkowe, ryzyka) jest niezmienione względem poprzedniego raportu — patrz tam po szczegóły; tu tylko potwierdzenie aktualności.</p>
+      <dl>
+        <dt>Co się zmieniło</dt><dd>Nic istotnego: cena (1.21–1.23 vs 1.20–1.23 godzinę wcześniej), raport medyczny Sporting KC bez nowych nazwisk, brak nowych doniesień z klubów. Mecz nadal nie wystartował.</dd>
+        <dt>Motywacja i stawka</dt><dd>Bez zmian: Nashville SC lider ligi (63 pkt), walka o Supporters' Shield; Sporting KC ostatnie miejsce w konferencji Zachodniej, poza grą o play-offy.</dd>
+        <dt>Absencje</dt><dd>Bez zmian: Sporting KC z min. 5 zawodnikami pola poza składem (w tym obrońca), Nashville z 1 pewną i 1 wątpliwą absencją z rotacji.</dd>
+        <dt>Sygnały rynkowe</dt><dd>22 książki w paśmie, mediana 1.21 (poprzednio 1.20), Pinnacle 1.23 (bez zmian); drift od otwarcia -2,4% (poprzednio ok. -1,3%) — faworyt nadal się lekko skraca, rynek wciąż dociąża Nashville, nie ucieka od niego.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Przewaga formy i tabeli niezmieniona od ostatniego sprawdzenia, potwierdzona świeżym researchem bez nowych niespodzianek.</li>
+          <li>Najniższa marża i najszersze pokrycie bukmacherskie w paśmie (22 książki, Pinnacle), kurs nadal się skraca — brak czerwonej flagi driftu.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>André Luiz (SKC) w dobrej formie indywidualnej — realne zagrożenie nawet przy osłabionym zespole.</li>
+          <li>Zakład rozlicza się jako przegrany przy remisie; Sporting KC udowodniło tydzień temu, że potrafi strzelać mimo słabej defensywy.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Sporting KC broni się głęboko, ale wykorzystuje formę André Luiza na kontrach i wywozi remis lub niespodziewane zwycięstwo, podczas gdy atak Nashville nie przełamuje głębokiego blo­ku gościa w tym jednym meczu.</p>
+      <p class="sources"><strong>Źródła (świeże sprawdzenie, 1 nowe + 3 z poprzedniego raportu, przeczytane w całości):</strong> <a href="https://www.sportingkc.com/news/sports-medicine-report-six-players-listed-as-sporting-heads-to-nashville-nshvskc">Sports Medicine Report (sportingkc.com)</a> — potwierdza niezmieniony raport medyczny gości; poprzednio przeczytane w całości: GEODIS Preview i Health Report (nashvillesc.com), aktualności klubowe sportingkc.com.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Nashville SC – Sporting Kansas City, totals over 2.5 @ 1.29 (williamhill, mediana 1.29, 3 książki)</strong> — selekcja skorelowana z typem dnia na tym samym meczu; własna zdewigowana wycena najostrzejszej dostępnej książki (fair_prob 0.728) jest poniżej implikowanego dla tej ceny (0.775) — odrzucona po raz drugi.</li>
+      <li><strong>San Antonio Spurs – Phoenix Suns, wygrana Spurs @ 1.227 (tylko Draft Kings, książka tylko-USA)</strong> — mecz przedsezonu NBA (sezon 2026-27 startuje 20.10, potwierdzone w poprzednich raportach): rotacje, minuty testowe, brak pełnej motywacji — zbyt cienkie dane, odrzucone bez researchu.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">64</td><td class="num">51–11–2</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+4.95 u</td><td class="num pos">+7.7%</td><td class="num neg">-3.32 u</td><td class="num">+1.8%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">49</td><td class="num">40–9–0</td><td class="num">82%</td><td class="num">78%</td><td class="num pos">+2.72 u</td><td class="num pos">+5.5%</td><td class="num neg">-3.49 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">22</td><td class="num">18–3–1</td><td class="num">86%</td><td class="num">80%</td><td class="num pos">+1.92 u</td><td class="num pos">+8.7%</td><td class="num neg">-0.95 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">90</td><td class="num">66–23–1</td><td class="num">74%</td><td class="num">72%</td><td class="num pos">+0.06 u</td><td class="num pos">+0.1%</td><td class="num neg">-10.75 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">17</td><td class="num">13–4–0</td><td class="num">76%</td><td class="num">74%</td><td class="num neg">-0.44 u</td><td class="num neg">-2.6%</td><td class="num neg">-2.43 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Iva Jović – Dayana Yastremska: h2h home @ 1.26 → <strong>wygrana</strong> (2:0)</li><li>Inter Milan – Club Brugge: h2h home @ 1.23 → <strong>przegrana</strong> (3:4) <em>(papier)</em></li><li>Galatasaray – Barcelona: h2h away @ 1.27 → <strong>wygrana</strong> (1:4) <em>(papier)</em></li><li>RB Leipzig – PSV Eindhoven: totals over 2.5 @ 1.24 → <strong>przegrana</strong> (1:0) <em>(papier)</em></li><li>Katie Boulter – Diana Shnaider: h2h away @ 1.26 → <strong>wygrana</strong> (0:2)</li><li>Inter Miami CF – D.C. United: totals over 2.5 @ 1.27 → <strong>wygrana</strong> (4:0)</li><li>PSV Eindhoven – Heerenveen: h2h home @ 1.303 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Galatasaray – Kasimpasa: h2h home @ 1.278 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Nuno Borges – Facundo Diaz Acosta: h2h home @ 1.32 → <strong>wygrana</strong> (2:0)</li><li>England – Czech Republic: totals over 2.5 @ 1.3 → <strong>wygrana</strong> (3:0)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Brak nowych rozliczeń w tym cyklu</strong> — `ledger.py settle` nie zamknęło żadnej nowej pozycji (1 otwarta: Nashville SC – Sporting Kansas City, mecz jeszcze się nie zaczął). Bez nowego wniosku korygującego z wyników.</li>
+      <li><strong>Drugi udokumentowany przypadek (po 2026-10-13_0014/0258) dwóch kolejnych biegów z identycznym jedynym kandydatem w paśmie 1.20–1.30</strong>: ten sam mecz, ta sama selekcja, niezmieniona cena (1.20–1.23 → 1.21–1.23 godzinę później). Zgodnie z wcześniej ustaloną zasadą — typ przeniesiony z notatką „bez zmian” po świeżym sprawdzeniu absencji/kontuzji, <strong>bez dodawania drugiego wpisu do rejestru</strong> dla tego samego realnego zakładu.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.15 oznacza ok. 87% implikowanego prawdopodobieństwa, 1.50 — ok. 67%: nawet dobrze wybrany typ przegrywa odpowiednio mniej więcej raz na 8 i raz na 3 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Tryb automatyczny (serwer na amerykańskim IP): Sofascore i betexplorer niedostępne (403/429), więc kursy europejskie pochodzą wyłącznie z The Odds API (budżet „auto” = 2 kredyty = 1 klucz: <code>soccer_usa_mls</code>) i ESPN BET; pozostałe aktywne klucze w oknie (m.in. <code>basketball_nba_preseason</code>, <code>tennis_wta_wuhan_open</code>, <code>icehockey_nhl</code>) nie zostały wykupione w tym biegu. Kredytów The Odds API pozostało 241 z limitu miesięcznego.</li>
+      <li>Typ dnia w tym raporcie jest kontynuacją typu z poprzedniego biegu (20:53 CEST) — ten sam mecz jeszcze się nie rozegrał; nie został dodany drugi wpis do rejestru dla tego samego zakładu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

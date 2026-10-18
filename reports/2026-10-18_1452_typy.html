@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-18 14:52</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-18 12:47:52 UTC / 14:47 CEST (Warszawa). Zegar zweryfikowany przez GitHub API, Cloudflare i Google (dryf &lt;1 s, werdykt OK). Okno: 12:47–20:47 UTC (14:47–22:47 CEST).</p>
+    <p class="meta">Przeanalizowano: 64 wydarzenia w oknie (piłka nożna 58, tenis 5, hokej 1; brak siatkówki i koszykówki w ESPN/Odds API w tym oknie), 778 selekcji ze źródeł ESPN (DraftKings) i The Odds API. Kursy pobrane o 12:48 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u własnego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Uruchomienie automatyczne (GitHub Actions, serwer w USA): Sofascore i betexplorer niedostępne (blokada/403 dla adresów datacenter), więc ceny w zakresie 1.20–1.30 pochodzą wyłącznie z The Odds API (18–19 europejskich bukmacherów na mecz) — budżet The Odds API pozwolił w tym uruchomieniu na jedną ligę (grecka Super League), więc realnych kandydatów z dostępną dla polskiego grającego ceną było tylko dwóch; resztę odrzucono, bo jedyną wyceną było US-only DraftKings z ESPN.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 74–83%; wymagane p_est ≥ implikowane. W zakresie: 4 selekcje (2 bez dostępnej dla Polaka ceny — odrzucone), przeanalizowano dogłębnie 2.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">16:30</td>
+            <td>Panathinaikos – Asteras Tripoli</td>
+            <td>Grecka Super League</td>
+            <td>1X2: wygrana gospodarzy</td>
+            <td class="num">1.23<span class="note">coolbet (The Odds API), 12:48 UTC; mediana 19 bukmacherów 1.20</span></td>
+            <td class="num pos">0.83</td>
+            <td class="num">0.81</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Panathinaikos – Asteras Tripoli — 1X2 wygrana gospodarzy @ 1.23 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · Grecka Super League, 7. kolejka · 18.10.2026, 16:30 CEST (14:30 UTC) · kurs 1.23 u coolbet (The Odds API), pobrany 12:48 UTC, mediana 19 bukmacherów 1.20 · p_est 0.83 vs implikowane 0.81</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> To jedyny kandydat w paśmie 1.20–1.30 z realną, wielobukmacherską ceną (19 europejskich firm zgodnie w okolicach 1.18–1.23) i jednoznacznie korzystnym kontekstem: gospodarz w świetnej formie, gość w słabej formie i z długą listą absencji. Drugi kandydat w paśmie z dostępną ceną (PAOK – Iraklis, 1.32) odpadł, bo własny szacunek wypada poniżej kursu implikowanego — patrz "Odrzuceni kandydaci".</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Mecz ligowy bez specjalnej stawki dla gospodarza poza utrzymaniem serii; dla Asterasu to kolejny mecz w ciągu słabszych wyników, presja raczej na gościu.</dd>
+        <dt>Forma</dt><dd>Panathinaikos: 4W–1L w ostatnich 5 (porażka tylko u lidera Olympiakosu 0:1), w tym wygrane 3:0 z Panetolikos, 3:1 z Kifisia i 1:0 na wyjeździe w Kalamacie. Asteras Tripoli: 1W–2D–2L w ostatnich 5, w tym porażka 0:2 na wyjeździe z Iraklisem i 0:1 u siebie z Olympiakosem — forma wyraźnie słabsza niż gospodarza (źródło: futboltotal.futbol).</dd>
+        <dt>Absencje</dt><dd>Panathinaikos: Étienne Camara (zawieszony) i Sverrir Ingi Ingason (uraz) — obaj z głębi składu, nie kluczowi ofensywnie. Asteras Tripoli: aż pięciu zawodników wątpliwych lub wykluczonych — D. Kourbelis (wątpliwy), Jordan Silva (uraz, ok. tydzień), Adrián Riera (uraz mięśniowy, 1–2 tyg.), P. Deligiannidis (uraz nogi), Issiaga Sylla (uraz oka) — źródło: FotMob, strona meczu.</dd>
+        <dt>Składy</dt><dd>Składy wyjściowe niepotwierdzone na ponad godzinę przed meczem (typowe dla greckiej ligi — publikowane ok. godziny przed startem); powyższe absencje są jednak już potwierdzone przez klub/serwisy, nie przewidywane.</dd>
+        <dt>Terminarz</dt><dd>Brak rozgrywek europejskich między kolejkami dla obu klubów w tym tygodniu w dostępnych źródłach — nie znaleziono sygnału rotacji z tego tytułu.</dd>
+        <dt>Miejsce i warunki</dt><dd>Stadion Apostolos Nikolaidis (Leoforos), Atenach — domowa twierdza Panathinaikosu.</dd>
+        <dt>Styl gry</dt><dd>Formacje wg ostatnich spotkań: Panathinaikos 4-2-3-1 z przewagą w środku pola, Asteras 3-4-3 bez stabilnej defensywy przy wielu absencjach z tyłu (Silva, Riera).</dd>
+        <dt>Sygnały rynkowe</dt><dd>Kurs DraftKings przesunął się z 1.174 na 1.222 (+4,8%) od otwarcia — wzrost w granicach normy (próg alarmowy to &gt;10%), nie jest to więc sygnał ostrzegawczy; 19 europejskich bukmacherów zgodnych w paśmie 1.18–1.23, w tym Pinnacle na 1.20.</dd>
+        <dt>Inne</dt><dd>Bezpośrednie starcia historycznie zdecydowanie na korzyść Panathinaikosu (19W–13D–7L w 39 meczach wg Starting11), choć duży udział remisów każe nie zawyżać p_est zbyt agresywnie.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Gospodarz w bardzo dobrej formie, gość w słabej</li><li>Gość osłabiony pięcioma absencjami/wątpliwymi, gospodarz tylko dwoma z głębi składu</li><li>Cena potwierdzona przez 19 niezależnych europejskich bukmacherów, nie tylko jedną firmę</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>39 wzajemnych meczów zawiera 13 remisów — mecz 1X2 (nie DNB) przegrywa też przy remisie, a Asteras ma profil zespołu grającego o punkt</li><li>Składy wyjściowe formalnie niepotwierdzone w momencie pisania raportu</li><li>Kurs 1.23 tylko u coolbet — mediana rynku to 1.20, więc u większości bukmacherów cena będzie niżej w paśmie lub poza nim</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Panathinaikos nie przełamuje osłabionej defensywy Asterasu, mecz kończy się remisem lub niespodziewaną stratą punktów na rozbitym, ale zdeterminowanym rywalu.</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://futboltotal.futbol/partido/panathinaikos-vs-asteras-tripolis-super-league-1-2026-10-18">futboltotal.futbol</a> — potwierdzenie terminu/godziny i formy ostatnich 5 meczów obu zespołów, <a href="https://www.fotmob.com/matches/panathinaikos-vs-asteras-tripolis/1w9bg7n">FotMob</a> — potwierdzone absencje i zawieszenia po obu stronach.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>PAOK – Iraklis, 1X2 gospodarz @ 1.32 (mediana 1.29)</strong> — PAOK przegrał ostatnio w domu 1:3 z Kalamatą i na wyjeździe 1:3 z Panathinaikosem (2 porażki w 5 meczach), a Iraklis jest niepokonany w ostatnich 5 (2W–3D), w tym wygrał 2:0 na wyjeździe z Asterasem. Własny szacunek (p_est ≈ 0.72) wypada poniżej kursu implikowanego (0.76) — zapisany tylko „na papierze”, nie jako typ.</li>
+      <li><strong>Real Madryt – Sevilla, 1X2 gospodarz @ 1.235</strong> — jedyna dostępna cena to US-only DraftKings z ESPN (budżet The Odds API w tym uruchomieniu wystarczył tylko na ligę grecką); bez ceny dostępnej dla polskiego grającego nie można tego opublikować jako typ.</li>
+      <li><strong>Halmstads BK – Hammarby IF, 1X2 gość @ 1.235</strong> — ten sam problem: jedyna cena to US-only DraftKings, brak pokrycia The Odds API dla szwedzkiej Allsvenskan w tym uruchomieniu.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">67</td><td class="num">54–11–2</td><td class="num">83%</td><td class="num">78%</td><td class="num pos">+5.75 u</td><td class="num pos">+8.6%</td><td class="num neg">-2.98 u</td><td class="num">+1.8%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">52</td><td class="num">43–9–0</td><td class="num">83%</td><td class="num">79%</td><td class="num pos">+3.52 u</td><td class="num pos">+6.8%</td><td class="num neg">-3.14 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">25</td><td class="num">21–3–1</td><td class="num">88%</td><td class="num">80%</td><td class="num pos">+2.72 u</td><td class="num pos">+10.9%</td><td class="num neg">-0.61 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">92</td><td class="num">67–24–1</td><td class="num">74%</td><td class="num">72%</td><td class="num neg">-0.74 u</td><td class="num neg">-0.8%</td><td class="num neg">-11.69 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">19</td><td class="num">14–5–0</td><td class="num">74%</td><td class="num">74%</td><td class="num neg">-1.24 u</td><td class="num neg">-6.5%</td><td class="num neg">-3.37 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Detroit Pistons – Toronto Raptors: h2h home @ 1.2 → <strong>wygrana</strong> (129:125) <em>(papier)</em></li><li>Indiana Pacers – Milwaukee Bucks: h2h home @ 1.3 → <strong>przegrana</strong> (127:128) <em>(papier)</em></li><li>Rapid Wien – Hartberg: h2h home @ 1.27 → <strong>wygrana</strong> (3:1)</li><li>Torreense – Sunderland: h2h away @ 1.3 → <strong>wygrana</strong> (1:2)</li><li>Nashville SC – Sporting Kansas City: h2h home @ 1.23 → <strong>wygrana</strong> (4:0)</li><li>Iva Jović – Dayana Yastremska: h2h home @ 1.26 → <strong>wygrana</strong> (2:0)</li><li>Inter Milan – Club Brugge: h2h home @ 1.23 → <strong>przegrana</strong> (3:4) <em>(papier)</em></li><li>Galatasaray – Barcelona: h2h away @ 1.27 → <strong>wygrana</strong> (1:4) <em>(papier)</em></li><li>RB Leipzig – PSV Eindhoven: totals over 2.5 @ 1.24 → <strong>przegrana</strong> (1:0) <em>(papier)</em></li><li>Katie Boulter – Diana Shnaider: h2h away @ 1.26 → <strong>wygrana</strong> (0:2)</li><li>Inter Miami CF – D.C. United: totals over 2.5 @ 1.27 → <strong>wygrana</strong> (4:0)</li><li>PSV Eindhoven – Heerenveen: h2h home @ 1.303 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Galatasaray – Kasimpasa: h2h home @ 1.278 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Nuno Borges – Facundo Diaz Acosta: h2h home @ 1.32 → <strong>wygrana</strong> (2:0)</li><li>England – Czech Republic: totals over 2.5 @ 1.3 → <strong>wygrana</strong> (3:0)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>W tym uruchomieniu nic nowego się nie rozliczyło (0 wpisów otwartych przed startem, 0 rozliczonych) — ranking skuteczności powyżej to stan łączny z poprzednich uruchomień, bez zmian od ostatniego raportu.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.23 oznacza ok. 81% implikowanego prawdopodobieństwa: nawet dobrze wybrany typ przegrywa średnio raz na ok. 5–6 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore (403 z adresu datacenter) i betexplorer (429/blokada US) — zastąpione przez ESPN + The Odds API + WebSearch/WebFetch, jak w każdym uruchomieniu w chmurze.</li>
+      <li>Budżet The Odds API: zużyto 2 z 211 pozostałych na miesiąc (budżet automatyczny = 3 na to uruchomienie, wystarczyło na 1 ligę po 2 kredyty); pozostało 209 kredytów na miesiąc.</li>
+      <li>Ceny kursów podane są od europejskich bukmacherów z The Odds API (coolbet, Pinnacle i inni) — u polskiego bukmachera cena będzie zbliżona, ale sprawdź ją przed obstawieniem.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

@@ -473,6 +473,46 @@ def test_oddsapi_keys_ranked_by_events_in_fixtures():
     assert bought == ["tennis_atp_shanghai_masters", "icehockey_nhl"]
 
 
+def test_oddsapi_keys_ranked_by_possible_favourites():
+    """With 1 key a run, NHL (11 games, ESPN shortest 1.51) beat WTA Wuhan (2 games, no ESPN
+    price) and Liga MX (Cruz Azul 1.29 at ESPN) only because it had more games (lessons
+    2026-10-15_2349, 2026-10-17_2300)."""
+    t0 = datetime(2026, 10, 17, 22, tzinfo=timezone.utc)
+    when = lambda h: (t0 + timedelta(hours=h)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    nhl = [{"sport": "hockey", "home": f"Nh{i}", "away": f"Na{i}", "start_utc": when(1),
+            "espn_odds": [{"bookmaker": "ESPN BET", "home_win": 1.51 + i / 100, "away_win": 2.6}]} for i in range(11)]
+    mx = [{"sport": "football", "home": "Cruz Azul", "away": "FC Juarez", "start_utc": when(3),
+           "espn_odds": [{"bookmaker": "ESPN BET", "home_win": 1.294, "draw_win": 5.5, "away_win": 9.0}]}]
+    mx += [{"sport": "football", "home": f"Mh{i}", "away": f"Ma{i}", "start_utc": when(3),
+            "espn_odds": [{"bookmaker": "ESPN BET", "home_win": 2.1, "draw_win": 3.3, "away_win": 3.4}]} for i in range(3)]
+    wta = [{"sport": "tennis", "home": f"Player{i} One", "away": f"Rival{i} Two", "start_utc": when(2)} for i in range(2)]
+    fixtures = nhl + mx + wta
+    for f in fixtures:
+        f["key"] = bk_lib.event_key(f["sport"], f["home"], f["away"], bk_lib.parse_time(f["start_utc"]))
+    ev = lambda f: {"home_team": f["home"], "away_team": f["away"], "commence_time": f["start_utc"]}
+    events = {"icehockey_nhl": [ev(f) for f in nhl], "soccer_mexico_ligamx": [ev(f) for f in mx],
+              "tennis_wta_wuhan_open": [ev(f) for f in wta]}
+    sports = [{"key": k, "group": g, "title": k, "active": True, "has_outrights": False}
+              for k, g in (("icehockey_nhl", "Ice Hockey"), ("soccer_mexico_ligamx", "Soccer"),
+                           ("tennis_wta_wuhan_open", "Tennis"))]
+    calls = []
+
+    def fake_get(url, params=None, headers=None, timeout=25, retries=2, ttl=0):
+        calls.append(url)
+        return (json.dumps(sports).encode() if url.endswith("/sports") else b"[]"), {}
+
+    saved = (odds_mod.http_get, odds_mod._events_in_window)
+    odds_mod.http_get = fake_get
+    odds_mod._events_in_window = lambda key, sk, a, b: events[sk]
+    try:
+        odds_mod.from_oddsapi(fixtures, "KEY", "eu", t0, 8, 3, False, None, markets="h2h")
+    finally:
+        odds_mod.http_get, odds_mod._events_in_window = saved
+    bought = [u.split("/sports/")[1].split("/")[0] for u in calls if u.endswith("/odds")]
+    assert bought == ["tennis_wta_wuhan_open", "soccer_mexico_ligamx", "icehockey_nhl"]
+    assert odds_mod._matched_events(events["soccer_mexico_ligamx"], "football", fixtures) == (4, 1)
+
+
 def test_us_only_book_names_with_spaces():
     fx = {"key": "k", "sport": "football", "home": "A", "away": "B", "start_utc": "2026-10-09T17:00:00Z", "sources": {}}
     assert odds_mod.row(fx, "h2h", "A", 1.28, "Draft Kings", "espn")["us_only"]

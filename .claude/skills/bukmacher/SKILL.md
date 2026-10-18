@@ -121,7 +121,10 @@ bookmaker's own de-vigged probability, valid only inside mutually exclusive mark
 puts it in the range of its median price and ranks each range by fair probability. With `ODDS_API_KEY`
 (The Odds API, in `.env`) it adds Pinnacle and a dozen EU books; the free plan has 500
 credits a month: name the leagues actually playing with `--oddsapi-keys` (e.g.
-`soccer_uefa_nations_league,basketball_euroleague`), run `--extra-markets --only-keys …` on
+`soccer_uefa_nations_league,basketball_euroleague`; take the names from the free `/v4/sports`
+list, don't guess them — tennis keys are per tournament, `tennis_wta_wuhan_open`, and the
+Conference League is `soccer_uefa_europa_conference_league`; "not active" in the warnings
+usually means a wrong name), run `--extra-markets --only-keys …` on
 the finalists only, and report the remaining credits the script prints.
 
 Polish bookmakers' prices (and every market line, Asian totals and handicaps included) come

@@ -198,18 +198,34 @@ EXTRA_MARKETS = {
 }
 
 
-def _matched_events(events: list[dict], sport: str, fixtures: list[dict]) -> int:
-    """How many of a sport key's events are fixtures we already have (ESPN context to analyse).
+# An ESPN moneyline this short marks a fixture that may land in the daily 1.20-1.30 band once the
+# European books price it (ESPN BET / DraftKings carry a US margin, so their favourite is longer).
+SHORT_FAV_MAX = 1.40
+
+
+def _may_have_favourite(fx: dict) -> bool:
+    """A short ESPN favourite, or no ESPN moneyline at all (tennis, most of Europe) — unknown,
+    so it may be one; only fixtures ESPN prices with no favourite that short are ruled out."""
+    prices = [o.get(f"{side}_win") for o in fx.get("espn_odds") or [] for side in ("home", "away")]
+    prices = [p for p in prices if p and p > 1]
+    return not prices or min(prices) <= SHORT_FAV_MAX
+
+
+def _matched_events(events: list[dict], sport: str, fixtures: list[dict]) -> tuple[int, int]:
+    """How many of a sport key's events are fixtures we already have (ESPN context to analyse),
+    and how many of those may have a favourite for the daily band (_may_have_favourite).
     Matched by teams and kick-off, not by the key's title: titles miss sponsors and abbreviations
     ("ATP Shanghai Masters" vs ESPN "ATP: Rolex Shanghai Masters", "NHL" vs "National Hockey League")."""
     by_key = {f["key"]: f for f in fixtures}
-    n = 0
+    n = fav = 0
     for ev in events:
         start = parse_time(ev.get("commence_time"))
         home, away = ev.get("home_team", ""), ev.get("away_team", "")
-        if event_key(sport, home, away, start) in by_key or _fuzzy(by_key, sport, home, away, start):
+        fx = by_key.get(event_key(sport, home, away, start)) or _fuzzy(by_key, sport, home, away, start)
+        if fx:
             n += 1
-    return n
+            fav += _may_have_favourite(fx)
+    return n, fav
 
 
 # Free plan: 500 credits a month. Below the reserve a run goes ESPN-only (SKILL.md); report runs
@@ -242,8 +258,9 @@ def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float,
     """Featured odds for the sport keys that actually have events in the window.
 
     Key discovery is free (/sports, /events); each /odds call costs len(markets) x len(regions)
-    credits, so keys are ranked (most events already in fixtures.json first, then by number of
-    events in the window) and cut to --max-keys and --credit-budget ("auto": auto_budget() from
+    credits, so keys are ranked (most fixtures that may have a daily-band favourite first — a
+    short ESPN favourite or no ESPN moneyline — then most events
+    already in fixtures.json, then by number of events in the window) and cut to --max-keys and --credit-budget ("auto": auto_budget() from
     the credits left, read from the free /sports call)."""
     errors: list[str] = []
     try:
@@ -269,11 +286,15 @@ def from_oddsapi(fixtures: list[dict], key: str, regions: str, t0, hours: float,
         for s in cands:
             events = _events_in_window(key, s["key"], span_from, span_to)
             if events:
-                counted.append((s, _matched_events(events, group_sport[s["group"]], fixtures), len(events)))
-        counted.sort(key=lambda smn: (-smn[1], -smn[2]))
-        keys = [s["key"] for s, _, _ in counted]
-        eprint(f"[oddsapi] {len(keys)} sport keys with events in the window (in fixtures.json/all): "
-               + ", ".join(f"{s['key']}({m}/{n})" for s, m, n in counted))
+                m, fav = _matched_events(events, group_sport[s["group"]], fixtures)
+                counted.append((s, fav, m, len(events)))
+        # keys with games that may have a daily-band favourite first: with 1-2 keys a run, the most
+        # games is the wrong goal when ESPN shows none of them has one (NHL 11/11, shortest 1.51,
+        # bought over WTA Wuhan or over Liga MX with Cruz Azul at 1.29)
+        counted.sort(key=lambda c: (-c[1], -c[2], -c[3]))
+        keys = [c[0]["key"] for c in counted]
+        eprint(f"[oddsapi] {len(keys)} sport keys with events in the window (may have a favourite/"
+               "in fixtures.json/all): " + ", ".join(f"{s['key']}({f}/{m}/{n})" for s, f, m, n in counted))
     cost = len(markets.split(",")) * len(regions.split(","))
     if credit_budget is not None:
         max_keys = min(max_keys, max(0, credit_budget // cost))

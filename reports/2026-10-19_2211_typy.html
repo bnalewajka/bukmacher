@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-19 22:11</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-19 20:11 UTC / 22:11 CEST. Zegar zweryfikowany: tak (GitHub API, Cloudflare, Google — zgodność do 0.1 s). Okno: 2026-10-19 22:11 – 2026-10-20 06:11 CEST (20:11–04:11 UTC). Tryb automatyczny (GitHub Actions), bez pytań.</p>
+    <p class="meta">Przeanalizowano: 16 spotkań w oknie (piłka nożna 5, koszykówka 1 [WNBA], hokej 4 [NHL], tenis 6 [WTA], siatkówka 0) z ESPN (fixtures + ESPN BET/DraftKings) i The Odds API (tylko NHL — patrz „Uwagi”). Kursy pobrane ok. 20:12 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Brak typu dnia: w oknie 8 h żaden faworyt nie ma potwierdzonej, wielobukmacherskiej (europejskiej) ceny w paśmie 1.20–1.30 — najkrótszy realnie sprawdzony kurs to Colorado Avalanche @ 1.42 (Pinnacle). Mecze z Argentyny, Brazylii i WNBA miały dostępną tylko cenę jednego, amerykańskiego bukmachera (DraftKings, niedostępny dla polskiego grającego) z powodu limitu kredytów The Odds API — nie wchodzą do analizy bez wiarygodnej, wielobukmacherskiej ceny.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 0 typy</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 83–77 %; wymagane p_est ≥ implikowane. W zakresie: 0 selekcji z wiarygodną, wielobukmacherską ceną z 16 przeanalizowanych spotkań.</p>
+
+    <p class="empty">Brak typu dnia w tym uruchomieniu. Żadna selekcja w oknie 8 h nie ma potwierdzonej ceny w paśmie 1.20–1.30 u bukmacherów dostępnych dla polskiego grającego (Pinnacle i europejskie książki z The Odds API; amerykańskie DraftKings/BetOnline/GTbets/mybookie liczą się tylko do mediany, nie są publikowalną ceną). Najbliższe realne kandydatury:</p>
+    <ul>
+      <li><strong>Philadelphia Flyers – Colorado Avalanche (NHL), zwycięstwo Avalanche</strong> — 01:00 CEST (20.10, 23:00 UTC). Pinnacle 1.42 (najostrzejsza cena), ale mediana 22 bukmacherów z The Odds API to aż 1.645 (rozstrzał 1.40–1.74: ostre książki vs. miękkie europejskie retail). Nawet przy najostrzejszej cenie to pasmo 1.30–1.44, nie 1.20–1.30 — i bez analizy składów/bramkarzy (nie robiono, bo cena i tak poza zakresem) nie da się uczciwie podnieść p_est do poziomu uzasadniającego awans. Zabrakło: kursu bliżej 1.25–1.30 u większości bukmacherów.</li>
+      <li><strong>Utah Mammoth – Pittsburgh Penguins (NHL), zwycięstwo Utah</strong> — 03:00 CEST (20.10, 01:00 UTC). Pinnacle 1.55, mediana ok. 1.80 — jeszcze dalej od zakresu.</li>
+      <li><strong>Corinthians – Vitória (Brazylijska Serie A), Newell's Old Boys, Deportivo Pasto</strong> — faworyci u DraftKings w przedziale 1.56–1.77, ale to jedyny dostępny bukmacher (US-only) w tym uruchomieniu; bez drugiej, europejskiej ceny nie można ani potwierdzić, ani odrzucić obecności w paśmie 1.20–1.30 u polskich bukmacherów — patrz „Uwagi”.</li>
+    </ul>
+    <p class="meta">Co by to zmieniło: kurs u ≥2 europejskich bukmacherów w paśmie 1.20–1.30 plus potwierdzony skład/stan kadry (zwłaszcza bramkarz w hokeju) — dziś żadnego z tych dwóch warunków nie udało się potwierdzić dla kandydatów bliskich zakresowi.</p>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">68</td><td class="num">55–11–2</td><td class="num">83%</td><td class="num">78%</td><td class="num pos">+5.98 u</td><td class="num pos">+8.8%</td><td class="num neg">-2.90 u</td><td class="num">+1.8%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">53</td><td class="num">44–9–0</td><td class="num">83%</td><td class="num">79%</td><td class="num pos">+3.75 u</td><td class="num pos">+7.1%</td><td class="num neg">-3.06 u</td><td class="num">+1.6%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">26</td><td class="num">22–3–1</td><td class="num">88%</td><td class="num">80%</td><td class="num pos">+2.95 u</td><td class="num pos">+11.3%</td><td class="num neg">-0.52 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">93</td><td class="num">68–24–1</td><td class="num">74%</td><td class="num">72%</td><td class="num neg">-0.42 u</td><td class="num neg">-0.4%</td><td class="num neg">-11.53 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">20</td><td class="num">15–5–0</td><td class="num">75%</td><td class="num">74%</td><td class="num neg">-0.92 u</td><td class="num neg">-4.6%</td><td class="num neg">-3.21 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>PAOK – Iraklis: h2h home @ 1.32 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Panathinaikos – Asteras Tripoli: h2h home @ 1.23 → <strong>wygrana</strong> (5:1)</li><li>Detroit Pistons – Toronto Raptors: h2h home @ 1.2 → <strong>wygrana</strong> (129:125) <em>(papier)</em></li><li>Indiana Pacers – Milwaukee Bucks: h2h home @ 1.3 → <strong>przegrana</strong> (127:128) <em>(papier)</em></li><li>Rapid Wien – Hartberg: h2h home @ 1.27 → <strong>wygrana</strong> (3:1)</li><li>Torreense – Sunderland: h2h away @ 1.3 → <strong>wygrana</strong> (1:2)</li><li>Nashville SC – Sporting Kansas City: h2h home @ 1.23 → <strong>wygrana</strong> (4:0)</li><li>Iva Jović – Dayana Yastremska: h2h home @ 1.26 → <strong>wygrana</strong> (2:0)</li><li>Inter Milan – Club Brugge: h2h home @ 1.23 → <strong>przegrana</strong> (3:4) <em>(papier)</em></li><li>Galatasaray – Barcelona: h2h away @ 1.27 → <strong>wygrana</strong> (1:4) <em>(papier)</em></li><li>RB Leipzig – PSV Eindhoven: totals over 2.5 @ 1.24 → <strong>przegrana</strong> (1:0) <em>(papier)</em></li><li>Katie Boulter – Diana Shnaider: h2h away @ 1.26 → <strong>wygrana</strong> (0:2)</li><li>Inter Miami CF – D.C. United: totals over 2.5 @ 1.27 → <strong>wygrana</strong> (4:0)</li><li>PSV Eindhoven – Heerenveen: h2h home @ 1.303 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Galatasaray – Kasimpasa: h2h home @ 1.278 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Brak nowych rozliczeń w tym uruchomieniu</strong> — `ledger.py settle` rozliczył 0 nowych zdarzeń (0 otwartych wpisów w ogóle). Ostatnie trzy porażki na papierze (Indiana–Milwaukee 1.30, Inter–Brugge 1.23, Leipzig–PSV over 2.5 @1.24) były już opisane w poprzednich raportach; nic nowego do wyciągnięcia dzisiaj. Ogólny CLV dla typów (+1.8%) pozostaje dodatni, co jest ważniejszym sygnałem jakości analizy niż sama trafność.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.20 to ok. 80% implikowanego prawdopodobieństwa, 1.30 — ok. 74–77%: nawet dobrze wybrany typ w tym paśmie przegrywa średnio raz na 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li><strong>Limit kredytów The Odds API:</strong> budżet automatyczny (`--credit-budget auto`) przyznał tylko 3 kredyty na to uruchomienie (197 z 500 zostało w tym miesiącu po zużyciu 2), co pozwoliło pobrać ceny europejskich bukmacherów tylko dla jednego klucza — wybrano <code>icehockey_nhl</code> (4 mecze). Odpadły: <code>soccer_argentina_primera_division</code> (3 mecze: Newell's–Central Córdoba, Sarmiento–Barracas, Riestra–Unión), <code>basketball_wnba</code> (Golden State Valkyries–Atlanta Dream), <code>soccer_brazil_campeonato</code> (Corinthians–Vitória). Dla tych meczów jedyna cena pochodziła z ESPN/DraftKings (US-only) — zgodnie z regułami nie może być publikowaną ceną dla polskiego grającego, więc te spotkania nie weszły do rankingu 1.20–1.30 mimo że DraftKings notował faworytów w przedziale 1.56–1.77 (poza zakresem i tak).</li>
+      <li>Liga kolumbijska (Deportivo Pasto – Alianza FC) nie ma w ogóle klucza w The Odds API (darmowy plan) — tylko cena DraftKings z ESPN, również US-only.</li>
+      <li>Tenis (WTA Kinoshita Group Japan Open, 6 meczów) — brak jakiejkolwiek ceny: ESPN nie publikuje kursów na te mecze, a jedyny dopasowany klucz The Odds API w tym tygodniu (<code>tennis_wta_ningbo_open</code>) to inny, niepowiązany turniej. Mecze pozostały bez ceny i bez analizy.</li>
+      <li>Siatkówka: 0 wydarzeń z ESPN w oknie (brak pokrycia tego sportu u tego źródła, nie błąd pobierania). Sofascore i betexplorer nie były używane (US datacenter IP w tym uruchomieniu — 403/429 zgodnie z regułami trybu automatycznego).</li>
+      <li>Kredyty The Odds API pozostałe po tym uruchomieniu: 197.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-23 20:49</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-23 18:49 UTC / 20:49 CEST (Warszawa). Zegar zweryfikowany: tak (api.github.com, cloudflare.com, google.com, sofascore.com, espn.com — rozbieżność &lt; 1 s). Okno: 20:45–04:42 CEST (18:45–02:42 UTC).</p>
+    <p class="meta">Przeanalizowano: 58 wydarzeń (piłka nożna 17, koszykówka 12, hokej 24, tenis 5, siatkówka 0) z ESPN + The Odds API. W paśmie 1.20–1.30 wg shortlisty: 5 selekcji / 3 realne mecze (2 selekcje odrzucone strukturalnie — cena tylko u bukmacherów US-only, niedostępnych w Polsce). Kursy pobrane o 18:43 UTC. Tryb automatyczny (GitHub Actions) — Sofascore i betexplorer nie są wywoływane (403/429 z chmury); cena to Pinnacle i inne europejskie książki z The Odds API, sprawdź ją u własnego bukmachera przed zagraniem.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Jeden typ dnia: Portland Trail Blazers (wygrana) @ Sacramento Kings — potwierdzona przewaga kadrowa Kings (Raynaud poza składem, Simmons poza sezonem, Sabonis niepewny) plus już zaobserwowana w 1. kolejce 29-punktowa różnica w bilansie otwarcia sezonu. Dwóch pozostałych kandydatów z shortlisty (Lakers–Clippers, Raptors–Wizards) odrzuconych — własny szacunek nie przebił ceny po doliczeniu niepewności (Clippers i Raptors po głębokich roszadach kadrowych, brak potwierdzonych składów na dziś).</p>
+    <nav class="ranges">
+      <a href="#z-120">1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 77–83%; wymagane p_est ≥ implikowane (uczciwa cena), p_est ≥ implikowane + 0.03 (z przewagą). W paśmie: 5 selekcji (3 mecze), przeanalizowano wszystkie 3.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">04:00</td>
+            <td>Sacramento Kings – Portland Trail Blazers</td>
+            <td>NBA</td>
+            <td>Wygrana Portland</td>
+            <td class="num">1.24<span class="note">Pinnacle, The Odds API, 18:43 UTC</span></td>
+            <td class="num pos">0.81</td>
+            <td class="num">0.81 (0.807)</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Sacramento Kings – Portland Trail Blazers — wygrana Portland @ 1.24 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · NBA, sezon regularny 2026-27 · 24.10 04:00 CEST (24.10 02:00 UTC) · 1.24 Pinnacle (The Odds API, 18:43 UTC; mediana ok. 20 europejskich bukmacherów 1.20–1.23) · p_est 0.81 vs implikowane 0.807</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to najwyższe p_est w całym paśmie z realną, europejską ceną — wyżej niż Lakers (0.75) i Raptors (0.74), bo tu akurat strona faworyta ma konkretne, potwierdzone fakty kadrowe (nie tylko wynik 1. kolejki), których cena jeszcze nie w pełni odzwierciedla: Kings grają bez centra rotacyjnego i bez jednego z nominalnych starterów, a Sabonis — jedyna gwiazda składu — wciąż dzień do dnia.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>2. mecz sezonu dla obu; dla Kings to domowy mecz "na odbicie" po bolesnej porażce na otwarcie, dla Blazers potwierdzenie formy po dominującym występie.</dd>
+        <dt>Forma</dt><dd>Blazers rozbili Phoenix Suns 124:83 w meczu otwarcia (21.10, dom) — przewaga 41 pkt. Kings przegrali 96:121 w Los Angeles z Clippers (21.10, wyjazd) — strata 25 pkt. Próbka to tylko 1 mecz na stronę, ale różnica kierunku jest duża i zgodna z przedsezonowymi oczekiwaniami (Kings typowani na jeden z najsłabszych zespołów ligi).</dd>
+        <dt>Absencje</dt><dd>Kings: Maxime Raynaud (C, rotacja) — kontuzja kolana (częściowe podwichnięcie rzepki) z meczu przedsezonowego 10.10, oficjalna reewaluacja ok. 25.10, nie zagra. Ben Simmons — poza całym sezonem 2026-27. Domantas Sabonis (jedyna gwiazda) figurował jako "day-to-day" na raport przed meczem otwarcia z Clippers — status na dziś niepotwierdzony z nowszego źródła. Po stronie Blazers brak potwierdzonych absencji kluczowych graczy na ten konkretny mecz (Deni Avdija miał zgłaszane drobne problemy z kostką przed sezonem, ale zagrał i był jedną z gwiazd otwarcia).</dd>
+        <dt>Składy</dt><dd>Brak oficjalnego listy "injury report" NBA na dziś w dostępnych źródłach (strona ligi nie była dostępna z tego adresu); oparto się na serwisach zespołowych i agencyjnych z ostatnich dni — nie są to składy potwierdzone na minuty przed startem.</dd>
+        <dt>Terminarz</dt><dd>Obie strony po 2 dniach odpoczynku od meczu otwarcia (21.10) — brak back-to-back, brak przewagi/straty z tytułu zmęczenia.</dd>
+        <dt>Miejsce i warunki</dt><dd>Golden 1 Center, Sacramento — bez znaczenia pogodowego (hala); typowa przewaga własnej hali dla Kings już uwzględniona w cenie rynkowej.</dd>
+        <dt>Styl gry</dt><dd>Blazers z przebudowanym składem (dojście Ja Moranta do backcourtu z Damianem Lillardem, Avdija jako lider) — więcej tempa i kreacji niż u broniącego się składu Kings bez swojego rotacyjnego centra.</dd>
+        <dt>Sygnały rynkowe</dt><dd>Cena na Portland skróciła się od otwarcia (proxy DraftKings: 1.44 → 1.21, ok. -16%) — spadek, nie wzrost, więc reguła "cena w górę o >10% = unikać" nie ma zastosowania; brak czerwonej flagi. 24 książki w The Odds API notują faworyta Portland, w tym Pinnacle.</dd>
+        <dt>Inne</dt><dd>Typowa pułapka "letdown" po efektownym zwycięstwie w 1. kolejce jest realna, ale przy tak dużej różnicy jakości składu (i to niezależnie potwierdzonej kontuzjami, nie tylko wynikiem) nie wystarcza, by przesunąć p_est pod implikowane.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong>
+          <ul>
+            <li>Dwa niezależne, potwierdzone fakty kadrowe u Kings (Raynaud poza składem, Simmons poza sezonem) — to, czego cena nie absorbuje w pełni po jednym tylko meczu nowego sezonu.</li>
+            <li>Zgodność kierunku: forma z 1. kolejki (41 pkt różnicy na plus vs 25 pkt na minus) idzie w tę samą stronę co absencje.</li>
+            <li>Cena potwierdzona przez 24 bukmacherów (w tym Pinnacle) — nie jest to pojedyncza, odosobniona wycena.</li>
+          </ul>
+        </div>
+        <div><strong>Ryzyka</strong>
+          <ul>
+            <li>Tylko 1 mecz próbki na stronę — wczesny sezon, duża wariancja, skład rotacyjny obu zespołów może się jeszcze zmieniać.</li>
+            <li>Status Sabonisa (day-to-day) nie jest potwierdzony świeżym źródłem na dziś — jeśli gra pełne minuty, Kings są wyraźnie silniejsi niż sugeruje wynik otwarcia.</li>
+            <li>Klasyczna pułapka "letdown" po dominującym zwycięstwie — Blazers mogą zacząć wolniej na wyjeździe.</li>
+            <li>Rozliczenie 1X2 NBA liczy się łącznie z dogrywką (OT) — remis po 48 minutach nie unieważnia zakładu, tylko przedłuża mecz.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Sabonis wraca do pełnych minut i sam przeważa mecz w ostatniej kwarcie, a Blazers, grający drugi mecz w 3 dni na wyjeździe po emocjonującym zwycięstwie w otwarciu, wchodzą w mecz bez energii z poprzedniego występu.</p>
+      <p class="sources"><strong>Źródła (4, przeczytane w całości: 3):</strong>
+        <a href="https://legionreport.com/portland-trail-blazers-score/">legionreport.com — Trail Blazers</a> — wynik otwarcia 124:83 z Suns, bilans 1-0, kolejny mecz u Kings;
+        <a href="https://legionreport.com/sacramento-kings-score/">legionreport.com — Kings</a> — wynik otwarcia 96:121 u Clippers, bilans 0-1, kolejny mecz z Blazers;
+        <a href="https://www.eurohoops.net/en/nba-news/2019660/maxime-raynaud-injury-update-sacramento-kings-nba/">eurohoops.net</a> — diagnoza i harmonogram powrotu Raynauda (podwichnięcie rzepki, reewaluacja ok. 25.10, nie zagra na starcie sezonu);
+        <a href="https://www.si.com/nba/clippers/news/los-angeles-clippers-vs-sacramento-kings-injury-report-01k7m9kz156x">si.com (niecałość, ze skrótu wyszukiwania)</a> — raport przedmeczowy na otwarcie: Raynaud OUT, Sabonis i Cardwell day-to-day.
+      </p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Los Angeles Lakers – LA Clippers, wygrana Lakers @ 1.30 (Pinnacle)</strong> — fair_prob/p_est własny (0.75) poniżej kursu implikowanego (0.769). Lakers rozbili Warriors 127:105 w otwarciu, ale Clippers wygrali swój otwierający mecz równie wyraźnie (121:96 z Kings) — po wymianie Kawhiego Leonarda do Toronto trener Ty Lue zaczyna sezon bez kilku zawodników, na których liczył, bez potwierdzenia, o kogo chodzi na dziś. Brak wystarczającej, świeżej przewagi informacyjnej, by przebić cenę.</li>
+      <li><strong>Washington Wizards – Toronto Raptors, wygrana Toronto @ 1.31 (Pinnacle)</strong> — p_est własny (0.74) poniżej implikowanego (0.763). Raptors rozbili Bulls 135:92, ale to właśnie do Toronto trafił w wymianie Kawhi Leonard — brak potwierdzenia, czy zagrał w otwarciu i w jakiej dyspozycji zdrowotnej, a Wizards pokonali w swoim otwarciu dobry zespół (Bucks, 128:116) — zbyt duża niewiadoma kadrowa po stronie faworyta, by uznać cenę za przestrzeloną.</li>
+      <li><strong>Cruzeiro – Remo (Serie A, Brazylia), wygrana Cruzeiro @ 1.303</strong> — jedyna dostępna cena w paśmie pochodziła wyłącznie z bukmachera US-only (niedostępnego w Polsce); bez ceny europejskiej odrzucony strukturalnie, bez dalszej analizy.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">70</td><td class="num">57–11–2</td><td class="num">84%</td><td class="num">78%</td><td class="num pos">+6.56 u</td><td class="num pos">+9.4%</td><td class="num neg">-2.63 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">55</td><td class="num">46–9–0</td><td class="num">84%</td><td class="num">79%</td><td class="num pos">+4.33 u</td><td class="num pos">+7.9%</td><td class="num neg">-2.79 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">12</td><td class="num">10–2–0</td><td class="num">83%</td><td class="num">82%</td><td class="num pos">+0.64 u</td><td class="num pos">+5.3%</td><td class="num neg">-0.88 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">28</td><td class="num">24–3–1</td><td class="num">89%</td><td class="num">80%</td><td class="num pos">+3.53 u</td><td class="num pos">+12.6%</td><td class="num neg">-0.25 u</td><td class="num">+2.2%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">96</td><td class="num">71–24–1</td><td class="num">75%</td><td class="num">72%</td><td class="num pos">+0.34 u</td><td class="num pos">+0.4%</td><td class="num neg">-11.22 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">22</td><td class="num">16–5–1</td><td class="num">76%</td><td class="num">76%</td><td class="num neg">-0.91 u</td><td class="num neg">-4.1%</td><td class="num neg">-3.44 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">23</td><td class="num">18–5–0</td><td class="num">78%</td><td class="num">74%</td><td class="num neg">-0.16 u</td><td class="num neg">-0.7%</td><td class="num neg">-2.90 u</td><td class="num">+2.9%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Oklahoma City Thunder – Denver Nuggets: h2h home @ 1.3 → <strong>wygrana</strong> (96:84) <em>(papier)</em></li><li>Ferencvaros – Torreense: h2h home @ 1.3 → <strong>wygrana</strong> (4:1)</li><li>OFI Crete – Bayer Leverkusen: h2h away @ 1.22 → <strong>wygrana</strong> (0:2) <em>(papier)</em></li><li>Houston Rockets – Dallas Mavericks: h2h home @ 1.28 → <strong>wygrana</strong> (128:110)</li><li>Toronto Raptors – Chicago Bulls: h2h home @ 1.24 → <strong>wygrana</strong> (135:92) <em>(papier)</em></li><li>PAOK – Iraklis: h2h home @ 1.32 → <strong>wygrana</strong> (2:1) <em>(papier)</em></li><li>Panathinaikos – Asteras Tripoli: h2h home @ 1.23 → <strong>wygrana</strong> (5:1)</li><li>Detroit Pistons – Toronto Raptors: h2h home @ 1.2 → <strong>wygrana</strong> (129:125) <em>(papier)</em></li><li>Indiana Pacers – Milwaukee Bucks: h2h home @ 1.3 → <strong>przegrana</strong> (127:128) <em>(papier)</em></li><li>Rapid Wien – Hartberg: h2h home @ 1.27 → <strong>wygrana</strong> (3:1)</li><li>Torreense – Sunderland: h2h away @ 1.3 → <strong>wygrana</strong> (1:2)</li><li>Nashville SC – Sporting Kansas City: h2h home @ 1.23 → <strong>wygrana</strong> (4:0)</li><li>Iva Jović – Dayana Yastremska: h2h home @ 1.26 → <strong>wygrana</strong> (2:0)</li><li>Inter Milan – Club Brugge: h2h home @ 1.23 → <strong>przegrana</strong> (3:4) <em>(papier)</em></li><li>Galatasaray – Barcelona: h2h away @ 1.27 → <strong>wygrana</strong> (1:4) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak nowych rozliczeń od poprzedniego raportu (<code>ledger.py settle</code> zwrócił „settled 0; open 0; manual 0"). Bez nowego wniosku korygującego z wyników — patrz <code>data/lessons.md</code> dla wniosków z wcześniejszych biegów.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.24 oznacza ok. 81% implikowanego prawdopodobieństwa: nawet dobrze wybrany typ przegrywa w takich warunkach ok. raz na 5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Tryb automatyczny (GitHub Actions): Sofascore i betexplorer niedostępne z chmury (403/429/US-only), więc fixtures i kursy pochodzą z ESPN + The Odds API, a research z WebSearch/WebFetch. Cena podana to europejskie książki (tu: Pinnacle) — sprawdź ją u swojego bukmachera, bywa zbliżona, nie identyczna.</li>
+      <li>Budżet The Odds API „auto": 3 kredyty na ten bieg, zużyto 2 na jedyny klucz z realnym, wielobukmacherskim pokryciem i faworytem w paśmie (<code>basketball_nba</code>). Pozostało ok. 165 z 500 kredytów w tym miesiącu.</li>
+      <li>APISPORTS_KEY nie jest ustawiony w tym środowisku — źródło apisports pominięte (nie jest to awaria, tylko brak klucza w trybie automatycznym).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

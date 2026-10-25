@@ -242,7 +242,7 @@ def test_odds_and_shortlist(tmp_path=None):
     out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_test_odds.json"
     out.write_text(json.dumps({"rows": rows}))
     res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--ranges", "all", "--per-event", "4",
-                          "--out", str(out.with_name("bk_sl.json"))],
+                          "--now", bk_lib.iso(T0), "--out", str(out.with_name("bk_sl.json"))],
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     ranges = {r["label"]: r["candidates"] for r in json.loads(out.with_name("bk_sl.json").read_text())["ranges"]}
@@ -527,11 +527,30 @@ def test_best_price_ignores_us_only_books():
     out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_us_odds.json"
     out.write_text(json.dumps({"rows": rows}))
     res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--ranges", "all",
-                          "--out", str(out.with_name("bk_us_sl.json"))],
+                          "--now", bk_lib.iso(T0), "--out", str(out.with_name("bk_us_sl.json"))],
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     c = next(c for r in json.loads(out.with_name("bk_us_sl.json").read_text())["ranges"] for c in r["candidates"])
     assert c["best_odds"] == 1.55 and c["best_book"] == "unibet_eu" and c["n_books"] == 4
+
+
+def test_shortlist_drops_games_starting_too_soon():
+    """2026-10-20_2046, 10-21_2100, 10-23_1555: candidates started 5-15 min after the odds were
+    fetched — no time for research or for the reader to bet. --min-lead (45 min) drops them."""
+    rows = []
+    for key, start in (("soon", ts(0.5)), ("later", ts(1))):
+        fx = {"key": key, "sport": "basketball", "home": f"H {key}", "away": f"A {key}",
+              "start_utc": bk_lib.iso(start), "sources": {}}
+        rows += [odds_mod.row(fx, "h2h", f"H {key}", o, bk, "oddsapi") for o, bk in (("1.25", "pinnacle"), ("1.26", "betsson"))]
+    out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_lead_odds.json"
+    out.write_text(json.dumps({"rows": rows}))
+    def keys(*extra):
+        res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--now", bk_lib.iso(T0),
+                              *extra, "--out", str(out.with_name("bk_lead_sl.json"))], capture_output=True, text=True)
+        assert res.returncode == 0, res.stderr + res.stdout
+        return {c["key"] for r in json.loads(out.with_name("bk_lead_sl.json").read_text())["ranges"] for c in r["candidates"]}
+    assert keys() == {"later"}                       # 30 min to start < 45: dropped
+    assert keys("--min-lead", "0") == {"soon", "later"}
 
 
 def test_betexplorer_full_football_list():
@@ -566,7 +585,7 @@ def test_opportunity_ranges():
     odds_mod.add_fair_probs(rows)
     out = Path(os.environ.get("TMPDIR", "/tmp")) / "bk_opp_odds.json"
     out.write_text(json.dumps({"rows": rows}))
-    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--ranges", "1.61-2.00",
+    res = subprocess.run([sys.executable, str(SCRIPTS / "shortlist.py"), str(out), "--ranges", "1.61-2.00", "--now", bk_lib.iso(T0),
                           "--out", str(out.with_name("bk_opp_sl.json"))], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     c = json.loads(out.with_name("bk_opp_sl.json").read_text())["ranges"][0]["candidates"][0]

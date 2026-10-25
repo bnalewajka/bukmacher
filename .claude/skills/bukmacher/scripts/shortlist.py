@@ -16,6 +16,9 @@ Usage:
   python3 shortlist.py odds.json --out shortlist.json                  # all five ranges
   python3 shortlist.py odds.json --ranges 1.20-1.29,1.30-1.44 --out shortlist.json
   python3 shortlist.py odds.json --min 1.15 --max 1.25 --per-event 2 --top 40 --out shortlist.json
+
+Games starting less than --min-lead minutes (default 45) after --now are dropped: research and
+placing the bet need that long, and runs kept finding candidates that started 5-15 min later.
 """
 from __future__ import annotations
 
@@ -24,7 +27,9 @@ import statistics
 import sys
 from collections import defaultdict
 
-from bk_lib import dump_json, load_json, table
+from datetime import timedelta
+
+from bk_lib import dump_json, load_json, now_utc, parse_time, table
 
 
 AGG_FAMILIES = {"h2h", "double_chance", "dnb", "btts", "totals", "team_total", "handicap", "sets", "games"}
@@ -52,6 +57,8 @@ def main() -> int:
     ap.add_argument("--per-event", type=int, default=3, help="max selections kept per event and range")
     ap.add_argument("--top", type=int, default=40, help="max selections kept per range")
     ap.add_argument("--sport")
+    ap.add_argument("--min-lead", type=int, default=45, help="drop games starting sooner than N minutes after --now")
+    ap.add_argument("--now", help="verified UTC time (ISO) from clock.py; default: system clock")
     ap.add_argument("--exclude-markets", default="correct_score,htft,other",
                     help="market_norm categories to drop (exotic/low-liquidity)")
     ap.add_argument("--out")
@@ -76,6 +83,14 @@ def main() -> int:
     rows = data["rows"] if isinstance(data, dict) else data
     if args.sport:
         rows = [r for r in rows if r["sport"] == args.sport]
+    t0 = parse_time(args.now) if args.now else now_utc()
+    if t0 is None:
+        ap.error("bad --now value")
+    cutoff = t0 + timedelta(minutes=args.min_lead)
+    late = {r["key"] for r in rows if (st := parse_time(r.get("start_utc"))) and st < cutoff}
+    if late:
+        print(f"# dropped {len(late)} game(s) starting before {cutoff:%H:%M} UTC (--min-lead {args.min_lead})")
+        rows = [r for r in rows if r["key"] not in late]
 
     # aggregate the same selection across bookmakers/sources
     agg: dict[tuple, dict] = {}

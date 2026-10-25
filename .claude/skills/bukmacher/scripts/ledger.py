@@ -21,8 +21,9 @@ Entry schema (fields the run must fill; the rest is added here):
   tier         picks only: "value" | "fair"
   sources      picks: >= 2 independent sources, >= 1 read in full —
                [{"url": "https://…", "what": "absences", "read": true}, …]; optional for paper
-  range        "1.20-1.29" | "1.30-1.44" | "1.45-1.60" | "1.61-2.00" | "2.01-3.00" | "custom"
-               (older entries: "1.10-1.19"); a pick in 1.61-2.00 / 2.01-3.00 must be tier "value"
+  range        "1.20-1.30" (typ dnia, the default) | on request: "1.20-1.29" | "1.30-1.44" | "1.45-1.60"
+               | "1.61-2.00" | "2.01-3.00" | "custom" (older entries: "1.10-1.19");
+               a pick in 1.61-2.00 / 2.01-3.00 must be tier "value"
   sport, competition, home, away, start_utc
   market       "h2h" | "dc" | "dnb" | "totals" | "spread" | "btts"
   selection    h2h/dnb/spread: "home"|"away"|"draw"(h2h only); dc: "1X"|"12"|"X2";

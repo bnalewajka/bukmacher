@@ -110,7 +110,8 @@ nothing is played. If the window is quiet (few events), say so rather than stret
 
 ```bash
 python3 scripts/odds.py --fixtures work/fixtures.json --out work/odds.json
-python3 scripts/shortlist.py work/odds.json --out work/shortlist.json   # 1.20-1.30 (default)
+python3 scripts/shortlist.py work/odds.json --now <clock.py UTC> --out work/shortlist.json   # 1.20-1.30 (default)
+# games starting < 45 min after --now are dropped (--min-lead): no time to research and bet
 # on request: --ranges all | 1.30-1.44,1.45-1.60 | custom --min 1.25 --max 1.35
 ```
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-28 23:56</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-28 22:50 UTC / 2026-10-28 23:50 CET. Zegar zweryfikowany: tak (api.github.com, cloudflare, google — zgodność w granicach ok. 10 s). Okno: 2026-10-28 23:50 – 2026-10-29 07:50 (CET).</p>
+    <p class="meta">Przeanalizowano 54 wydarzenia (piłka nożna 20, koszykówka 12, hokej 4, tenis 18, siatkówka 0) z ESPN i The Odds API; tryb automatyczny (chmura) — bez Sofascore i betexplorer (403/429 z adresów datacenter w tym środowisku). 1196 selekcji ze źródeł: ESPN (236), The Odds API (960). Kursy pobrane ok. 22:51–22:52 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">W paśmie 1.20–1.30 w tym oknie była dokładnie jedna liczbowo pasująca selekcja (Houston Rockets @ Milwaukee Bucks) i po dogłębnym sprawdzeniu odpada: Rockets grają bez trzech rotacyjnych graczy (w tym gwiazdy — centra Alperena Şengüna), a rynek i tak już wycenia tę selekcję jako przewartościowaną. Brak typu dnia w tym przebiegu — trzeci z rzędu.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 0 typy</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 83–77 %; wymagane p_est ≥ implikowane. W paśmie: 1 selekcja, przeanalizowano 1.</p>
+
+    <p class="empty">Brak typu dnia w tym przebiegu — jedyny liczbowo pasujący kandydat nie spełnia progu p_est ≥ implikowane. Co zmieniłoby to w tym konkretnym meczu: powrót Şengüna do składu (wtedy Rockets realnie bliżej swojej obecnej ceny) albo dryf kursu w górę do ok. 1.40–1.45 (dopasowanie do faktycznej siły składu bez niego) — żadne z tych dwóch nie miało miejsca do 22:51 UTC.</p>
+
+    <h3 class="sub">Odrzucony kandydat</h3>
+    <ul>
+      <li><strong>Houston Rockets @ Milwaukee Bucks (NBA), zwycięstwo Rockets, kurs 1.29 (mediana 24 księgarni; Pinnacle 1.30, 2026-10-29 00:00 UTC / 01:00 CET)</strong> — p_est 0.70–0.71 &lt; implikowane 0.775 (mediana) / 0.769 (Pinnacle). Zdewigowana wycena rynku (fair_prob 0.75, 24 księgarnie w tym Pinnacle) już sama w sobie leży poniżej implikowanego — typowy dla tego pasma margines na krótkich faworytach NBA (wzorzec zgłaszany w poprzednich raportach tej serii). Dodatkowo świeży fakt nieabsorbowany jeszcze w pełni w cenie: oficjalny raport kontuzji Rockets (CBS Sports, stan na 2026-10-28) pokazuje <strong>trzech zawodników rotacji wykluczonych</strong> — Alperen Şengün (plecy, co najmniej do 30.10; w poprzednim meczu 26.10 grał 37 min, 29 pkt/9 zb./9 as., +29), Marcus Smart (przedramię, co najmniej do 30.10) i Steven Adams (łydka, co najmniej do 2.11). Bucks nie mają nikogo na liście kontuzji (CBS Sports) i wygrali ostatni mecz 110:102 z Indianą (26.10); Rockets mimo serii 4–0 na starcie sezonu jadą do Milwaukee bez swojego środka ciężkości w polu środkowym. To przeciąga p_est w dół, a nie w górę — odrzucone.</li>
+    </ul>
+
+    <p class="sources"><strong>Źródła (5, przeczytane w całości: 5):</strong>
+      <a href="https://www.cbssports.com/nba/teams/HOU/houston-rockets/injuries/">CBS Sports — raport kontuzji Rockets</a> — Şengün/Smart/Adams out, daty powrotu;
+      <a href="https://www.cbssports.com/nba/teams/MIL/milwaukee-bucks/injuries/">CBS Sports — raport kontuzji Bucks</a> — brak kontuzji;
+      <a href="https://www.statmuse.com/nba/ask/houston-rockets-record-2026-27">StatMuse — bilans Rockets 2026-27</a> — 4–0, ostatni wynik 120:110 z Atlantą (26.10);
+      <a href="https://www.statmuse.com/nba/ask/milwaukee-bucks-record-2026-27">StatMuse — bilans Bucks 2026-27</a> — 1–3, ostatni wynik 110:102 z Indianą (26.10);
+      <a href="https://www.statmuse.com/nba/ask/did-alperen-sengun-play-in-rockets-last-game">StatMuse — statystyki Şengüna z 26.10</a> — grał pełny wymiar minut dwa mecze przed kontuzją.
+    </p>
+  </section>
+
+  <section id="skutecznosc">
+    <h2>Skuteczność</h2>
+    <p class="meta">Stawka 1 u na typ; „Po podatku" = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum. Stan na 2026-10-28T22:51:08Z.</p>
+    <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">75</td><td class="num">62–11–2</td><td class="num">85%</td><td class="num">79%</td><td class="num pos">+7.87 u</td><td class="num pos">+10.5%</td><td class="num neg">-2.07 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">60</td><td class="num">51–9–0</td><td class="num">85%</td><td class="num">79%</td><td class="num pos">+5.64 u</td><td class="num pos">+9.4%</td><td class="num neg">-2.24 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">32</td><td class="num">28–3–1</td><td class="num">90%</td><td class="num">80%</td><td class="num pos">+4.60 u</td><td class="num pos">+14.4%</td><td class="num pos">+0.21 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">102 (+2 otw.)</td><td class="num">76–25–1</td><td class="num">75%</td><td class="num">73%</td><td class="num pos">+0.64 u</td><td class="num pos">+0.6%</td><td class="num neg">-11.68 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">27 (+2 otw.)</td><td class="num">21–6–0</td><td class="num">78%</td><td class="num">75%</td><td class="num neg">-0.47 u</td><td class="num neg">-1.7%</td><td class="num neg">-3.65 u</td><td class="num">+2.3%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Brak nowych rozliczeń od poprzedniego raportu</strong> (<code>ledger.py settle</code> zwrócił „settled 0; open 2; manual 0" — oba otwarte wpisy to dzisiejsze mecze NBA, które jeszcze się nie zakończyły, nie zaległość do ręcznej obsługi). Bez nowego wniosku korygującego z rozliczeń.</li>
+      <li><strong>Houston Rockets – Milwaukee Bucks</strong> (ten sam mecz co w poprzednim raporcie, 2026-10-28_2054): wtedy odrzucony tylko na podstawie marginesu bukmacherskiego (fair_prob u Pinnacle 0.748 &lt; implikowane 0.769), z zastrzeżeniem że „oficjalny raport kontuzji NBA nie był jeszcze opublikowany". W tym przebiegu raport już jest dostępny (CBS Sports) i potwierdza dokładnie w kierunku pierwotnej ostrożności: Şengün, Smart i Adams wszyscy poza składem Rockets. To domyka niepewność z poprzedniego raportu — strukturalne odrzucenie było słuszne, a nie przypadkowe.</li>
+      <li><strong>Trzeci z rzędu pusty przebieg dla typu dnia</strong> w tym paśmie (po 2026-10-28_1628 i 2026-10-28_2054). Do self-review: rozważyć, czy NBA moneyline 1.20–1.30 w ogóle zasługuje na pełny automatyczny research co każdy przebieg, skoro margines bukmacherski na krótkich faworytach NBA okazuje się systemowy (ten sam wzorzec zgłaszany też 2026-10-24, 2026-10-26).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.20 oznacza ok. 80% implikowanego prawdopodobieństwa, 1.30 — ok. 74%: nawet dobrze wybrany typ w tym paśmie przegrywa odpowiednio mniej więcej raz na 5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Tryb automatyczny (chmura): Sofascore i betexplorer pominięte (403/429 z adresów datacenter w tym środowisku) — ceny z ESPN i The Odds API (księgarnie europejskie: Pinnacle, Unibet, Betsson, Winamax, Marathonbet i inne); ceny polskich bukmacherów są zwykle zbliżone, ale sprawdź je przed obstawieniem u własnego bukmachera.</li>
+      <li>Budżet The Odds API „auto" (3 kredyty dostępne, wykorzystano 2): trafił w jedyny klucz z realnym pokryciem wielu księgarni w oknie (<code>basketball_nba</code>, 12/12 dopasowanych wydarzeń). Tenis (WTA Querétaro, WTA Toray Pan Pacific, WTA Guangzhou), MLS, NHL oraz piłka brazylijska/chilijska/kolumbijska/meksykańska pozostały w tym przebiegu tylko z cenami ESPN BET (konto tylko-USA, niedostępne dla polskiego gracza) — bez budżetu na dodatkowy klucz. Pozostało ok. 101 z 500 kredytów The Odds API w tym miesiącu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

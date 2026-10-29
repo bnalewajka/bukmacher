@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-30 00:02</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-29T22:59:18Z / 2026-10-30 00:02 CET. Zegar zweryfikowany: tak (GitHub, Cloudflare, Google, Sofascore, ESPN — zgodność ±1 s, verdict OK). Okno: 2026-10-29 23:58 – 2026-10-30 07:58 (czas PL).</p>
+    <p class="meta">Przeanalizowano 37 wydarzeń (piłka nożna 4, koszykówka 3, hokej 13, tenis 17, siatkówka 0), 288 selekcji z ESPN + The Odds API (regiony EU/UK, bez Sofascore/betexplorer — bieg automatyczny z chmury, patrz „Uwagi”). Kursy pobrane ok. 22:59 UTC / 23:59 PL.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Ceny poniżej pochodzą z europejskich kont bukmacherskich (The Odds API); kurs polskiego bukmachera będzie zbliżony, ale może się różnić — zweryfikuj przed obstawieniem.</p>
+    <p class="summary">Jedna realna selekcja wpadła w pasmo 1.20–1.30 w tym 8-godzinnym oknie: Elena Rybakina w ćwierćfinale WTA Tokio z Leylah Fernandez — typ dnia poniżej. Wszystkie inne liczbowo bliskie pasmu selekcje (głównie NBA/NHL) miały tylko ceny z kont tylko-USA, niedostępne dla polskiego grającego.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ~77–83%; wymagane p_est ≥ implikowane. W zakresie: 1 selekcja (z 288 przeanalizowanych selekcji w oknie).</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">06:30</td>
+            <td>Elena Rybakina – Leylah Fernandez</td>
+            <td>WTA 500 Tokio</td>
+            <td>Wygrana Rybakiny (h2h)</td>
+            <td class="num">1.29<span class="note">William Hill, The Odds API, 22:59 UTC</span></td>
+            <td class="num pos">0.80</td>
+            <td class="num">0.775</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Elena Rybakina – Leylah Fernandez — wygrana Rybakiny (h2h) @ 1.29 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · WTA 500 Toray Pan Pacific Open, Tokio (ćwierćfinał) · 06:30 PL (2026-10-30T05:30Z) · 1.29 William Hill / The Odds API, pobrano 22:59 UTC (29.10) · p_est 0.80 vs implikowane 0.775</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> To jedyna selekcja w całym 8-godzinnym oknie, która numerycznie wylądowała w paśmie 1.20–1.30 z realną europejską ceną (19 bukmacherów). Faworyci NBA/NHL bliscy pasma mieli tylko ceny z kont tylko-USA (ESPN BET/DraftKings), niedostępne dla polskiego grającego, i w większości ich własna zdewigowana wycena była już niższa od kursu implikowanego. Rybakina gra dziś w formie życia, z bardzo świeżym (5 dni) i jednoznacznym h2h na swoją korzyść.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Rybakina zapewniła sobie już dziś (pokonując Putintseva 6:2, 6:3) tytuł liderki klasyfikacji rocznej WTA — wchodzi w mecz z Fernandez bez presji rankingowej, czysto w roli faworytki budującej passę. Dla Fernandez to szansa na punkty i odwet za finał w Ningbo.</dd>
+        <dt>Forma</dt><dd>Rybakina: tytuł w Ningbo (finał z Fernandez, 6:2 6:2, 25.10) + dziś czyste zwycięstwo 6:2 6:3 nad Putintseva bez straty gema serwisowego (6 asów, 70 min). Fernandez: awans do ćwierćfinału kosztem trzysetowego meczu z 5. rozstawioną Mertens (6:2, 7:6(8)) — trudniejsza droga, mniej odpoczynku.</dd>
+        <dt>Absencje</dt><dd>Nie dotyczy (tenis singlowy). Brak potwierdzonych wycofań na ten mecz.</dd>
+        <dt>Składy</dt><dd>Nie dotyczy.</dd>
+        <dt>Terminarz</dt><dd>Rybakina miała bye w 1. rundzie (dodatkowy odpoczynek) i gra dziś drugi mecz w Tokio po tytule w Ningbo 5 dni wcześniej — normalne obciążenie, nie back-to-back. Fernandez rozegrała już 2 mecze w Tokio, ostatni trzysetowy.</dd>
+        <dt>Miejsce i warunki</dt><dd>Ariake Coliseum, Tokio, twarda nawierzchnia (DecoTurf), zamknięty dach — Rybakina sama wskazała po meczu z Putintsevą, że szybsza piłka pod zamkniętym dachem pomaga jej serwisowi.</dd>
+        <dt>Styl gry</dt><dd>Mocny serwis i returny z głębi kortu Rybakiny historycznie trudne dla defensywnej, lewostronnej gry Fernandez na twardym korcie; h2h ogólnie 4-2 dla Rybakiny, wygrane 3 ostatnie spotkania z rzędu.</dd>
+        <dt>Sygnały rynkowe</dt><dd>19 bukmacherów w wąskim przedziale 1.22–1.29, Pinnacle (księga sharp-referencyjna) przy 1.27 (fair_prob 0.766) — silny konsensus bez wyraźnych odchyleń. Ruch ceny od otwarcia nie mógł być zweryfikowany w tym biegu (brak Sofascore/betexplorer w chmurze, The Odds API nie podaje initial_odds dla tego wydarzenia) — potencjalne ryzyko do sprawdzenia przez czytelnika.</dd>
+        <dt>Inne</dt><dd>Rybakina ma historię problemów z achillesem/kostką od sierpnia (Cincinnati) i wycofanie z Wuhan Open w październiku z tego powodu — ale dzisiejszy mecz (brak straty serwisu, 6 asów) nie wykazał żadnych oznak ograniczenia ruchowego.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>H2H 4-2 dla Rybakiny, 3 wygrane z rzędu, w tym 6:2 6:2 pięć dni temu w finale Ningbo.</li>
+          <li>Dzisiejszy mecz pokazał pełną formę fizyczną (bez straty gema serwisowego, 6 asów, 70 minut).</li>
+          <li>Fernandez ma za sobą trudniejszy, trzysetowy mecz w tej samej rundzie — mniej odpoczynku.</li>
+          <li>Bardzo płynny, zgodny rynek (19 bukmacherów w wąskim przedziale, w tym Pinnacle).</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Rybakina ma udokumentowaną historię problemów z achillesem/kostką od sierpnia — nagromadzenie meczów (finał Ningbo + 2 mecze w Tokio w 5 dni) może sprowokować nawrót w trakcie meczu.</li>
+          <li>Fernandez pokonała Rybakinę w 2025 (DC Open) w trzysetowym, tie-breakowym meczu — umie sprawić niespodzianki mocno serwującym zawodniczkom w dobrym dniu returnu.</li>
+          <li>Ruch kursu od otwarcia nie zweryfikowany w tym biegu (brak dostępu do betexplorer/Sofascore z chmury) — sprawdź aktualną cenę u bukmachera przed obstawieniem.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Fernandez wygrywa długie wymiany returnem i wymusza błędy niewymuszone Rybakiny, albo u Rybakiny w trakcie meczu odnawia się problem z achillesem/kostką.</p>
+      <p class="sources"><strong>Źródła (4, przeczytane w całości: 4):</strong> <a href="https://www.wtatennis.com/news/4600655/rybakina-defeats-putintseva-in-tokyo-to-secure-year-end-no-1-ranking">WTA Tennis — wynik R2 i potwierdzenie ćwierćfinału</a>, <a href="https://en.wikipedia.org/wiki/2026_Toray_Pan_Pacific_Open_%E2%80%93_Singles">Wikipedia — struktura turnieju, rozstawienie, potwierdzony ćwierćfinał</a>, <a href="https://www.thestar.com.my/sport/tennis/2026/10/25/tennis-rybakina-brushes-aside-fernandez-to-retain-ningbo-crown">The Star — wynik finału w Ningbo (6:2, 6:2)</a>, <a href="https://tennistourcalendar.com/?p=7053">Tennis Tour Calendar — podgląd losowania, bye, nawierzchnia</a>.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Portland Trail Blazers – Memphis Grizzlies, ESPN BET h2h @ 1.345</strong> — poza górną granicą pasma, a jedyna dostępna cena to konto tylko-USA (ESPN BET), więc nawet po zaokrągleniu nie nadaje się dla polskiego grającego; własna zdewigowana wycena (0.714) i tak niższa od implikowanej (0.744).</li>
+      <li><strong>New Orleans Pelicans – Sacramento Kings, ESPN BET h2h @ 1.42</strong> — jak wyżej: poza pasmem, tylko konto tylko-USA, własna wycena (0.675) niższa od implikowanej (0.704).</li>
+      <li><strong>Atlético Nacional – Independiente Santa Fe, ESPN BET h2h @ 1.476</strong> — poza pasmem i tylko-USA; Puchar Kolumbii, zbyt cienki rynek by nawet rozważać mimo numerycznej bliskości innych linii.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">75</td><td class="num">62–11–2</td><td class="num">85%</td><td class="num">79%</td><td class="num pos">+7.87 u</td><td class="num pos">+10.5%</td><td class="num neg">-2.07 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">60</td><td class="num">51–9–0</td><td class="num">85%</td><td class="num">79%</td><td class="num pos">+5.64 u</td><td class="num pos">+9.4%</td><td class="num neg">-2.24 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">32</td><td class="num">28–3–1</td><td class="num">90%</td><td class="num">80%</td><td class="num pos">+4.60 u</td><td class="num pos">+14.4%</td><td class="num pos">+0.21 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">104</td><td class="num">78–25–1</td><td class="num">76%</td><td class="num">73%</td><td class="num pos">+1.21 u</td><td class="num pos">+1.2%</td><td class="num neg">-11.42 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">29</td><td class="num">23–6–0</td><td class="num">79%</td><td class="num">75%</td><td class="num pos">+0.10 u</td><td class="num pos">+0.4%</td><td class="num neg">-3.39 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Milwaukee Bucks – Houston Rockets: h2h away @ 1.3 → <strong>wygrana</strong> (100:132) <em>(papier)</em></li><li>Cleveland Cavaliers – Washington Wizards: h2h home @ 1.27 → <strong>wygrana</strong> (121:111) <em>(papier)</em></li><li>Aliaksandra Sasnovich – Diana Shnaider: h2h away @ 1.29 → <strong>wygrana</strong> (1:2)</li><li>Ben Shelton – Aleksandar Kovacevic: h2h home @ 1.21 → <strong>wygrana</strong> (2:1)</li><li>Leylah Fernandez – Himeno Sakatsume: h2h home @ 1.25 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Sporting CP – Académico de Viseu: h2h home @ 1.21 → <strong>przegrana</strong> (1:2) <em>(papier)</em></li><li>Volos NFC – Panathinaikos: h2h away @ 1.3 → <strong>wygrana</strong> (0:1)</li><li>Phoenix Suns – Golden State Warriors: h2h home @ 1.27 → <strong>wygrana</strong> (131:122)</li><li>Denver Nuggets – New Orleans Pelicans: h2h home @ 1.23 → <strong>wygrana</strong> (141:135) <em>(papier)</em></li><li>Cleveland Cavaliers – Brooklyn Nets: h2h home @ 1.21 → <strong>wygrana</strong> (125:121) <em>(papier)</em></li><li>Sacramento Kings – Portland Trail Blazers: h2h away @ 1.24 → <strong>wygrana</strong> (120:128)</li><li>Los Angeles Lakers – LA Clippers: h2h home @ 1.3 → <strong>wygrana</strong> (125:117) <em>(papier)</em></li><li>Washington Wizards – Toronto Raptors: h2h away @ 1.31 → <strong>wygrana</strong> (102:112) <em>(papier)</em></li><li>Oklahoma City Thunder – Denver Nuggets: h2h home @ 1.3 → <strong>wygrana</strong> (96:84) <em>(papier)</em></li><li>Ferencvaros – Torreense: h2h home @ 1.3 → <strong>wygrana</strong> (4:1)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Brak nowych rozliczeń od poprzedniego raportu</strong> — <code>ledger.py settle</code> zwrócił „settled 0; open 0; manual 0”. Ostatnie trafienia i jedyna niedawna przegrana na papierze (Sporting CP, 1.21) były już omówione w poprzednich raportach; bez nowego wniosku korygującego z samych rozliczeń.</li>
+      <li><strong>Seria pustych biegów przerwana.</strong> Po pięciu biegach z rzędu bez typu dnia (2026-10-28_1628 do 2026-10-29_2054), budżet „auto” The Odds API (3 kredyty) trafił tym razem w jedyny klucz tenisowy z realnym pokryciem w oknie (<code>tennis_wta_pan_pacific_open</code>, 3/3 dopasowane wydarzenia) — i to jedyna selekcja numerycznie w paśmie 1.20–1.30 w tym oknie miała zarazem solidne, dobrze zweryfikowane fakty (świeży h2h, forma, trudniejsza droga rywalki). Potwierdza wcześniejszy wniosek z self-review: NBA/NHL w oknie systematycznie zostaje bez europejskiej ceny lub poza pasmem z powodu marginesu, więc kierowanie ograniczonego budżetu `auto` na tenis, gdy ma on pełne pokrycie, zwiększa szansę na realnego kandydata.</li>
+      <li><strong>Ruch kursu od otwarcia nieweryfikowalny w chmurze</strong> (ponownie) — The Odds API nie podaje <code>initial_odds</code> dla tego wydarzenia, a Sofascore/betexplorer są poza zasięgiem z amerykańskich IP runnerów GitHub Actions. Zaznaczone w analizie jako ryzyko dla czytelnika, zgodnie z zasadą automatycznego biegu.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.29 oznacza ok. 78% implikowanego prawdopodobieństwa: nawet dobrze wybrany typ w tym paśmie przegrywa średnio raz na 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Bieg automatyczny z chmury (GitHub Actions, amerykańskie IP): Sofascore i betexplorer nie były używane (403/429/geoblokada); kursy pochodzą z ESPN i The Odds API (konta europejskie — Pinnacle, William Hill, Unibet, Betsson, Coolbet, Marathonbet…). Budżet The Odds API „auto”: 3 kredyty dostępne, wykorzystano 2 (<code>tennis_wta_pan_pacific_open</code>, h2h+totals, 3/3 dopasowane wydarzenia). Pozostało ok. 93 z 500 kredytów The Odds API w tym miesiącu.</li>
+      <li>Żadne źródło nie zawiodło krytycznie w tym biegu (ESPN i The Odds API odpowiedziały poprawnie); Sofascore/betexplorer pominięte celowo zgodnie z regułami biegu automatycznego.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

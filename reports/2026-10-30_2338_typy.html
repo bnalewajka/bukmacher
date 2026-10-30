@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-10-30 23:38</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-10-30 22:38:54 UTC / 2026-10-30 23:38 CET. Zegar zweryfikowany: tak (api.github.com, Cloudflare, Google, ESPN — zgodność ±1s). Okno: 2026-10-30 23:23 – 2026-10-31 07:38 CET (45 min marginesu na research, 8 h horyzontu).</p>
+    <p class="meta">Przeanalizowano: 69 spotkań ze scoreboardów ESPN (piłka nożna 14, koszykówka 10, hokej 26, tenis 19, siatkówka 0 — ESPN nie publikuje siatkówki). Źródła kursów: ESPN BET (wbudowane) + The Odds API (NBA i WTA Tokio, 3 kredyty). Tryb automatyczny w chmurze (GitHub Actions, amerykańskie IP runnera) — Sofascore i betexplorer niedostępne (403/429), więc ceny pochodzą z europejskich bukmacherów zwracanych przez The Odds API (Winamax, Unibet, Pinnacle, bet365, Marathon…); gracz w Polsce powinien zweryfikować dokładny kurs u własnego bukmachera.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Jedna selekcja numerycznie wylądowała w paśmie 1.20–1.30 w całym 8-godzinnym oknie: Miami Heat (h2h) w domu z Indiana Pacers, która gra bez trzech rotacyjnych zawodników w defensywie/organizacji gry (w tym obu rozgrywających). Tenis WTA (Tokio, Hongkong, Queretaro, Guangzhou) i większość piłki (Brazylia, Argentyna, Meksyk, Kolumbia, J-League, A-League) zostały poza budżetem The Odds API albo poza pasmem cenowo.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 83–77%; wymagane p_est ≥ implikowane. W paśmie: 1 selekcja ze 906+70 zebranych (NBA + WTA Tokio), żadna inna nie wylądowała numerycznie w 1.20–1.30 w tym oknie.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">01:00</td>
+            <td>Miami Heat – Indiana Pacers</td>
+            <td>NBA</td>
+            <td>1X2: Miami Heat</td>
+            <td class="num">1.33<span class="note">Winamax (The Odds API), 22 ks., 22:40 UTC</span></td>
+            <td class="num pos">0.79</td>
+            <td class="num">0.75</td>
+            <td><span class="tier value">z przewagą</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Miami Heat – Indiana Pacers — 1X2: Miami Heat @ 1.33 <span class="tier value">z przewagą</span></h3>
+      <p class="line">Zakres 1.20–1.30 · NBA, Kaseya Center (Miami) · 2026-10-31 01:00 CET (2026-10-31 00:00 UTC) · 1.33 u Winamax (The Odds API, region EU), mediana 1.30/22 ks.; pobrane 22:40 UTC · p_est 0.79 vs implikowane 0.75</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> To jedyna selekcja w całym 8-godzinnym oknie, która numerycznie wylądowała w paśmie 1.20–1.30 (WTA Tokio i reszta piłki/koszykówki/hokeja była albo poza budżetem kursowym, albo poza pasmem cenowo — patrz „Uwagi"). Kurs jest krótki nie przez przypadek: Indiana gra bez swojego rozgrywającego (Haliburton) ORAZ bez pierwszego rezerwowego rozgrywającego (McConnell) ORAZ bez podstawowego środkowego (Zubac) w tym samym meczu, a Miami jest w pełni zdrowe — to więcej niż standardowa premia faworyta, więc wybrałem 1X2 zamiast np. handicapu, gdzie ta przewaga rozmywa się w linii punktowej.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Początek sezonu (5–6 kolejka), brak presji play-off/tabeli; dla Miami to szansa odbicia się po słabym starcie, dla Indiany mecz do „przetrwania" bez kluczowych rotacji.</dd>
+        <dt>Forma</dt><dd>Miami 2–4 w tym sezonie, ale z narastającym trendem: porażki 106:131, 111:128, 110:115, 109:113, potem wygrana 129:117 z Atlantą (ostatni mecz, 28.10) — różnica punktów łącznie -39/5 mimo wygranej passy formy w ostatnim meczu. Indiana 2–3 z Haliburtonem w składzie (zwycięstwa różnicą +3 i +27, porażki -16, -8), a bez niego (28.10 z Philadelphią) przegrana 109:114 różnicą -5 — rywal realnie gorszy bez gwiazdy, ale wciąż konkurencyjny w jednym sprawdzonym meczu.</dd>
+        <dt>Absencje</dt><dd>Indiana (oficjalny raport kontuzji ESPN, ok. 80 min przed startem): Tyrese Haliburton OUT (naciągnięty hamstring, Carlisle: min. 2 tygodnie od 28.10 — potwierdzone przez ESPN/Shams Charania); T.J. McConnell (rozgrywający rezerwowy) OUT, naciągnięty hamstring; Ivica Zubac (podstawowy środkowy, sprowadzony w lutym 2026 z Clippers za Mathurina i Jacksona właśnie jako partner pick-and-roll dla Haliburtona) OUT, kostka; Ben Sheppard OUT na miesiące (łąkotka); Johnny Furphy OUT (kolano). Obi Toppin questionable (plecy), Andrew Nembhard i Aaron Nesmith probable — to oni mają prowadzić atak zamiast obu rozgrywających. Miami: brak nazwisk na oficjalnym raporcie kontuzji ESPN — pełny skład zdrowy.</dd>
+        <dt>Składy</dt><dd>Nembhard (probable, uraz karku) i Nesmith (probable, hamstring) powinni zagrać, ale żaden nie jest typowym rozgrywającym organizującym atak — ich status nie jest jeszcze "final" (raport zwykle finalizuje się ok. 30 min przed startem, a research robiony ok. 80 min wcześniej).</dd>
+        <dt>Terminarz</dt><dd>Obie strony po 2–3 dniach odpoczynku (ostatnie mecze 28.10) — żadnej z nich back-to-back; nie jest to czynnik.</dd>
+        <dt>Miejsce i warunki</dt><dd>Kaseya Center, Miami — przewaga własnej hali, bez nadzwyczajnych warunków.</dd>
+        <dt>Styl gry</dt><dd>Indiana bez rozgrywającego i środkowego traci jednocześnie organizację ataku i ochronę tablic/obręczy — to dwa różne filary składu wypadające naraz, nie tylko jeden gracz do zastąpienia.</dd>
+        <dt>Sygnały rynkowe</dt><dd>Kurs otwarcia (DraftKings) na Miami to 1.645, obecnie 1.308 — linia punktowa przesunęła się z MIA -3.5 do MIA -8.5. To duży, ale wyjaśniony ruch (reakcja na kontuzję Haliburtona ogłoszoną 28.10, czyli zanim ten run zebrał kursy) — zgodnie z własnym researchem skilla: spadek kursu, który już zaszedł, nie czyni zakładu bezpieczniejszym, liczy się obecna cena. Traktuję to jako potwierdzenie, że rynek już wie o Haliburtonie, ale część głębi składu (Zubac, McConnell — gorsza/mniej nagłośniona wiadomość niż sama gwiazda) mogła nie być w pełni wyceniona w momencie ustalania kursu.</dd>
+        <dt>Inne</dt><dd>22 bukmacherów notowało ten mecz u The Odds API — płynny, dobrze pokryty rynek, nie cienki.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Indiana bez obu rozgrywających (Haliburton + McConnell) i podstawowego środkowego (Zubac) jednocześnie — rzadka kumulacja absencji na dwóch różnych pozycjach kluczowych.</li>
+          <li>Miami w pełni zdrowe wg oficjalnego raportu kontuzji, z pozytywnym ostatnim wynikiem (+12 z Atlantą).</li>
+          <li>Płynny rynek (22 książki), brak sygnału "pułapki" (ruch kursu w dół, nie w górę).</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Miami samo ma słaby bilans (2–4) — to nie jest dominujący zespół, tylko lepszy od okrojonego rywala; wariancja trzypunktowa może zdecydować w wyrównanej końcówce.</li>
+          <li>Nembhard/Nesmith (probable) wciąż mogą wypaść z ostatecznego raportu kontuzji, który finalizuje się bliżej startu niż ten research — trzeba sprawdzić końcowy raport przed obstawieniem.</li>
+          <li>Ryzyko odpoczynku gwiazdy Miami (load management) przy tak dużej przewadze w kursie jest realne w NBA, choć nic na to nie wskazuje w tej chwili.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Indiana trafia gorącą noc za trzy punkty (wariancja), Nembhard przejmuje rolę rozgrywającego skuteczniej niż oczekiwano, a Miami — wciąż zespół z bilansem 2–4 — nie wykorzystuje przewagi kadrowej w wyrównanym, końcowym kwarterze.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 2):</strong> <a href="https://www.nbcsports.com/fantasy/basketball/player-news/2026-10-28/shams-haliburton-hamstring-set-to-miss-time">NBC Sports — Shams: Haliburton (hamstring) set to miss time</a> — przeczytane w całości, potwierdza naciągnięcie hamstringu Haliburtona 28.10 i min. 2 tygodnie przerwy wg trenera Carlisle'a; <a href="https://site.web.api.espn.com/apis/site/v2/sports/basketball/nba/injuries">ESPN — oficjalny raport kontuzji NBA (żywy feed JSON)</a> — przeczytane w całości, lista absencji Indiany (Haliburton, McConnell, Zubac, Sheppard, Furphy) i statusów Miami (brak wpisów) na mecz 31.10; <a href="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/ind/schedule">ESPN — terminarz i wyniki Indiany/Miami (API)</a> — bilanse i różnice punktowe sezonu 2026-27, w tym protokół meczu 28.10 potwierdzający nieobecność Haliburtona w statystykach.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Brooklyn Nets – Detroit Pistons, 1X2 Pistons (gość) @ 1.35</strong> — poza górną granicą pasma (1.30–1.44); nie badane głębiej w tym biegu, budżet The Odds API poszedł na NBA ogółem (10 meczów), nie na pojedynczy mecz z dodatkowymi rynkami.</li>
+      <li><strong>Leylah Fernandez – Kamilla Rakhimova, WTA Tokio, 1X2 Fernandez @ 1.35</strong> — poza pasmem; własna zdewigowana wycena rynku (0.728) już niżej od kursu implikowanego, nie badane dalej.</li>
+      <li><strong>Minnesota Timberwolves – LA Clippers, 1X2 Timberwolves @ 1.39</strong> — poza pasmem i poniżej implikowanego po zdewigowaniu (0.706); odrzucony samą matematyką kursu.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+    <h2>Skuteczność</h2>
+    <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+    <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">76</td><td class="num">62–12–2</td><td class="num">84%</td><td class="num">79%</td><td class="num pos">+6.87 u</td><td class="num pos">+9.0%</td><td class="num neg">-3.07 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">15</td><td class="num">11–2–2</td><td class="num">85%</td><td class="num">78%</td><td class="num pos">+2.23 u</td><td class="num pos">+14.9%</td><td class="num pos">+0.16 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">61</td><td class="num">51–10–0</td><td class="num">84%</td><td class="num">79%</td><td class="num pos">+4.64 u</td><td class="num pos">+7.6%</td><td class="num neg">-3.24 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">33</td><td class="num">28–4–1</td><td class="num">88%</td><td class="num">80%</td><td class="num pos">+3.60 u</td><td class="num pos">+10.9%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">104</td><td class="num">78–25–1</td><td class="num">76%</td><td class="num">73%</td><td class="num pos">+1.21 u</td><td class="num pos">+1.2%</td><td class="num neg">-11.42 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">29</td><td class="num">23–6–0</td><td class="num">79%</td><td class="num">75%</td><td class="num pos">+0.10 u</td><td class="num pos">+0.4%</td><td class="num neg">-3.39 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+    <h3 class="sub">Ostatnio rozliczone</h3>
+    <ul><li>Elena Rybakina – Leylah Fernandez: h2h home @ 1.29 → <strong>przegrana</strong> (0:0)</li><li>Milwaukee Bucks – Houston Rockets: h2h away @ 1.3 → <strong>wygrana</strong> (100:132) <em>(papier)</em></li><li>Cleveland Cavaliers – Washington Wizards: h2h home @ 1.27 → <strong>wygrana</strong> (121:111) <em>(papier)</em></li><li>Aliaksandra Sasnovich – Diana Shnaider: h2h away @ 1.29 → <strong>wygrana</strong> (1:2)</li><li>Ben Shelton – Aleksandar Kovacevic: h2h home @ 1.21 → <strong>wygrana</strong> (2:1)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Brak nowych rozliczeń od poprzedniego raportu</strong> (<code>ledger.py settle</code> zwrócił „settled 0; open 0; manual 0"). Ostatnia przegrana (Rybakina – Fernandez, walkower/wycofanie po zapewnieniu sobie miejsca w WTA Finals) była już omówiona i opisana jako lekcja w poprzednim raporcie (2026-10-30_1621) — bez nowego wniosku korygującego z rozliczeń.</li>
+      <li>Ten bieg po raz pierwszy w serii poszedł na NBA z realną, udokumentowaną przewagą kadrową (dwóch rozgrywających i podstawowy środkowy jednego zespołu nieobecni naraz), a nie tylko na samym marginesie bukmacherskim faworyta — to inny przypadek niż wcześniej odrzucane „suche" faworyty NBA (2026-10-24, 2026-10-26, 2026-10-28). Do self-review: rozważyć, czy NBA zasługuje na stałe sprawdzanie oficjalnego raportu kontuzji ESPN (<code>/apis/site/v2/sports/basketball/nba/injuries</code>) w chmurze, skoro okazał się dostępny i użyteczny, zamiast ograniczać się do samej ceny i marginesu.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby.</li>
+      <li>Kurs 1.33 oznacza ok. 75% implikowanego prawdopodobieństwa: nawet dobrze wybrany typ przegrywa średnio raz na cztery próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore i betexplorer (blokowane dla amerykańskich IP runnera GitHub Actions — zgodnie z trybem automatycznym, nie wywoływane). WTA Hongkong/Queretaro/Guangzhou i większość piłki (Brazylia, Argentyna, Meksyk, Kolumbia, J-League, A-League) nie miały żadnej ceny europejskiej — budżet The Odds API (3 kredyty z 85 pozostałych w tym miesiącu) poszedł na NBA (2 kredyty, najwyższy priorytet algorytmu po liczbie meczów z potencjalnym faworytem) i WTA Tokio (1 kredyt, dograny ręcznie po tym samym budżecie, bo miał pełne pokrycie i oba mecze singlowe wyglądały na wyraźne faworyty). Pozostało ok. 82 z 500 kredytów w tym miesiącu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

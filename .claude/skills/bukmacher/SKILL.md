@@ -79,8 +79,10 @@ Read the result before choosing anything: for every settled *pick* that lost, an
 a bar set too high) and write one line on it into the report's "Wnioski" (lessons). Watch
 **CLV** (price taken vs the closing median) more than the win rate: over a few dozen bets a
 positive average CLV is the best evidence the analysis beats the market; the win rate needs
-hundreds. Entries marked `manual` (postponed, abandoned, unparsable) are settled by hand in the
-ledger file.
+hundreds. Entries marked `manual` (postponed, abandoned, unparsable, tennis/volleyball without a
+full set count — walkover or retirement) are settled by hand in the ledger file: a walkover
+(no ball played) is void → `push`, payout 1; a retirement follows the bookmaker's rule — look it
+up, never record it as a loss by default.
 
 ## Step 2 — Collect every fixture in the window
 

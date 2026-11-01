@@ -289,6 +289,12 @@ def test_settlement_math():
     assert ledger_mod.settle_score({**hockey, "period": "ot"}, ot) == (3, 2)
     pens = {"score": (2, 2), "partials": [], "stage": "STATUS FINAL PEN"}
     assert ledger_mod.settle_score({"sport": "football", "period": "ft"}, pens) is None  # 90' unknown -> manual
+    tennis = {"sport": "tennis", "period": "ft"}
+    assert ledger_mod.settle_score(tennis, {"score": (0, 0)}) is None   # walkover (2026-10-30_0002#1) -> manual
+    assert ledger_mod.settle_score(tennis, {"score": (1, 0)}) is None   # retirement -> manual
+    assert ledger_mod.settle_score(tennis, {"score": (1, 2)}) == (1, 2)
+    assert ledger_mod.settle_score({"sport": "volleyball", "period": "ft"}, {"score": (2, 1)}) is None
+    assert ledger_mod.settle_score({"sport": "volleyball", "period": "ft"}, {"score": (3, 1)}) == (3, 1)
 
 
 def test_ledger_roundtrip(tmp_path=None):
@@ -511,6 +517,10 @@ def test_oddsapi_keys_ranked_by_possible_favourites():
     bought = [u.split("/sports/")[1].split("/")[0] for u in calls if u.endswith("/odds")]
     assert bought == ["tennis_wta_wuhan_open", "soccer_mexico_ligamx", "icehockey_nhl"]
     assert odds_mod._matched_events(events["soccer_mexico_ligamx"], "football", fixtures) == (4, 1)
+    # a 1.05 ESPN favourite (cup tie vs a lower-league side) cannot land in 1.20-1.30 at European books
+    cup = lambda p: {"espn_odds": [{"bookmaker": "DraftKings", "home_win": p, "draw_win": 12.0, "away_win": 30.0}]}
+    assert not odds_mod._may_have_favourite(cup(1.05)) and not odds_mod._may_have_favourite(cup(1.14))
+    assert odds_mod._may_have_favourite(cup(1.15)) and odds_mod._may_have_favourite({"espn_odds": []})
 
 
 def test_us_only_book_names_with_spaces():

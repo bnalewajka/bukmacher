@@ -201,14 +201,17 @@ EXTRA_MARKETS = {
 # An ESPN moneyline this short marks a fixture that may land in the daily 1.20-1.30 band once the
 # European books price it (ESPN BET / DraftKings carry a US margin, so their favourite is longer).
 SHORT_FAV_MAX = 1.40
+# ...but not one this short: European books price favourites no longer than the US books, so an
+# ESPN 1.01-1.14 favourite stays below the band (Copa del Rey rounds 2026-10-29_1636 / _2054).
+SHORT_FAV_MIN = 1.15
 
 
 def _may_have_favourite(fx: dict) -> bool:
-    """A short ESPN favourite, or no ESPN moneyline at all (tennis, most of Europe) — unknown,
+    """A short (not too short) ESPN favourite, or no ESPN moneyline at all (tennis, most of Europe) — unknown,
     so it may be one; only fixtures ESPN prices with no favourite that short are ruled out."""
     prices = [o.get(f"{side}_win") for o in fx.get("espn_odds") or [] for side in ("home", "away")]
     prices = [p for p in prices if p and p > 1]
-    return not prices or min(prices) <= SHORT_FAV_MAX
+    return not prices or SHORT_FAV_MIN <= min(prices) <= SHORT_FAV_MAX
 
 
 def _matched_events(events: list[dict], sport: str, fixtures: list[dict]) -> tuple[int, int]:

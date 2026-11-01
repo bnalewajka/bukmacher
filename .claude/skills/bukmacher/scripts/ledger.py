@@ -205,6 +205,10 @@ def settle_score(e: dict, res: dict) -> Optional[tuple[int, int]]:
     score, parts, stage = res.get("score"), res.get("partials") or [], (res.get("stage") or "").lower()
     if not score:
         return None
+    # sets: a finished tennis/volleyball match has a winner with 2+/3+ sets; anything less (0:0 walkover,
+    # 1:0 retirement) is settled by each book's own walkover/retirement rule (usually void) -> manual
+    if e["sport"] in ("tennis", "volleyball") and max(score) < (2 if e["sport"] == "tennis" else 3):
+        return None
     # whole words, from betexplorer ("After Extra Time", "After Penalties") and ESPN ("Final/OT", "FINAL PEN")
     extra = bool(set(re.split(r"[^a-z]+", stage)) & {"extra", "penalties", "overtime", "aet", "pen", "ot", "so"})
     if e["sport"] == "football" and extra:  # books settle football on 90 minutes

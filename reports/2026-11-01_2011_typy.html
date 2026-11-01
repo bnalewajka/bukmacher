@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-11-01 20:11</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-11-01 19:11 UTC / 20:11 CET. Zegar zweryfikowany: tak (GitHub API, Cloudflare, Google — zgodne; <code>clock.py</code> zwrócił „OK”). Okno: 19:56–03:11 CET (01.11 20:56 – 02.11 04:11 czasu PL).</p>
+    <p class="meta">Przeanalizowano: 37 spotkań w oknie (piłka nożna 25, koszykówka 4, hokej 6, tenis 2, siatkówka 0) z ESPN (kursy ESPN BET/DraftKings — tylko USA) i The Odds API (budżet „auto” = 4 kredyty, wykorzystane na 2 klucze: NBA i MLS, 22 europejskie księgarnie każdy). 1089 selekcji łącznie. Kursy pobrane ok. 19:12 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Ceny poniżej pochodzą z europejskich księgarni (Pinnacle, Unibet, Winamax, William Hill, Marathonbet, Nordicbet…), które wycenia The Odds API — polskie kursy 1X2/BTTS/handicap bywają zbliżone, ale warto je zweryfikować osobno.</p>
+    <p class="summary">Brak typu dnia: żadna selekcja z realną, wieloksięgarniową ceną nie trafia w pasmo 1.20–1.30 w tym oknie. Jedyna numerycznie-w-paśmie pozycja (Deportivo Cali @ 1.25) ma tylko jedną amerykańską książkę (niedostępną dla polskiego grającego) w cienko pokrytej lidze kolumbijskiej. Najbliższy realny kandydat — Boston Celtics w Orlando (mediana 1.33, 22 księgarnie) — leży tuż poza pasmem.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 0 typów</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 83–77%; wymagane p_est ≥ implikowane. W paśmie liczbowo: 1 selekcja (niedostępna/niewiarygodna, patrz niżej); przeanalizowano 8-12 kandydatów w sąsiednich pasmach dla porównania.</p>
+
+    <p class="empty">Brak typu dnia w paśmie 1.20–1.30. Jedyna selekcja, której mediana ceny faktycznie wpada w ten przedział — Deportivo Cali (gospodarz) w meczu z Boyacá Chicó, kolumbijska Primera A, kurs 1.25 — opiera się na cenie jednej amerykańskiej książki (DraftKings, ESPN BET), niedostępnej dla polskiego grającego, w lidze z bardzo cienkimi danymi (brak potwierdzonych składów, brak drugiego źródła kursu do uśrednienia). Nie publikujemy jej jako typu i nie liczymy jako kandydata „na papierze” — cena jest niesprawdzalna, nie tylko niekorzystna.</p>
+    <p class="empty">Najbliższy kandydat z realną, wieloksięgarniową ceną to <strong>Boston Celtics (wygrana) @ Orlando Magic</strong> — mediana 1.33 (rozstrzał 1.27–1.37 u 22 europejskich księgarni, w tym Pinnacle), więc trafia do pasma 1.30–1.44, nie 1.20–1.30. Zrobiłby się grywalny w naszym paśmie, gdyby cena spadła do ≤1.30 (o ok. 2–4% względem mediany) przed startem meczu — na razie żadny ruch w tę stronę nie jest widoczny. Szczegóły analizy niżej, jako kontekst, nie jako typ.</p>
+
+    <h3 class="sub">Kontekst: najbliższy odrzucony kandydat</h3>
+    <article class="pick" id="z-120-closest">
+      <h3>Boston Celtics @ Orlando Magic — zwycięstwo Celtics @ 1.33 <span class="tier fair">poza pasmem (1.30–1.44)</span></h3>
+      <p class="line">NBA · 01.11 20:30 CET (19:30 UTC) · mediana 1.33, najlepszy kurs 1.37 (Winamax DE), zakres 1.27 (PMU FR) – 1.37, 22 księgarnie, The Odds API, pobrane 19:12 UTC · p_est 0.75 vs implikowane (z mediany) 0.752</p>
+      <p><strong>Dlaczego to najbliższy kandydat, a nie typ:</strong> to jedyny wieloksięgarniowy, niebudżetowy faworyt w całym oknie poniżej 1.45 — ale mediana (1.33) leży o ok. 3 pkt proc. implikowanego prawdopodobieństwa poza żądanym pasmem 1.20–1.30, więc zgodnie z zasadą „selekcja liczy się do pasma swojej mediany” nie wchodzi do rankingu typu dnia, niezależnie od jakości analizy.</p>
+      <dl>
+        <dt>Absencje</dt><dd>Paolo Banchero (Orlando) — potwierdzone, poza składem od 24.10.2026 ze skręceniem stawu skokowego (high-ankle sprain), ESPN podało wtedy czas powrotu 4–6 tygodni; to 8 dni przed tym meczem, więc praktycznie na pewno wciąż nieobecny. Banchero był najlepszym graczem Magic w tym sezonie — jego brak tłumaczy, czemu Celtics (drużyna na wyjeździe) są wyraźnym faworytem.</dd>
+        <dt>Forma</dt><dd>Jayson Tatum w pełni zdrowy po powrocie z zerwanego ścięgna Achillesa (wrócił w marcu 2026, przeszedł całe preseason 2026-27 bez ograniczeń) — Celtics wchodzą w sezon z kompletnym składem gwiazd, Magic bez swojego lidera.</dd>
+        <dt>Sygnały rynkowe</dt><dd>22 księgarnie zgodne w wąskim przedziale 1.27–1.37 (rozstrzał &lt;8%), w tym Pinnacle na 1.35 — brak sygnału ostrego ruchu ceny, konsensus wygląda stabilny.</dd>
+        <dt>Inne</dt><dd>Brak potwierdzenia statusu Franza Wagnera (drugiej gwiazdy Magic) na dziś — dostępne źródła pokazują go zdrowym z wiosny 2026, bez nowszych sygnałów kontuzji na październik/listopad 2026.</dd>
+      </dl>
+      <p class="loses"><strong>Jak ten zakład (gdyby grany) przegrywa:</strong> Magic grają świetny mecz bez Banchero (np. Wagner + ławka przejmują ciężar, Celtics mają typowy dla początku sezonu wyjazdowy dzień gorszej skuteczności za 3 punkty).</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 3):</strong> <a href="https://www.tsn.ca/nba/article/report-magics-banchero-out-multiple-weeks-with-low-grade-high-ankle-sprain-n1-50266620/">TSN, 24.10.2026</a> — potwierdzenie kontuzji Banchero i horyzontu 4–6 tyg., <a href="https://www.boston.com/sports/boston-celtics/2026/10/09/jayson-tatum-celtics-injury-recovery/">Boston.com</a> — status Tatuma przed sezonem 2026-27, <a href="https://thescore-web-gcp.thescore.com/nba/news/3466744/celtics-tatum-unsure-if-hell-play-this-season">theScore</a> — tło powrotu Tatuma z Achillesa w marcu 2026.</p>
+    </article>
+
+    <h3 class="sub">Dlaczego okno było tak ubogie w kandydatów</h3>
+    <ul>
+      <li><strong>Budżet „auto” The Odds API (4 kredyty) trafił w NBA i MLS</strong> — oba z pełnym pokryciem 20+ księgarni, ale żaden faworyt w tych dwóch ligach nie był dziś krótszy niż 1.27 (najkrótszy: Celtics). Duże europejskie ligi grające w tym oknie — Serie A (Juventus–Napoli), LaLiga (Athletic Club–Real Sociedad), Primeira Liga (Braga–Famalicao) — miały tylko puste ceny ESPN BET (konto tylko-USA, brak notowania), więc nie dało się ich w ogóle wycenić ani ocenić, mimo że Braga (mocny gospodarz) czy Athletic Club mogły realnie mieć faworyta bliżej pasma 1.20–1.30.</li>
+      <li>Tenis (WTA Querétaro) i hokej (NCAA, NHL) bez zakupionych kluczy The Odds API w tym biegu — tylko ceny ESPN BET (USA) tam, gdzie w ogóle były notowane, żadna poniżej 1.45.</li>
+      <li>To ten sam wzorzec, co w kilku poprzednich biegach tej serii (zob. „Wnioski” w <code>data/lessons.md</code>): budżet „auto” wybiera ligi po liczbie wydarzeń/sygnale ESPN, nie po tym, która liga faktycznie ma dziś krótkiego faworyta.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">79 (+1 otw.)</td><td class="num">65–11–3</td><td class="num">86%</td><td class="num">79%</td><td class="num pos">+8.77 u</td><td class="num pos">+11.1%</td><td class="num neg">-1.76 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">16</td><td class="num">12–2–2</td><td class="num">86%</td><td class="num">78%</td><td class="num pos">+2.56 u</td><td class="num pos">+16.0%</td><td class="num pos">+0.33 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">63 (+1 otw.)</td><td class="num">53–9–1</td><td class="num">85%</td><td class="num">79%</td><td class="num pos">+6.21 u</td><td class="num pos">+9.9%</td><td class="num neg">-2.10 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">36 (+1 otw.)</td><td class="num">31–3–2</td><td class="num">91%</td><td class="num">80%</td><td class="num pos">+5.50 u</td><td class="num pos">+15.3%</td><td class="num pos">+0.52 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">104</td><td class="num">78–25–1</td><td class="num">76%</td><td class="num">73%</td><td class="num pos">+1.21 u</td><td class="num pos">+1.2%</td><td class="num neg">-11.42 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">29</td><td class="num">23–6–0</td><td class="num">79%</td><td class="num">75%</td><td class="num pos">+0.10 u</td><td class="num pos">+0.4%</td><td class="num neg">-3.39 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Milwaukee Bucks – Cleveland Cavaliers: h2h away @ 1.27 → <strong>wygrana</strong> (111:136)</li><li>Memphis Grizzlies – Sacramento Kings: h2h home @ 1.3 → <strong>wygrana</strong> (136:105)</li><li>Miami Heat – Indiana Pacers: h2h home @ 1.33 → <strong>wygrana</strong> (145:125)</li><li>Elena Rybakina – Leylah Fernandez: h2h home @ 1.29 → <strong>zwrot</strong> (0:0)</li><li>Milwaukee Bucks – Houston Rockets: h2h away @ 1.3 → <strong>wygrana</strong> (100:132) <em>(papier)</em></li><li>Cleveland Cavaliers – Washington Wizards: h2h home @ 1.27 → <strong>wygrana</strong> (121:111) <em>(papier)</em></li><li>Aliaksandra Sasnovich – Diana Shnaider: h2h away @ 1.29 → <strong>wygrana</strong> (1:2)</li><li>Ben Shelton – Aleksandar Kovacevic: h2h home @ 1.21 → <strong>wygrana</strong> (2:1)</li><li>Leylah Fernandez – Himeno Sakatsume: h2h home @ 1.25 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Sporting CP – Académico de Viseu: h2h home @ 1.21 → <strong>przegrana</strong> (1:2) <em>(papier)</em></li><li>Volos NFC – Panathinaikos: h2h away @ 1.3 → <strong>wygrana</strong> (0:1)</li><li>Phoenix Suns – Golden State Warriors: h2h home @ 1.27 → <strong>wygrana</strong> (131:122)</li><li>Denver Nuggets – New Orleans Pelicans: h2h home @ 1.23 → <strong>wygrana</strong> (141:135) <em>(papier)</em></li><li>Cleveland Cavaliers – Brooklyn Nets: h2h home @ 1.21 → <strong>wygrana</strong> (125:121) <em>(papier)</em></li><li>Sacramento Kings – Portland Trail Blazers: h2h away @ 1.24 → <strong>wygrana</strong> (120:128)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak nowych rozliczeń od poprzedniego raportu (<code>ledger.py settle</code> zwrócił „settled 0; open 1; manual 0” — jedyny otwarty wpis, PAOK–Asteras Tripoli @ 1.30 z 16:28, nie dał się dziś rozliczyć z chmury, bo betexplorer/Sofascore są poza zasięgiem z amerykańskich IP runnerów; rozliczy się w kolejnym biegu z dostępem do pełnych źródeł). Bez nowego wniosku korygującego z rozliczeń.</li>
+      <li>Po raz kolejny w tej serii budżet „auto” The Odds API poszedł w ligi/sporty wybrane po liczbie wydarzeń w oknie (tu: NBA 4/4, MLS 6/6), nie po tym, która liga faktycznie ma dziś krótkiego faworyta — efekt: zero kandydatów w paśmie 1.20–1.30, a jedyny realny niemal-kandydat (Boston Celtics @ 1.33) leży tuż poza nim, podczas gdy europejskie ligi z potencjalnie krótszymi faworytami (Braga, Athletic Club) zostały bez żadnej ceny. Ten sam wzorzec odnotowany już w raportach z 2026-10-29 do 2026-10-31 (patrz <code>data/lessons.md</code>) — temat do self-review: czy ranking kluczy „auto” powinien premiować ligi z historycznie większym udziałem krótkich faworytów (np. Primeira Liga, Serie A) nad ligami wybieranymi tylko po liczbie dopasowanych wydarzeń.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO bez wyraźnej prośby. W tym biegu nie ma zakładu do postawienia.</li>
+      <li>Kurs 1.20 to ok. 83% implikowanego prawdopodobieństwa, 1.30 — ok. 77%: nawet dobrze wybrany typ w tym paśmie przegrywa średnio raz na 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore i betexplorer (403/429 z amerykańskich IP runnerów GitHub Actions — zgodnie z ograniczeniami trybu automatycznego); zastąpione ESPN + The Odds API. ESPN BET (DraftKings) nie podał żadnej ceny dla Serie A, LaLiga i Primeira Liga w tym oknie. Pozostało ok. 490 z 500 kredytów The Odds API w tym miesiącu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

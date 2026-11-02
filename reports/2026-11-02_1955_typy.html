@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-11-02 19:55</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów 1.20–1.30 (tryb automatyczny)</h1>
+    <p class="meta">Wygenerowano: 2026-11-02 18:50 UTC / 19:50 CET. Zegar zweryfikowany: tak (GitHub API, Cloudflare, Google — zgodność z systemowym, drift &lt; 1 s). Okno: 19:50–03:50 CET (18:50–02:50 UTC), 2–3 listopada 2026.</p>
+    <p class="meta">Przeanalizowano: 66 spotkań (piłka nożna 18, koszykówka 41 — NBA 12 + NCAA mężczyźni 16 + NCAA kobiety 13, hokej 4, tenis 3), kursy z ESPN (BET/DraftKings) i The Odds API (budżet „auto": 4 kredyty, wykorzystano 2 na klucze <code>basketball_wncaab</code> i <code>basketball_nba</code> — pełne pokrycie 22 europejskich księgarni). Sofascore i betexplorer niedostępne z amerykańskich IP runnera GitHub Actions. W zakresie 1.20–1.30 (po odfiltrowaniu meczów startujących w ciągu 45 minut): 2 selekcje numerycznie w paśmie, obie z NBA. Kursy pobrane 2026-11-02 18:51 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u własnego bukmachera przed postawieniem zakładu. Ceny w tym raporcie to notowania europejskich księgarni (w tym Pinnacle); polski bukmacher może różnić się o kilka setnych.</p>
+    <p class="summary">Dwie selekcje NBA spełniają próg (p_est ≥ implikowane), obie w klasie „uczciwa cena" — rynek (22 księgarnie zgodnie) już wycenił większość przewagi z dramatycznych absencji kadrowych po obu stronach. Żadna inna liga/sport w oknie nie dała faworyta bliżej niż 1.42 z ceną dostępną poza USA.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 2 typy</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 77–83 %; „z przewagą" = p_est ≥ implikowane + 0.03, „uczciwa cena" = implikowane ≤ p_est &lt; implikowane + 0.03. W zakresie: 2 selekcje (obie NBA), obie przeanalizowane szczegółowo — więcej numerycznie w paśmie nie było w całym oknie.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">01:30</td>
+            <td>Indiana Pacers – Atlanta Hawks</td>
+            <td>NBA</td>
+            <td>Zwycięstwo Atlanty (h2h)</td>
+            <td class="num">1.29<span class="note">unibet_se, The Odds API, 18:51 UTC</span></td>
+            <td class="num pos">0.80</td>
+            <td class="num">0.78</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="num">02:00</td>
+            <td>Dallas Mavericks – Sacramento Kings</td>
+            <td>NBA</td>
+            <td>Zwycięstwo Dallas (h2h)</td>
+            <td class="num">1.28<span class="note">winamax_de, The Odds API, 18:51 UTC</span></td>
+            <td class="num pos">0.80</td>
+            <td class="num">0.78</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Indiana Pacers – Atlanta Hawks — zwycięstwo Atlanty @ 1.29 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · NBA · 01:30 CET (00:30 UTC, 3 listopada) · 1.29 u unibet_se (The Odds API), pobrane 18:51 UTC · p_est 0.80 vs implikowane 0.78</p>
+      <p><strong>Dlaczego ten typ:</strong> Indiana gra drugi mecz w dwa dni i zgłasza aż 7 zawodników rotacji jako niedostępnych — to nie jest zwykła „krótka cena na faworyta", to realny mecz rezerwowych Pacers kontra w większości zdrowa Atlanta. 22 księgarnie (w tym Pinnacle) zgadzają się co do ceny w wąskim przedziale 1.20–1.29, a notowanie skróciło się o ok. 9% od otwarcia (favoryt coraz bardziej wspierany, nie uciekający) — rynek już wycenił większość tej przewagi, dlatego klasa to „uczciwa cena", nie „z przewagą".</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Indiana zaczęła sezon 0–5 i jest w fazie przebudowy po nieudanym poprzednim sezonie (19–63); mecz ligowy w listopadzie bez większej stawki dla obu stron, ale drugi mecz back-to-back dla Pacers tłumaczy część absencji oznaczonych jako "rest" — wzorzec potwierdzony też w poprzednich sezonach Siakama.</dd>
+        <dt>Forma</dt><dd>Atlanta po przebudowie roster (Trae Young odesłany do Washingtonu w styczniu 2026 za CJ McCollum i Coreya Kisperta) gra wokół Jalena Johnsona, Dysona Danielsa, Onyeki Okongwu i Luguentza Dorta — głębszy, zdrowszy skład niż Indiana w tym konkretnym meczu.</dd>
+        <dt>Absencje</dt><dd>Indiana (oficjalny raport NBA/ESPN, stan na dziś): Tyrese Haliburton OUT (naciągnięty hamstring, powrót planowany 13.11), Pascal Siakam OUT (rest – back-to-back), Andrew Nembhard OUT (naciągnięcie karku), Aaron Nesmith OUT (zarządzanie obciążeniem hamstringu), Johnny Furphy OUT (rekonwalescencja po ACL), Ben Sheppard OUT (operacja łąkotki), Obi Toppin QUESTIONABLE (ból pleców), Nance DOUBTFUL (choroba). To praktycznie cała pierwsza rotacja poza Toppinem. Atlanta: Jalen Johnson QUESTIONABLE (skręcenie kostki) — jedyny istotny znak zapytania, resztę nieobecności (Landale, Gueye, Veesaar, zawieszony Flemings) to głębocy rezerwowi.</dd>
+        <dt>Składy</dt><dd>Nieoficjalne/przewidywane do ok. 2–3 h przed startem; Haliburton/Siakam/Nembhard traktowane jako pewne OUT (oficjalny raport kontuzji NBA), status Johnsona i Toppina wart sprawdzenia bezpośrednio przed zakładem.</dd>
+        <dt>Terminarz</dt><dd>Dla Indiany to druga noc back-to-back (stąd część nieobecności oznaczonych jako "rest"), co dodatkowo osłabia już i tak zdziesiątkowaną rotację.</dd>
+        <dt>Miejsce i warunki</dt><dd>Gainbridge Fieldhouse, Indianapolis — bez istotnego wpływu na wynik przy tej skali różnic kadrowych.</dd>
+        <dt>Styl gry</dt><dd>Bez dwóch rozgrywających (Haliburton, Nembhard) atak Indiany prowadzą gracze spoza standardowej rotacji — Atlanta z przewagą na obwodzie (Daniels, Dort, McCollum) powinna wygrywać pojedynki 1-na-1 i wymuszać straty.</dd>
+        <dt>Sygnały rynkowe</dt><dd>22 księgarnie zgodne w paśmie 1.20–1.29 (Pinnacle 1.25), drift -9% od otwarcia (skrócenie, nie wydłużenie — brak czerwonej flagi z reguły skilla).</dd>
+        <dt>Inne</dt><dd>Brak dostępu do betexplorer/Sofascore z IP runnera — ruch kursu liczony z <code>initial_odds</code> ESPN (Draft Kings), nie z pełnej mediany polskich bukmacherów.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>7 zawodników rotacji Indiany niedostępnych jednocześnie, w tym obaj rozgrywający</li><li>22 księgarnie zgodne, w tym Pinnacle — cena nie jest wynikiem jednego słabego bukmachera</li><li>Jedyny istotny minus Atlanty (Johnson) to "questionable", nie "out"</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Jeśli Jalen Johnson ostatecznie nie zagra, przewaga Atlanty w składzie startowym się zmniejsza</li><li>Mecz bez stawki dla obu zespołów — możliwa nieoczekiwana rotacja minut u Atlanty przy dużej przewadze w 4. kwarcie</li><li>NBA ma wysoką wariancję punktową nawet przy dużej różnicy kadrowej — rezerwowi Pacers grający bez presji czasem "odpalają" jedną dobrą noc</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> rezerwowa piątka Indiany (Walker, Mathurin i inni) trafia dobry dzień z dystansu, a Atlanta — bez stawki w listopadowym meczu — gra niedbale w obronie i oddaje przewagę w ostatnich minutach.</p>
+      <p class="sources"><strong>Źródła (4, przeczytane w całości: 1):</strong> <a href="https://site.web.api.espn.com/apis/site/v2/sports/basketball/nba/injuries">ESPN — oficjalny raport kontuzji NBA</a> — pełna lista absencji obu zespołów (przeczytane w całości), <a href="https://www.essentiallysports.com/nba-active-basketball-news-four-ninety-one-days-after-career-threatening-injury-return-tyrese-haliburton-faces-another-heartbreaking-blow/">EssentiallySports</a> — data i opis urazu Haliburtona, <a href="https://www.si.com/nba/pacers/onsi/news/pacers-making-wrong-kind-of-nba-history-after-brutal-0-5-start">SI.com</a> — kontekst startu sezonu Indiany (0–5), <a href="https://www.ajc.com/sports/2026/01/hawks-trade-trae-young-to-wizards/">AJC.com</a> — potwierdzenie transferu Trae Younga (styczeń 2026).</p>
+    </article>
+
+    <article class="pick" id="z-120-2">
+      <h3>2. Dallas Mavericks – Sacramento Kings — zwycięstwo Dallas @ 1.28 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · NBA · 02:00 CET (01:00 UTC, 3 listopada) · 1.28 u winamax_de (The Odds API), pobrane 18:51 UTC · p_est 0.80 vs implikowane 0.78</p>
+      <p><strong>Dlaczego ten typ:</strong> Dallas gra u siebie z praktycznie kompletną rotacją startową (Kyrie Irving, Klay Thompson, Cooper Flagg, P.J. Washington — po wymianach Luki i Anthony'ego Davisa to już nowy trzon zespołu), tracąc tylko rezerwowego centra (Lively) i głębokiego rezerwowego (Biberovic). Sacramento broni się bez jednego ze starterów (Keegan Murray) i z wątpliwym LaVine'em, ale zachowuje swój trzon (Sabonis, DeRozan) — stąd przewaga jest realna, ale mniejsza niż w meczu Indiana–Atlanta, co odzwierciedla podobna cena rynkowa.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Początek sezonu, bez szczególnej stawki; dla Dallas to era "Cooper Flagg + powrót Kyrie'ego Irvinga po zerwanym ACL" pod nowym kierownictwem (Masai Ujiri, Dusty May) — zespół broni pozycji w domu.</dd>
+        <dt>Forma</dt><dd>Oba zespoły po dużej przebudowie (Dallas: odszedł Luka 2025, Davis II 2026; Sacramento: odszedł De'Aaron Fox do Spurs) — trudno o głęboką analizę formy sezonowej bez próby meczów, ale skład Dallas w tym konkretnym meczu jest zdrowszy.</dd>
+        <dt>Absencje</dt><dd>Dallas (oficjalny raport NBA/ESPN): Dereck Lively II OUT (stopa), Tarik Biberovic OUT (zapalenie pięty) — obaj poza rotacją startową. Sacramento: Dylan Cardwell OUT (łydka, nie zagrał jeszcze w sezonie), Maxime Raynaud OUT (zwichnięcie rzepki, powrót ok. połowy listopada), Keegan Murray OUT (kapsulit kostki, re-ewaluacja za 10–14 dni) — to strata jednego ze starterów na skrzydle, Ben Simmons OUT (sezon zakończony, Achilles — gracz głębokiej rotacji), Zach LaVine QUESTIONABLE (łokieć, ostatnio ograniczone minuty).</dd>
+        <dt>Składy</dt><dd>Nieoficjalne do ok. 2–3 h przed startem; status LaVine'a wart sprawdzenia bezpośrednio przed zakładem — jego ewentualny udział zawęża przewagę Dallas.</dd>
+        <dt>Terminarz</dt><dd>Brak potwierdzonego informacji o back-to-back dla któregoś z zespołów w dostępnych źródłach; nie wpływa istotnie na ocenę.</dd>
+        <dt>Miejsce i warunki</dt><dd>American Airlines Center, Dallas — przewaga własnego parkietu dla faworyta.</dd>
+        <dt>Styl gry</dt><dd>Sacramento bez Murray'a traci rozmiar i rzuty z dystansu na skrzydle; Sabonis/DeRozan nadal dają im solidny punkt oporu w ataku pozycyjnym, co ogranicza przewagę Dallas w porównaniu z meczem Indiana–Atlanta.</dd>
+        <dt>Sygnały rynkowe</dt><dd>22 księgarnie zgodne w paśmie 1.21–1.28 (Pinnacle 1.28), kurs praktycznie płaski od otwarcia (brak istotnego driftu) — oznacza, że te absencje były znane już przy otwieraniu linii, nie jest to świeża informacja nieodzwierciedlona w cenie.</dd>
+        <dt>Inne</dt><dd>Jak wyżej — ruch kursu nieweryfikowalny przez betexplorer/Sofascore z IP runnera.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>Dallas z praktycznie kompletną rotacją startową, Sacramento bez jednego ze starterów</li><li>22 księgarnie zgodne, w tym Pinnacle</li><li>Przewaga własnego parkietu dla faworyta</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Sabonis i DeRozan — gwiazdy Sacramento — są zdrowi i mogą sami utrzymać mecz w zasięgu</li><li>Jeśli LaVine zagra pełne minuty, różnica kadrowa się zmniejsza</li><li>Płaski drift od otwarcia sugeruje, że to "tylko" uczciwa cena, nie świeża przewaga analityczna — rynek już to wie</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Sabonis i DeRozan prowadzą Sacramento do dobrego meczu w ataku pozycyjnym, a słabsza głębia ławki Dallas (bez Lively'ego pod koszem) kosztuje ich przewagę w ostatniej ćwiartce.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 1):</strong> <a href="https://site.web.api.espn.com/apis/site/v2/sports/basketball/nba/injuries">ESPN — oficjalny raport kontuzji NBA</a> — pełna lista absencji obu zespołów (przeczytane w całości), <a href="https://africa.espn.com/nba/story/_/id/49546534/dallas-mavericks-offseason-recap-2026-27-season-preview-stats-roster-depth-chart">ESPN — przegląd oferty Dallas na sezon 2026-27</a> — aktualny skład po wymianach, <a href="https://www.espn.com/nba/story/_/id/49733549">ESPN — przegląd oferty Sacramento na sezon 2026-27</a> — aktualny skład po wymianach.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Philadelphia 76ers – Chicago Bulls, zwycięstwo Philadelphii</strong> — mediana kursu 1.183 (Pinnacle), więc numerycznie poniżej pasma 1.20–1.30 (zasada skilla: nic poniżej 1.20); najlepsza cena 1.24 dotyczy tylko jednej mniejszej księgarni.</li>
+      <li><strong>Minnesota Timberwolves – Milwaukee Bucks, zwycięstwo Minnesoty</strong> — mediana 1.19 (Pinnacle 1.21), również poniżej dolnej granicy pasma.</li>
+      <li><strong>Atalanta – Parma, zwycięstwo Atalanty</strong> — kurs 1.435 tylko u jednej amerykańskiej księgarni (ESPN BET/DraftKings, niedostępna dla polskiego grającego); bez drugiej księgarni nie ma nawet mediany do porównania, poza tym kurs jest poza pasmem 1.20–1.30.</li>
+    </ul>
+  </section>
+
+<section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">80</td><td class="num">66–11–3</td><td class="num">86%</td><td class="num">79%</td><td class="num pos">+9.07 u</td><td class="num pos">+11.3%</td><td class="num neg">-1.62 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">16</td><td class="num">12–2–2</td><td class="num">86%</td><td class="num">78%</td><td class="num pos">+2.56 u</td><td class="num pos">+16.0%</td><td class="num pos">+0.33 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">64</td><td class="num">54–9–1</td><td class="num">86%</td><td class="num">79%</td><td class="num pos">+6.51 u</td><td class="num pos">+10.2%</td><td class="num neg">-1.95 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">37</td><td class="num">32–3–2</td><td class="num">91%</td><td class="num">80%</td><td class="num pos">+5.80 u</td><td class="num pos">+15.7%</td><td class="num pos">+0.66 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">104</td><td class="num">78–25–1</td><td class="num">76%</td><td class="num">73%</td><td class="num pos">+1.21 u</td><td class="num pos">+1.2%</td><td class="num neg">-11.42 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">29</td><td class="num">23–6–0</td><td class="num">79%</td><td class="num">75%</td><td class="num pos">+0.10 u</td><td class="num pos">+0.4%</td><td class="num neg">-3.39 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>PAOK – Asteras Tripoli: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li><li>Milwaukee Bucks – Cleveland Cavaliers: h2h away @ 1.27 → <strong>wygrana</strong> (111:136)</li><li>Memphis Grizzlies – Sacramento Kings: h2h home @ 1.3 → <strong>wygrana</strong> (136:105)</li><li>Miami Heat – Indiana Pacers: h2h home @ 1.33 → <strong>wygrana</strong> (145:125)</li><li>Elena Rybakina – Leylah Fernandez: h2h home @ 1.29 → <strong>zwrot</strong> (0:0)</li></ul>
+</section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Od ostatniego raportu (2026-11-01_2325) bez nowych rozliczeń (<code>ledger.py settle</code>: 0 rozliczonych, 0 otwartych). Ostatnie wnioski — PAOK–Asteras (rynek poprawnie wycenił absencje, p_est 0.78 blisko konsensusu 15+ księgarni, nie modelu uproszczonego) i NBA z 2026-10-31 (transfery gwiazd jako fakt nieodzwierciedlony w samej cenie) — pozostają aktualne, bez korekty.</li>
+      <li>Ten przebieg: drugi dzień z rzędu, gdy budżet The Odds API „auto" trafił w <code>basketball_nba</code> i dał realnych kandydatów — w przeciwieństwie do poprzedniego pustego biegu (2026-11-01_2325), gdzie pełne pokrycie miały ligi bez krótkiego faworyta. Oba typy tego raportu są klasy „uczciwa cena", nie „z przewagą": w obu przypadkach 20+ księgarni (w tym Pinnacle) już zgodnie wyceniło skalę absencji, więc przewaga analizy nad rynkiem jest niewielka (ok. 2 pkt proc.) — uczciwy opis sytuacji, nie okazja.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.28–1.29 oznacza ok. 78 % implikowanego prawdopodobieństwa: nawet dobrze wybrany typ przegrywa średnio raz na ok. 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Tryb automatyczny (GitHub Actions, amerykańskie IP runnera): Sofascore i betexplorer odpowiedziały 403/niedostępne, zastąpione przez ESPN i The Odds API. Ruch kursu od otwarcia dla obu typów liczony tylko z <code>initial_odds</code> ESPN (Draft Kings), nie z pełnej mediany polskich bukmacherów — potwierdzony jako brak czerwonej flagi (brak wydłużenia &gt;10%), ale czytelnik nie ma dostępu do pełnej historii ruchu ceny u lokalnego bukmachera.</li>
+      <li>Pozostało ok. 480 z 500 kredytów The Odds API w tym miesiącu (budżet „auto" 4/4 wykorzystane na dwa klucze: <code>basketball_wncaab</code> i <code>basketball_nba</code>, po 2 kredyty każdy).</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

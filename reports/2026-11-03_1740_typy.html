@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-11-03 17:40</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 4 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-11-03 16:34:53 UTC / 17:34 CET (bieg automatyczny GitHub Actions). Zegar zweryfikowany przez clock.py (GitHub API, Cloudflare, Google, Sofascore, ESPN — zgodne, odchylenie &lt;1 s). Okno: 17:20–20:35 CET (16:20–19:35 UTC + marża do 20:34:53 UTC).</p>
+    <p class="meta">Przeanalizowano 34 spotkania (piłka nożna 20, tenis 14) z ESPN i The Odds API (Pinnacle, Unibet, bet365-sieć, Betsson, William Hill, onexbet i inne europejskie księgarnie — budżet „auto”: 4 kredyty, trafiły w <code>tennis_atp_paris_masters</code> i <code>soccer_uefa_champs_league</code>). Sofascore i betexplorer niedostępne (403/US-IP runnera) — zgodnie z trybem chmury. Kursy pobrane 2026-11-03 16:35:16 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Ceny poniżej pochodzą z europejskich księgarni (Pinnacle/William Hill/onexbet itd.); polski bukmacher może różnić się o ułamek kursu.</p>
+    <p class="summary">W oknie 1.20–1.30 realnych kandydatów było tylko dwóch: Over 2.5 w Galatasaray–Stuttgart (dobrze podparte statystyką bramkową tego sezonu LM) i wygrana Barcelony z Aston Villą (osłabiona linia defensywna Barcelony + świetna forma europejska Villi zepsuły to, co wydawało się oczywistym faworytem — poszło do „papieru”, nie jako typ). Trzeci numerycznie dopasowany kurs (IK Sirius, szwedzka liga) miał cenę tylko z księgarni niedostępnej dla gracza w Polsce i odpadł bez analizy.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 74–80 %; wymagane p_est ≥ implikowane (uczciwa cena), p_est ≥ implikowane + 0.03 (z przewagą). W zakresie: 2 selekcje numerycznie dopasowane (+ 1 odrzucona bez analizy), przeanalizowano 2.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">18:45</td>
+            <td>Galatasaray – VfB Stuttgart</td>
+            <td>Liga Mistrzów</td>
+            <td>Over 2.5 goli</td>
+            <td class="num">1.25<span class="note">William Hill (The Odds API), 16:35 UTC</span></td>
+            <td class="num pos">0.79</td>
+            <td class="num">0.76</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Galatasaray – VfB Stuttgart — Over 2.5 goli @ 1.25 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · Liga Mistrzów UEFA, 4. kolejka faz ligowej · 18:45 CET (17:45 UTC) · 1.25 u William Hill, Nordicbet, Betsson (The Odds API), kurs pobrany 16:35 UTC · p_est 0.79 vs implikowane (zdewigowane, mediana 3 księgarni) 0.76</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> To jedyna numerycznie dopasowana selekcja w paśmie, którą dało się w pełni zweryfikować z dwóch niezależnych, przeczytanych źródeł (nie licząc wygranej Barcelony, zepchniętej do „papieru” przez listę absencji). Rynek na Over 2.5 jest tu wyjątkowo zgodny z surowymi statystykami bramkowymi obu klubów z tego samego rozgrywek — rzadka sytuacja, gdzie liczby z bieżącej fazy ligowej LM i cena księgarni mówią to samo, a nie tylko model osoby trzeciej.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Galatasaray jest 23. w tabeli fazy ligowej (3 pkt po 3 meczach) i przegrywa seryjnie — mecz ma dla gospodarzy, jak ujął to fanatik.com.tr, „kluczowe znaczenie”; presja gry o wszystko zwykle podbija tempo i otwiera obronę, nie uspokaja meczu.</dd>
+        <dt>Forma</dt><dd>Stuttgart ma w tej fazie ligowej 7 pkt (2W, 1R) ze stosunkiem bramek 7:2 — drużyna skuteczna z przodu i rzadko tracąca goli u siebie, ale to był głównie bilans u siebie/przeciw słabszym rywalom; na wyjeździe w Istambule presja kibiców i gorąca atmosfera Rams Park/Türk Telekom bywają inne.</dd>
+        <dt>Absencje</dt><dd>Stuttgart jedzie bez Angelo Stillera (nadciągnięcie przywodziciela) i Leo Sauera (biodro) — potwierdzone przez klub (fanatik.com.tr). Stiller to gra przez środek pola; jego brak może nieco spowolnić budowanie ataku, ale nie zmienia faktu, że obrona Galatasaray przepuszcza dużo.</dd>
+        <dt>Składy</dt><dd>Oficjalne składy wyjściowe zwykle ok. godziny przed meczem — na razie tylko przewidywane.</dd>
+        <dt>Terminarz</dt><dd>Brak sygnału o istotnym zmęczeniu/rotacji po stronie żadnego z klubów w tym konkretnym meczu.</dd>
+        <dt>Miejsce i warunki</dt><dd>Rams Park (Türk Telekom Arena), Istambuł — głośny, napięty stadion przy drużynie walczącej o być albo nie być w tabeli.</dd>
+        <dt>Styl gry</dt><dd>Galatasaray w tej fazie LM: 6 strzelonych, 9 straconych w 3 meczach (3,0 gola na mecz łącznie) — skłonność do otwartych, wysoko punktowanych spotkań niezależnie od rywala. Stuttgart: 7 strzelonych, 2 stracone w 3 meczach (3,0 gola na mecz łącznie) — drużyna, która sama strzela dużo. Połączenie „dziurawej obrony gospodarzy” z „skutecznym atakiem gości” statystycznie sprzyja Over.</dd>
+        <dt>Sygnały rynkowe</dt><dd>3 księgarnie notujące tę linię (William Hill, Nordicbet, Betsson) wszystkie dają identyczne 1.25 — brak rozjazdu. Niezależne modele zewnętrzne (Betclan, Kickoff, Kalshi) szacują Over 2.5 na 67–70%, czyli niżej niż rynek (76% po zdjęciu marży) — rynek jest tu bardziej przekonany o golach niż generyczne modele, co pokrywa się z konkretną, nietypowo ekstremalną statystyką bramkową tego sezonu LM.</dd>
+        <dt>Inne</dt><dd>Mała próbka (3 mecze fazy ligowej) ogranicza wagę samych liczb — traktuję je jako potwierdzenie kierunku, nie dowód matematyczny.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Obie drużyny mają w tym sezonie LM średnią 3,0 gola na mecz (strzelone+stracone) — rzadko spotykana zgodność w obu kierunkach.</li>
+          <li>Galatasaray gra pod presją tabeli — motywacja do grania do przodu, nie do zamykania meczu.</li>
+          <li>Trzy księgarnie zgodne co do ceny, brak rozjazdu sugerującego błąd rynku w jedną lub drugą stronę.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Brak Stillera może spowolnić budowanie ataku Stuttgartu i obniżyć liczbę sytuacji.</li>
+          <li>Galatasaray, świadomy własnej fatalnej obrony, może dla odmiany spróbować gry bardziej zachowawczej, by nie przegrać kolejnego meczu wysoko.</li>
+          <li>Mała próbka (3 mecze) — statystyka bramkowa może się jeszcze normalizować w obu kierunkach.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> Ciasny, nerwowy mecz zamyka się 1:0 lub 1:1 — Galatasaray gra ostrożniej niż cały sezon w obawie przed kolejną wysoką porażką, a Stuttgart bez Stillera nie tworzy wystarczająco sytuacji, by to zrekompensować.</p>
+      <p class="sources"><strong>Źródła (3, przeczytane w całości: 2):</strong> <a href="https://www.fanatik.com.tr/en/two-stars-injured-major-shock-in-stuttgart-ahead-of-the-galatasaray-match-2642780">fanatik.com.tr</a> — potwierdzone absencje Stillera i Sauera, kontekst „kluczowego meczu” dla Galatasaray; <a href="https://www.skysports.com/football/galatasaray-vs-stuttgart/table/577655">skysports.com</a> — bilans bramkowy obu klubów w fazie ligowej LM (6:9 i 7:2 w 3 meczach); <a href="https://www.betclan.com/predictionsdetails/football/1635669/galatasaray-v-vfb-stuttgart-prediction-h2h-tip-and-match-preview/">betclan.com</a> — tylko jako porównanie z niezależnym modelem (67–70% na Over 2.5), nie jako dowód.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Barcelona – Aston Villa, wygrana Barcelony @ 1.27–1.30 (Liga Mistrzów)</strong> — numerycznie w paśmie i z szerokim pokryciem (21 księgarni), ale własny szacunek (p_est ≈ 0.74) wyszedł poniżej implikowanego (0.76–0.79): lista absencji Barcelony jest nietypowo długa dla tej pozycji w tabeli (m.in. Christensen, Espart, Koundé, Eric García, Dani Olmo, Bardghji wymieniani jako wątpliwi/niedostępni w różnych źródłach, część niepotwierdzona do końca), a Aston Villa jedzie w fazie ligowej LM niepokonana (3W, +9 w różnicy bramek) — rzadka forma dla europejskiego „underdoga”. Zalogowane jako pozycja papierowa, nie jako typ.</li>
+      <li><strong>IK Sirius – Halmstads BK, wygrana gospodarzy @ 1.303 (szwedzka Allsvenskan)</strong> — jedyna cena pochodziła z księgarni dostępnej tylko w USA (bez drugiej księgarni do porównania) — bez możliwej do wzięcia w Polsce ceny i bez mediany rynku odrzucone bez analizy.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+    <h2>Skuteczność</h2>
+    <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+    <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">82</td><td class="num">67–12–3</td><td class="num">85%</td><td class="num">79%</td><td class="num pos">+8.36 u</td><td class="num pos">+10.2%</td><td class="num neg">-2.48 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">16</td><td class="num">12–2–2</td><td class="num">86%</td><td class="num">78%</td><td class="num pos">+2.56 u</td><td class="num pos">+16.0%</td><td class="num pos">+0.33 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">66</td><td class="num">55–10–1</td><td class="num">85%</td><td class="num">79%</td><td class="num pos">+5.80 u</td><td class="num pos">+8.8%</td><td class="num neg">-2.82 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">39</td><td class="num">33–4–2</td><td class="num">89%</td><td class="num">80%</td><td class="num pos">+5.09 u</td><td class="num pos">+13.1%</td><td class="num neg">-0.20 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">106</td><td class="num">79–26–1</td><td class="num">75%</td><td class="num">73%</td><td class="num pos">+0.46 u</td><td class="num pos">+0.4%</td><td class="num neg">-12.32 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">31</td><td class="num">24–7–0</td><td class="num">77%</td><td class="num">75%</td><td class="num neg">-0.65 u</td><td class="num neg">-2.1%</td><td class="num neg">-4.29 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+    <h3 class="sub">Ostatnio rozliczone</h3>
+    <ul><li>UC Davis Aggies – North Alabama Lions: h2h home @ 1.22 → <strong>przegrana</strong> (75:79) <em>(papier)</em></li><li>Dallas Mavericks – Sacramento Kings: h2h home @ 1.28 → <strong>przegrana</strong> (100:115)</li><li>Minnesota Timberwolves – Milwaukee Bucks: h2h home @ 1.25 → <strong>wygrana</strong> (112:100) <em>(papier)</em></li><li>Indiana Pacers – Atlanta Hawks: h2h away @ 1.29 → <strong>wygrana</strong> (104:108)</li><li>PAOK – Asteras Tripoli: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li><li>Milwaukee Bucks – Cleveland Cavaliers: h2h away @ 1.27 → <strong>wygrana</strong> (111:136)</li><li>Memphis Grizzlies – Sacramento Kings: h2h home @ 1.3 → <strong>wygrana</strong> (136:105)</li><li>Miami Heat – Indiana Pacers: h2h home @ 1.33 → <strong>wygrana</strong> (145:125)</li><li>Elena Rybakina – Leylah Fernandez: h2h home @ 1.29 → <strong>zwrot</strong> (0:0)</li><li>Milwaukee Bucks – Houston Rockets: h2h away @ 1.3 → <strong>wygrana</strong> (100:132) <em>(papier)</em></li><li>Cleveland Cavaliers – Washington Wizards: h2h home @ 1.27 → <strong>wygrana</strong> (121:111) <em>(papier)</em></li><li>Aliaksandra Sasnovich – Diana Shnaider: h2h away @ 1.29 → <strong>wygrana</strong> (1:2)</li><li>Ben Shelton – Aleksandar Kovacevic: h2h home @ 1.21 → <strong>wygrana</strong> (2:1)</li><li>Leylah Fernandez – Himeno Sakatsume: h2h home @ 1.25 → <strong>wygrana</strong> (2:0) <em>(papier)</em></li><li>Sporting CP – Académico de Viseu: h2h home @ 1.21 → <strong>przegrana</strong> (1:2) <em>(papier)</em></li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak nowych rozliczeń od poprzedniego raportu (<code>ledger.py settle</code> zwrócił „settled 0; open 0; manual 0”). Ogólna skuteczność i CLV bez zmian — wnioski z poprzednich biegów (PAOK–Asteras, transfery gwiazd NBA, kontuzje Minnesoty) pozostają aktualne.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.25 oznacza ok. 76–80% szansy po zdjęciu marży bukmachera: nawet dobrze wybrany typ przegrywa średnio raz na 4–5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Bieg automatyczny (GitHub Actions, US-datacenter IP): Sofascore (403) i betexplorer (429/US-only) niedostępne — fixtures i kursy z ESPN i The Odds API, research z WebSearch/WebFetch. Ceny podane to europejskie księgarnie (William Hill, Nordicbet, Betsson, onexbet, Pinnacle); sprawdź odpowiednik u polskiego bukmachera przed obstawieniem.</li>
+      <li>Budżet The Odds API: wykorzystano 4 kredyty (tennis_atp_paris_masters, soccer_uefa_champs_league); pozostało ok. 464 z 500 w tym miesiącu.</li>
+      <li>Drift (zmiana kursu od otwarcia) sprawdzony tylko tam, gdzie feed podał initial_odds (jedna księgarnia US-only na mecz) — dla większości selekcji w tym biegu ruch od otwarcia nie był możliwy do zweryfikowania w chmurze.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

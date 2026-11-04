@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-11-04 17:39</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 4 h, zakres kursów 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-11-04 16:39 UTC / 17:39 CET. Zegar zweryfikowany: tak (GitHub API, Cloudflare, Google — zgodnie co do sekundy; Wikipedia dała duży rozjazd i została odrzucona jako niewiarygodna w tym biegu). Okno: 17:35–21:35 CET (16:35–20:35 UTC).</p>
+    <p class="meta">Przeanalizowano: 23 spotkania (piłka nożna 14, tenis 9, siatkówka 0, koszykówka 0, hokej 0 — w tym oknie nic z tych trzech sportów się nie zaczyna). Kursy na 901 selekcji z 14 meczów piłkarskich (ESPN + The Odds API, klucz <code>soccer_uefa_champs_league</code>); tenis (ATP Paris Masters, WTA Cali Open) bez żadnej ceny w tym biegu. 5 selekcji wylądowało w paśmie 1.20–1.30, wszystkie w Lidze Mistrzów. Kursy pobrane 2026-11-04 16:36 UTC.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu.</p>
+    <p class="summary">Jeden realny typ dnia: Real Madryt do wygrania na wyjeździe z AEK Atenami — faworyt bez realnych absencji u rywala, konsensus 21 księgarni i własna analiza zgodne (~81%). Druga najmocniejsza selekcja w oknie (Arsenal w Pradze) odpadła o włos — dwie potwierdzone straty (Saka, Saliba) ściągają własny szacunek odrobinę poniżej ceny rynkowej, więc poszła na papier, nie do typu.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 1 typ</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ~83–77%; wymagane p_est ≥ implikowane. W paśmie: 5 selekcji (wszystkie Liga Mistrzów), przeanalizowano wszystkie 5.</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">18:45</td>
+            <td>AEK Atenyy – Real Madryt</td>
+            <td>Liga Mistrzów</td>
+            <td>Wygrana Realu Madryt</td>
+            <td class="num">1.24<span class="note">marathonbet (The Odds API), 16:36 UTC</span></td>
+            <td class="num pos">0.81</td>
+            <td class="num">0.8065</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. AEK Atenyy – Real Madryt — wygrana Realu Madryt @ 1.24 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · Liga Mistrzów, 4. kolejka fazy ligowej · 18:45 PL (17:45 UTC) · 1.24, marathonbet, The Odds API, pobrane 16:36 UTC · p_est 0.81 vs implikowane 0.8065</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to jedyna selekcja w całym oknie, gdzie 20+ niezależnych księgarni (w tym Pinnacle przy niższej cenie 1.21) zgodnie wycenia faworyta powyżej 80% po zdjęciu marży, a własny research nie znalazł żadnej informacji, która by to podważała — AEK nie ma żadnych potwierdzonych absencji, Real Madryt mimo czterech nieobecności w składzie (patrz niżej) ma na tyle głęboką kadrę w ofensywie (Mbappé, Bellingham, Güler, Vinícius dostępni), że to nie zmienia obrazu meczu. Rynek wycenia to tak wysoko, że niemal wszystkie księgarnie (15 z 21) dają już cenę poniżej 1.20 — tylko marathonbet (1.24) i jedna księgarnia spoza polskiej oferty (1.26) trzymają się jeszcze w paśmie.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Real Madryt ma komplet 9 pkt z 3 meczów fazy ligowej i gra o utrzymanie pierwszego miejsca w tabeli; AEK ma tylko 3 pkt z 3 meczów i w praktyce gra bez szans na awans — różnica motywacji i poziomu wyraźnie na korzyść gościa.</dd>
+        <dt>Forma</dt><dd>Real Madryt: 3/3 wygrane w LM, dominujący w lidze krajowej. AEK: słaby start fazy ligowej (3 pkt/3 mecze), a krajowo też przeciętnie — brak formy, która wskazywałaby na niespodziankę.</dd>
+        <dt>Absencje</dt><dd>Real Madryt: Fede Valverde (uraz ścięgna podkolanowego), Raúl Asencio (złamana noga), Ferland Mendy (uraz więzadeł) i Rodrygo (uraz kolana, poza grą od marca) — wszyscy potwierdzeni jako niedostępni, ale to głównie obrona/pomoc, zastępują ich Alexander-Arnold, Konaté, Huijsen, Tchouaméni/Camavinga. AEK: brak jakichkolwiek potwierdzonych absencji w polu, jedynie rezerwowy bramkarz Thomas Strakosha (uraz nadgarstka) — nie wpływa na siłę wyjściowej jedenastki.</dd>
+        <dt>Składy</dt><dd>Oficjalne składy wychodzą ok. godziny przed meczem (ok. 17:45 PL) — przewidywany skład Realu: Courtois; Alexander-Arnold, Konaté, Huijsen, Cucurella; Tchouaméni, Rüdiger; Diomande, Bellingham, Güler; Mbappé. AEK bez opublikowanych nazwisk przewidywanego składu, ale bez żadnych wymuszonych zmian.</dd>
+        <dt>Terminarz</dt><dd>Real Madryt bez ekstremalnego zagęszczenia terminarza (następny mecz 23.11 z Elche) — nie ma presji rotacji całego składu, choć część rezerwowych może dostać minuty w drugiej połowie przy bezpiecznym wyniku.</dd>
+        <dt>Miejsce i warunki</dt><dd>Allwyn Arena, Atenyy — niewielka przewaga własnego boiska dla AEK, ale historycznie nie przeszkadzała Realowi w fazie ligowej LM.</dd>
+        <dt>Styl gry</dt><dd>AEK gra defensywnym, niskim blokiem w europejskich pucharach — to raczej zmniejsza liczbę goli (stąd rynek totals Over 2.5 jest już poniżej wymaganego progu, patrz odrzuceni), nie zagraża wynikowi meczu jako takiemu.</dd>
+        <dt>Sygnały rynkowe</dt><dd>Kurs skrócił się od otwarcia o ok. 8–11% (DraftKings 1.312→1.20, mediana podobnie) — rynek jeszcze bardziej uwierzył w faworyta, to nie jest ruch w górę, więc nie uruchamia reguły ostrzegawczej. 21 księgarni w tym Pinnacle (1.21) zgodnie poniżej pasma — pasmo 1.20–1.30 łapie już tylko „długi koniec" wyceny.</dd>
+        <dt>Inne</dt><dd>Betexplorer/Sofascore niedostępne z serwera w chmurze (IP poza Polską) — ruch ceny sprawdzony tylko przez pojedynczą księgarnię (DraftKings, USA, mała waga), nie przez medianę wielu polskich bukmacherów.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul><li>21 niezależnych księgarni zgodnie >80% po zdjęciu marży, w tym Pinnacle.</li><li>AEK bez żadnej potwierdzonej absencji w polu — żadnego usprawiedliwienia dla niespodzianki ze strony rywala.</li><li>Cztery nieobecności Realu dotyczą głównie obrony/pomocy, nie ofensywy (Mbappé, Bellingham, Vinícius, Güler dostępni).</li></ul></div>
+        <div><strong>Ryzyka</strong><ul><li>Courtois chorował w tygodniu przed meczem — jeśli nie zagra, w bramce debiutuje rezerwowy, co nieco zwiększa ryzyko błędu indywidualnego.</li><li>Przy bezpiecznym wyniku Real Madryt może odpocząć kilku kluczowych zawodników w drugiej połowie.</li><li>Puchar europejski bywa nieprzewidywalny w pierwszej połowie — drużyna z niczym do stracenia (AEK) czasem gra odważniej niż w lidze krajowej.</li></ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> AEK strzela szybko z kontry lub rzutu rożnego, zamyka się w głębokiej defensywie i Real Madryt — już bez presji wyniku w grupie — nie przełamuje jej w typowym dla pierwszej połowy pucharów stylu "bez pełnego zaangażowania".</p>
+      <p class="sources"><strong>Źródła (2, przeczytane w całości: 2):</strong> <a href="https://starting11.com/fixtures/aek-athens-fc-vs-real-madrid">starting11.com</a> — absencje obu stron, przewidywany skład Realu, godzina meczu; <a href="https://khelnow.com/football/aek-athens-vs-real-madrid-preview-uefa-champions-league-202611">khelnow.com</a> — potwierdzenie absencji (Valverde, Asencio, Mendy, Rodrygo; AEK: Strakosha), data i godzina meczu (4.11.2026, 17:45 UTC), cena bet365 1/4 jako niezależne potwierdzenie poziomu rynku.</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>Slavia Praha – Arsenal, wygrana Arsenalu @ 1.26 (20 księgarni)</strong> — konsensus rynku (fair_prob 0.786) spada tuż poniżej ceny possible do wzięcia (implikowane 0.794): Arsenal ma dwie potwierdzone/bardzo prawdopodobne straty (Saka — czeka na kolejne badanie ścięgna, Saliba — po operacji kręgosłupa, prawdopodobnie z ławki), co w dużej mierze równoważy własne absencje Slavii (Ouanda na pewno, czterech kolejnych wątpliwych). Własny szacunek (0.78) wyszedł odrobinę pod implikowane — zalogowane jako papier, nie typ.</li>
+      <li><strong>RB Leipzig – Manchester City, totals Over 2.5 @ 1.30 (3 księgarnie)</strong> — tylko 3 notowania (poniżej progu pewności szerokiego rynku), fair_prob 0.744 poniżej implikowanego 0.769 — przeceniony względem własnego i rynkowego szacunku, bez dodatkowego researchu (za mało czasu/kredytów, żeby to uzasadnić).</li>
+      <li><strong>AEK Atenyy – Real Madryt, totals Over 2.5 @ 1.30 (3 księgarnie)</strong> — ten sam mecz co typ dnia, ale rynek bramkowy (fair_prob 0.733) nie dogania ceny (implikowane 0.769): defensywny styl AEK w europejskich pucharach realnie ogranicza liczbę goli, mimo przewagi klasy Realu w 1X2.</li>
+    </ul>
+  </section>
+
+  <section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">83</td><td class="num">67–13–3</td><td class="num">84%</td><td class="num">79%</td><td class="num pos">+7.36 u</td><td class="num pos">+8.9%</td><td class="num neg">-3.48 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">16</td><td class="num">12–2–2</td><td class="num">86%</td><td class="num">78%</td><td class="num pos">+2.56 u</td><td class="num pos">+16.0%</td><td class="num pos">+0.33 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">67</td><td class="num">55–11–1</td><td class="num">83%</td><td class="num">79%</td><td class="num pos">+4.80 u</td><td class="num pos">+7.2%</td><td class="num neg">-3.82 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">40</td><td class="num">33–5–2</td><td class="num">87%</td><td class="num">80%</td><td class="num pos">+4.09 u</td><td class="num pos">+10.2%</td><td class="num neg">-1.20 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">107</td><td class="num">80–26–1</td><td class="num">75%</td><td class="num">73%</td><td class="num pos">+0.76 u</td><td class="num pos">+0.7%</td><td class="num neg">-12.17 u</td><td class="num">+1.7%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">32</td><td class="num">25–7–0</td><td class="num">78%</td><td class="num">75%</td><td class="num neg">-0.35 u</td><td class="num neg">-1.1%</td><td class="num neg">-4.15 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Barcelona – Aston Villa: h2h home @ 1.3 → <strong>wygrana</strong> (3:0) <em>(papier)</em></li><li>Galatasaray – VfB Stuttgart: totals over 2.5 @ 1.25 → <strong>przegrana</strong> (2:0)</li><li>UC Davis Aggies – North Alabama Lions: h2h home @ 1.22 → <strong>przegrana</strong> (75:79) <em>(papier)</em></li><li>Dallas Mavericks – Sacramento Kings: h2h home @ 1.28 → <strong>przegrana</strong> (100:115)</li><li>Minnesota Timberwolves – Milwaukee Bucks: h2h home @ 1.25 → <strong>wygrana</strong> (112:100) <em>(papier)</em></li><li>Indiana Pacers – Atlanta Hawks: h2h away @ 1.29 → <strong>wygrana</strong> (104:108)</li><li>PAOK – Asteras Tripoli: h2h home @ 1.3 → <strong>wygrana</strong> (2:1)</li><li>Milwaukee Bucks – Cleveland Cavaliers: h2h away @ 1.27 → <strong>wygrana</strong> (111:136)</li><li>Memphis Grizzlies – Sacramento Kings: h2h home @ 1.3 → <strong>wygrana</strong> (136:105)</li><li>Miami Heat – Indiana Pacers: h2h home @ 1.33 → <strong>wygrana</strong> (145:125)</li><li>Elena Rybakina – Leylah Fernandez: h2h home @ 1.29 → <strong>zwrot</strong> (0:0)</li><li>Milwaukee Bucks – Houston Rockets: h2h away @ 1.3 → <strong>wygrana</strong> (100:132) <em>(papier)</em></li><li>Cleveland Cavaliers – Washington Wizards: h2h home @ 1.27 → <strong>wygrana</strong> (121:111) <em>(papier)</em></li><li>Aliaksandra Sasnovich – Diana Shnaider: h2h away @ 1.29 → <strong>wygrana</strong> (1:2)</li><li>Ben Shelton – Aleksandar Kovacevic: h2h home @ 1.21 → <strong>wygrana</strong> (2:1)</li></ul>
+  </section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li>Brak nowych rozliczeń od poprzedniego raportu (2026-11-04_0040) — `ledger.py settle` zwrócił „settled 0; open 0; manual 0". Ogólna skuteczność (84% trafności, CLV +1,9%) bez zmian; ostatnie wnioski (Barcelona–Aston Villa jako przykład zbyt ostrożnego podejścia do niepotwierdzonych absencji, Galatasaray–Stuttgart jako przykład szumu w statystykach bramkowych z 2–3 meczów) pozostają aktualne.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.24 oznacza ok. 81% implikowanego prawdopodobieństwa: nawet dobrze wybrany typ przegrywa średnio raz na ok. 5 prób. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Cena 1.24 (marathonbet) wybrana celowo zamiast najwyższej dostępnej (onexbet/1xBet @ 1.26) — ten drugi bukmacher nie jest dostępny legalnie w Polsce (brak na liście MF), więc nie jest realną ceną do wzięcia przez polskiego czytelnika. Sprawdź dokładny kurs u własnego bukmachera (STS, Fortuna, Superbet, LV BET…) przed obstawieniem — będzie zbliżony, ale może wypaść tuż pod lub nad granicą pasma 1.20–1.30.</li>
+      <li>Bieg w chmurze (GitHub Actions, serwer poza Polską): Sofascore (403) i betexplorer (brak dostępu z amerykańskiego IP) niedostępne — fixtures i kursy wyłącznie z ESPN i The Odds API; ruch ceny sprawdzony tylko przez pojedynczą księgarnię (DraftKings) z ESPN, nie przez pełną medianę polskich bukmacherów.</li>
+      <li>Tenis (ATP Rolex Paris Masters, WTA Cali Open — 9 meczów w oknie) bez żadnej ceny w tym biegu: budżet The Odds API „auto" (4 kredyty, wykorzystano 2) trafił w całości w `soccer_uefa_champs_league`, a ESPN nie publikuje kursów na te turnieje. Koszykówka, siatkówka i hokej: zero wydarzeń w tym 4-godzinnym oknie (ESPN i Sofascore zgodnie puste) — nic z tych sportów się w tym czasie nie zaczyna, to nie błąd źródła.</li>
+      <li>Pozostało ok. 450 z 500 kredytów The Odds API w tym miesiącu.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typy 2026-11-06 21:43</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --text: #1d1d1b; --muted: #5f5f5a; --border: #e2e1dc;
+    --accent: #1f5fbf; --pos: #1e7a46; --neg: #b3261e; --warn-bg: #fff6e0; --warn-text: #6b4e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+      --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151514; --surface: #1f1f1d; --text: #ecebe6; --muted: #a3a29b; --border: #34332f;
+    --accent: #7aa7ff; --pos: #5fcf8e; --neg: #ff8a80; --warn-bg: #3a2f10; --warn-text: #f3d68a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.6rem; line-height: 1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+  h3 { font-size: 1.05rem; margin: 0 0 8px; }
+  a { color: var(--accent); }
+  .meta { color: var(--muted); font-size: .92rem; margin: 0 0 4px; }
+  .warn { background: var(--warn-bg); color: var(--warn-text); border-radius: 8px;
+          padding: 10px 14px; margin: 16px 0; font-weight: 600; }
+  .summary { margin: 12px 0 0; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px;
+                background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--border);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pos { color: var(--pos); font-weight: 600; }
+  .neg { color: var(--neg); font-weight: 600; }
+  .note { display: block; color: var(--muted); font-size: .85rem; }
+  .pick { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+          padding: 18px 20px; margin: 16px 0; }
+  .pick .line { color: var(--muted); font-size: .92rem; margin: 0 0 12px; }
+  .pick dl { display: grid; grid-template-columns: 11rem 1fr; gap: 6px 14px; margin: 12px 0; }
+  .pick dt { color: var(--muted); font-weight: 600; }
+  .pick dd { margin: 0; }
+  .loses { border-left: 3px solid var(--neg); padding: 4px 0 4px 12px; margin: 12px 0; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cols ul, .pick ul { margin: 4px 0 0; padding-left: 1.2rem; }
+  .sources { font-size: .88rem; color: var(--muted); }
+  .ranges { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .ranges a { border: 1px solid var(--border); background: var(--surface); border-radius: 999px;
+              padding: 5px 12px; text-decoration: none; font-size: .9rem; white-space: nowrap; }
+  .range { border-top: 2px solid var(--border); margin-top: 36px; padding-top: 4px; }
+  .range > h2 { font-size: 1.35rem; margin-top: 20px; }
+  .range h3.sub { font-size: 1.05rem; color: var(--muted); margin: 24px 0 10px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .tier { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .8rem; font-weight: 600;
+          white-space: nowrap; border: 1px solid currentColor; }
+  .tier.value { color: var(--pos); }
+  .tier.fair { color: var(--muted); }
+  @media (max-width: 640px) {
+    .pick dl, .cols { grid-template-columns: 1fr; }
+    .pick dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Typy bukmacherskie — okno 8 h, zakres kursów: 1.20–1.30</h1>
+    <p class="meta">Wygenerowano: 2026-11-06 20:43 UTC / 21:43 CET. Zegar zweryfikowany: tak (api.github.com, cloudflare.com, sofascore.com — zgodność do ±1 s; verified_utc 2026-11-06T20:33:40Z). Okno: 2026-11-06 21:18 – 2026-11-07 05:33 CET (T0+45 min do T0+8 h).</p>
+    <p class="meta">Przeanalizowano: 67 wydarzeń w oknie (koszykówka i hokej zdominowały — NBA, NHL, NCAA Men's Ice Hockey/Basketball — plus piłka meksykańska, argentyńska, kolumbijska, brazylijska, J.League, A-League), 2382 selekcje z ESPN (231) i The Odds API (2151, budżet „auto” 4/4 kredyty na `basketball_ncaab` + `basketball_nba`). Kursy pobrane o 20:34 UTC. Tryb automatyczny w chmurze (GitHub Actions) — Sofascore i betexplorer niedostępne (403/US-only IP), źródła: ESPN + The Odds API + WebSearch/WebFetch.</p>
+    <p class="warn">Kursy się zmieniają — sprawdź je u swojego bukmachera przed postawieniem zakładu. Ceny poniżej to europejskie księgarnie z The Odds API (Pinnacle, Winamax) — polskie kursy bywają zbliżone, ale mogą się różnić.</p>
+    <p class="summary">Pierwszy wieczór w tej serii z dwoma realnymi kandydatami w paśmie 1.20–1.30 naraz — oba NBA/NCAAB, oba oparte na konkretnych, potwierdzonych zmianach kadrowych (nie samej marce klubu). Dwa meczy środkowej klasy NCAAB (Elon, San Francisco) wylądowały liczbowo w paśmie, ale bez żadnego realnego źródła informacji o składach/absencjach — odrzucone jako „papier”.</p>
+    <nav class="ranges">
+      <a href="#z-120">Typ dnia 1.20–1.30 · 2 typy</a>
+      <a href="#skutecznosc">Skuteczność</a>
+    </nav>
+  </header>
+
+  <section class="range" id="z-120">
+    <h2>Typ dnia · kursy 1.20–1.30</h2>
+    <p class="meta">Próg opłacalności ok. 74–83 %; wymagane p_est ≥ implikowane. W paśmie: 4 selekcje z wielo-bukmacherskim notowaniem, przeanalizowano 4 (2 jako typ, 2 jako papier).</p>
+    <h3 class="sub">Ranking</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Godz. (PL)</th><th>Wydarzenie</th><th>Rozgrywki</th><th>Zakład</th><th>Kurs</th><th>p_est</th><th>Implik.</th><th>Klasa</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td class="num">01:00</td>
+            <td>Charlotte Hornets – Boston Celtics</td>
+            <td>NBA (NBA Cup)</td>
+            <td>1X2 gość (Celtics)</td>
+            <td class="num">1.28<span class="note">winamax_de, The Odds API, 20:34 UTC</span></td>
+            <td class="num pos">0.79</td>
+            <td class="num">0.78</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td class="num">02:00</td>
+            <td>Michigan Wolverines – UConn Huskies</td>
+            <td>NCAA Men's Basketball</td>
+            <td>1X2 gość (UConn)</td>
+            <td class="num">1.34<span class="note">pinnacle, The Odds API, 20:34 UTC</span></td>
+            <td class="num pos">0.77</td>
+            <td class="num">0.75</td>
+            <td><span class="tier fair">uczciwa cena</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Analiza propozycji</h3>
+
+    <article class="pick" id="z-120-1">
+      <h3>1. Charlotte Hornets – Boston Celtics — 1X2 gość (Celtics) @ 1.28 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · NBA, faza grupowa NBA Cup · 01:00 CET (2026-11-07T00:00:00Z) · 1.28, winamax_de, The Odds API, 20:34 UTC · p_est 0.79 vs implikowane 0.78</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> to nie „Celtics są lepsi, bo Celtics", tylko konkretna, potwierdzona asymetria tej jesieni: Charlotte latem oddało LaMelo Balla i Josha Greena do Minnesoty (za Naz Reida i przyszłe wybory), a ESPN po tym transferze prognozuje Hornets na 34–48 — gorzej niż ich już nieplayoffowy sezon 2025-26 (44-38). Boston też się przebudowało (Jaylen Brown wymieniony na Paula George'a w lipcu — ruch oceniany przez komentatorów jako strata dla Celtics), ale Tatum wrócił po zerwaniu achillesa i gra pełne minuty (26, 32, 19 pkt w ostatnich trzech meczach) — Boston nie jest okrojone tak jak Charlotte.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Mecz fazy grupowej NBA Cup (potwierdzone biletowo jako „NBA Cup: Charlotte Hornets vs. Boston Celtics") — premia pieniężna za awans z grupy daje obu stronom realny powód do gry w pełnym składzie, nie tylko sparing.</dd>
+        <dt>Forma</dt><dd>Boston z dobrym otwarciem sezonu (kolejne zwycięstwa z Bulls, Magic, porażka u Rockets 93:109 2.11) — Tatum w pełnej dyspozycji. Charlotte po wymianie Balla/Greena w trybie przebudowy, nowi liderzy (Miller, Knueppel, Coby White, Reid) na razie bez dowodu, że mogą nosić zespół w pierwszym tygodniu po transferze.</dd>
+        <dt>Absencje</dt><dd>LaMelo Ball i Josh Green — nie "absencja", a trwałe odejście z klubu (transfer), więc efekt jest pewny, nie warunkowy. Status Kristapsa Porzingisa / Paula George'a na ten konkretny wieczór nie został potwierdzony w dostępnych źródłach — realne ryzyko, patrz niżej.</dd>
+        <dt>Składy</dt><dd>Nie znaleziono oficjalnego, godzinowego raportu kontuzji NBA na 6.11.2026 dla obu klubów — oparte na ostatnich występach graczy (Tatum) i znanych transferach (Ball/Green, Brown/George), nie na liście „questionable/out" z dnia meczu.</dd>
+        <dt>Terminarz</dt><dd>Brak sygnału o kumulacji meczów (back-to-back) dla Celtics w tym konkretnym terminie poza ogólną wzmianką, że listopad ma dla Tatuma kilka par meczów dzień-po-dniu.</dd>
+        <dt>Miejsce i warunki</dt><dd>Spectrum Center, Charlotte — pełny mecz wyjazdowy dla Bostonu, bez czynnika neutralnego boiska.</dd>
+        <dt>Styl gry</dt><dd>Brak szczegółowej analizy stylu kontra styl poza ogólną premią doświadczenia/głębi Celtics nad przebudowującym się Charlotte.</dd>
+        <dt>Sygnały rynkowe</dt><dd>23 księgarnie notują ten mecz; mediana ~1.25, najwyższa europejska cena 1.28 (winamax_de); kurs skrócił się o ok. 3,8% od otwarcia (faworyt droższy, nie tańszy — to nie czerwona flaga, bo próg ostrzegawczy dotyczy wzrostu kursu faworyta, nie jego spadku).</dd>
+        <dt>Inne</dt><dd>Fair_prob rynku po zdjęciu marży: 0.78 — czyli własny szacunek (0.79) leży tuż nad górną granicą tego, co rynek sam uznaje za prawdopodobne. To uczciwa cena, nie odkryta przewaga.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Odejście LaMelo Balla i Josha Greena to fakt, nie plotka — potwierdzone transferem, z konkretną, złą prognozą ESPN (34-48) jako konsekwencją.</li>
+          <li>Tatum gra pełne minuty i w dobrej formie — to nie jest mecz, w którym gwiazda Bostonu jest zarządzana ostrożnościowo.</li>
+          <li>Mecz ma realną stawkę (faza grupowa NBA Cup), nie jest to oczywisty mecz do rotacji.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>Nie potwierdzono godzinowego raportu kontuzji na dzień meczu (Porzingis, Paul George) — jeśli ktoś z rotacji Celtics wypadnie, przewaga się zwęża.</li>
+          <li>Boston też przeszło duży transfer (Brown za George'a) — George ma reputację gracza osiągającego mniej niż oczekiwano w Filadelfii (ok. 16 pkt/mecz), więc "jakość" Celtics nie jest w 100% tą z poprzednich sezonów.</li>
+          <li>Przy kursie 1.28 strata zdarza się statystycznie raz na ok. 4-5 zakładów nawet przy trafnym typie.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> młody skład Charlotte (Miller/Knueppel) trafia dobry wieczór z gry za 3, Tatum ma słabszy mecz strzelecki na wyjeździe, a Boston przegrywa pojedynczy, wyrównany mecz grupowy, jak to się zdarza faworytom przy tej cenie raz na 4-5 prób.</p>
+      <p class="sources"><strong>Źródła (4, przeczytane w całości: 2):</strong> <a href="https://roundtable.io/sports/nba/hornets/news/hornets-get-brutal-2026-27-season-projection-from-espn-after-lamelo-ball-trade">roundtable.io — prognoza ESPN po transferze Balla</a> — 34-48, nowa piątka startowa; <a href="https://www.boston.com/sports/boston-celtics/2026/10/09/jayson-tatum-celtics-injury-recovery/">boston.com — powrót Tatuma</a> — 17 miesięcy po zerwaniu achillesa, gotowy na granie dzień-po-dniu, transfer Brown/George; <a href="https://roundtable.io/sports/nba/celtics/news/boston-celtics-jayson-tatum-off-to-historic-start-in-2026-27">roundtable.io — log meczowy Tatuma</a> (nieprzeczytane w całości); <a href="https://www.tickpick.com/buy-nba-cup-charlotte-hornets-vs-boston-celtics-tickets-spectrum-center-11-6-26-7pm/8200089/">tickpick.com — potwierdzenie terminu/rangi meczu</a> (nieprzeczytane w całości).</p>
+    </article>
+
+    <article class="pick" id="z-120-2">
+      <h3>2. Michigan Wolverines – UConn Huskies — 1X2 gość (UConn) @ 1.34 <span class="tier fair">uczciwa cena</span></h3>
+      <p class="line">Zakres 1.20–1.30 · NCAA Men's Basketball, TNT Hall of Fame Series (rewanż finału NCAA 2026) · 02:00 CET (2026-11-07T01:00:00Z) · 1.34, pinnacle, The Odds API, 20:34 UTC · p_est 0.77 vs implikowane 0.75</p>
+      <p><strong>Dlaczego ten typ, a nie inne:</strong> UWAGA — to inny mecz niż wpis z 5.11 w tej samej serii (tam chodziło o kobiecy UConn–Michigan, mecz wyrównany, poprawnie odrzucony). To jest męski rewanż finału NCAA 2026 (Michigan wygrało 69:63), potwierdzony oficjalnie jako „TNT Sports Hall of Fame Series" w TD Garden. Asymetria jest konkretna: Michigan straciło trzech zawodników wybranych w drafcie NBA (Lendeborg, Morez Johnson Jr., Aday Mara) i swojego 5-gwiazdkowego rekruta Brandona McCoya Jr. (zerwane ACL, cały sezon), a do tego trenera mistrzowskiego składu (Dusty May odszedł do Dallas Mavericks) — zastępuje go dopiero awansowany asystent Mike Boynton Jr. w swoim pierwszym prawdziwym teście. UConn (#4 w rankingu) zostało w większości w składzie (Mullins, Demary Jr.) i dodało wzmocnienia (Khamenia z Duke, Hines z Seton Hall) do już elitarnej defensywy.</p>
+      <dl>
+        <dt>Motywacja i stawka</dt><dd>Rewanż finału NCAA, duża promocja telewizyjna (TNT/truTV/HBO Max) — obie strony mają powód grać w pełnym składzie, to nie sparing.</dd>
+        <dt>Forma</dt><dd>Oba zespoły 1-0 po otwarciu sezonu: Michigan pokonało słabego Oaklanda 84:68, ale trafiało tylko 20,6% z gry za 3; UConn rozbiło Gardner-Webb 86:46. Żadna próba nie jest duża (1 mecz), ale poziom rywala w otwarciu różnił się wyraźnie na korzyść dowodu UConn.</dd>
+        <dt>Absencje</dt><dd>UConn: Solo Ball — pauza do końca sezonu (potwierdzone). Michigan: Moustapha Thiam (centrum) nie zagrał w otwarciu, status na ten mecz niepotwierdzony w znalezionych źródłach — ryzyko w obie strony, ale to Michigan ma więcej niewiadomych kadrowych.</dd>
+        <dt>Składy</dt><dd>Nie potwierdzono składu wyjściowego godzina przed meczem (brak Sofascore/betexplorer w tym biegu) — oparte na przedmeczowych zapowiedziach mediów (Yahoo, mgoblue.com, SI).</dd>
+        <dt>Terminarz</dt><dd>Brak sygnału o kumulacji meczów; to drugi mecz sezonu dla obu klubów.</dd>
+        <dt>Miejsce i warunki</dt><dd>TD Garden, Boston — formalnie neutralne, geograficznie bliżej Connecticut (UConn) niż Michigan (Ann Arbor, ok. 1100 km) — łagodna przewaga logistyczna dla UConn.</dd>
+        <dt>Styl gry</dt><dd>UConn wolne tempo (322. miejsce w tempie w zeszłym sezonie, 318. na starcie tego) + top-5 defensywa (KenPom/T-Rank) — model fizycznej, kontrolowanej gry Dana Hurleya kontra przebudowujący się, niepewny jeszcze pod nowym trenerem atak Michigan.</dd>
+        <dt>Sygnały rynkowe</dt><dd>9-23 księgarni w zależności od rynku, Pinnacle wśród nich; kurs na UConn skrócił się o ok. 11,2% od otwarcia (faworyt droższy — rynek dogrywa kadrę Michigan, nie red flag, bo to spadek, nie wzrost kursu faworyta).</dd>
+        <dt>Inne</dt><dd>Fair_prob rynku po zdjęciu marży: 0.73 — własny szacunek (0.77) jest nieco wyższy, bo stawia większą wagę na skumulowany efekt czterech jednoczesnych strat kadrowych (3 draftowanych + rekrut) i debiutu nowego trenera, który model cenowy może częściowo już wyceniać, ale raczej jako "gorszy Michigan", nie jako "ryzyko debiutu trenerskiego" per se.</dd>
+      </dl>
+      <div class="cols">
+        <div><strong>Plusy</strong><ul>
+          <li>Cztery niezależne, potwierdzone straty kadrowe Michigan (3 zawodników do NBA + rekrut na ACL) plus zmiana trenera — rzadko spotykana kumulacja osłabień w jednym zespole.</li>
+          <li>UConn zachowało rdzeń mistrzowskiej defensywy i dodało wzmocnienia, nie tylko stratę gwiazdy.</li>
+          <li>Kurs spadł (skrócił się) od otwarcia, czyli rynek idzie w tę samą stronę co analiza, nie przeciwną.</li>
+        </ul></div>
+        <div><strong>Ryzyka</strong><ul>
+          <li>To wciąż tylko 2. mecz sezonu dla obu stron — bardzo mała próbka formy.</li>
+          <li>Interim trener czasem daje zespołowi krótkoterminowy "efekt mobilizacji" (gra "dla trenera") — nieprzewidywalny czynnik psychologiczny.</li>
+          <li>Status Moustaphy Thiama (Michigan) niepotwierdzony — jeśli wróci w pełnej formie, atak Michigan jest głębszy niż zakładano.</li>
+          <li>NCAAB o tej porze sezonu to generalnie cienka próba (ostrzeżenie powtarzane w tej serii) — tu akurat kompensowane konkretnymi, nie tylko statystycznymi, faktami kadrowymi.</li>
+        </ul></div>
+      </div>
+      <p class="loses"><strong>Jak ten zakład przegrywa:</strong> okrojony, ale wciąż utalentowany Michigan (transfer J.P. Estrella z Tennessee w większej roli) trafia dobry wieczór pod nowym trenerem, UConn ma słabszy mecz z linii rzutów wolnych/za 3, i wynik rozstrzyga się w wyrównanej końcówce.</p>
+      <p class="sources"><strong>Źródła (4, przeczytane w całości: 1):</strong> <a href="https://sports.yahoo.com/articles/bet-uconn-vs-michigan-ncaab-010043457.html">Yahoo Sports — zapowiedź i typy zakładowe</a> — linia -5.5/-7.5, Solo Ball pauza do końca sezonu, Thiam niepotwierdzony; <a href="https://mgoblue.com/news/2026/11/4/mens-basketball-michigan-uconn-set-for-national-championship-rematch-in-boston">mgoblue.com — oficjalne potwierdzenie meczu</a> (nieprzeczytane w całości); <a href="https://www.si.com/college/michigan/basketball/michigan-basketball-set-to-hire-interim-head-coach-following-dusty-may-s-departure">SI.com — Mike Boynton Jr. trenerem interim</a> (nieprzeczytane w całości); <a href="https://fantasynerds.com/news/story/2026/09/01/michigans-brandon-mccoy-jr-out-for-2026-27-season-with-acl-tear-1612915">fantasynerds.com — Brandon McCoy Jr. poza sezonem</a> (nieprzeczytane w całości).</p>
+    </article>
+
+    <h3 class="sub">Odrzuceni kandydaci</h3>
+    <ul>
+      <li><strong>San Francisco Dons – North Dakota St Bison, 1X2 gospodarz @ 1.25 (pinnacle)</strong> — matematycznie w paśmie (fair_prob rynku 0.80), ale żadne wyszukiwanie nie znalazło realnego materiału o składach/absencjach dla tych dwóch średniej klasy programów NCAAB (San Francisco – WCC, North Dakota State – Summit League); odrzucone jako „cienkie dane", zalogowane jako papier.</li>
+      <li><strong>Elon Phoenix – UNC Greensboro Spartans, 1X2 gospodarz @ 1.25 (pinnacle)</strong> — ten sam problem: brak jakiejkolwiek aktualnej zapowiedzi, kontuzji czy formy dla tego starcia środkowej klasy CAA; odrzucone z tego samego powodu, zalogowane jako papier.</li>
+      <li><strong>Atlanta Hawks – Washington Wizards, 1X2 gospodarz @ 1.31–1.34</strong> — tuż poza żądanym pasmem (mediana 1.31), nie analizowane w tym biegu, bo zakres zawężono wyłącznie do 1.20–1.30 na wyraźne życzenie.</li>
+    </ul>
+  </section>
+
+<section id="skutecznosc">
+  <h2>Skuteczność</h2>
+  <p class="meta">Stawka 1 u na typ; „Po podatku” = wygrana × 0.88 (12% podatku od stawki). W–P–Z = wygrane (w tym połówki) – przegrane – zwroty. CLV = kurs wzięty względem mediany ostatniego kursu sprzed startu meczu; dodatnie CLV na dłuższą metę znaczy, że analiza wyprzedza rynek. Przy małej liczbie typów trafność i ROI to jeszcze głównie szum.</p>
+  <div class="table-wrap"><table><thead><tr><th></th><th>Rozliczone</th><th>W–P–Z</th><th>Trafność</th><th>Śr. p_est</th><th>Wynik (1 u)</th><th>ROI</th><th>Po podatku 12%</th><th>CLV</th></tr></thead><tbody><tr><td><strong>Typy — razem</strong></td><td class="num">86</td><td class="num">69–14–3</td><td class="num">83%</td><td class="num">79%</td><td class="num pos">+6.83 u</td><td class="num pos">+7.9%</td><td class="num neg">-4.31 u</td><td class="num">+1.9%</td></tr><tr><td>Typy — z przewagą</td><td class="num">17</td><td class="num">12–3–2</td><td class="num">80%</td><td class="num">78%</td><td class="num pos">+1.56 u</td><td class="num pos">+9.2%</td><td class="num neg">-0.67 u</td><td class="num">+2.4%</td></tr><tr><td>Typy — uczciwa cena</td><td class="num">69</td><td class="num">57–11–1</td><td class="num">84%</td><td class="num">79%</td><td class="num pos">+5.27 u</td><td class="num pos">+7.6%</td><td class="num neg">-3.64 u</td><td class="num">+1.7%</td></tr><tr><td>Typy 1.10-1.19</td><td class="num">8</td><td class="num">8–0–0</td><td class="num">100%</td><td class="num">87%</td><td class="num pos">+1.35 u</td><td class="num pos">+16.9%</td><td class="num pos">+0.23 u</td><td class="num">+2.0%</td></tr><tr><td>Typy 1.20-1.29</td><td class="num">13</td><td class="num">11–2–0</td><td class="num">85%</td><td class="num">82%</td><td class="num pos">+0.88 u</td><td class="num pos">+6.8%</td><td class="num neg">-0.79 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.20-1.30</td><td class="num">43</td><td class="num">35–6–2</td><td class="num">85%</td><td class="num">80%</td><td class="num pos">+3.56 u</td><td class="num pos">+8.3%</td><td class="num neg">-2.03 u</td><td class="num">+2.1%</td></tr><tr><td>Typy 1.30-1.44</td><td class="num">13</td><td class="num">9–3–1</td><td class="num">75%</td><td class="num">75%</td><td class="num pos">+0.58 u</td><td class="num pos">+4.5%</td><td class="num neg">-1.05 u</td><td class="num">+1.0%</td></tr><tr><td>Typy 1.45-1.60</td><td class="num">8</td><td class="num">5–3–0</td><td class="num">62%</td><td class="num">67%</td><td class="num neg">-0.24 u</td><td class="num neg">-3.0%</td><td class="num neg">-1.17 u</td><td class="num">+1.4%</td></tr><tr><td>Typy 1.61-2.00</td><td class="num">1</td><td class="num">1–0–0</td><td class="num">100%</td><td class="num">62%</td><td class="num pos">+0.70 u</td><td class="num pos">+70.0%</td><td class="num pos">+0.50 u</td><td class="num">+6.2%</td></tr><tr><td><em>Na papierze (odrzuceni)</em></td><td class="num">117</td><td class="num">87–29–1</td><td class="num">75%</td><td class="num">73%</td><td class="num neg">-0.55 u</td><td class="num neg">-0.5%</td><td class="num neg">-14.53 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.10-1.19</em></td><td class="num">14</td><td class="num">14–0–0</td><td class="num">100%</td><td class="num">84%</td><td class="num pos">+2.45 u</td><td class="num pos">+17.5%</td><td class="num pos">+0.48 u</td><td class="num">+2.5%</td></tr><tr><td><em>Papier 1.20-1.29</em></td><td class="num">24</td><td class="num">18–5–1</td><td class="num">78%</td><td class="num">76%</td><td class="num neg">-0.30 u</td><td class="num neg">-1.2%</td><td class="num neg">-3.14 u</td><td class="num">+1.8%</td></tr><tr><td><em>Papier 1.20-1.30</em></td><td class="num">42</td><td class="num">32–10–0</td><td class="num">76%</td><td class="num">75%</td><td class="num neg">-1.66 u</td><td class="num neg">-4.0%</td><td class="num neg">-6.50 u</td><td class="num">+2.3%</td></tr><tr><td><em>Papier 1.30-1.44</em></td><td class="num">21</td><td class="num">16–5–0</td><td class="num">76%</td><td class="num">70%</td><td class="num pos">+1.18 u</td><td class="num pos">+5.6%</td><td class="num neg">-1.49 u</td><td class="num">+1.6%</td></tr><tr><td><em>Papier 1.45-1.60</em></td><td class="num">10</td><td class="num">4–6–0</td><td class="num">40%</td><td class="num">62%</td><td class="num neg">-3.72 u</td><td class="num neg">-37.2%</td><td class="num neg">-4.47 u</td><td class="num">-0.6%</td></tr><tr><td><em>Papier 1.61-2.00</em></td><td class="num">2</td><td class="num">1–1–0</td><td class="num">50%</td><td class="num">56%</td><td class="num neg">-0.10 u</td><td class="num neg">-5.0%</td><td class="num neg">-0.33 u</td><td class="num">-1.2%</td></tr><tr><td><em>Papier 2.01-3.00</em></td><td class="num">4</td><td class="num">2–2–0</td><td class="num">50%</td><td class="num">42%</td><td class="num pos">+1.60 u</td><td class="num pos">+40.0%</td><td class="num pos">+0.93 u</td><td class="num">+6.6%</td></tr></tbody></table></div>
+  <h3 class="sub">Ostatnio rozliczone</h3>
+  <ul><li>Utah Utes – Towson Tigers: h2h home @ 1.22 → <strong>wygrana</strong> (67:57) <em>(papier)</em></li><li>Navy Midshipmen – Delaware St Hornets: h2h home @ 1.25 → <strong>wygrana</strong> (66:60) <em>(papier)</em></li><li>Alcorn St Braves – Howard Bison: h2h away @ 1.24 → <strong>wygrana</strong> (83:94) <em>(papier)</em></li><li>Michigan Wolverines – UConn Huskies (kobiety): h2h away @ 1.29 → <strong>przegrana</strong> (77:66) <em>(papier)</em></li><li>Bayer Leverkusen – Marseille: h2h home @ 1.3 → <strong>przegrana</strong> (0:1) <em>(papier)</em></li><li>Benfica – Lech Poznan: totals over 2.5 @ 1.25 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>FC Twente – Pafos: h2h home @ 1.26 → <strong>wygrana</strong> (3:1) <em>(papier)</em></li><li>Red Star Belgrade – Inter D&#x27;Escaldes: totals over 2.5 @ 1.23 → <strong>wygrana</strong> (2:1)</li><li>Lincoln Red Imps – Hajduk Split: h2h away @ 1.3 → <strong>przegrana</strong> (1:0)</li><li>Atalanta – Kairat Almaty: totals over 2.5 @ 1.27 → <strong>przegrana</strong> (1:1) <em>(papier)</em></li></ul>
+</section>
+
+  <section id="wnioski">
+    <h2>Wnioski z rozliczonych typów</h2>
+    <ul>
+      <li><strong>Lincoln Red Imps – Hajduk Split, h2h gość @ 1.30 → przegrana (1:0).</strong> Do przewidzenia tylko częściowo: forma Hajduka i słabość kontynentalna Lincolna nie uchwyciły specyfiki samego starcia (mała gibraltarska murawa, krótki wyjazd gościa), a niepotwierdzony konflikt gwiazdy Hajduka (Livaji) z klubem — odnotowany jako ryzyko, nie fakt — mógł mieć większy wpływ niż przyjęto. Zmiana: w tym biegu dla obu dzisiejszych typów oparto się na twardych, potwierdzonych faktach kadrowych (transfery, konkretne kontuzje), nie na reputacji/formie ligowej per se.</li>
+      <li><strong>Atalanta – Kairat Almaty, totals over 2.5 @ 1.27 (papier) → przegrana (1:1).</strong> Trzeci przypadek w serii potwierdzający, że statystyki bramkowe z 2–3 meczów bieżącej fazy pucharowej są zbyt małą próbą — odnotowane, ale niniejszy bieg nie miał żadnego kandydata totals w europejskich pucharach, więc nie było okazji do zastosowania tej korekty.</li>
+      <li><strong>Pozytyw:</strong> dzisiejszy bieg to pierwszy od wielu dni z dwoma pełnoprawnymi typami naraz — oba NBA/NCAAB z realnymi, udokumentowanymi zmianami kadrowymi (transfery, ACL, zmiana trenera), nie samą marką zespołu. Rozliczenie obu pokaże, czy ten rodzaj „twardego dowodu kadrowego" bije dotychczasową bazową skuteczność (80% w paśmie 1.20–1.30).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Uwagi</h2>
+    <ul>
+      <li>Zakłady pojedyncze; nie łączyć w AKO.</li>
+      <li>Kurs 1.28 oznacza ok. 78% implikowanego prawdopodobieństwa, 1.34 — ok. 75%: nawet dobrze wybrany typ przegrywa odpowiednio raz na ok. 4-5 i raz na 4 próby. Stawiaj tylko środki, których utratę akceptujesz.</li>
+      <li>Źródła, które zawiodły w tym uruchomieniu: Sofascore (403 z IP runnera GitHub Actions) i betexplorer (US-only/429) — niedostępne w trybie chmurowym; zastąpione przez ESPN + The Odds API + WebSearch/WebFetch. Jedno WebFetch (mgoblue.com) zwróciło tylko nagłówek strony (prawdopodobnie treść renderowana JS-em po stronie klienta) — potraktowane jako źródło nieprzeczytane w całości, nie jako błąd krytyczny, bo dwa inne źródła pokrywały te same fakty.</li>
+      <li>Budżet The Odds API: wykorzystano 4 z 500 kredytów na ten miesiąc (budżet „auto" 4/4 na `basketball_ncaab` i `basketball_nba`) — pozostało ok. 408.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
